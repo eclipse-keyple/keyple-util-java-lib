@@ -1,0 +1,21 @@
+<resources>
+    <string name="action_settings">Settings</string>
+
+    <string name="card_reading_title">Card reading</string>
+    <string name="card_invalid_title">Card not valid</string>
+    <string name="no_tickets_title">No valid title</string>
+    <string name="valid_title">Validation</string>
+    <string name="error_title">Error</string>
+
+    <string name="present_card">Please present a travel card</string>
+    <string name="card_invalid_main_desc">Sorry, this card is not valid on this network.</string>
+    <string name="card_invalid_small_desc">Identified card type: %s</string>
+    <string name="no_tickets_main_desc">You have no valid title on this card.</string>
+    <string name="no_tickets_small_desc">Please recharge your card.</string>
+    <string name="valid_main_desc">Well done!</string>
+    <string name="valid_small_desc">%s\n\n You have %d ticket(s) left on this card.</string>
+    <string name="valid_season_ticket_small_desc">%s\n\n You have a\n%s\npass on this card.</string>
+    <string name="valid_last_desc">Have a nice trip!</string>
+    <string name="error_main_desc">An error occurred.</string>
+    <string name="error_small_desc">Please try again.</string>
+</resources>
