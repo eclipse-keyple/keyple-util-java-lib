@@ -12,83 +12,124 @@
 package org.eclipse.keyple.famoco.validator.data
 
 import android.app.Activity
-import javax.inject.Inject
-import org.eclipse.keyple.famoco.validator.di.scopes.AppScoped
-import org.eclipse.keyple.famoco.validator.ticketing.TicketingSession
-import org.eclipse.keyple.famoco.validator.ticketing.TicketingSessionManager
 import org.eclipse.keyple.core.seproxy.SeProxyService
 import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
+import org.eclipse.keyple.core.seproxy.exception.KeypleException
 import org.eclipse.keyple.core.seproxy.exception.KeyplePluginInstantiationException
 import org.eclipse.keyple.core.seproxy.exception.KeyplePluginNotFoundException
-import org.eclipse.keyple.core.seproxy.protocol.SeCommonProtocols
-import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoPluginFactory
-import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoReader
-import org.eclipse.keyple.plugin.android.nfc.AndroidNfcPluginFactory
-import org.eclipse.keyple.plugin.android.nfc.AndroidNfcProtocolSettings.getSetting
-import org.eclipse.keyple.plugin.android.nfc.AndroidNfcReader
+import org.eclipse.keyple.core.seproxy.exception.KeypleReaderIOException
+import org.eclipse.keyple.famoco.validator.BuildConfig
+import org.eclipse.keyple.famoco.validator.di.scopes.AppScoped
+import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
+import org.eclipse.keyple.famoco.validator.ticketing.TicketingSession
+import org.eclipse.keyple.famoco.validator.ticketing.TicketingSessionManager
 import timber.log.Timber
+import javax.inject.Inject
 
 @AppScoped
-class CardReaderApi @Inject constructor() {
+class CardReaderApi @Inject constructor(private var readerRepository: IReaderRepository) {
 
-    private lateinit var poReader: SeReader
-    private lateinit var samReader: SeReader
     private lateinit var ticketingSessionManager: TicketingSessionManager
-    private lateinit var ticketingSession: TicketingSession
+    private var ticketingSession: TicketingSession? = null
 
-    @Throws(KeyplePluginInstantiationException::class)
-    fun init(observer: ObservableReader.ReaderObserver?) {
-        Timber.d("Initialize SEProxy with Android Plugin")
-        val nfcPlugin = SeProxyService.getInstance().registerPlugin(AndroidNfcPluginFactory())
-        val samPlugin = SeProxyService.getInstance().registerPlugin(AndroidFamocoPluginFactory())
-        // define task as an observer for ReaderEvents
-        poReader = nfcPlugin.getReader(AndroidNfcReader.READER_NAME)
-        Timber.d("PO (NFC) reader name: ${poReader.name}")
+    @Throws(
+        KeyplePluginInstantiationException::class,
+        IllegalStateException::class,
+        KeyplePluginNotFoundException::class
+    )
+    suspend fun init(observer: ObservableReader.ReaderObserver?) {
 
-        poReader.setParameter("FLAG_READER_RESET_STATE", "0")
-        poReader.setParameter("FLAG_READER_PRESENCE_CHECK_DELAY", "100")
-        poReader.setParameter("FLAG_READER_NO_PLATFORM_SOUNDS", "0")
-        poReader.setParameter("FLAG_READER_SKIP_NDEF_CHECK", "0")
+        /*
+         * Register plugin
+         */
+        try {
+            readerRepository.registerPlugin()
+        } catch (e: KeypleException) {
+            Timber.e(e)
+            throw IllegalStateException(e.message)
+        }
 
-        // with this protocol settings we activate the nfc for ISO1443_4 protocol
-        poReader.addSeProtocolSetting(SeCommonProtocols.PROTOCOL_ISO14443_4, getSetting(SeCommonProtocols.PROTOCOL_ISO14443_4))
-        poReader.addSeProtocolSetting(SeCommonProtocols.PROTOCOL_MIFARE_CLASSIC, getSetting(SeCommonProtocols.PROTOCOL_MIFARE_CLASSIC))
+        /*
+         * Init PO reader
+         */
+        val poReader: SeReader?
+        try {
+            poReader = readerRepository.initPoReader()
+        } catch (e: KeyplePluginNotFoundException) {
+            Timber.e(e)
+            throw IllegalStateException("PoReader with name AndroidCoppernicAskPlugin was not found")
+        } catch (e: KeypleReaderIOException) {
+            Timber.e(e)
+            throw IllegalStateException(e.message)
+        } catch (e: KeypleException) {
+            Timber.e(e)
+            throw IllegalStateException(e.message)
+        }
+        if (poReader == null) {
+            throw IllegalStateException("No proxy reader available - ${BuildConfig.FLAVOR}")
+        }
 
-        /* remove the observer if it already exist */
-        (poReader as ObservableReader).addObserver(observer)
+        /*
+         * Init SAM reader
+         */
+        var samReaders: Map<String, SeReader>? = null
+        try {
+            samReaders = readerRepository.initSamReaders()
+        } catch (e: KeyplePluginNotFoundException) {
+            Timber.e(e)
+        }
+        if (samReaders.isNullOrEmpty()) {
+            Timber.w("No SAM reader available")
+        }
 
-        samReader = samPlugin.getReader(AndroidFamocoReader.READER_NAME)
+        poReader.let { reader ->
+            /* remove the observer if it already exist */
+            (reader as ObservableReader).addObserver(observer)
 
-        ticketingSessionManager = TicketingSessionManager()
+            ticketingSessionManager = TicketingSessionManager()
 
-        ticketingSession = ticketingSessionManager.createTicketingSession(poReader, samReader) as TicketingSession
+            ticketingSession =
+                ticketingSessionManager.createTicketingSession(readerRepository) as TicketingSession
+        }
     }
 
     fun startNfcDetection(activity: Activity) {
-        (poReader as AndroidNfcReader).enableNFCReaderMode(activity)
+        readerRepository.enableNfcReaderMode(activity)
 
         /*
         * Provide the SeReader with the selection operation to be processed when a PO is
         * inserted.
         */
-        ticketingSession.prepareAndSetPoDefaultSelection()
+        ticketingSession?.prepareAndSetPoDefaultSelection()
 
-        (poReader as ObservableReader).startSeDetection(ObservableReader.PollingMode.REPEATING)
+        (readerRepository.poReader as ObservableReader).startSeDetection(ObservableReader.PollingMode.REPEATING)
     }
 
     fun stopNfcDetection(activity: Activity) {
         try {
             // notify reader that se detection has been switched off
-            (poReader as AndroidNfcReader).stopSeDetection()
+            (readerRepository.poReader as ObservableReader).stopSeDetection()
             // Disable Reader Mode for NFC Adapter
-            (poReader as AndroidNfcReader).disableNFCReaderMode(activity)
+            readerRepository.disableNfcReaderMode(activity)
         } catch (e: KeyplePluginNotFoundException) {
             Timber.e(e, "NFC Plugin not found")
         }
     }
 
-    fun getTicketingSession(): TicketingSession {
+    fun getTicketingSession(): TicketingSession? {
         return ticketingSession
+    }
+
+    fun onDestroy(observer: ObservableReader.ReaderObserver?) {
+        if (observer != null && readerRepository.poReader != null) {
+            (readerRepository.poReader as ObservableReader).removeObserver(observer)
+        }
+        SeProxyService.getInstance().plugins.forEach {
+            SeProxyService.getInstance().unregisterPlugin(it.key)
+        }
+        SeProxyService.getInstance().plugins.clear()
+        readerRepository.onDestroy()
+        ticketingSession = null
     }
 }

@@ -23,15 +23,22 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ui.activities
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.airbnb.lottie.LottieDrawable
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_card_reader.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
 import org.eclipse.keyple.core.seproxy.event.ReaderEvent
 import org.eclipse.keyple.core.seproxy.exception.KeyplePluginInstantiationException
+import org.eclipse.keyple.famoco.validator.BuildConfig
 import org.eclipse.keyple.famoco.validator.R
 import org.eclipse.keyple.famoco.validator.data.CardReaderApi
 import org.eclipse.keyple.famoco.validator.data.model.CardReaderResponse
@@ -42,49 +49,80 @@ import org.eclipse.keyple.famoco.validator.ticketing.TicketingSession
 import org.eclipse.keyple.famoco.validator.util.KeypleSettings
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
 @ActivityScoped
-class CardReaderActivity: DaggerAppCompatActivity() {
+class CardReaderActivity : DaggerAppCompatActivity() {
 
+    @Inject
+    lateinit var cardReaderApi: CardReaderApi
+
+    private var poReaderObserver: PoObserver? = null
+
+    private lateinit var progress: ProgressDialog
     private var timer = Timer()
     private var readersInitialized = false
     lateinit var ticketingSession: TicketingSession
     var currentAppState = AppState.WAIT_SYSTEM_READY
-    private val cardReaderApi: CardReaderApi = CardReaderApi()
 
     /* application states */
     enum class AppState {
         UNSPECIFIED, WAIT_SYSTEM_READY, WAIT_CARD, CARD_STATUS
     }
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_reader)
         // Inflate the layout for this fragment
         animation.setAnimation("card_scan.json")
         animation.playAnimation()
 
-        try {
-            Timber.d("initCardReader")
-            if (!readersInitialized) {
-                val poReaderObserver: ObservableReader.ReaderObserver = PoObserver()
-                cardReaderApi.init(poReaderObserver)
-                ticketingSession = cardReaderApi.getTicketingSession()
-                handleAppEvents(AppState.WAIT_CARD, null)
-                readersInitialized = true
-                Timber.d("readersInitialized")
-            }
-        } catch (e: KeyplePluginInstantiationException) {
-            Timber.e(e)
-        }
+        progress = ProgressDialog(this)
+        progress.setMessage(getString(R.string.please_wait))
+        progress.setCancelable(false)
     }
 
     override fun onResume() {
         super.onResume()
         animation.playAnimation()
-        if (readersInitialized) {
+
+        if (!readersInitialized) {
+            GlobalScope.launch {
+                withContext(Dispatchers.Main) {
+                    showProgress()
+                }
+
+                withContext(Dispatchers.IO) {
+                    try {
+                        poReaderObserver = PoObserver()
+                        cardReaderApi.init(poReaderObserver)
+                        ticketingSession = cardReaderApi.getTicketingSession()!!
+                        readersInitialized = true
+                        handleAppEvents(AppState.WAIT_CARD, null)
+                        cardReaderApi.startNfcDetection(this@CardReaderActivity)
+                    } catch (e: KeyplePluginInstantiationException) {
+                        Timber.e(e)
+                        withContext(Dispatchers.Main) {
+                            dismissProgress()
+                            showNoProxyReaderDialog(e)
+                        }
+                    } catch (e: IllegalStateException) {
+                        Timber.e(e)
+                        withContext(Dispatchers.Main) {
+                            dismissProgress()
+                            showNoProxyReaderDialog(e)
+                        }
+                    }
+                }
+                if (readersInitialized) {
+                    withContext(Dispatchers.Main) {
+                        dismissProgress()
+                        updateReaderInfos()
+                    }
+                }
+            }
+        } else {
             cardReaderApi.startNfcDetection(this)
-            Timber.d("startNfcDetection")
         }
         if(KeypleSettings.batteryPowered) {
             timer = Timer() // Need to reinit timer after cancel
@@ -94,6 +132,27 @@ class CardReaderActivity: DaggerAppCompatActivity() {
                 }
             }, RETURN_DELAY_MS.toLong())
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        readersInitialized = false
+        cardReaderApi.onDestroy(poReaderObserver)
+        poReaderObserver = null
+    }
+
+    fun updateReaderInfos() {
+
+        @Suppress("ConstantConditionIf")
+        val readerPlugin = if (BuildConfig.FLAVOR == "copernic") {
+            BuildConfig.FLAVOR
+        } else {
+            "Android NFC - ${BuildConfig.FLAVOR}"
+        }
+//        val samPlugin = cardReaderViewModel.samReaderAvailable()
+//
+//        reader_plugin.text = getString(R.string.reader_plugin, readerPlugin)
+//        sam_plugin.text = getString(R.string.sam_plugin, samPlugin)
     }
 
     override fun onPause() {
@@ -119,7 +178,10 @@ class CardReaderActivity: DaggerAppCompatActivity() {
                     animation.cancelAnimation()
                 }
                 val intent = Intent(this, CardSummaryActivity::class.java)
-                intent.putExtra(CardSummaryActivity.STATUS_KEY, cardReaderResponse.status.toString())
+                intent.putExtra(
+                    CardSummaryActivity.STATUS_KEY,
+                    cardReaderResponse.status.toString()
+                )
                 intent.putExtra(CardSummaryActivity.TICKETS_KEY, cardReaderResponse.ticketsNumber)
                 intent.putExtra(CardSummaryActivity.CONTRACT, cardReaderResponse.contract)
                 intent.putExtra(CardSummaryActivity.CARD_TYPE, cardReaderResponse.cardType)
@@ -160,7 +222,13 @@ class CardReaderActivity: DaggerAppCompatActivity() {
                 Timber.i("PO Type = ${ticketingSession.poTypeName}")
                 if ("CALYPSO" != ticketingSession.poTypeName) {
                     changeDisplay(
-                        CardReaderResponse(Status.INVALID_CARD, 0, "", ticketingSession.poTypeName ?: ""))
+                        CardReaderResponse(
+                            Status.INVALID_CARD,
+                            0,
+                            "",
+                            ticketingSession.poTypeName ?: ""
+                        )
+                    )
                     return
                 } else {
                     Timber.i("A Calypso PO selection succeeded.")
@@ -199,30 +267,33 @@ class CardReaderActivity: DaggerAppCompatActivity() {
                                                 Timber.i("Debit TICKETS_FOUND page.")
                                                 changeDisplay(
                                                     CardReaderResponse(
-                                                    Status.TICKETS_FOUND,
-                                                    it - 1,
-                                                    "",
-                                                    ticketingSession.poTypeName ?: ""
-                                                ))
+                                                        Status.TICKETS_FOUND,
+                                                        it - 1,
+                                                        "",
+                                                        ticketingSession.poTypeName ?: ""
+                                                    )
+                                                )
                                             } else {
                                                 Timber.i("Debit ERROR page.")
                                                 changeDisplay(
                                                     CardReaderResponse(
-                                                    Status.ERROR,
-                                                    0,
-                                                    "",
-                                                    ticketingSession.poTypeName ?: ""
-                                                ))
+                                                        Status.ERROR,
+                                                        0,
+                                                        "",
+                                                        ticketingSession.poTypeName ?: ""
+                                                    )
+                                                )
                                             }
                                         } else {
                                             Timber.i("Load EMPTY_CARD page.")
                                             changeDisplay(
                                                 CardReaderResponse(
-                                                Status.EMPTY_CARD,
-                                                0,
-                                                "",
-                                                ticketingSession.poTypeName ?: ""
-                                            ))
+                                                    Status.EMPTY_CARD,
+                                                    0,
+                                                    "",
+                                                    ticketingSession.poTypeName ?: ""
+                                                )
+                                            )
                                         }
                                     }
                                 } else {
@@ -230,27 +301,36 @@ class CardReaderActivity: DaggerAppCompatActivity() {
                                         Timber.i("Season TICKETS_FOUND page.")
                                         changeDisplay(
                                             CardReaderResponse(
-                                            Status.TICKETS_FOUND,
-                                            0,
-                                            contract,
-                                            ticketingSession.poTypeName ?: ""
-                                        ))
+                                                Status.TICKETS_FOUND,
+                                                0,
+                                                contract,
+                                                ticketingSession.poTypeName ?: ""
+                                            )
+                                        )
                                     } else {
                                         Timber.i("Season ticket ERROR page.")
                                         changeDisplay(
                                             CardReaderResponse(
-                                            Status.ERROR,
-                                            0,
-                                            "",
-                                            ticketingSession.poTypeName ?: ""
-                                        ))
+                                                Status.ERROR,
+                                                0,
+                                                "",
+                                                ticketingSession.poTypeName ?: ""
+                                            )
+                                        )
                                     }
                                 }
                             }
                         } catch (e: IllegalStateException) {
                             Timber.e(e)
                             Timber.e("Load ERROR page after exception = ${e.message}")
-                            changeDisplay(CardReaderResponse(Status.ERROR, 0, "", ticketingSession.poTypeName ?: ""))
+                            changeDisplay(
+                                CardReaderResponse(
+                                    Status.ERROR,
+                                    0,
+                                    "",
+                                    ticketingSession.poTypeName ?: ""
+                                )
+                            )
                         }
                     }
                 }
@@ -261,12 +341,54 @@ class CardReaderActivity: DaggerAppCompatActivity() {
         Timber.i("New state = $currentAppState")
     }
 
+    fun showProgress() {
+        if (!progress.isShowing) {
+            progress.show()
+        }
+    }
+
+    fun dismissProgress() {
+        if (progress.isShowing) {
+            progress.dismiss()
+        }
+    }
+
+    fun showNoProxyReaderDialog(t: Throwable) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.error_title)
+        builder.setMessage(t.message)
+        builder.setNegativeButton(R.string.quit) { _, _ ->
+            finish()
+        }
+        val dialog = builder.create()
+        dialog.setCancelable(false)
+        dialog.show()
+    }
+
+    fun getCurrentFlavor(): String {
+        return BuildConfig.FLAVOR
+    }
+
+
     private inner class PoObserver : ObservableReader.ReaderObserver {
         override fun update(event: ReaderEvent) {
+            System.out.println(">>> ")
+            System.out.println(">>> ")
+            System.out.println(">>> PoObserver.update - event : $event")
+            System.out.println(">>> PoObserver.update - New ReaderEvent received :${event.eventType.name}")
+            System.out.println(">>> ")
+            System.out.println(">>> ")
             Timber.i("New ReaderEvent received :${event.eventType.name}")
             handleAppEvents(currentAppState, event)
         }
     }
+
+//    inner class PoObserver : ObservableReader.ReaderObserver {
+//        override fun update(event: ReaderEvent) {
+//            Timber.i("New ReaderEvent received :${event.eventType.name}")
+//            handleAppEvents(currentAppState, event)
+//        }
+//    }
 
     companion object {
         private const val RETURN_DELAY_MS = 30000
