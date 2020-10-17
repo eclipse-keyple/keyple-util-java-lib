@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('keyple-android-plugin-famoco-se-communication.aar'))

@@ -1,2 +1,3 @@
+include ':keyple-android-plugin-famoco-se-communication'
 rootProject.name = "KeypleAndroidDemo"
 include ':validator-app'
