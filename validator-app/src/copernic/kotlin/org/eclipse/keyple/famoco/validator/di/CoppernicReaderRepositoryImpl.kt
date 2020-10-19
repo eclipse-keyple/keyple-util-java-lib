@@ -19,8 +19,11 @@ import org.eclipse.keyple.core.seproxy.SeProxyService
 import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.exception.KeypleException
 import org.eclipse.keyple.core.seproxy.exception.KeyplePluginInstantiationException
-import org.eclipse.keyple.core.seproxy.protocol.TransmissionMode
+import org.eclipse.keyple.core.seproxy.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.seproxy.plugin.reader.util.ContactlessCardCommonProtocols
+import org.eclipse.keyple.core.seproxy.plugin.reader.util.ContactsCardCommonProtocols
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
+import org.eclipse.keyple.famoco.validator.reader.PoReaderProtocol
 import org.eclipse.keyple.famoco.validator.util.suspendCoroutineWithTimeout
 import javax.inject.Inject
 import kotlin.coroutines.Continuation
@@ -81,6 +84,12 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
             SeProxyService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
         val poReader = askPlugin?.getReader(AndroidCoppernicAskContactlessReader.READER_NAME)
         poReader?.let {
+
+            (it as AbstractLocalReader).activateProtocol(
+                getContactlessIsoProtocol()!!.readerProtocolName,
+                getContactlessIsoProtocol()!!.applicationProtocolName
+            )
+
             this.poReader = poReader
         }
 
@@ -92,9 +101,15 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
         val askPlugin =
             SeProxyService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
         samReaders = askPlugin?.readers?.filter {
-            it.value.transmissionMode == TransmissionMode.CONTACTS
+            !it.value.isContactless
         }?.toMutableMap() ?: mutableMapOf()
 
+        samReaders.forEach {
+            (it.value as AbstractLocalReader).activateProtocol(
+                getSamReaderProtocol(),
+                getSamReaderProtocol()
+            )
+        }
         return samReaders
     }
 
@@ -114,10 +129,6 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
         }
     }
 
-    override fun setSamParameters(samReader: SeReader) {
-        samReader.setParameter(AndroidCoppernicAskContactReader.FLAG_READER_RESET_STATE, "")
-    }
-
     override fun enableNfcReaderMode(activity: Activity) {
         //Do nothing
     }
@@ -125,6 +136,19 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
     override fun disableNfcReaderMode(activity: Activity) {
         //Do nothing
     }
+
+    override fun getContactlessIsoProtocol(): PoReaderProtocol? {
+        return PoReaderProtocol(
+            ContactlessCardCommonProtocols.ISO_14443_4.name,
+            ContactlessCardCommonProtocols.ISO_14443_4.name
+        )
+    }
+
+    override fun getContactlessMifareProtocol(): PoReaderProtocol? {
+        return null
+    }
+
+    override fun getSamReaderProtocol(): String = ContactsCardCommonProtocols.ISO_7816_3.name
 
     override fun onDestroy() {
         ConePeripheral.RFID_ASK_UCM108_GPIO.off(applicationContext)

@@ -28,8 +28,6 @@ import org.eclipse.keyple.core.seproxy.event.AbstractDefaultSelectionsResponse
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
 import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
 import org.eclipse.keyple.core.seproxy.message.SeResponse
-import org.eclipse.keyple.core.seproxy.protocol.SeCommonProtocols
-import org.eclipse.keyple.core.seproxy.protocol.TransmissionMode
 import org.eclipse.keyple.core.util.ByteArrayUtil
 import timber.log.Timber
 import java.text.DateFormat
@@ -39,7 +37,8 @@ import java.util.*
 class TicketingSession(readerRepository: IReaderRepository) :
     AbstractTicketingSession(readerRepository), ITicketingSession {
     private var mifareClassicIndex = 0
-    private var mifareDesfireIndex = 0
+
+    //    private var mifareDesfireIndex = 0
     private var bankingCardIndex = 0
     private var navigoCardIndex = 0
 
@@ -71,7 +70,7 @@ class TicketingSession(readerRepository: IReaderRepository) :
         /* Select Calypso */
         val poSelectionRequest = PoSelectionRequest(
             PoSelector.builder()
-                .seProtocol(SeCommonProtocols.PROTOCOL_ISO14443_4)
+                .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
                 .aidSelector(SeSelector.AidSelector.builder().aidToSelect(CalypsoInfo.AID).build())
                 .invalidatedPo(PoSelector.InvalidatedPo.REJECT).build()
         )
@@ -100,31 +99,35 @@ class TicketingSession(readerRepository: IReaderRepository) :
         calypsoPoIndex = seSelection.prepareSelection(poSelectionRequest)
 
         /* Select Mifare Classic PO */
-        val mifareClassicSelectionRequest = GenericSeSelectionRequest(
-            SeSelector.builder()
-                .seProtocol(SeCommonProtocols.PROTOCOL_MIFARE_CLASSIC)
-                .atrFilter(SeSelector.AtrFilter(".*")).build()
-        )
+        readerRepository.getContactlessMifareProtocol()?.let {
+            val mifareClassicSelectionRequest = GenericSeSelectionRequest(
+                SeSelector.builder()
+                    .seProtocol(it.applicationProtocolName)
+                    .atrFilter(SeSelector.AtrFilter(".*")).build()
+            )
 
-        /*
-         * Add the selection case to the current selection
-         */
-        mifareClassicIndex = seSelection.prepareSelection(mifareClassicSelectionRequest)
+            /*
+             * Add the selection case to the current selection
+             */
+            mifareClassicIndex = seSelection.prepareSelection(mifareClassicSelectionRequest)
+        }
+
 
         /* Select Mifare Desfire PO */
-        val mifareDesfireSelectionRequest = GenericSeSelectionRequest(
-            SeSelector.builder()
-                .seProtocol(SeCommonProtocols.PROTOCOL_MIFARE_DESFIRE)
-                .atrFilter(SeSelector.AtrFilter(".*")).build()
-        )
+//        val protocolMifareUltralight = AndroidNfcProtocolSettings.getSetting(AndroidNfcSupportedProtocols.MIFARE_ULTRA_LIGHT.name)
+//        val mifareDesfireSelectionRequest = GenericSeSelectionRequest(
+//            SeSelector.builder()
+//                .seProtocol(AndroidNfcProtocolSettings.getSetting(protocolMifareUltralight))
+//                .atrFilter(SeSelector.AtrFilter(".*")).build()
+//        )
+//        mifareDesfireIndex = seSelection.prepareSelection(mifareDesfireSelectionRequest)
 
         /*
          * Add the selection case to the current selection
          */
-        mifareDesfireIndex = seSelection.prepareSelection(mifareDesfireSelectionRequest)
         val bankingCardSelectionRequest = GenericSeSelectionRequest(
             PoSelector.builder()
-                .seProtocol(SeCommonProtocols.PROTOCOL_ISO14443_4)
+                .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
                 .aidSelector(
                     SeSelector.AidSelector.builder().aidToSelect("325041592e5359532e4444463031")
                         .build()
@@ -138,7 +141,7 @@ class TicketingSession(readerRepository: IReaderRepository) :
         bankingCardIndex = seSelection.prepareSelection(bankingCardSelectionRequest)
         val naviogCardSelectionRequest = GenericSeSelectionRequest(
             PoSelector.builder()
-                .seProtocol(SeCommonProtocols.PROTOCOL_ISO14443_4)
+                .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
                 .aidSelector(
                     SeSelector.AidSelector.builder().aidToSelect("A0000004040125090101").build()
                 )
@@ -176,9 +179,9 @@ class TicketingSession(readerRepository: IReaderRepository) :
                 mifareClassicIndex -> {
                     poTypeName = "MIFARE Classic"
                 }
-                mifareDesfireIndex -> {
-                    poTypeName = "MIFARE Desfire"
-                }
+//                mifareDesfireIndex -> {
+//                    poTypeName = "MIFARE Desfire"
+//                }
                 bankingCardIndex -> {
                     poTypeName = "EMV"
                 }
@@ -454,13 +457,11 @@ class TicketingSession(readerRepository: IReaderRepository) :
      */
     inner class GenericSeSelectionRequest(seSelector: SeSelector) :
         AbstractSeSelectionRequest<AbstractApduCommandBuilder>(seSelector) {
-        private val transmissionMode = seSelector.seProtocol.transmissionMode
         override fun parse(seResponse: SeResponse): AbstractMatchingSe {
             class GenericMatchingSe(
-                selectionResponse: SeResponse?,
-                transmissionMode: TransmissionMode?
+                selectionResponse: SeResponse?
             ) : AbstractMatchingSe(selectionResponse)
-            return GenericMatchingSe(seResponse, transmissionMode)
+            return GenericMatchingSe(seResponse)
         }
     }
 }

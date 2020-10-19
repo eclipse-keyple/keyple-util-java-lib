@@ -23,7 +23,6 @@ import org.eclipse.keyple.core.seproxy.MultiSeRequestProcessing
 import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
 import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
-import org.eclipse.keyple.core.seproxy.protocol.SeCommonProtocols
 import timber.log.Timber
 
 abstract class AbstractTicketingSession protected constructor(
@@ -98,15 +97,16 @@ abstract class AbstractTicketingSession protected constructor(
 
     @Throws(KeypleReaderException::class, IllegalStateException::class)
     protected fun checkSamAndOpenChannel(samReader: SeReader): SeResource<CalypsoSam> {
-        readerRepository.setSamParameters(samReader)
         /*
          * check the availability of the SAM doing a ATR based selection, open its physical and
          * logical channels and keep it open
          */
         val samSelection = SeSelection(MultiSeRequestProcessing.FIRST_MATCH)
 
-        val samSelector = SamSelector.builder().seProtocol(SeCommonProtocols.PROTOCOL_ISO7816_3)
-            .samRevision(SamRevision.C1).build()
+        val samSelector = SamSelector.builder()
+            .seProtocol(readerRepository.getSamReaderProtocol())
+            .samRevision(SamRevision.C1)
+            .build()
 
         samSelection.prepareSelection(SamSelectionRequest(samSelector))
 

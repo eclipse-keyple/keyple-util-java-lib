@@ -24,7 +24,6 @@ import org.eclipse.keyple.core.selection.SelectionsResult
 import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.SeSelector
 import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
-import org.eclipse.keyple.core.seproxy.protocol.SeCommonProtocols
 import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -53,7 +52,7 @@ class TicketingSessionExplicitSelection(readerRepository: IReaderRepository)
 
         /* Select Calypso */
         val poSelectionRequest = PoSelectionRequest(PoSelector.builder()
-            .seProtocol(SeCommonProtocols.PROTOCOL_ISO14443_4)
+            .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
             .aidSelector(SeSelector.AidSelector.builder().aidToSelect(CalypsoInfo.AID).build())
             .invalidatedPo(PoSelector.InvalidatedPo.REJECT).build())
 

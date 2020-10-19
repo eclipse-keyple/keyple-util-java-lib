@@ -124,7 +124,7 @@ class CardReaderActivity : DaggerAppCompatActivity() {
         } else {
             cardReaderApi.startNfcDetection(this)
         }
-        if(KeypleSettings.batteryPowered) {
+        if (KeypleSettings.batteryPowered) {
             timer = Timer() // Need to reinit timer after cancel
             timer.schedule(object : TimerTask() {
                 override fun run() {
@@ -365,32 +365,55 @@ class CardReaderActivity : DaggerAppCompatActivity() {
         dialog.show()
     }
 
-    fun getCurrentFlavor(): String {
-        return BuildConfig.FLAVOR
-    }
-
-
     private inner class PoObserver : ObservableReader.ReaderObserver {
         override fun update(event: ReaderEvent) {
-            System.out.println(">>> ")
-            System.out.println(">>> ")
-            System.out.println(">>> PoObserver.update - event : $event")
-            System.out.println(">>> PoObserver.update - New ReaderEvent received :${event.eventType.name}")
-            System.out.println(">>> ")
-            System.out.println(">>> ")
             Timber.i("New ReaderEvent received :${event.eventType.name}")
-            handleAppEvents(currentAppState, event)
+
+            if (event.eventType == ReaderEvent.EventType.SE_MATCHED &&
+                cardReaderApi.isMockedResponse()
+            ) {
+                launchMockedEvents()
+            } else {
+                handleAppEvents(currentAppState, event)
+            }
         }
     }
 
-//    inner class PoObserver : ObservableReader.ReaderObserver {
-//        override fun update(event: ReaderEvent) {
-//            Timber.i("New ReaderEvent received :${event.eventType.name}")
-//            handleAppEvents(currentAppState, event)
-//        }
-//    }
+    /**
+     * Used to mock card responses -> display chosen result screen
+     */
+    private fun launchMockedEvents() {
+        Timber.i("Launch STUB Card event !!")
+        // STUB Card event
+        val timer = Timer()
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                /** Change this value to see other status screens **/
+                val status: Status = Status.TICKETS_FOUND
+                when (status) {
+                    Status.TICKETS_FOUND -> changeDisplay(
+                        CardReaderResponse(
+                            Status.TICKETS_FOUND,
+                            7,
+                            "Season Pass",
+                            ""
+                        )
+                    )
+                    Status.LOADING, Status.ERROR, Status.SUCCESS, Status.INVALID_CARD, Status.EMPTY_CARD -> changeDisplay(
+                        CardReaderResponse(
+                            status,
+                            0,
+                            "",
+                            ""
+                        )
+                    )
+                }
+            }
+        }, EVENT_DELAY_MS.toLong())
+    }
 
     companion object {
         private const val RETURN_DELAY_MS = 30000
+        private const val EVENT_DELAY_MS = 500
     }
 }

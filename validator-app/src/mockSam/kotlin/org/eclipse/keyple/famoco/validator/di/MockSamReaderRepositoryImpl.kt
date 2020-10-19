@@ -1,10 +1,6 @@
 package org.eclipse.keyple.famoco.validator.di
 
 import android.app.Activity
-import android.content.Context
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import org.eclipse.keyple.core.seproxy.SeProxyService
 import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
@@ -14,8 +10,6 @@ import org.eclipse.keyple.core.seproxy.plugin.reader.util.ContactsCardCommonProt
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.famoco.validator.reader.PoReaderProtocol
 import org.eclipse.keyple.plugin.android.nfc.*
-import org.eclipse.keyple.plugin.android.omapi.AndroidOmapiPluginFactory
-import org.eclipse.keyple.plugin.android.omapi.PLUGIN_NAME
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -26,7 +20,7 @@ import javax.inject.Inject
  *  @author youssefamrani
  */
 
-class OmapiReaderRepositoryImpl @Inject constructor(private val applicationContext: Context) :
+class MockSamReaderRepositoryImpl @Inject constructor() :
     IReaderRepository {
 
     override var poReader: SeReader? = null
@@ -35,7 +29,6 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
     @Throws(KeypleException::class)
     override fun registerPlugin() {
         SeProxyService.getInstance().registerPlugin(AndroidNfcPluginFactory())
-        SeProxyService.getInstance().registerPlugin(AndroidOmapiPluginFactory(applicationContext))
     }
 
     @Throws(KeypleException::class)
@@ -72,27 +65,17 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
 
     @Throws(KeypleException::class)
     override suspend fun initSamReaders(): Map<String, SeReader> {
-        return withContext(Dispatchers.IO) {
-            for (x in 1..MAX_TRIES) {
-                samReaders = SeProxyService.getInstance().getPlugin(PLUGIN_NAME).readers
-                if (samReaders.isEmpty()) {
-                    Timber.d("No readers found in OMAPI Keyple Plugin")
-                    Timber.d("Retrying in 1 second")
-                    delay(1000)
-                } else {
-                    Timber.d("Readers Found")
-                    break
-                }
-            }
-            samReaders.forEach {
-                (it.value as AbstractLocalReader).activateProtocol(
-                    getSamReaderProtocol(),
-                    getSamReaderProtocol()
-                )
-            }
+        samReaders =
+            mutableMapOf(Pair(AndroidMockReaderImpl.READER_NAME, AndroidMockReaderImpl()))
 
-            samReaders
+        samReaders.forEach {
+            (it.value as AbstractLocalReader).activateProtocol(
+                getSamReaderProtocol(),
+                getSamReaderProtocol()
+            )
         }
+
+        return samReaders
     }
 
     override fun enableNfcReaderMode(activity: Activity) {
@@ -104,11 +87,7 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
     }
 
     override fun getSamReader(): SeReader? {
-        return if (samReaders.isNotEmpty()) {
-            samReaders.values.first()
-        } else {
-            null
-        }
+        return samReaders[AndroidMockReaderImpl.READER_NAME]
     }
 
     override fun getContactlessIsoProtocol(): PoReaderProtocol? {
@@ -133,7 +112,60 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
         //Do nothing
     }
 
-    companion object {
-        private const val MAX_TRIES = 10
+    override fun isMockedResponse(): Boolean {
+        return true
+    }
+
+    @Suppress("INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_WARNING")
+    class AndroidMockReaderImpl : AbstractLocalReader(
+        "",
+        ""
+    ) {
+
+        override fun isSePresent(): Boolean {
+            return true
+        }
+
+        override fun transmitApdu(apduIn: ByteArray?): ByteArray {
+            return apduIn ?: throw IllegalStateException("Mock no apdu in")
+        }
+
+        override fun getATR(): ByteArray? {
+            return null
+        }
+
+        override fun openPhysicalChannel() {
+        }
+
+        override fun isPhysicalChannelOpen(): Boolean {
+            return true
+        }
+
+        override fun checkSePresence(): Boolean {
+            return true
+        }
+
+        override fun closePhysicalChannel() {
+        }
+
+        override fun isContactless(): Boolean {
+            return false
+        }
+
+        override fun isCurrentProtocol(readerProtocolName: String?): Boolean {
+            return true
+        }
+
+        override fun deactivateReaderProtocol(readerProtocolName: String?) {
+            //Do nothing
+        }
+
+        override fun activateReaderProtocol(readerProtocolName: String?) {
+            //Do nothing
+        }
+
+        companion object {
+            const val READER_NAME = "Mock_Sam"
+        }
     }
 }

@@ -57,36 +57,33 @@ android {
         omapi {
             dimension 'device'
             resValue "string", "app_name", "Keyple OMAPI Validator"
-//            applicationId "org.eclipse.keyple.famoco.validator.omapi"
             applicationIdSuffix ".omapi"
         }
         copernic {
             dimension 'device'
             resValue "string", "app_name", "Keyple Copernic Validator"
-//            applicationId "org.eclipse.keyple.famoco.validator.copernic"
             applicationIdSuffix ".copernic"
         }
         famoco {
             dimension 'device'
             resValue "string", "app_name", "Keyple Famoco Validator"
-//            applicationId "org.eclipse.keyple.famoco.validator.famoco"
             applicationIdSuffix ".famoco"
         }
-        noFamoco {
+        mockSam {
             dimension "device"
-            resValue "string", "app_name", "Keyple No-Famoco Validator"
-//            applicationId "org.eclipse.keyple.famoco.validator.nofamoco"
-            applicationIdSuffix ".nofamoco"
+            resValue "string", "app_name", "Keyple Mock Sam Validator"
+            applicationIdSuffix ".mockSam"
         }
     }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
+
         omapi.java.srcDirs += 'src/omapi/kotlin'
         copernic.java.srcDirs += 'src/copernic/kotlin'
         famoco.java.srcDirs += 'src/famoco/kotlin'
-        noFamoco.java.srcDirs += 'src/noFamoco/kotlin'
+        mockSam.java.srcDirs += 'src/mockSam/kotlin'
     }
 
     androidExtensions {
@@ -111,8 +108,7 @@ dependencies {
     omapiImplementation "org.eclipse.keyple:keyple-android-plugin-omapi:$keyple_version"
     famocoImplementation "org.eclipse.keyple:keyple-android-plugin-nfc:$keyple_version"
     famocoImplementation "org.eclipse.keyple:keyple-android-plugin-famoco-se-communication:$keyple_version"
-    noFamocoImplementation "org.eclipse.keyple:keyple-android-plugin-nfc:$keyple_version"
-    noFamocoImplementation "org.eclipse.keyple:keyple-android-plugin-famoco-se-communication:$keyple_version"
+    mockSamImplementation "org.eclipse.keyple:keyple-android-plugin-nfc:$keyple_version"
     copernicImplementation "org.eclipse.keyple:keyple-android-plugin-coppernic-ask:$keyple_version"
 
     // Android Architecture components dependencies

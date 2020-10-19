@@ -25,10 +25,15 @@ interface IReaderRepository {
     @Throws(KeypleException::class)
     suspend fun initSamReaders(): Map<String, SeReader>
 
-    fun setSamParameters(samReader: SeReader)
-
     fun enableNfcReaderMode(activity: Activity)
     fun disableNfcReaderMode(activity: Activity)
     fun getSamReader(): SeReader?
+    fun getContactlessIsoProtocol(): PoReaderProtocol?
+    fun getContactlessMifareProtocol(): PoReaderProtocol?
+    fun getSamReaderProtocol(): String
     fun onDestroy()
+
+    fun isMockedResponse(): Boolean = false
 }
+
+data class PoReaderProtocol(val readerProtocolName: String, val applicationProtocolName: String)

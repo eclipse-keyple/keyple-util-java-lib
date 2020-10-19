@@ -132,4 +132,8 @@ class CardReaderApi @Inject constructor(private var readerRepository: IReaderRep
         readerRepository.onDestroy()
         ticketingSession = null
     }
+
+    fun isMockedResponse(): Boolean {
+        return readerRepository.isMockedResponse()
+    }
 }

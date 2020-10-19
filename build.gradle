@@ -81,7 +81,9 @@ subprojects{
 
 ext{
 
-    keyple_version = '0.9.0'
+    keyple_version = '1.0.0-SNAPSHOT'
+    famoco_plugin_version = '1.0.0-SNAPSHOT'
+    coppernic_plugin_version = '1.0.0-SNAPSHOT'
 
     appcompat_version = '1.1.0'
     core_ktx_version = '1.2.0'

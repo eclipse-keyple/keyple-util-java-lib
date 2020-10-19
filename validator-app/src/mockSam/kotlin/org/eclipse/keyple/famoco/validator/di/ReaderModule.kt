@@ -18,5 +18,5 @@ class ReaderModule {
 
     @Provides
     @AppScoped
-    fun provideReaderRepository(): IReaderRepository = NoFamocoReaderRepositoryImpl()
+    fun provideReaderRepository(): IReaderRepository = MockSamReaderRepositoryImpl()
 }
