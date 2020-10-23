@@ -29,13 +29,22 @@
         </activity>
         <activity
             android:name="org.eclipse.keyple.famoco.validator.ui.activities.CardSummaryActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
         <activity
             android:name="org.eclipse.keyple.famoco.validator.ui.activities.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
         <activity
             android:name="org.eclipse.keyple.famoco.validator.ui.activities.SettingsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -11,19 +11,10 @@
   ~ SPDX-License-Identifier: EPL-2.0
   -->
 
-<resources>
-    <dimen name="toolbar_margin_top">40dp</dimen>
-
-    <dimen name="big_text_size">27sp</dimen>
-    <dimen name="medium_text_size">23sp</dimen>
-    <dimen name="small_text_size">20sp</dimen>
-
-    <dimen name="settings_start_ic_size">100dp</dimen>
-
-    <dimen name="home_text_width">230dp</dimen>
-
-    <dimen name="reading_animation_size">250dp</dimen>
-
-    <dimen name="eclipse_logo_width">183dp</dimen>
-    <dimen name="eclipse_logo_height">72dp</dimen>
-</resources>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/blue" />
+    <corners android:radius="5dp" />
+    <stroke android:width="1dip" android:color="@color/blue" />
+</shape>

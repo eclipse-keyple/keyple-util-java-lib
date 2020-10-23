@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.eclipse.keyple.famoco.validator.BuildConfig
+import kotlinx.android.synthetic.main.logo_toolbar.*
 import org.eclipse.keyple.famoco.validator.R
 import org.eclipse.keyple.famoco.validator.util.KeypleSettings
 
@@ -29,6 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         setSupportActionBar(findViewById(R.id.toolbar))
+        toolbarLogo.setImageResource(R.drawable.ic_logo_blue)
 
         timeBtn.setOnClickListener {
             startActivityForResult(Intent (Settings.ACTION_DATE_SETTINGS), 0);

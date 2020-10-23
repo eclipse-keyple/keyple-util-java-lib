@@ -73,9 +73,6 @@ class CardReaderActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_reader)
-        // Inflate the layout for this fragment
-        animation.setAnimation("card_scan.json")
-        animation.playAnimation()
 
         progress = ProgressDialog(this)
         progress.setMessage(getString(R.string.please_wait))
