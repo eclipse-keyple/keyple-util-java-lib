@@ -46,7 +46,7 @@ import java.util.*
 @ActivityScoped
 class CardReaderActivity: DaggerAppCompatActivity() {
 
-    private val timer = Timer()
+    private var timer = Timer()
     private var readersInitialized = false
     lateinit var ticketingSession: TicketingSession
     var currentAppState = AppState.WAIT_SYSTEM_READY
@@ -87,6 +87,7 @@ class CardReaderActivity: DaggerAppCompatActivity() {
             Timber.d("startNfcDetection")
         }
         if(KeypleSettings.batteryPowered) {
+            timer = Timer() // Need to reinit timer after cancel
             timer.schedule(object : TimerTask() {
                 override fun run() {
                     runOnUiThread { onBackPressed() }

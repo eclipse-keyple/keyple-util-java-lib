@@ -39,7 +39,7 @@ import java.util.*
 @ActivityScoped
 class CardReaderActivity: DaggerAppCompatActivity() {
 
-    private val timer = Timer()
+    private var timer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -53,6 +53,7 @@ class CardReaderActivity: DaggerAppCompatActivity() {
         super.onResume()
         animation.playAnimation()
         if(KeypleSettings.batteryPowered) {
+            timer = Timer() // Need to reinit timer after cancel
             timer.schedule(object : TimerTask() {
                 override fun run() {
                     runOnUiThread { onBackPressed() }
@@ -60,27 +61,30 @@ class CardReaderActivity: DaggerAppCompatActivity() {
             }, RETURN_DELAY_MS.toLong())
         }
 
-        // STUB Card event
-        val timer = Timer()
-        timer.schedule(object : TimerTask() {
+        val cardEventTimer = Timer()
+        cardEventTimer.schedule(object : TimerTask() {
             override fun run() {
                 /** Change this value to see other status screens **/
                 val status: Status = Status.INVALID_CARD
                 when (status) {
-                    Status.TICKETS_FOUND -> changeDisplay(
-                        CardReaderResponse(
-                        Status.TICKETS_FOUND,
-                        7,
-                        "Season Pass",
-                        ""
-                    ))
-                    Status.LOADING, Status.ERROR, Status.SUCCESS, Status.INVALID_CARD, Status.EMPTY_CARD -> changeDisplay(
-                        CardReaderResponse(
-                        status,
-                        0,
-                        "",
-                        ""
-                    ))
+                    Status.TICKETS_FOUND -> runOnUiThread {
+                        changeDisplay(
+                                CardReaderResponse(
+                                        Status.TICKETS_FOUND,
+                                        7,
+                                        "Season Pass",
+                                        ""
+                                ))
+                    }
+                    Status.LOADING, Status.ERROR, Status.SUCCESS, Status.INVALID_CARD, Status.EMPTY_CARD -> runOnUiThread {
+                        changeDisplay(
+                                CardReaderResponse(
+                                        status,
+                                        0,
+                                        "",
+                                        ""
+                                ))
+                    }
                 }
             }
         }, EVENT_DELAY_MS.toLong())
@@ -101,9 +105,7 @@ class CardReaderActivity: DaggerAppCompatActivity() {
                 animation.playAnimation()
                 animation.repeatCount = LottieDrawable.INFINITE
             } else {
-                runOnUiThread{
-                    animation.cancelAnimation()
-                }
+                animation.cancelAnimation()
                 val intent = Intent(this, CardSummaryActivity::class.java)
                 intent.putExtra(CardSummaryActivity.STATUS_KEY, cardReaderResponse.status.toString())
                 intent.putExtra(CardSummaryActivity.TICKETS_KEY, cardReaderResponse.ticketsNumber)
