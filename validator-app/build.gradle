@@ -1,18 +1,25 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBeta = 1 //Use 99 if beta is over and going to production.
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "org.cna.keyple.famoco.validator"
+        applicationId "org.eclipse.keyple.famoco.validator"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBeta
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,8 +29,8 @@ android {
             versionNameSuffix "-DEBUG"
             applicationIdSuffix ".debug"
             resValue "string", "app_name", "Keyple Demo Validator (Debug)"
-
         }
+
         release {
             debuggable false
             minifyEnabled false
@@ -31,6 +38,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue "string", "app_name", "Keyple Demo Validator"
         }
+    }
+
+    flavorDimensions "device"
+    productFlavors {
+        famoco {
+            dimension "device"
+        }
+        noFamoco {
+            dimension "device"
+            applicationIdSuffix ".noFamoco"
+            versionNameSuffix "-noFamoco"
+        }
+    }
+
+    androidExtensions {
+        experimental = true
     }
 
     //For lambda of legacy code
@@ -42,6 +65,8 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
+        famoco.java.srcDirs += 'src/famoco/kotlin'
+        noFamoco.java.srcDirs += 'src/noFamoco/kotlin'
     }
 
     packagingOptions {
@@ -56,7 +81,6 @@ android {
 }
 
 dependencies {
-    //implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     implementation "com.google.android.material:material:1.1.0-rc02"
@@ -69,9 +93,9 @@ dependencies {
     implementation "org.eclipse.keyple:keyple-java-core:$keyple_version"
     implementation "org.eclipse.keyple:keyple-java-calypso:$keyple_version"
     implementation "org.eclipse.keyple:keyple-android-plugin-nfc:$keyple_version"
-    implementation "org.eclipse.keyple:keyple-android-plugin-famoco-se-communication:$keyple_version"
+    //implementation "org.eclipse.keyple:keyple-android-plugin-famoco-se-communication:1.0.1@aar"
     //keyple-android-plugin-famoco-se-communication
-//    implementation project(path: ':keyple-plugins:famoco-se-communication')
+    implementation project(':keyple-android-plugin-famoco-se-communication')
     //implementation "org.eclipse.keyple:famoco-se-communication:$keyple_version"
 
     // Android Architecture components dependencies
