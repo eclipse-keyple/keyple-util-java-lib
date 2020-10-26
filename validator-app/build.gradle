@@ -106,9 +106,12 @@ dependencies {
 
     omapiImplementation "org.eclipse.keyple:keyple-android-plugin-nfc:$keyple_version"
     omapiImplementation "org.eclipse.keyple:keyple-android-plugin-omapi:$keyple_version"
+
     famocoImplementation "org.eclipse.keyple:keyple-android-plugin-nfc:$keyple_version"
     famocoImplementation "org.eclipse.keyple:keyple-android-plugin-famoco-se-communication:$keyple_version"
+
     mockSamImplementation "org.eclipse.keyple:keyple-android-plugin-nfc:$keyple_version"
+
     copernicImplementation "org.eclipse.keyple:keyple-android-plugin-coppernic-ask:$keyple_version"
 
     // Android Architecture components dependencies
