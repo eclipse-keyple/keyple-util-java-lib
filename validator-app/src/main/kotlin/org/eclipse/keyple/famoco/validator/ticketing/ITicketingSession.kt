@@ -15,7 +15,7 @@ import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
 
 interface ITicketingSession {
-    val poReader: SeReader
+    val poReader: SeReader?
     val cardContent: CardContent
     val poTypeName: String?
     fun analyzePoProfile(): Boolean

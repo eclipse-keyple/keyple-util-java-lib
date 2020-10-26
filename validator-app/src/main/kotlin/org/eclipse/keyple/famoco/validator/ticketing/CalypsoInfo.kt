@@ -29,6 +29,10 @@ package org.eclipse.keyple.famoco.validator.ticketing
 object CalypsoInfo {
     /** AID 1TIC.ICA*  */
     const val AID = "315449432e494341"
+
+    /** AID NORMALIZED IDF*  */
+//    const val AID = "A0000004040125090101"
+
     /** Audit-C0  */ // public final static String AID = "315449432E4943414C54";
     // / ** 1TIC.ICA AID */
     // public final static String AID = "315449432E494341";

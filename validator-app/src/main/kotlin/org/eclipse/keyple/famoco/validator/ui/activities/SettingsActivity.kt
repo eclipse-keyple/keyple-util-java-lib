@@ -15,9 +15,11 @@ package org.eclipse.keyple.famoco.validator.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Editable
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
+import org.eclipse.keyple.famoco.validator.BuildConfig
 import org.eclipse.keyple.famoco.validator.R
 import org.eclipse.keyple.famoco.validator.util.KeypleSettings
 
@@ -46,5 +48,8 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
+        if(BuildConfig.DEBUG){
+            locationEdit.text = Editable.Factory.getInstance().newEditable("Paris")
+        }
     }
 }

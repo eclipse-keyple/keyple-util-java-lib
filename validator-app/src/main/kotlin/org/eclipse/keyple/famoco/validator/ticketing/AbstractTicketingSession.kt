@@ -11,15 +11,11 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ticketing
 
+import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.calypso.command.sam.SamRevision
-import org.eclipse.keyple.calypso.transaction.CalypsoPo
-import org.eclipse.keyple.calypso.transaction.CalypsoSam
-import org.eclipse.keyple.calypso.transaction.ElementaryFile
-import org.eclipse.keyple.calypso.transaction.PoSecuritySettings
+import org.eclipse.keyple.calypso.transaction.*
 import org.eclipse.keyple.calypso.transaction.PoSecuritySettings.PoSecuritySettingsBuilder
 import org.eclipse.keyple.calypso.transaction.PoTransaction.SessionSetting.AccessLevel
-import org.eclipse.keyple.calypso.transaction.SamSelectionRequest
-import org.eclipse.keyple.calypso.transaction.SamSelector
 import org.eclipse.keyple.core.selection.SeResource
 import org.eclipse.keyple.core.selection.SeSelection
 import org.eclipse.keyple.core.selection.SelectionsResult
@@ -27,11 +23,12 @@ import org.eclipse.keyple.core.seproxy.MultiSeRequestProcessing
 import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
 import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
-import org.eclipse.keyple.core.seproxy.protocol.SeCommonProtocols
-import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoReader
 import timber.log.Timber
 
-abstract class AbstractTicketingSession protected constructor(val poReader: SeReader, protected val samReader: SeReader?) {
+abstract class AbstractTicketingSession protected constructor(
+    protected val readerRepository: IReaderRepository
+) {
+
     protected lateinit var calypsoPo: CalypsoPo
     protected lateinit var seSelection: SeSelection
     var poTypeName: String? = null
@@ -44,6 +41,7 @@ abstract class AbstractTicketingSession protected constructor(val poReader: SeRe
     protected lateinit var efEventLog: ElementaryFile
     protected lateinit var efCounter: ElementaryFile
     protected lateinit var efContractParser: ElementaryFile
+
     protected fun pad(text: String, c: Char, length: Int): String {
         val sb = StringBuffer(length)
         sb.append(text)
@@ -94,19 +92,21 @@ abstract class AbstractTicketingSession protected constructor(val poReader: SeRe
     }
 
     fun notifySeProcessed() {
-        (poReader as ObservableReader).finalizeSeProcessing()
+        (readerRepository.poReader as ObservableReader).finalizeSeProcessing()
     }
 
     @Throws(KeypleReaderException::class, IllegalStateException::class)
     protected fun checkSamAndOpenChannel(samReader: SeReader): SeResource<CalypsoSam> {
-        samReader.setParameter(AndroidFamocoReader.FLAG_READER_RESET_STATE, "")
         /*
          * check the availability of the SAM doing a ATR based selection, open its physical and
          * logical channels and keep it open
          */
         val samSelection = SeSelection(MultiSeRequestProcessing.FIRST_MATCH)
 
-        val samSelector = SamSelector.builder().seProtocol(SeCommonProtocols.PROTOCOL_ISO7816_3).samRevision(SamRevision.C1).build()
+        val samSelector = SamSelector.builder()
+            .seProtocol(readerRepository.getSamReaderProtocol())
+            .samRevision(SamRevision.C1)
+            .build()
 
         samSelection.prepareSelection(SamSelectionRequest(samSelector))
 
@@ -157,5 +157,9 @@ abstract class AbstractTicketingSession protected constructor(val poReader: SeRe
                 DEFAULT_KEY_RECORD_NUMBER_DEBIT
             )
             .build()
+    }
+
+    fun samReaderAvailable(): Boolean {
+        return readerRepository.getSamReader() != null
     }
 }

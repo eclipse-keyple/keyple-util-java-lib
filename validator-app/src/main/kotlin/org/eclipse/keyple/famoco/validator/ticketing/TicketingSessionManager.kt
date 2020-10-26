@@ -11,7 +11,7 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ticketing
 
-import org.eclipse.keyple.core.seproxy.SeReader
+import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
 import org.eclipse.keyple.core.seproxy.exception.KeypleReaderNotFoundException
 import timber.log.Timber
@@ -19,14 +19,14 @@ import timber.log.Timber
 class TicketingSessionManager(private val ticketingSessions: ArrayList<ITicketingSession> = ArrayList()) {
 
     @Throws(KeypleReaderException::class)
-    fun createTicketingSession(poReader: SeReader, samReader: SeReader?, explicitSelection: Boolean = false): ITicketingSession {
+    fun createTicketingSession(readerRepository: IReaderRepository, explicitSelection: Boolean = false): ITicketingSession {
         val ticketingSession: ITicketingSession
         if (explicitSelection) {
-            Timber.d("Create a new TicketingSessionExplicitSelection for reader ${poReader.name}")
-            ticketingSession = TicketingSessionExplicitSelection(poReader, samReader)
+            Timber.d("Create a new TicketingSessionExplicitSelection for reader ${readerRepository.poReader?.name}")
+            ticketingSession = TicketingSessionExplicitSelection(readerRepository)
         } else {
-            ticketingSession = TicketingSession(poReader, samReader)
-            Timber.d("Created a new TicketingSession for reader ${poReader.name}")
+            Timber.d("Created a new TicketingSession for reader ${readerRepository.poReader?.name}")
+            ticketingSession = TicketingSession(readerRepository)
         }
         ticketingSessions.add(ticketingSession)
         return ticketingSession
@@ -42,7 +42,7 @@ class TicketingSessionManager(private val ticketingSessions: ArrayList<ITicketin
     fun destroyTicketingSession(poReaderName: String): Boolean {
         Timber.d("Destroy a the TicketingSession for reader $poReaderName")
         for (ticketingSession in ticketingSessions) {
-            if (ticketingSession.poReader.name == poReaderName) {
+            if (ticketingSession.poReader?.name == poReaderName) {
                 ticketingSessions.remove(ticketingSession)
                 Timber.d("Session removed for reader ${ticketingSession.poReader} - $ticketingSession")
                 return true
@@ -55,7 +55,7 @@ class TicketingSessionManager(private val ticketingSessions: ArrayList<ITicketin
     fun getTicketingSession(poReaderName: String): ITicketingSession? {
         Timber.d("Retrieve the TicketingSession of reader $poReaderName")
         for (ticketingSession in ticketingSessions) {
-            if (ticketingSession.poReader.name == poReaderName) {
+            if (ticketingSession.poReader?.name == poReaderName) {
                 Timber.d("TicketingSession found for reader $poReaderName")
                 return ticketingSession
             }
