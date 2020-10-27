@@ -24,7 +24,7 @@
         android:id="@+id/appBarLayout" />
 
     <TextView
-        android:id="@+id/home_description"
+        android:id="@+id/homeDescription"
         android:layout_width="@dimen/home_text_width"
         android:layout_height="wrap_content"
         android:text="@string/home_description"
@@ -36,42 +36,42 @@
         android:layout_marginTop="@dimen/home_element_margin" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
+        android:id="@+id/guidelineTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.33" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
+        android:id="@+id/guidelineBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.80" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left"
+        android:id="@+id/guidelineLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.40" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right"
+        android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.70" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left_txt"
+        android:id="@+id/guidelineLeftTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right_txt"
+        android:id="@+id/guidelineRightTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -84,9 +84,9 @@
         app:lottie_fileName="present_card_white.json"
         app:lottie_autoPlay="true"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toTopOf="@id/guideline_top" />
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
     <TextView
         android:id="@+id/presentCardTv"
@@ -95,13 +95,13 @@
         android:text="@string/present_card"
         style="@style/bigBoldWhite"
         android:fontFamily="@font/worksans_bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right_txt"
-        app:layout_constraintStart_toStartOf="@id/guideline_left_txt"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRightTxt"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeftTxt"
         android:gravity="center"/>
 
     <ImageView
-        android:id="@+id/eclipse_logo"
+        android:id="@+id/eclipseLogo"
         android:layout_width="@dimen/eclipse_logo_width"
         android:layout_height="@dimen/eclipse_logo_height"
         android:src="@drawable/ic_logo_eclipse"

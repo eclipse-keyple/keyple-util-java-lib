@@ -15,7 +15,7 @@ package org.eclipse.keyple.famoco.validator.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.startBtn
 import org.eclipse.keyple.famoco.validator.R
 
 class HomeActivity : AppCompatActivity() {

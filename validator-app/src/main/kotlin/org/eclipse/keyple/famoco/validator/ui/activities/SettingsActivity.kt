@@ -18,9 +18,12 @@ import android.provider.Settings
 import android.text.Editable
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_settings.batteryPoweredBox
+import kotlinx.android.synthetic.main.activity_settings.locationEdit
+import kotlinx.android.synthetic.main.activity_settings.startBtn
+import kotlinx.android.synthetic.main.activity_settings.timeBtn
+import kotlinx.android.synthetic.main.logo_toolbar.toolbarLogo
 import org.eclipse.keyple.famoco.validator.BuildConfig
-import kotlinx.android.synthetic.main.logo_toolbar.*
 import org.eclipse.keyple.famoco.validator.R
 import org.eclipse.keyple.famoco.validator.util.KeypleSettings
 
