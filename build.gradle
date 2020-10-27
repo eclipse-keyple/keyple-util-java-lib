@@ -6,6 +6,7 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
         google()
         jcenter()
     }
@@ -28,6 +29,8 @@ allprojects {
         mavenLocal()
         mavenCentral()
         maven { url 'https://artifactory.coppernic.fr/artifactory/libs-release'}
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
         google()
         jcenter()
     }
