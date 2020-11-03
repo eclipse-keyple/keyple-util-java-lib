@@ -9,16 +9,18 @@
     <string name="please_wait">Please wait</string>
 
     <string name="quit">Quitter</string>
-    <string name="present_card">Please present a travel card</string>
     <string name="reader_plugin">Reader plugin : %s</string>
     <string name="sam_plugin">Sam plugin : %s</string>
-    <string name="card_invalid_main_desc">Sorry, this card is not valid on this network.</string>
-    <string name="card_invalid_small_desc">Identified card type: %s</string>
-    <string name="no_tickets_main_desc">You have no valid title on this card.</string>
-    <string name="no_tickets_small_desc">Please recharge your card.</string>
-    <string name="valid_main_desc">Well done!</string>
-    <string name="valid_small_desc">%s\n\n You have %d ticket(s) left on this card.</string>
-    <string name="valid_season_ticket_small_desc">%s\n\n You have a\n%s\npass on this card.</string>
+    <string name="present_card">Please present your contactless support</string>
+    <string name="card_invalid_main_desc">Invalid on this network</string>
+    <string name="card_invalid_small_desc">This is %s.</string>
+    <string name="no_tickets_main_desc">No trips left</string>
+    <string name="expired_title_main_desc">Expired title</string>
+    <string name="no_valid_title_main_desc">No valid title detected</string>
+    <string name="no_tickets_small_desc">Please recharge your support.</string>
+    <string name="valid_main_desc">Validation completed!</string>
+    <string name="valid_small_desc">%s\n\n You have %d trip(s) left.</string>
+    <string name="valid_season_ticket_small_desc">%s\n\n You have a season pass valid until %s.</string>
     <string name="valid_last_desc">Have a nice trip!</string>
     <string name="error_main_desc">An error occurred.</string>
     <string name="error_small_desc">Please try again.</string>

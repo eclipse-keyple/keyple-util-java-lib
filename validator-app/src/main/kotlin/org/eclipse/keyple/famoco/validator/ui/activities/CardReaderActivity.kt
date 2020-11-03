@@ -30,7 +30,8 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.airbnb.lottie.LottieDrawable
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_card_reader.*
+import java.util.TimerTask
+import java.util.Timer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -48,8 +49,10 @@ import org.eclipse.keyple.famoco.validator.ticketing.ITicketingSession
 import org.eclipse.keyple.famoco.validator.ticketing.TicketingSession
 import org.eclipse.keyple.famoco.validator.util.KeypleSettings
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_card_reader.animation
+import kotlinx.android.synthetic.main.activity_card_reader.mainView
+import kotlinx.android.synthetic.main.activity_card_reader.presentCardTv
 
 @ActivityScoped
 class CardReaderActivity : DaggerAppCompatActivity() {
@@ -73,9 +76,6 @@ class CardReaderActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_reader)
-        // Inflate the layout for this fragment
-        animation.setAnimation("card_scan.json")
-        animation.playAnimation()
 
         progress = ProgressDialog(this)
         progress.setMessage(getString(R.string.please_wait))

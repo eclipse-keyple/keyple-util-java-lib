@@ -12,18 +12,14 @@
   -->
 
 <resources>
-    <dimen name="toolbar_margin_top">40dp</dimen>
+    <dimen name="toolbar_margin_top">20dp</dimen>
 
-    <dimen name="big_text_size">27sp</dimen>
-    <dimen name="medium_text_size">23sp</dimen>
-    <dimen name="small_text_size">20sp</dimen>
+    <dimen name="settings_start_ic_size">80dp</dimen>
+    <dimen name="settings_edit_margin_bottom">20dp</dimen>
+    <dimen name="settings_box_text_start_margin">23dp</dimen>
 
-    <dimen name="settings_start_ic_size">100dp</dimen>
+    <dimen name="home_start_btn_width">150dp</dimen>
 
-    <dimen name="home_text_width">230dp</dimen>
+    <dimen name="reading_animation_size">200dp</dimen>
 
-    <dimen name="reading_animation_size">250dp</dimen>
-
-    <dimen name="eclipse_logo_width">183dp</dimen>
-    <dimen name="eclipse_logo_height">72dp</dimen>
 </resources>

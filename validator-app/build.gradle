@@ -138,7 +138,7 @@ dependencies {
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
     // Lottie for animation
-    implementation "com.airbnb.android:lottie:2.5.0"
+    implementation 'com.airbnb.android:lottie:3.4.4'
 
     implementation "com.jakewharton.timber:timber:$timber_version" //Android
 

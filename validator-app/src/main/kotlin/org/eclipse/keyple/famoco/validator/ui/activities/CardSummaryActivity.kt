@@ -27,13 +27,20 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_card_summary.*
 import org.eclipse.keyple.famoco.validator.R
 import org.eclipse.keyple.famoco.validator.data.model.Status
 import org.eclipse.keyple.famoco.validator.data.model.Status.Companion.getStatus
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
+import java.util.Timer
+import java.util.TimerTask
+import kotlinx.android.synthetic.main.activity_card_summary.animation
+import kotlinx.android.synthetic.main.activity_card_summary.bigText
+import kotlinx.android.synthetic.main.activity_card_summary.mainView
+import kotlinx.android.synthetic.main.activity_card_summary.mediumText
+import kotlinx.android.synthetic.main.activity_card_summary.smallDesc
 
 class CardSummaryActivity : DaggerAppCompatActivity() {
 
