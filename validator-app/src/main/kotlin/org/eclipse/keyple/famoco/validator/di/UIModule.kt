@@ -16,9 +16,14 @@ import dagger.android.ContributesAndroidInjector
 import org.eclipse.keyple.famoco.validator.di.scopes.ActivityScoped
 import org.eclipse.keyple.famoco.validator.ui.activities.CardReaderActivity
 import org.eclipse.keyple.famoco.validator.ui.activities.CardSummaryActivity
+import org.eclipse.keyple.famoco.validator.ui.activities.SplashScreenActivity
 
 @Module
 abstract class UIModule {
+    @ActivityScoped
+    @ContributesAndroidInjector
+    abstract fun splashScreenActivity(): SplashScreenActivity
+
     @ActivityScoped
     @ContributesAndroidInjector
     abstract fun cardReaderActivity(): CardReaderActivity

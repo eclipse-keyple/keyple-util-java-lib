@@ -11,6 +11,8 @@
   -->
 
 <resources>
+    <dimen name="splash_title">18sp</dimen>
+
     <dimen name="toolbar_margin_top">10dp</dimen>
     <dimen name="toolbar_logo_padding">4dp</dimen>
 
@@ -32,4 +34,7 @@
     <dimen name="home_start_text_margin_top">60dp</dimen>
 
     <dimen name="reading_animation_size">150dp</dimen>
+
+    <dimen name="summary_big_title_top_margin">50dp</dimen>
+    <dimen name="summary_desc_top_margin">30dp</dimen>
 </resources>

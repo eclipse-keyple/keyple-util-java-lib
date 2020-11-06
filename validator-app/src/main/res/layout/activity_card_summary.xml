@@ -59,20 +59,18 @@
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toEndOf="@id/guidelineRightAnim"
         app:layout_constraintStart_toStartOf="@id/guidelineLeftAnim"
-        app:layout_constraintTop_toTopOf="@id/guidelineTop"
-        app:layout_constraintBottom_toTopOf="@id/bigText"
-        app:layout_constraintVertical_chainStyle="spread_inside"/>
+        app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
     <TextView
         android:id="@+id/bigText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/bigBoldWhite"
+        android:layout_marginTop="@dimen/summary_big_title_top_margin"
         app:layout_constraintTop_toBottomOf="@id/animation"
         app:layout_constraintEnd_toEndOf="@id/guidelineRightTxt"
         app:layout_constraintStart_toStartOf="@id/guidelineLeftTxt"
         app:layout_constraintBottom_toTopOf="@id/smallDesc"
-        app:layout_constraintVertical_chainStyle="spread_inside"
         android:gravity="center" />
 
     <TextView
@@ -80,11 +78,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/mediumRegularWhite"
+        android:layout_marginTop="@dimen/summary_desc_top_margin"
         app:layout_constraintTop_toBottomOf="@id/bigText"
         app:layout_constraintBottom_toTopOf="@id/mediumText"
         app:layout_constraintEnd_toEndOf="@id/guidelineRightTxt"
         app:layout_constraintStart_toStartOf="@id/guidelineLeftTxt"
-        app:layout_constraintVertical_chainStyle="spread_inside"
         android:gravity="center" />
 
     <TextView
@@ -92,11 +90,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/bigBoldWhite"
+        android:layout_marginTop="@dimen/summary_desc_top_margin"
         app:layout_constraintTop_toBottomOf="@id/smallDesc"
-        app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="@id/guidelineRightTxt"
         app:layout_constraintStart_toStartOf="@id/guidelineLeftTxt"
-        app:layout_constraintVertical_chainStyle="spread_inside"
         android:gravity="center" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
