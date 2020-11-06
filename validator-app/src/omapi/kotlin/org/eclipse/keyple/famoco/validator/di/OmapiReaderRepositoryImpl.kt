@@ -5,11 +5,13 @@ import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import org.eclipse.keyple.core.seproxy.SeProxyService
-import org.eclipse.keyple.core.seproxy.event.ObservableReader
-import org.eclipse.keyple.core.seproxy.exception.KeypleException
-import org.eclipse.keyple.core.seproxy.plugin.reader.AbstractLocalReader
-import org.eclipse.keyple.core.seproxy.plugin.reader.util.ContactsCardCommonProtocols
+import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.SmartCardService
+import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.exception.KeypleException
+import org.eclipse.keyple.core.service.exception.KeyplePluginInstantiationException
+import org.eclipse.keyple.core.service.util.ContactsCardCommonProtocols
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.famoco.validator.reader.PoReaderProtocol
 import org.eclipse.keyple.plugin.android.nfc.*
@@ -33,13 +35,19 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
 
     @Throws(KeypleException::class)
     override fun registerPlugin() {
-        SeProxyService.getInstance().registerPlugin(AndroidNfcPluginFactory())
-        SeProxyService.getInstance().registerPlugin(AndroidOmapiPluginFactory(applicationContext))
+        SmartCardService.getInstance().registerPlugin(AndroidNfcPluginFactory())
+        try {
+            AndroidOmapiPluginFactory(applicationContext) {
+                SmartCardService.getInstance().registerPlugin(it)
+            }
+        } catch (e: KeyplePluginInstantiationException) {
+            e.printStackTrace()
+        }
     }
 
     @Throws(KeypleException::class)
     override suspend fun initPoReader(): Reader? {
-        val readerPlugin = SeProxyService.getInstance().getPlugin(AndroidNfcPlugin.PLUGIN_NAME)
+        val readerPlugin = SmartCardService.getInstance().getPlugin(AndroidNfcPlugin.PLUGIN_NAME)
         poReader = readerPlugin.readers.values.first()
 
         poReader?.let {
@@ -73,7 +81,7 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
     override suspend fun initSamReaders(): Map<String, Reader> {
         return withContext(Dispatchers.IO) {
             for (x in 1..MAX_TRIES) {
-                samReaders = SeProxyService.getInstance().getPlugin(PLUGIN_NAME).readers
+                samReaders = SmartCardService.getInstance().getPlugin(PLUGIN_NAME).readers
                 if (samReaders.isEmpty()) {
                     Timber.d("No readers found in OMAPI Keyple Plugin")
                     Timber.d("Retrying in 1 second")

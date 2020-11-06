@@ -14,14 +14,14 @@ import org.eclipse.keyple.coppernic.ask.plugin.AndroidCoppernicAskContactReader
 import org.eclipse.keyple.coppernic.ask.plugin.AndroidCoppernicAskContactlessReader
 import org.eclipse.keyple.coppernic.ask.plugin.AndroidCoppernicAskContactlessReaderImpl
 import org.eclipse.keyple.coppernic.ask.plugin.AndroidCoppernicAskPluginFactory
-import org.eclipse.keyple.core.seproxy.PluginFactory
-import org.eclipse.keyple.core.seproxy.SeProxyService
-import org.eclipse.keyple.core.seproxy.Reader
-import org.eclipse.keyple.core.seproxy.exception.KeypleException
-import org.eclipse.keyple.core.seproxy.exception.KeyplePluginInstantiationException
-import org.eclipse.keyple.core.seproxy.plugin.reader.AbstractLocalReader
-import org.eclipse.keyple.core.seproxy.plugin.reader.util.ContactlessCardCommonProtocols
-import org.eclipse.keyple.core.seproxy.plugin.reader.util.ContactsCardCommonProtocols
+import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.service.PluginFactory
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.SmartCardService
+import org.eclipse.keyple.core.service.exception.KeypleException
+import org.eclipse.keyple.core.service.exception.KeyplePluginInstantiationException
+import org.eclipse.keyple.core.service.util.ContactlessCardCommonProtocols
+import org.eclipse.keyple.core.service.util.ContactsCardCommonProtocols
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.famoco.validator.reader.PoReaderProtocol
 import org.eclipse.keyple.famoco.validator.util.suspendCoroutineWithTimeout
@@ -67,11 +67,11 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
                 }
 
             if (result != null && result) {
-                val pluginFactory: PluginFactory?
+                val pluginFactory: AndroidCoppernicAskPluginFactory?
                 pluginFactory = withContext(Dispatchers.IO) {
                     AndroidCoppernicAskPluginFactory.init(applicationContext)
                 }
-                SeProxyService.getInstance().registerPlugin(pluginFactory)
+                SmartCardService.getInstance().registerPlugin(pluginFactory)
             } else {
                 throw KeyplePluginInstantiationException("An error occured during Copernic AskReader power up.")
             }
@@ -81,7 +81,7 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
     @Throws(KeypleException::class)
     override suspend fun initPoReader(): Reader? {
         val askPlugin =
-            SeProxyService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
+            SmartCardService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
         val poReader = askPlugin?.getReader(AndroidCoppernicAskContactlessReader.READER_NAME)
         poReader?.let {
 
@@ -99,7 +99,7 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
     @Throws(KeypleException::class)
     override suspend fun initSamReaders(): Map<String, Reader> {
         val askPlugin =
-            SeProxyService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
+            SmartCardService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
         samReaders = askPlugin?.readers?.filter {
             !it.value.isContactless
         }?.toMutableMap() ?: mutableMapOf()

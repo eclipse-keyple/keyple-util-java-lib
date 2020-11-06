@@ -6,6 +6,7 @@ import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
 import org.eclipse.keyple.core.service.event.ObservableReader
 import org.eclipse.keyple.core.service.exception.KeypleException
+import org.eclipse.keyple.core.service.util.ContactsCardCommonProtocols
 import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoPlugin
 import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoPluginFactory
 import org.eclipse.keyple.famoco.se.plugin.AndroidFamocoReader

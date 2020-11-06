@@ -1,12 +1,12 @@
 package org.eclipse.keyple.famoco.validator.di
 
 import android.app.Activity
-import org.eclipse.keyple.core.seproxy.SeProxyService
-import org.eclipse.keyple.core.seproxy.Reader
-import org.eclipse.keyple.core.seproxy.event.ObservableReader
-import org.eclipse.keyple.core.seproxy.exception.KeypleException
-import org.eclipse.keyple.core.seproxy.plugin.reader.AbstractLocalReader
-import org.eclipse.keyple.core.seproxy.plugin.reader.util.ContactsCardCommonProtocols
+import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.SmartCardService
+import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.exception.KeypleException
+import org.eclipse.keyple.core.service.util.ContactsCardCommonProtocols
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.famoco.validator.reader.PoReaderProtocol
 import org.eclipse.keyple.plugin.android.nfc.*
@@ -28,12 +28,12 @@ class MockSamReaderRepositoryImpl @Inject constructor() :
 
     @Throws(KeypleException::class)
     override fun registerPlugin() {
-        SeProxyService.getInstance().registerPlugin(AndroidNfcPluginFactory())
+        SmartCardService.getInstance().registerPlugin(AndroidNfcPluginFactory())
     }
 
     @Throws(KeypleException::class)
     override suspend fun initPoReader(): Reader? {
-        val readerPlugin = SeProxyService.getInstance().getPlugin(AndroidNfcPlugin.PLUGIN_NAME)
+        val readerPlugin = SmartCardService.getInstance().getPlugin(AndroidNfcPlugin.PLUGIN_NAME)
         poReader = readerPlugin.readers.values.first()
 
         poReader?.let {
@@ -67,13 +67,6 @@ class MockSamReaderRepositoryImpl @Inject constructor() :
     override suspend fun initSamReaders(): Map<String, Reader> {
         samReaders =
             mutableMapOf(Pair(AndroidMockReaderImpl.READER_NAME, AndroidMockReaderImpl()))
-
-        samReaders.forEach {
-            (it.value as AbstractLocalReader).activateProtocol(
-                getSamReaderProtocol(),
-                getSamReaderProtocol()
-            )
-        }
 
         return samReaders
     }
@@ -122,10 +115,6 @@ class MockSamReaderRepositoryImpl @Inject constructor() :
         ""
     ) {
 
-        override fun isSePresent(): Boolean {
-            return true
-        }
-
         override fun transmitApdu(apduIn: ByteArray?): ByteArray {
             return apduIn ?: throw IllegalStateException("Mock no apdu in")
         }
@@ -141,7 +130,11 @@ class MockSamReaderRepositoryImpl @Inject constructor() :
             return true
         }
 
-        override fun checkSePresence(): Boolean {
+        override fun isCardPresent(): Boolean {
+            return true
+        }
+
+        override fun checkCardPresence(): Boolean {
             return true
         }
 
