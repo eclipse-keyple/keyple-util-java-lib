@@ -2,7 +2,7 @@ package org.eclipse.keyple.famoco.validator.di
 
 import android.app.Activity
 import org.eclipse.keyple.core.seproxy.SeProxyService
-import org.eclipse.keyple.core.seproxy.SeReader
+import org.eclipse.keyple.core.seproxy.Reader
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
 import org.eclipse.keyple.core.seproxy.exception.KeypleException
 import org.eclipse.keyple.core.seproxy.plugin.reader.AbstractLocalReader
@@ -23,8 +23,8 @@ import javax.inject.Inject
 class MockSamReaderRepositoryImpl @Inject constructor() :
     IReaderRepository {
 
-    override var poReader: SeReader? = null
-    override var samReaders: MutableMap<String, SeReader> = mutableMapOf()
+    override var poReader: Reader? = null
+    override var samReaders: MutableMap<String, Reader> = mutableMapOf()
 
     @Throws(KeypleException::class)
     override fun registerPlugin() {
@@ -32,7 +32,7 @@ class MockSamReaderRepositoryImpl @Inject constructor() :
     }
 
     @Throws(KeypleException::class)
-    override suspend fun initPoReader(): SeReader? {
+    override suspend fun initPoReader(): Reader? {
         val readerPlugin = SeProxyService.getInstance().getPlugin(AndroidNfcPlugin.PLUGIN_NAME)
         poReader = readerPlugin.readers.values.first()
 
@@ -64,7 +64,7 @@ class MockSamReaderRepositoryImpl @Inject constructor() :
     }
 
     @Throws(KeypleException::class)
-    override suspend fun initSamReaders(): Map<String, SeReader> {
+    override suspend fun initSamReaders(): Map<String, Reader> {
         samReaders =
             mutableMapOf(Pair(AndroidMockReaderImpl.READER_NAME, AndroidMockReaderImpl()))
 
@@ -86,7 +86,7 @@ class MockSamReaderRepositoryImpl @Inject constructor() :
         (poReader as AndroidNfcReader).disableNFCReaderMode(activity)
     }
 
-    override fun getSamReader(): SeReader? {
+    override fun getSamReader(): Reader? {
         return samReaders[AndroidMockReaderImpl.READER_NAME]
     }
 

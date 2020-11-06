@@ -11,18 +11,18 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ticketing
 
-import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.calypso.command.sam.SamRevision
 import org.eclipse.keyple.calypso.transaction.*
 import org.eclipse.keyple.calypso.transaction.PoSecuritySettings.PoSecuritySettingsBuilder
 import org.eclipse.keyple.calypso.transaction.PoTransaction.SessionSetting.AccessLevel
-import org.eclipse.keyple.core.selection.SeResource
-import org.eclipse.keyple.core.selection.SeSelection
-import org.eclipse.keyple.core.selection.SelectionsResult
-import org.eclipse.keyple.core.seproxy.MultiSeRequestProcessing
-import org.eclipse.keyple.core.seproxy.SeReader
-import org.eclipse.keyple.core.seproxy.event.ObservableReader
-import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
+import org.eclipse.keyple.core.card.selection.CardResource
+import org.eclipse.keyple.core.card.selection.CardSelection
+import org.eclipse.keyple.core.card.selection.MultiSelectionProcessing
+import org.eclipse.keyple.core.card.selection.SelectionsResult
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.exception.KeypleReaderException
+import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import timber.log.Timber
 
 abstract class AbstractTicketingSession protected constructor(
@@ -30,7 +30,7 @@ abstract class AbstractTicketingSession protected constructor(
 ) {
 
     protected lateinit var calypsoPo: CalypsoPo
-    protected lateinit var seSelection: SeSelection
+    protected lateinit var cardSelection: CardSelection
     var poTypeName: String? = null
         protected set
     var cardContent: CardContent = CardContent()
@@ -52,10 +52,10 @@ abstract class AbstractTicketingSession protected constructor(
     }
 
     fun processSelectionsResult(selectionsResult: SelectionsResult) {
-        val selectionIndex = selectionsResult.matchingSelections.keys.first()
+        val selectionIndex = selectionsResult.smartCards.keys.first()
 
         if (selectionIndex == calypsoPoIndex) {
-            calypsoPo = selectionsResult.activeMatchingSe as CalypsoPo
+            calypsoPo = selectionsResult.activeSmartCard as CalypsoPo
             poTypeName = "CALYPSO"
             efEnvironmentHolder = calypsoPo.getFileBySfi(CalypsoInfo.SFI_EnvironmentAndHolder)
             efEventLog = calypsoPo.getFileBySfi(CalypsoInfo.SFI_EventLog)
@@ -92,30 +92,30 @@ abstract class AbstractTicketingSession protected constructor(
     }
 
     fun notifySeProcessed() {
-        (readerRepository.poReader as ObservableReader).finalizeSeProcessing()
+        (readerRepository.poReader as ObservableReader).finalizeCardProcessing()
     }
 
     @Throws(KeypleReaderException::class, IllegalStateException::class)
-    protected fun checkSamAndOpenChannel(samReader: SeReader): SeResource<CalypsoSam> {
+    protected fun checkSamAndOpenChannel(samReader: Reader): CardResource<CalypsoSam> {
         /*
          * check the availability of the SAM doing a ATR based selection, open its physical and
          * logical channels and keep it open
          */
-        val samSelection = SeSelection(MultiSeRequestProcessing.FIRST_MATCH)
+        val samSelection = CardSelection(MultiSelectionProcessing.FIRST_MATCH)
 
         val samSelector = SamSelector.builder()
-            .seProtocol(readerRepository.getSamReaderProtocol())
+            .cardProtocol(readerRepository.getSamReaderProtocol())
             .samRevision(SamRevision.C1)
             .build()
 
         samSelection.prepareSelection(SamSelectionRequest(samSelector))
 
         return try {
-            if (samReader.isSePresent) {
+            if (samReader.isCardPresent) {
                 val selectionResult = samSelection.processExplicitSelection(samReader)
                 if (selectionResult.hasActiveSelection()) {
-                    val calypsoSam = selectionResult.activeMatchingSe as CalypsoSam
-                    SeResource(samReader, calypsoSam)
+                    val calypsoSam = selectionResult.activeSmartCard as CalypsoSam
+                    CardResource(samReader, calypsoSam)
                 } else {
                     throw IllegalStateException("Sam selection failed")
                 }
@@ -127,7 +127,7 @@ abstract class AbstractTicketingSession protected constructor(
         }
     }
 
-    open fun getSecuritySettings(samResource: SeResource<CalypsoSam>?): PoSecuritySettings? {
+    open fun getSecuritySettings(samResource: CardResource<CalypsoSam>?): PoSecuritySettings? {
 
         // The default KIF values for personalization, loading and debiting
         val DEFAULT_KIF_PERSO = 0x21.toByte()

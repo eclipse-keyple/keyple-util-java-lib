@@ -11,9 +11,9 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ticketing
 
+import org.eclipse.keyple.core.service.exception.KeypleReaderException
+import org.eclipse.keyple.core.service.exception.KeypleReaderNotFoundException
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
-import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
-import org.eclipse.keyple.core.seproxy.exception.KeypleReaderNotFoundException
 import timber.log.Timber
 
 class TicketingSessionManager(private val ticketingSessions: ArrayList<ITicketingSession> = ArrayList()) {

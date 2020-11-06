@@ -11,7 +11,6 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ticketing
 
-import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.calypso.command.po.exception.CalypsoPoCommandException
 import org.eclipse.keyple.calypso.command.sam.exception.CalypsoSamCommandException
 import org.eclipse.keyple.calypso.transaction.CalypsoPo
@@ -19,16 +18,15 @@ import org.eclipse.keyple.calypso.transaction.PoSelectionRequest
 import org.eclipse.keyple.calypso.transaction.PoSelector
 import org.eclipse.keyple.calypso.transaction.PoTransaction
 import org.eclipse.keyple.calypso.transaction.exception.CalypsoPoTransactionException
-import org.eclipse.keyple.core.command.AbstractApduCommandBuilder
-import org.eclipse.keyple.core.selection.*
-import org.eclipse.keyple.core.seproxy.MultiSeRequestProcessing
-import org.eclipse.keyple.core.seproxy.SeReader
-import org.eclipse.keyple.core.seproxy.SeSelector
-import org.eclipse.keyple.core.seproxy.event.AbstractDefaultSelectionsResponse
-import org.eclipse.keyple.core.seproxy.event.ObservableReader
-import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
-import org.eclipse.keyple.core.seproxy.message.SeResponse
+import org.eclipse.keyple.core.card.command.AbstractApduCommandBuilder
+import org.eclipse.keyple.core.card.message.CardSelectionResponse
+import org.eclipse.keyple.core.card.selection.*
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.event.AbstractDefaultSelectionsResponse
+import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.exception.KeypleReaderException
 import org.eclipse.keyple.core.util.ByteArrayUtil
+import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -42,10 +40,10 @@ class TicketingSession(readerRepository: IReaderRepository) :
     private var bankingCardIndex = 0
     private var navigoCardIndex = 0
 
-    override val poReader: SeReader?
+    override val poReader: Reader?
         get() = readerRepository.poReader
 
-    private var samReader: SeReader? = null
+    private var samReader: Reader? = null
 
     init {
         samReader = readerRepository.getSamReader()
@@ -65,13 +63,13 @@ class TicketingSession(readerRepository: IReaderRepository) :
         /*
          * Prepare a PO selection
          */
-        seSelection = SeSelection(MultiSeRequestProcessing.FIRST_MATCH)
+        cardSelection = CardSelection(MultiSelectionProcessing.FIRST_MATCH)
 
         /* Select Calypso */
         val poSelectionRequest = PoSelectionRequest(
             PoSelector.builder()
-                .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
-                .aidSelector(SeSelector.AidSelector.builder().aidToSelect(CalypsoInfo.AID).build())
+                .cardProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
+                .aidSelector(CardSelector.AidSelector.builder().aidToSelect(CalypsoInfo.AID).build())
                 .invalidatedPo(PoSelector.InvalidatedPo.REJECT).build()
         )
 
@@ -96,28 +94,28 @@ class TicketingSession(readerRepository: IReaderRepository) :
         /*
          * Add the selection case to the current selection (we could have added other cases here)
          */
-        calypsoPoIndex = seSelection.prepareSelection(poSelectionRequest)
+        calypsoPoIndex = cardSelection.prepareSelection(poSelectionRequest)
 
         /* Select Mifare Classic PO */
         readerRepository.getContactlessMifareProtocol()?.let {
             val mifareClassicSelectionRequest = GenericSeSelectionRequest(
-                SeSelector.builder()
-                    .seProtocol(it.applicationProtocolName)
-                    .atrFilter(SeSelector.AtrFilter(".*")).build()
+                CardSelector.builder()
+                    .cardProtocol(it.applicationProtocolName)
+                    .atrFilter(CardSelector.AtrFilter(".*")).build()
             )
 
             /*
              * Add the selection case to the current selection
              */
-            mifareClassicIndex = seSelection.prepareSelection(mifareClassicSelectionRequest)
+            mifareClassicIndex = cardSelection.prepareSelection(mifareClassicSelectionRequest)
         }
 
 
         /* Select Mifare Desfire PO */
 //        val protocolMifareUltralight = AndroidNfcProtocolSettings.getSetting(AndroidNfcSupportedProtocols.MIFARE_ULTRA_LIGHT.name)
 //        val mifareDesfireSelectionRequest = GenericSeSelectionRequest(
-//            SeSelector.builder()
-//                .seProtocol(AndroidNfcProtocolSettings.getSetting(protocolMifareUltralight))
+//            CardSelector.builder()
+//                .cardProtocol(AndroidNfcProtocolSettings.getSetting(protocolMifareUltralight))
 //                .atrFilter(SeSelector.AtrFilter(".*")).build()
 //        )
 //        mifareDesfireIndex = seSelection.prepareSelection(mifareDesfireSelectionRequest)
@@ -127,9 +125,9 @@ class TicketingSession(readerRepository: IReaderRepository) :
          */
         val bankingCardSelectionRequest = GenericSeSelectionRequest(
             PoSelector.builder()
-                .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
+                .cardProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
                 .aidSelector(
-                    SeSelector.AidSelector.builder().aidToSelect("325041592e5359532e4444463031")
+                    CardSelector.AidSelector.builder().aidToSelect("325041592e5359532e4444463031")
                         .build()
                 )
                 .invalidatedPo(PoSelector.InvalidatedPo.REJECT).build()
@@ -138,12 +136,12 @@ class TicketingSession(readerRepository: IReaderRepository) :
         /*
          * Add the selection case to the current selection
          */
-        bankingCardIndex = seSelection.prepareSelection(bankingCardSelectionRequest)
+        bankingCardIndex = cardSelection.prepareSelection(bankingCardSelectionRequest)
         val naviogCardSelectionRequest = GenericSeSelectionRequest(
             PoSelector.builder()
-                .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
+                .cardProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
                 .aidSelector(
-                    SeSelector.AidSelector.builder().aidToSelect("A0000004040125090101").build()
+                    CardSelector.AidSelector.builder().aidToSelect("A0000004040125090101").build()
                 )
                 .invalidatedPo(PoSelector.InvalidatedPo.REJECT).build()
         )
@@ -151,24 +149,24 @@ class TicketingSession(readerRepository: IReaderRepository) :
         /*
          * Add the selection case to the current selection
          */
-        navigoCardIndex = seSelection.prepareSelection(naviogCardSelectionRequest)
+        navigoCardIndex = cardSelection.prepareSelection(naviogCardSelectionRequest)
 
         /*
-         * Provide the SeReader with the selection operation to be processed when a PO is inserted.
+         * Provide the Reader with the selection operation to be processed when a PO is inserted.
          */
         (poReader as ObservableReader).setDefaultSelectionRequest(
-            seSelection.selectionOperation, ObservableReader.NotificationMode.ALWAYS
+            cardSelection.selectionOperation, ObservableReader.NotificationMode.ALWAYS
         )
     }
 
     fun processDefaultSelection(selectionResponse: AbstractDefaultSelectionsResponse?): SelectionsResult {
         Timber.i("selectionResponse = $selectionResponse")
         val selectionsResult: SelectionsResult =
-            seSelection.processDefaultSelection(selectionResponse)
+            cardSelection.processDefaultSelection(selectionResponse)
         if (selectionsResult.hasActiveSelection()) {
-            when (selectionsResult.matchingSelections.keys.first()) {
+            when (selectionsResult.smartCards.keys.first()) {
                 calypsoPoIndex -> {
-                    calypsoPo = selectionsResult.activeMatchingSe as CalypsoPo
+                    calypsoPo = selectionsResult.activeSmartCard as CalypsoPo
                     poTypeName = "CALYPSO"
                     efEnvironmentHolder =
                         calypsoPo.getFileBySfi(CalypsoInfo.SFI_EnvironmentAndHolder)
@@ -213,11 +211,11 @@ class TicketingSession(readerRepository: IReaderRepository) :
             // Should block poTransaction without Sam?
             val poTransaction = if (samReader != null)
                 PoTransaction(
-                    SeResource(poReader, calypsoPo),
+                    CardResource(poReader, calypsoPo),
                     getSecuritySettings(checkSamAndOpenChannel(samReader!!))
                 )
             else
-                PoTransaction(SeResource(poReader, calypsoPo))
+                PoTransaction(CardResource(poReader, calypsoPo))
             poTransaction.processOpening(PoTransaction.SessionSetting.AccessLevel.SESSION_LVL_PERSO)
 
             if ("PROFILE1" == profile) {
@@ -254,7 +252,7 @@ class TicketingSession(readerRepository: IReaderRepository) :
                 CalypsoInfo.RECORD_NUMBER_1.toInt(),
                 ByteArrayUtil.fromHex(pad("", '0', 29 * 2))
             )
-            seSelection.prepareReleaseSeChannel()
+            cardSelection.prepareReleaseChannel()
             return true
         } catch (e: CalypsoPoTransactionException) {
             Timber.e(e)
@@ -284,11 +282,11 @@ class TicketingSession(readerRepository: IReaderRepository) :
             // Should block poTransaction without Sam?
             val poTransaction = if (samReader != null)
                 PoTransaction(
-                    SeResource(poReader, calypsoPo),
+                    CardResource(poReader, calypsoPo),
                     getSecuritySettings(checkSamAndOpenChannel(samReader!!))
                 )
             else
-                PoTransaction(SeResource(poReader, calypsoPo))
+                PoTransaction(CardResource(poReader, calypsoPo))
 
             if (!Arrays.equals(currentPoSN, calypsoPo.applicationSerialNumberBytes)) {
                 Timber.i("Load ticket status  : STATUS_CARD_SWITCHED")
@@ -329,7 +327,7 @@ class TicketingSession(readerRepository: IReaderRepository) :
             /*
              * Process transaction
              */
-            seSelection.prepareReleaseSeChannel()
+            cardSelection.prepareReleaseChannel()
             Timber.i("Load ticket status  : STATUS_OK")
             ITicketingSession.STATUS_OK
         } catch (e: CalypsoSamCommandException) {
@@ -350,11 +348,11 @@ class TicketingSession(readerRepository: IReaderRepository) :
             val poTransaction =
                 if (samReader != null)
                     PoTransaction(
-                        SeResource(poReader, calypsoPo),
+                        CardResource(poReader, calypsoPo),
                         getSecuritySettings(checkSamAndOpenChannel(samReader!!))
                     )
                 else
-                    PoTransaction(SeResource(poReader, calypsoPo))
+                    PoTransaction(CardResource(poReader, calypsoPo))
 
             /*
              * Open a transaction to read/write the Calypso PO
@@ -408,11 +406,11 @@ class TicketingSession(readerRepository: IReaderRepository) :
             // Should block poTransaction without Sam?
             val poTransaction = if (samReader != null)
                 PoTransaction(
-                    SeResource(poReader, calypsoPo),
+                    CardResource(poReader, calypsoPo),
                     getSecuritySettings(checkSamAndOpenChannel(samReader!!))
                 )
             else
-                PoTransaction(SeResource(poReader, calypsoPo))
+                PoTransaction(CardResource(poReader, calypsoPo))
 
             if (!Arrays.equals(currentPoSN, calypsoPo.applicationSerialNumberBytes)) {
                 return ITicketingSession.STATUS_CARD_SWITCHED
@@ -455,12 +453,12 @@ class TicketingSession(readerRepository: IReaderRepository) :
     /**
      * Create a new class extending AbstractSeSelectionRequest
      */
-    inner class GenericSeSelectionRequest(seSelector: SeSelector) :
-        AbstractSeSelectionRequest<AbstractApduCommandBuilder>(seSelector) {
-        override fun parse(seResponse: SeResponse): AbstractMatchingSe {
+    inner class GenericSeSelectionRequest(seSelector: CardSelector) :
+        AbstractCardSelectionRequest<AbstractApduCommandBuilder>(seSelector) {
+        override fun parse(seResponse: CardSelectionResponse): AbstractSmartCard {
             class GenericMatchingSe(
-                selectionResponse: SeResponse?
-            ) : AbstractMatchingSe(selectionResponse)
+                selectionResponse: CardSelectionResponse?
+            ) : AbstractSmartCard(selectionResponse)
             return GenericMatchingSe(seResponse)
         }
     }

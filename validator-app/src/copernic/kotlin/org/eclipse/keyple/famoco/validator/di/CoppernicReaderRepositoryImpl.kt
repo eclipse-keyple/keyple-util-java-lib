@@ -16,7 +16,7 @@ import org.eclipse.keyple.coppernic.ask.plugin.AndroidCoppernicAskContactlessRea
 import org.eclipse.keyple.coppernic.ask.plugin.AndroidCoppernicAskPluginFactory
 import org.eclipse.keyple.core.seproxy.PluginFactory
 import org.eclipse.keyple.core.seproxy.SeProxyService
-import org.eclipse.keyple.core.seproxy.SeReader
+import org.eclipse.keyple.core.seproxy.Reader
 import org.eclipse.keyple.core.seproxy.exception.KeypleException
 import org.eclipse.keyple.core.seproxy.exception.KeyplePluginInstantiationException
 import org.eclipse.keyple.core.seproxy.plugin.reader.AbstractLocalReader
@@ -39,8 +39,8 @@ import kotlin.coroutines.resume
 class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationContext: Context) :
     IReaderRepository, PowerListener {
 
-    override var poReader: SeReader? = null
-    override var samReaders: MutableMap<String, SeReader> = mutableMapOf()
+    override var poReader: Reader? = null
+    override var samReaders: MutableMap<String, Reader> = mutableMapOf()
     var peripheral: ConePeripheral? = null
 
     var powerListenerContinuation: Continuation<Boolean>? = null
@@ -79,7 +79,7 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
     }
 
     @Throws(KeypleException::class)
-    override suspend fun initPoReader(): SeReader? {
+    override suspend fun initPoReader(): Reader? {
         val askPlugin =
             SeProxyService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
         val poReader = askPlugin?.getReader(AndroidCoppernicAskContactlessReader.READER_NAME)
@@ -97,7 +97,7 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
     }
 
     @Throws(KeypleException::class)
-    override suspend fun initSamReaders(): Map<String, SeReader> {
+    override suspend fun initSamReaders(): Map<String, Reader> {
         val askPlugin =
             SeProxyService.getInstance().getPlugin(AndroidCoppernicAskPluginFactory.pluginName)
         samReaders = askPlugin?.readers?.filter {
@@ -113,7 +113,7 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
         return samReaders
     }
 
-    override fun getSamReader(): SeReader? {
+    override fun getSamReader(): Reader? {
         return if (samReaders.isNotEmpty()) {
             val filteredByName = samReaders.filter {
                 it.value.name == SAM_READER_1_NAME

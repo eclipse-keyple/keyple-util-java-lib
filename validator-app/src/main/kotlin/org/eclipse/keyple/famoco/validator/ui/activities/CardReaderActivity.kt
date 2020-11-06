@@ -35,9 +35,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.eclipse.keyple.core.seproxy.event.ObservableReader
-import org.eclipse.keyple.core.seproxy.event.ReaderEvent
-import org.eclipse.keyple.core.seproxy.exception.KeyplePluginInstantiationException
+import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.event.ReaderEvent
+import org.eclipse.keyple.core.service.exception.KeyplePluginInstantiationException
 import org.eclipse.keyple.famoco.validator.BuildConfig
 import org.eclipse.keyple.famoco.validator.R
 import org.eclipse.keyple.famoco.validator.data.CardReaderApi
@@ -204,7 +204,7 @@ class CardReaderActivity : DaggerAppCompatActivity() {
 
         Timber.i("Current state = $currentAppState, wanted new state = $newAppState, event = ${readerEvent?.eventType}")
         when (readerEvent?.eventType) {
-            ReaderEvent.EventType.SE_INSERTED, ReaderEvent.EventType.SE_MATCHED -> {
+            ReaderEvent.EventType.CARD_INSERTED, ReaderEvent.EventType.CARD_MATCHED -> {
                 if (newAppState == AppState.WAIT_SYSTEM_READY) {
                     return
                 }
@@ -235,7 +235,7 @@ class CardReaderActivity : DaggerAppCompatActivity() {
                     newAppState = AppState.CARD_STATUS
                 }
             }
-            ReaderEvent.EventType.SE_REMOVED -> {
+            ReaderEvent.EventType.CARD_REMOVED -> {
                 currentAppState = AppState.WAIT_SYSTEM_READY
             }
             else -> {
@@ -250,7 +250,7 @@ class CardReaderActivity : DaggerAppCompatActivity() {
             AppState.CARD_STATUS -> {
                 currentAppState = newAppState
                 when (readerEvent?.eventType) {
-                    ReaderEvent.EventType.SE_INSERTED, ReaderEvent.EventType.SE_MATCHED -> {
+                    ReaderEvent.EventType.CARD_INSERTED, ReaderEvent.EventType.CARD_MATCHED -> {
                         try {
                             if (ticketingSession.analyzePoProfile()) {
                                 val cardContent = ticketingSession.cardContent
@@ -369,7 +369,7 @@ class CardReaderActivity : DaggerAppCompatActivity() {
         override fun update(event: ReaderEvent) {
             Timber.i("New ReaderEvent received :${event.eventType.name}")
 
-            if (event.eventType == ReaderEvent.EventType.SE_MATCHED &&
+            if (event.eventType == ReaderEvent.EventType.CARD_MATCHED &&
                 cardReaderApi.isMockedResponse()
             ) {
                 launchMockedEvents()

@@ -11,11 +11,11 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ticketing
 
-import org.eclipse.keyple.core.seproxy.SeReader
-import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.exception.KeypleReaderException
 
 interface ITicketingSession {
-    val poReader: SeReader?
+    val poReader: Reader?
     val cardContent: CardContent
     val poTypeName: String?
     fun analyzePoProfile(): Boolean

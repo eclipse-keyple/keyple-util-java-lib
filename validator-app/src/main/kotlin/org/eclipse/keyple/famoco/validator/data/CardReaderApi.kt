@@ -12,14 +12,13 @@
 package org.eclipse.keyple.famoco.validator.data
 
 import android.app.Activity
-import org.eclipse.keyple.core.seproxy.SeProxyService
-import org.eclipse.keyple.core.seproxy.SeReader
-import org.eclipse.keyple.core.seproxy.event.ObservableReader
-import org.eclipse.keyple.core.seproxy.exception.KeypleException
-import org.eclipse.keyple.core.seproxy.exception.KeyplePluginInstantiationException
-import org.eclipse.keyple.core.seproxy.exception.KeyplePluginNotFoundException
-import org.eclipse.keyple.core.seproxy.exception.KeypleReaderIOException
-import org.eclipse.keyple.famoco.validator.BuildConfig
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.SmartCardService
+import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.exception.KeypleException
+import org.eclipse.keyple.core.service.exception.KeyplePluginInstantiationException
+import org.eclipse.keyple.core.service.exception.KeyplePluginNotFoundException
+import org.eclipse.keyple.core.service.exception.KeypleReaderIOException
 import org.eclipse.keyple.famoco.validator.di.scopes.AppScoped
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.famoco.validator.ticketing.TicketingSession
@@ -53,7 +52,7 @@ class CardReaderApi @Inject constructor(private var readerRepository: IReaderRep
         /*
          * Init PO reader
          */
-        val poReader: SeReader?
+        val poReader: Reader?
         try {
             poReader = readerRepository.initPoReader()
         } catch (e: KeyplePluginNotFoundException) {
@@ -66,14 +65,11 @@ class CardReaderApi @Inject constructor(private var readerRepository: IReaderRep
             Timber.e(e)
             throw IllegalStateException(e.message)
         }
-        if (poReader == null) {
-            throw IllegalStateException("No proxy reader available - ${BuildConfig.FLAVOR}")
-        }
 
         /*
          * Init SAM reader
          */
-        var samReaders: Map<String, SeReader>? = null
+        var samReaders: Map<String, Reader>? = null
         try {
             samReaders = readerRepository.initSamReaders()
         } catch (e: KeyplePluginNotFoundException) {
@@ -98,18 +94,18 @@ class CardReaderApi @Inject constructor(private var readerRepository: IReaderRep
         readerRepository.enableNfcReaderMode(activity)
 
         /*
-        * Provide the SeReader with the selection operation to be processed when a PO is
+        * Provide the Reader with the selection operation to be processed when a PO is
         * inserted.
         */
         ticketingSession?.prepareAndSetPoDefaultSelection()
 
-        (readerRepository.poReader as ObservableReader).startSeDetection(ObservableReader.PollingMode.REPEATING)
+        (readerRepository.poReader as ObservableReader).startCardDetection(ObservableReader.PollingMode.REPEATING)
     }
 
     fun stopNfcDetection(activity: Activity) {
         try {
             // notify reader that se detection has been switched off
-            (readerRepository.poReader as ObservableReader).stopSeDetection()
+            (readerRepository.poReader as ObservableReader).stopCardDetection()
             // Disable Reader Mode for NFC Adapter
             readerRepository.disableNfcReaderMode(activity)
         } catch (e: KeyplePluginNotFoundException) {
@@ -125,10 +121,10 @@ class CardReaderApi @Inject constructor(private var readerRepository: IReaderRep
         if (observer != null && readerRepository.poReader != null) {
             (readerRepository.poReader as ObservableReader).removeObserver(observer)
         }
-        SeProxyService.getInstance().plugins.forEach {
-            SeProxyService.getInstance().unregisterPlugin(it.key)
+        SmartCardService.getInstance().plugins.forEach {
+            SmartCardService.getInstance().unregisterPlugin(it.key)
         }
-        SeProxyService.getInstance().plugins.clear()
+        SmartCardService.getInstance().plugins.clear()
         readerRepository.onDestroy()
         ticketingSession = null
     }

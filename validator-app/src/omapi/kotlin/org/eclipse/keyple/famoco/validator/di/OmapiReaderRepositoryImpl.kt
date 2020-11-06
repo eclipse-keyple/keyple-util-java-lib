@@ -6,7 +6,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import org.eclipse.keyple.core.seproxy.SeProxyService
-import org.eclipse.keyple.core.seproxy.SeReader
 import org.eclipse.keyple.core.seproxy.event.ObservableReader
 import org.eclipse.keyple.core.seproxy.exception.KeypleException
 import org.eclipse.keyple.core.seproxy.plugin.reader.AbstractLocalReader
@@ -29,8 +28,8 @@ import javax.inject.Inject
 class OmapiReaderRepositoryImpl @Inject constructor(private val applicationContext: Context) :
     IReaderRepository {
 
-    override var poReader: SeReader? = null
-    override var samReaders: MutableMap<String, SeReader> = mutableMapOf()
+    override var poReader: Reader? = null
+    override var samReaders: MutableMap<String, Reader> = mutableMapOf()
 
     @Throws(KeypleException::class)
     override fun registerPlugin() {
@@ -39,7 +38,7 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
     }
 
     @Throws(KeypleException::class)
-    override suspend fun initPoReader(): SeReader? {
+    override suspend fun initPoReader(): Reader? {
         val readerPlugin = SeProxyService.getInstance().getPlugin(AndroidNfcPlugin.PLUGIN_NAME)
         poReader = readerPlugin.readers.values.first()
 
@@ -71,7 +70,7 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
     }
 
     @Throws(KeypleException::class)
-    override suspend fun initSamReaders(): Map<String, SeReader> {
+    override suspend fun initSamReaders(): Map<String, Reader> {
         return withContext(Dispatchers.IO) {
             for (x in 1..MAX_TRIES) {
                 samReaders = SeProxyService.getInstance().getPlugin(PLUGIN_NAME).readers
@@ -103,7 +102,7 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
         (poReader as AndroidNfcReader).disableNFCReaderMode(activity)
     }
 
-    override fun getSamReader(): SeReader? {
+    override fun getSamReader(): Reader? {
         return if (samReaders.isNotEmpty()) {
             samReaders.values.first()
         } else {
