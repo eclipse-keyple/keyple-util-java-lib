@@ -1,8 +1,8 @@
 package org.eclipse.keyple.famoco.validator.reader
 
 import android.app.Activity
-import org.eclipse.keyple.core.seproxy.SeReader
-import org.eclipse.keyple.core.seproxy.exception.KeypleException
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.exception.KeypleException
 
 /**
  *
@@ -13,21 +13,21 @@ import org.eclipse.keyple.core.seproxy.exception.KeypleException
 
 interface IReaderRepository {
 
-    var poReader: SeReader?
-    var samReaders: MutableMap<String, SeReader>
+    var poReader: Reader?
+    var samReaders: MutableMap<String, Reader>
 
     @Throws(KeypleException::class)
     fun registerPlugin()
 
     @Throws(KeypleException::class)
-    suspend fun initPoReader(): SeReader?
+    suspend fun initPoReader(): Reader?
 
     @Throws(KeypleException::class)
-    suspend fun initSamReaders(): Map<String, SeReader>
+    suspend fun initSamReaders(): Map<String, Reader>
 
     fun enableNfcReaderMode(activity: Activity)
     fun disableNfcReaderMode(activity: Activity)
-    fun getSamReader(): SeReader?
+    fun getSamReader(): Reader?
     fun getContactlessIsoProtocol(): PoReaderProtocol?
     fun getContactlessMifareProtocol(): PoReaderProtocol?
     fun getSamReaderProtocol(): String

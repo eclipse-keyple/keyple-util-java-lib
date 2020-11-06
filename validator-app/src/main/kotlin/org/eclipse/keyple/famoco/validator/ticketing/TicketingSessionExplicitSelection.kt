@@ -11,19 +11,19 @@
  ********************************************************************************/
 package org.eclipse.keyple.famoco.validator.ticketing
 
-import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.calypso.command.po.exception.CalypsoPoCommandException
 import org.eclipse.keyple.calypso.command.sam.exception.CalypsoSamCommandException
 import org.eclipse.keyple.calypso.transaction.PoSelectionRequest
 import org.eclipse.keyple.calypso.transaction.PoSelector
 import org.eclipse.keyple.calypso.transaction.PoTransaction
 import org.eclipse.keyple.calypso.transaction.exception.CalypsoPoTransactionException
-import org.eclipse.keyple.core.selection.SeResource
-import org.eclipse.keyple.core.selection.SeSelection
-import org.eclipse.keyple.core.selection.SelectionsResult
-import org.eclipse.keyple.core.seproxy.SeReader
-import org.eclipse.keyple.core.seproxy.SeSelector
-import org.eclipse.keyple.core.seproxy.exception.KeypleReaderException
+import org.eclipse.keyple.core.card.selection.CardResource
+import org.eclipse.keyple.core.card.selection.CardSelection
+import org.eclipse.keyple.core.card.selection.CardSelector
+import org.eclipse.keyple.core.card.selection.SelectionsResult
+import org.eclipse.keyple.core.service.Reader
+import org.eclipse.keyple.core.service.exception.KeypleReaderException
+import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -32,9 +32,9 @@ import java.util.*
 class TicketingSessionExplicitSelection(readerRepository: IReaderRepository)
     : AbstractTicketingSession(readerRepository), ITicketingSession {
 
-    override val poReader: SeReader?
+    override val poReader: Reader?
         get() = readerRepository.poReader
-    private var samReader: SeReader? = null
+    private var samReader: Reader? = null
 
     init {
         samReader = readerRepository.getSamReader()
@@ -48,12 +48,12 @@ class TicketingSessionExplicitSelection(readerRepository: IReaderRepository)
         /*
          * Prepare a PO selection
          */
-        seSelection = SeSelection()
+        cardSelection = CardSelection()
 
         /* Select Calypso */
         val poSelectionRequest = PoSelectionRequest(PoSelector.builder()
-            .seProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
-            .aidSelector(SeSelector.AidSelector.builder().aidToSelect(CalypsoInfo.AID).build())
+            .cardProtocol(readerRepository.getContactlessIsoProtocol()!!.applicationProtocolName)
+            .aidSelector(CardSelector.AidSelector.builder().aidToSelect(CalypsoInfo.AID).build())
             .invalidatedPo(PoSelector.InvalidatedPo.REJECT).build())
 
         // Prepare the reading of the Environment and Holder file.
@@ -65,8 +65,8 @@ class TicketingSessionExplicitSelection(readerRepository: IReaderRepository)
         /*
          * Add the selection case to the current selection (we could have added other cases here)
          */
-        calypsoPoIndex = seSelection.prepareSelection(poSelectionRequest)
-        return seSelection.processExplicitSelection(poReader)
+        calypsoPoIndex = cardSelection.prepareSelection(poSelectionRequest)
+        return cardSelection.processExplicitSelection(poReader)
     }
 
     /**
@@ -92,9 +92,9 @@ class TicketingSessionExplicitSelection(readerRepository: IReaderRepository)
 
             val poTransaction =
                 if (samReader != null)
-                    PoTransaction(SeResource(poReader, calypsoPo), getSecuritySettings(checkSamAndOpenChannel(samReader!!)))
+                    PoTransaction(CardResource(poReader, calypsoPo), getSecuritySettings(checkSamAndOpenChannel(samReader!!)))
                 else
-                    PoTransaction(SeResource(poReader, calypsoPo))
+                    PoTransaction(CardResource(poReader, calypsoPo))
 
             if (!Arrays.equals(currentPoSN, calypsoPo.applicationSerialNumberBytes)) {
                 Timber.i("Load ticket status  : STATUS_CARD_SWITCHED")
