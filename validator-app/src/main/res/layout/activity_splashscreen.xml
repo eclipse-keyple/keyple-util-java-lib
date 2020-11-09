@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/light_blue">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -35,7 +35,8 @@
         android:id="@+id/logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/logo_keyple"
+        android:src="@drawable/ic_keyple_logo_white"
+        android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="@string/home_description"
         android:gravity="center"
-        style="@style/mediumRegularBlue"
+        style="@style/mediumRegularWhite"
         android:textSize="@dimen/splash_title"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
