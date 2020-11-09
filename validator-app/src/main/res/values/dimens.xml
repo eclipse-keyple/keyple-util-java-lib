@@ -22,7 +22,7 @@
 
     <dimen name="settings_horizontal_padding">47dp</dimen>
     <dimen name="settings_edit_margin_bottom">10dp</dimen>
-    <dimen name="settings_start_ic_size">65dp</dimen>
+    <dimen name="settings_start_ic_size">100dp</dimen>
     <dimen name="settings_box_text_start_margin">10dp</dimen>
 
     <dimen name="eclipse_logo_width">163dp</dimen>
@@ -30,7 +30,8 @@
 
     <dimen name="home_element_margin">20dp</dimen>
     <dimen name="home_start_btn_width">100dp</dimen>
-    <dimen name="home_text_width">200dp</dimen>
+    <dimen name="home_text_width">210dp</dimen>
+    <dimen name="home_present_width">220dp</dimen>
     <dimen name="home_start_text_margin_top">60dp</dimen>
 
     <dimen name="reading_animation_size">150dp</dimen>
