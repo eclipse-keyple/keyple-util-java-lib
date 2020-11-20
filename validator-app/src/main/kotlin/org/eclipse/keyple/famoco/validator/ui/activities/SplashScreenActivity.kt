@@ -29,9 +29,7 @@ class SplashScreenActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)
 
-        /*
-         * Wait for Wizway Device to be connected
-         */Timer().schedule(object : TimerTask() {
+        Timer().schedule(object : TimerTask() {
             override fun run() {
                 if (!isFinishing) {
                     startActivity(Intent(applicationContext, SettingsActivity::class.java))
@@ -42,6 +40,6 @@ class SplashScreenActivity : DaggerAppCompatActivity() {
     }
 
     companion object {
-        private const val SPLASH_MAX_DELAY_MS = 6000
+        private const val SPLASH_MAX_DELAY_MS = 2000
     }
 }
