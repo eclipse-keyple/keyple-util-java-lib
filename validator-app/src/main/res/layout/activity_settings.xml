@@ -6,7 +6,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/ic_img_bg_valideur"
     tools:context="org.eclipse.keyple.famoco.validator.ui.activities.SettingsActivity">
 
     <include layout="@layout/logo_toolbar" android:id="@+id/appBarLayout"/>
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineTop"
         app:layout_constraintBottom_toTopOf="@id/locationView"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        android:buttonTint="@color/blue"
+        android:buttonTint="@color/white"
         />
 
     <TextView
@@ -43,7 +43,7 @@
         android:text="@string/battery_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/mediumRegularBlue"
+        style="@style/mediumRegularWhite"
         android:layout_marginStart="@dimen/settings_box_text_start_margin"
         app:layout_constraintStart_toEndOf="@id/batteryPoweredBox"
         app:layout_constraintTop_toBottomOf="@id/guidelineTop" />
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/location_label"
-            style="@style/mediumBoldBlue"
+            style="@style/mediumBoldWhite"
             android:layout_marginBottom="@dimen/settings_edit_margin_bottom" />
 
         <EditText
@@ -74,9 +74,9 @@
             android:autofillHints="location"
             android:hint="@string/location_hint"
             android:inputType="text"
-            android:textColorHint="@color/blue"
-            app:backgroundTint="@color/blue"
-            style="@style/mediumRegularBlue" />
+            android:textColorHint="@color/white"
+            app:backgroundTint="@color/white"
+            style="@style/mediumRegularWhite" />
     </LinearLayout>
 
 
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_label"
-        style="@style/bigBoldBlue"
+        style="@style/bigBoldWhite"
         android:layout_marginBottom="@dimen/settings_edit_margin_bottom"
         app:layout_constraintBottom_toTopOf="@id/startBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +111,7 @@
         android:id="@+id/startBtn"
         android:layout_width="@dimen/settings_start_ic_size"
         android:layout_height="@dimen/settings_start_ic_size"
-        android:src="@drawable/ic_start"
+        android:src="@drawable/ic_start_white"
         android:scaleType="fitXY"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@id/eclipseLogo"
