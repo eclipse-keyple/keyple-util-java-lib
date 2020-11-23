@@ -33,7 +33,6 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         setSupportActionBar(findViewById(R.id.toolbar))
-        toolbarLogo.setImageResource(R.drawable.ic_logo_blue)
 
         timeBtn.setOnClickListener {
             startActivityForResult(Intent (Settings.ACTION_DATE_SETTINGS), 0);

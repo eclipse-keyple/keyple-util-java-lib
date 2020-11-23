@@ -18,9 +18,10 @@
     <dimen name="medium_text_size">23sp</dimen>
     <dimen name="small_text_size">20sp</dimen>
 
-    <dimen name="settings_start_ic_size">100dp</dimen>
+    <dimen name="settings_start_ic_size">150dp</dimen>
 
-    <dimen name="home_text_width">230dp</dimen>
+    <dimen name="home_text_width">280dp</dimen>
+    <dimen name="home_present_width">280dp</dimen>
 
     <dimen name="reading_animation_size">250dp</dimen>
 

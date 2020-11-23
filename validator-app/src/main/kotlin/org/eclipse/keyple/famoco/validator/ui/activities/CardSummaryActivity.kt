@@ -41,6 +41,7 @@ import kotlinx.android.synthetic.main.activity_card_summary.bigText
 import kotlinx.android.synthetic.main.activity_card_summary.mainView
 import kotlinx.android.synthetic.main.activity_card_summary.mediumText
 import kotlinx.android.synthetic.main.activity_card_summary.smallDesc
+import org.eclipse.keyple.famoco.validator.util.KeypleSettings
 
 class CardSummaryActivity : DaggerAppCompatActivity() {
 
@@ -65,6 +66,7 @@ class CardSummaryActivity : DaggerAppCompatActivity() {
                 if (nbTickets != 0) {
                     smallDesc.text = String.format(
                         getString(R.string.valid_small_desc),
+                        KeypleSettings.location.toString(),
                         date,
                         nbTickets
                     )

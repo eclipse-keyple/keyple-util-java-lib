@@ -13,13 +13,13 @@
     <string name="sam_plugin">Sam plugin : %s</string>
     <string name="present_card">Please present your contactless support</string>
     <string name="card_invalid_main_desc">Invalid on this network</string>
-    <string name="card_invalid_small_desc">This is %s.</string>
+    <string name="card_invalid_small_desc">This is \"%s\".</string>
     <string name="no_tickets_main_desc">No trips left</string>
     <string name="expired_title_main_desc">Expired title</string>
     <string name="no_valid_title_main_desc">No valid title detected</string>
     <string name="no_tickets_small_desc">Please recharge your support.</string>
     <string name="valid_main_desc">Validation completed!</string>
-    <string name="valid_small_desc">%s\n\n You have %d trip(s) left.</string>
+    <string name="valid_small_desc">%s\n%s\n\n You have %d trips left.</string>
     <string name="valid_season_ticket_small_desc">%s\n\n You have a season pass valid until %s.</string>
     <string name="valid_last_desc">Have a nice trip!</string>
     <string name="error_main_desc">An error occurred.</string>
@@ -36,7 +36,7 @@
     <string name="msg_location_empty">Please fill in location</string>
 
     <!-- Home screen -->
-    <string name="home_description">Open source API for SmartTicketing</string>
+    <string name="home_description">Open source API for Smart Ticketing</string>
     <string name="start_validation_label">Start validation</string>
     <string name="eclipse_foundation">Eclipse Foundation</string>
 </resources>
