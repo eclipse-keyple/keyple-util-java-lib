@@ -17,6 +17,7 @@ import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
 import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
 import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.event.ReaderObservationExceptionHandler
 import org.eclipse.keyple.core.service.exception.KeypleException
 import org.eclipse.keyple.core.service.util.ContactCardCommonProtocols
 import org.eclipse.keyple.core.service.util.ContactlessCardCommonProtocols
@@ -39,7 +40,7 @@ import timber.log.Timber
  *  @author youssefamrani
  */
 
-class FamocoReaderRepositoryImpl @Inject constructor() :
+class FamocoReaderRepositoryImpl @Inject constructor(private val readerObservationExceptionHandler: ReaderObservationExceptionHandler) :
     IReaderRepository {
 
     override var poReader: Reader? = null
@@ -47,7 +48,7 @@ class FamocoReaderRepositoryImpl @Inject constructor() :
 
     @Throws(KeypleException::class)
     override fun registerPlugin(activity: Activity) {
-        SmartCardService.getInstance().registerPlugin(AndroidNfcPluginFactory(activity))
+        SmartCardService.getInstance().registerPlugin(AndroidNfcPluginFactory(activity, readerObservationExceptionHandler))
         try {
             SmartCardService.getInstance().registerPlugin(AndroidFamocoPluginFactory())
         } catch (e: UnsatisfiedLinkError) {

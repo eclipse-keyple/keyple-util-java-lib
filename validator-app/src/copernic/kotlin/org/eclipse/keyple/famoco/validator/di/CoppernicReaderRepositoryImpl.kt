@@ -25,6 +25,7 @@ import org.eclipse.keyple.coppernic.ask.plugin.ParagonSupportedContactlessProtoc
 import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
 import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
+import org.eclipse.keyple.core.service.event.ReaderObservationExceptionHandler
 import org.eclipse.keyple.core.service.exception.KeypleException
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 import org.eclipse.keyple.famoco.validator.reader.PoReaderProtocol
@@ -36,7 +37,7 @@ import org.eclipse.keyple.famoco.validator.reader.PoReaderProtocol
  *  @author youssefamrani
  */
 
-class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationContext: Context) :
+class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationContext: Context, private val readerObservationExceptionHandler: ReaderObservationExceptionHandler) :
     IReaderRepository {
 
     override var poReader: Reader? = null
@@ -47,7 +48,7 @@ class CoppernicReaderRepositoryImpl @Inject constructor(private val applicationC
         runBlocking {
             val pluginFactory: Cone2PluginFactory?
             pluginFactory = withContext(Dispatchers.IO) {
-                Cone2PluginFactory.init(applicationContext)
+                Cone2PluginFactory.init(applicationContext, readerObservationExceptionHandler)
             }
             SmartCardService.getInstance().registerPlugin(pluginFactory)
         }

@@ -14,7 +14,10 @@ package org.eclipse.keyple.famoco.validator.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import org.eclipse.keyple.core.service.event.ReaderObservationExceptionHandler
+import org.eclipse.keyple.famoco.validator.di.scopes.AppScoped
 import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
+import timber.log.Timber
 
 /**
  *
@@ -28,8 +31,14 @@ import org.eclipse.keyple.famoco.validator.reader.IReaderRepository
 class ReaderModule {
 
     @Provides
-    fun provideReaderRepository(context: Context): IReaderRepository {
-        val reader = CoppernicReaderRepositoryImpl(context)
-        return CoppernicReaderRepositoryImpl(context)
+    fun provideReaderRepository(context: Context, readerObservationExceptionHandler: ReaderObservationExceptionHandler): IReaderRepository {
+        return CoppernicReaderRepositoryImpl(context, readerObservationExceptionHandler)
     }
+
+    @Provides
+    @AppScoped
+    fun provideReaderObservationExceptionHandler(): ReaderObservationExceptionHandler =
+        ReaderObservationExceptionHandler { pluginName, readerName, e ->
+            Timber.e("An unexpected reader error occurred: $pluginName:$readerName : $e")
+        }
 }

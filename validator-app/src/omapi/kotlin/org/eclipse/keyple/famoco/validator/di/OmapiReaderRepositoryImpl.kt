@@ -21,6 +21,7 @@ import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
 import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
 import org.eclipse.keyple.core.service.event.ObservableReader
+import org.eclipse.keyple.core.service.event.ReaderObservationExceptionHandler
 import org.eclipse.keyple.core.service.exception.KeypleException
 import org.eclipse.keyple.core.service.exception.KeyplePluginInstantiationException
 import org.eclipse.keyple.core.service.util.ContactCardCommonProtocols
@@ -43,7 +44,7 @@ import timber.log.Timber
  *  @author youssefamrani
  */
 
-class OmapiReaderRepositoryImpl @Inject constructor(private val applicationContext: Context) :
+class OmapiReaderRepositoryImpl @Inject constructor(private val applicationContext: Context, private val readerObservationExceptionHandler: ReaderObservationExceptionHandler) :
     IReaderRepository {
 
     override var poReader: Reader? = null
@@ -51,7 +52,9 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
 
     @Throws(KeypleException::class)
     override fun registerPlugin(activity: Activity) {
-        SmartCardService.getInstance().registerPlugin(AndroidNfcPluginFactory(activity))
+        SmartCardService.getInstance().registerPlugin(AndroidNfcPluginFactory(
+            activity,
+            readerObservationExceptionHandler))
         try {
             AndroidOmapiPluginFactory(applicationContext) {
                 SmartCardService.getInstance().registerPlugin(it)
