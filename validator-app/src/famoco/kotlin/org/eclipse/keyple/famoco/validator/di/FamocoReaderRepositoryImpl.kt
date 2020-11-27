@@ -13,7 +13,7 @@ package org.eclipse.keyple.famoco.validator.di
 
 import android.app.Activity
 import javax.inject.Inject
-import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.plugin.AbstractLocalReader
 import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
 import org.eclipse.keyple.core.service.event.ObservableReader
