@@ -13,7 +13,7 @@ package org.eclipse.keyple.famoco.validator.di
 
 import android.app.Activity
 import javax.inject.Inject
-import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.plugin.AbstractLocalReader
 import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
 import org.eclipse.keyple.core.service.event.ObservableReader
@@ -68,10 +68,9 @@ class FamocoReaderRepositoryImpl @Inject constructor(private val readerObservati
             // define task as an observer for ReaderEvents
             Timber.d("PO (NFC) reader name: ${it.name}")
 
-            androidNfcReader.setParameter("FLAG_READER_RESET_STATE", "0")
-            androidNfcReader.setParameter("FLAG_READER_PRESENCE_CHECK_DELAY", "100")
-            androidNfcReader.setParameter("FLAG_READER_NO_PLATFORM_SOUNDS", "0")
-            androidNfcReader.setParameter("FLAG_READER_SKIP_NDEF_CHECK", "0")
+            androidNfcReader.presenceCheckDelay = 100
+            androidNfcReader.noPlateformSound = false
+            androidNfcReader.skipNdefCheck = false
 
             // with this protocol settings we activate the nfc for ISO1443_4 protocol
             (poReader as ObservableReader).activateProtocol(

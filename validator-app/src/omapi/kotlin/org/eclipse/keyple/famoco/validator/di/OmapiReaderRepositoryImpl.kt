@@ -17,7 +17,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.plugin.AbstractLocalReader
 import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
 import org.eclipse.keyple.core.service.event.ObservableReader
@@ -76,10 +76,9 @@ class OmapiReaderRepositoryImpl @Inject constructor(private val applicationConte
             // define task as an observer for ReaderEvents
             Timber.d("PO (NFC) reader name: ${it.name}")
 
-            androidNfcReader.setParameter("FLAG_READER_RESET_STATE", "0")
-            androidNfcReader.setParameter("FLAG_READER_PRESENCE_CHECK_DELAY", "100")
-            androidNfcReader.setParameter("FLAG_READER_NO_PLATFORM_SOUNDS", "0")
-            androidNfcReader.setParameter("FLAG_READER_SKIP_NDEF_CHECK", "0")
+            androidNfcReader.presenceCheckDelay = 100
+            androidNfcReader.noPlateformSound = false
+            androidNfcReader.skipNdefCheck = false
 
             (poReader as ObservableReader).activateProtocol(
                 getContactlessMifareProtocol()!!.readerProtocolName,

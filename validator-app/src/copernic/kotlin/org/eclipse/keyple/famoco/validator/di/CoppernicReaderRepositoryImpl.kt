@@ -22,7 +22,7 @@ import org.eclipse.keyple.coppernic.ask.plugin.Cone2ContactlessReader
 import org.eclipse.keyple.coppernic.ask.plugin.Cone2PluginFactory
 import org.eclipse.keyple.coppernic.ask.plugin.ParagonSupportedContactProtocols
 import org.eclipse.keyple.coppernic.ask.plugin.ParagonSupportedContactlessProtocols
-import org.eclipse.keyple.core.plugin.reader.AbstractLocalReader
+import org.eclipse.keyple.core.plugin.AbstractLocalReader
 import org.eclipse.keyple.core.service.Reader
 import org.eclipse.keyple.core.service.SmartCardService
 import org.eclipse.keyple.core.service.event.ReaderObservationExceptionHandler
