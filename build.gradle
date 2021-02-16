@@ -295,17 +295,20 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
 	api "org.slf4j:slf4j-api:${slf4japi_version}"
 
+	// https://mvnrepository.com/artifact/com.google.code.gson/gson
 	api "com.google.code.gson:gson:${gson_version}"
 
-	/*
-	 * Test
-	 */
+	/* Tests */
+
 	// https://mvnrepository.com/artifact/junit/junit
 	testImplementation "junit:junit:${junit_version}"
+
 	// https://search.maven.org/artifact/org.assertj/assertj-core/2.9.1/bundle
 	testImplementation "org.assertj:assertj-core:${assertj_version}"
+
 	// https://mvnrepository.com/artifact/org.mockito/mockito-core
 	testImplementation "org.mockito:mockito-core:${mockitocore_version}"
-	//add slf4j simple logger implementation
+
+	// add slf4j simple logger implementation
 	testImplementation "org.slf4j:slf4j-simple:${slf4jsimple_version}"
 }
