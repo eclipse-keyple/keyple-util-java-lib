@@ -9,7 +9,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package org.eclipse.keyple.core.utils.json;
+package org.eclipse.keyple.core.util.json;
 
 import com.google.gson.*;
 import java.lang.reflect.Type;

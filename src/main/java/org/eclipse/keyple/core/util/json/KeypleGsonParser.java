@@ -9,7 +9,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package org.eclipse.keyple.core.utils.json;
+package org.eclipse.keyple.core.util.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,17 +52,10 @@ public final class KeypleGsonParser {
    * @return a not null builder instance.
    */
   private static GsonBuilder initGsonBuilder() {
-    GsonBuilder init = new GsonBuilder();
-    // TODO check this
-    //    init.registerTypeAdapter(byte[].class, new ByteArrayJsonAdapter())
-    //        .registerTypeAdapter(CardCommand.class, new CardCommandJsonAdapter())
-    //        .registerTypeAdapter(BodyError.class, new BodyErrorJsonSerializer())
-    //        .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonSerializer())
-    //        .registerTypeAdapter(
-    //            KeypleReaderIOException.class, new KeypleReaderIOExceptionJsonSerializer())
-    //        .registerTypeHierarchyAdapter(
-    //            KeypleCardCommandException.class, new KeypleCardCommandExceptionJsonSerializer());
-    return init;
+    return new GsonBuilder()
+        .registerTypeAdapter(byte[].class, new ByteArrayJsonAdapter())
+        .registerTypeAdapter(BodyError.class, new BodyErrorJsonSerializer())
+        .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonSerializer());
   }
 
   /**

@@ -3,4 +3,4 @@
  *
  * @since 2.0
  */
-package org.eclipse.keyple.core.utils.bertlv;
+package org.eclipse.keyple.core.util.bertlv;

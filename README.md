@@ -1,4 +1,4 @@
-# Keyple Java Service
+# Keyple Java Utils
 
 ## Overview
 
@@ -13,3 +13,7 @@ The full documentation, including download information is available in the **Doc
 ## Build the Code
 
 The code is built with **Gradle** and is compliant with **Java 1.6** in order to be able to be used by a very large number of applications.
+
+## Code Contributions
+
+We welcome code contributions through merge requests.

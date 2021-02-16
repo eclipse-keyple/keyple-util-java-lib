@@ -292,9 +292,6 @@ test.finalizedBy jacocoTestReport
 ///////////////////////////////////////////////////////////////////////////////
 
 dependencies {
-	// keyple-java-commons-api
-	api "org.eclipse.keyple:keyple-java-commons-api:${keyple_java_commons_api_version}"
-
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
 	api "org.slf4j:slf4j-api:${slf4japi_version}"
 

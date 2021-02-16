@@ -9,9 +9,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package org.eclipse.keyple.core.utils.bertlv;
+package org.eclipse.keyple.core.util.bertlv;
 
-import org.eclipse.keyple.core.utils.ByteArrayUtil;
+import org.eclipse.keyple.core.util.ByteArrayUtil;
 
 /**
  * Helps to parse a byte array as a TLV structure

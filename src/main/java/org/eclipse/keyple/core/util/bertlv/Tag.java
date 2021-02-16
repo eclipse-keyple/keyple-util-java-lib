@@ -9,7 +9,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package org.eclipse.keyple.core.utils.bertlv;
+package org.eclipse.keyple.core.util.bertlv;
 
 /**
  * Represents a TAG as defined by the Basic Encoding Rules for ASN.1<br>
