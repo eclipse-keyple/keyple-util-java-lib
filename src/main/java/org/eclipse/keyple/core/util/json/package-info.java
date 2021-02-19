@@ -1,6 +1,6 @@
 /**
- * Contains JSON utility classes as serializers/deserializers, mainly used by the <b>Keyple
- * Distributed Plugins</b> solution.
+ * JSON utility classes as serializers/deserializers, mainly used by the <b>Keyple Distributed
+ * Plugins</b> solution.
  *
  * @since 2.0
  */

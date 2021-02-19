@@ -1,5 +1,5 @@
 /**
- * Contains various utility classes.
+ * Various utility classes.
  *
  * @since 2.0
  */

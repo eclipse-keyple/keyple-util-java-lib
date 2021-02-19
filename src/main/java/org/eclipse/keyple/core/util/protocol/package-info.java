@@ -1,5 +1,5 @@
 /**
- * Contains the card protocols definitions.
+ * Card protocols definitions.
  *
  * @since 2.0
  */
