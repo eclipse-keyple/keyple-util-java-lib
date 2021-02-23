@@ -96,7 +96,7 @@ pipeline {
                     container('java-builder') {
                         withCredentials([string(credentialsId: 'sonarcloud-token', variable: 'SONAR_LOGIN')]) {
                             sh './gradlew --stop'
-                            sh './gradlew analyzeCodeQuality --info'
+                            sh './gradlew sonarqube --info'
                             sh './gradlew --stop'
                         }
                     }

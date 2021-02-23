@@ -142,7 +142,6 @@ task analyzeCodeQuality {
     group "keyple"
     description "Analyse code and send results to Sonar"
     dependsOn installArtifact
-    dependsOn sonarqube
     doLast { println "Keyple code has been analysed and result was sent to SonarQube." }
 }
 
@@ -175,7 +174,7 @@ javadoc {
 }
 
 // sonarqube plugin task
-sonarqube {
+sonarqube() {
     properties {
         property "sonar.projectKey", "eclipse-${artifactId}"
         property "sonar.organization", "eclipse"
@@ -184,6 +183,8 @@ sonarqube {
         property "sonar.branch.name", System.getenv("BRANCH_NAME")
     }
 }
+
+project.tasks["sonarqube"].dependsOn "analyzeCodeQuality"
 
 // spotless plugin task
 spotless {
@@ -286,7 +287,6 @@ jacocoTestReport {
 }
 
 test.finalizedBy jacocoTestReport
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // PROJECT DEPENDENCIES
