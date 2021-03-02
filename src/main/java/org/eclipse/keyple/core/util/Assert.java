@@ -21,6 +21,17 @@ import java.util.List;
  */
 public final class Assert {
 
+  private static final String ARGUMENT = "Argument [";
+  private static final String CONDITION = "Condition [";
+  private static final String HAS_A_VALUE = "] has a value [";
+  private static final String LESS_THAN = "] less than [";
+  private static final String MORE_THAN = "] more than [";
+  private static final String IS_NULL = "] is null.";
+  private static final String IS_EMPTY = "] is empty.";
+  private static final String IS_FALSE = "] is false.";
+  private static final String NOT_EQUAL_TO = "] not equal to [";
+  private static final String CLOSING_BRACKET = "].";
+
   /** Singleton pattern */
   private static final Assert INSTANCE = new Assert();
 
@@ -47,7 +58,7 @@ public final class Assert {
    */
   public Assert notNull(Object obj, String name) {
     if (obj == null) {
-      throw new IllegalArgumentException("Argument [" + name + "] is null.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
     return INSTANCE;
   }
@@ -63,10 +74,10 @@ public final class Assert {
    */
   public Assert notEmpty(String obj, String name) {
     if (obj == null) {
-      throw new IllegalArgumentException("Argument [" + name + "] is null.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
     if (obj.isEmpty()) {
-      throw new IllegalArgumentException("Argument [" + name + "] is empty.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_EMPTY);
     }
     return INSTANCE;
   }
@@ -82,10 +93,10 @@ public final class Assert {
    */
   public Assert notEmpty(List<? extends Object> obj, String name) {
     if (obj == null) {
-      throw new IllegalArgumentException("Argument [" + name + "] is null.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
     if (obj.isEmpty()) {
-      throw new IllegalArgumentException("Argument [" + name + "] is empty.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_EMPTY);
     }
     return INSTANCE;
   }
@@ -101,10 +112,10 @@ public final class Assert {
    */
   public Assert notEmpty(byte[] obj, String name) {
     if (obj == null) {
-      throw new IllegalArgumentException("Argument [" + name + "] is null.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
     if (obj.length == 0) {
-      throw new IllegalArgumentException("Argument [" + name + "] is empty.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_EMPTY);
     }
     return INSTANCE;
   }
@@ -120,10 +131,10 @@ public final class Assert {
    */
   public Assert isTrue(Boolean condition, String name) {
     if (condition == null) {
-      throw new IllegalArgumentException("Condition [" + name + "] is null.");
+      throw new IllegalArgumentException(CONDITION + name + IS_NULL);
     }
     if (!condition) {
-      throw new IllegalArgumentException("Condition [" + name + "] is false.");
+      throw new IllegalArgumentException(CONDITION + name + IS_FALSE);
     }
     return INSTANCE;
   }
@@ -140,11 +151,11 @@ public final class Assert {
    */
   public Assert greaterOrEqual(Integer number, int minValue, String name) {
     if (number == null) {
-      throw new IllegalArgumentException("Argument [" + name + "] is null.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
     if (number < minValue) {
       throw new IllegalArgumentException(
-          "Argument [" + name + "] has a value [" + number + "] less than [" + minValue + "].");
+          ARGUMENT + name + HAS_A_VALUE + number + LESS_THAN + minValue + CLOSING_BRACKET);
     }
     return INSTANCE;
   }
@@ -161,11 +172,11 @@ public final class Assert {
    */
   public Assert isEqual(Integer number, int value, String name) {
     if (number == null) {
-      throw new IllegalArgumentException("Argument [" + name + "] is null.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
     if (number != value) {
       throw new IllegalArgumentException(
-          "Argument [" + name + "] has a value [" + number + "] not equal to [" + value + "].");
+          ARGUMENT + name + HAS_A_VALUE + number + NOT_EQUAL_TO + value + CLOSING_BRACKET);
     }
     return INSTANCE;
   }
@@ -183,15 +194,15 @@ public final class Assert {
    */
   public Assert isInRange(Integer number, int minValue, int maxValue, String name) {
     if (number == null) {
-      throw new IllegalArgumentException("Argument [" + name + "] is null.");
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
     if (number < minValue) {
       throw new IllegalArgumentException(
-          "Argument [" + name + "] has a value [" + number + "] less than [" + minValue + "].");
+          ARGUMENT + name + HAS_A_VALUE + number + LESS_THAN + minValue + CLOSING_BRACKET);
     }
     if (number > maxValue) {
       throw new IllegalArgumentException(
-          "Argument [" + name + "] has a value [" + number + "] more than [" + maxValue + "].");
+          ARGUMENT + name + HAS_A_VALUE + number + MORE_THAN + maxValue + CLOSING_BRACKET);
     }
     return INSTANCE;
   }
