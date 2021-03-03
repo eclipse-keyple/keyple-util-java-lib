@@ -25,7 +25,7 @@ public final class Assert {
   private static final String CONDITION = "Condition [";
   private static final String HAS_A_VALUE = "] has a value [";
   private static final String LESS_THAN = "] less than [";
-  private static final String MORE_THAN = "] more than [";
+  private static final String GREATER_THAN = "] greater than [";
   private static final String IS_NULL = "] is null.";
   private static final String IS_EMPTY = "] is empty.";
   private static final String IS_FALSE = "] is false.";
@@ -202,7 +202,7 @@ public final class Assert {
     }
     if (number > maxValue) {
       throw new IllegalArgumentException(
-          ARGUMENT + name + HAS_A_VALUE + number + MORE_THAN + maxValue + CLOSING_BRACKET);
+          ARGUMENT + name + HAS_A_VALUE + number + GREATER_THAN + maxValue + CLOSING_BRACKET);
     }
     return INSTANCE;
   }
