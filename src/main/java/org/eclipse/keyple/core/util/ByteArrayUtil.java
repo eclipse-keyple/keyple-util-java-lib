@@ -45,7 +45,7 @@ public final class ByteArrayUtil {
   /**
    * Chars we will ignore when loading a sample HEX string. It allows to copy/paste the specs APDU
    */
-  private static final Pattern HEX_IGNORED_CHARS = Pattern.compile(" |h");
+  private static final Pattern HEX_IGNORED_CHARS = Pattern.compile("[ h]");
 
   private ByteArrayUtil() {
     throw new IllegalStateException("ByteArray utility class");
