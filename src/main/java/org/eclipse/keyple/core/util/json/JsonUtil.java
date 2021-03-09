@@ -15,11 +15,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * GSON Parser of Keyple objects.
+ * Json utilities based on Gson (com.google.gson).
  *
  * @since 2.0
  */
-public final class KeypleGsonParser {
+public final class JsonUtil {
 
   private static Gson parser;
   private static final GsonBuilder gsonBuilder = initGsonBuilder();
@@ -29,7 +29,11 @@ public final class KeypleGsonParser {
    *
    * <p>If not created yet, a default instance is created.
    *
+   * <p><b>Caution:</b> to use the {@link Gson} object in return, the invoker must also import the
+   * Gson library from Google (see the manifest of the NOTICE document for the version to be used).
+   *
    * @return a not null instance.
+   * @since 2.0
    */
   public static Gson getParser() {
     if (parser == null) {
@@ -43,7 +47,7 @@ public final class KeypleGsonParser {
    * (private)<br>
    * Constructor.
    */
-  private KeypleGsonParser() {}
+  private JsonUtil() {}
 
   /**
    * (private)<br>
@@ -60,6 +64,9 @@ public final class KeypleGsonParser {
 
   /**
    * Registers a new type adapter and returns the updated parser.
+   *
+   * <p><b>Caution:</b> to use the {@link Gson} object in return, the invoker must also import the
+   * Gson library from Google (see the manifest of the NOTICE document for the version to be used).
    *
    * @param matchingClass The type to be registered.
    * @param adapter The type adapter to be registered (should implement {@link
@@ -79,5 +86,16 @@ public final class KeypleGsonParser {
     }
     parser = gsonBuilder.create();
     return parser;
+  }
+
+  /**
+   * Formats the provided object as a json string.
+   *
+   * @param obj The object to format.
+   * @return A not empty String.
+   * @since 2.0
+   */
+  public static String toJson(Object obj) {
+    return getParser().toJson(obj);
   }
 }
