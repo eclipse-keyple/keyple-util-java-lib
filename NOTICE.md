@@ -43,7 +43,7 @@ SPDX-License-Identifier: EPL-2.0
    
 ## Third-party Content
 
-Google Gson (2.2.4)
+Google Gson (2.8.5)
 
 * License: Apache License, 2.0
 
@@ -51,10 +51,14 @@ SLF4J API (1.7.25)
 
 * License: MIT License
 
-Mokito API (2.13.0)
+AssertJ (3.15.0)
+
+* License: Apache License, 2.0
+
+Mokito API (2.23.4)
 
 * License: MIT License
 
-Junit (4.12)
+Junit (4.13.2)
 
 * License: Eclipse Public License, 2.0

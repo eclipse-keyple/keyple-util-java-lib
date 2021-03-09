@@ -11,7 +11,7 @@
  ************************************************************************************** */
 package core.util;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.eclipse.keyple.core.util.ByteArrayUtil;
 import org.junit.Test;
