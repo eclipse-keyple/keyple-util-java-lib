@@ -12,22 +12,22 @@
 package org.eclipse.keyple.core.util.json;
 
 /**
- * POJO used to transports the content of a {@link RuntimeException} into a String
+ * POJO used to transports the content of an {@link Exception} into a string.
  *
  * @since 2.0
  */
 public class BodyError {
 
   private final String code;
-  private final RuntimeException exception;
+  private final Exception exception;
 
   /**
    * Builds an instance from an exception reference.
    *
-   * @param exception The runtime exception.
+   * @param exception The exception.
    * @since 2.0
    */
-  public BodyError(RuntimeException exception) {
+  public BodyError(Exception exception) {
     this.exception = exception;
     this.code = exception.getClass().getName();
   }
@@ -43,12 +43,12 @@ public class BodyError {
   }
 
   /**
-   * Gets the associated runtime exception.
+   * Gets the associated exception.
    *
    * @return a not null reference.
    * @since 2.0
    */
-  public RuntimeException getException() {
+  public Exception getException() {
     return exception;
   }
 }
