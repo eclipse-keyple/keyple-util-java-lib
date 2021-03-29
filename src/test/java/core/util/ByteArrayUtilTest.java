@@ -67,7 +67,7 @@ public class ByteArrayUtilTest {
   @Test
   public void fromHex_empty() {
     byte[] bytes = ByteArrayUtil.fromHex("");
-    assertThat(bytes.length).isZero();
+    assertThat(bytes).isEmpty();
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -94,14 +94,14 @@ public class ByteArrayUtilTest {
   @Test
   public void toHex_null() {
     String hex = ByteArrayUtil.toHex(null);
-    assertThat(hex.length()).isZero();
+    assertThat(hex).isEmpty();
   }
 
   @Test
   public void toHex_empty() {
     byte[] bytes = new byte[0];
     String hex = ByteArrayUtil.toHex(bytes);
-    assertThat(hex.length()).isZero();
+    assertThat(hex).isEmpty();
   }
 
   @Test
