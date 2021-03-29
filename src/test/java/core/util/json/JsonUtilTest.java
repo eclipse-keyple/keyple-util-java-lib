@@ -66,7 +66,7 @@ public class JsonUtilTest {
     String json = gson.toJson(source);
     logger.debug("json : {}", json);
     Object target = gson.fromJson(json, objectClass);
-    assertThat(target).isEqualToComparingFieldByFieldRecursively(source);
+    assertThat(target).usingRecursiveComparison().isEqualTo(source);
   }
 
   public static void assertSerialization_forList(List<?> source, Type objectType) {
@@ -75,7 +75,7 @@ public class JsonUtilTest {
     logger.debug("json : {}", json);
     List<?> target = gson.fromJson(json, objectType);
     assertThat(target).hasSameSizeAs(source);
-    assertThat(target.get(0)).isEqualToComparingFieldByFieldRecursively(source.get(0));
+    assertThat(target.get(0)).usingRecursiveComparison().isEqualTo(source.get(0));
   }
 
   public static void assertSerialization_forException(
@@ -88,6 +88,6 @@ public class JsonUtilTest {
     BodyError target = gson.fromJson(json, objectClass);
     logger.debug(
         "deserialize exception className : {}", target.getException().getClass().getName());
-    assertThat(target).isEqualToComparingFieldByFieldRecursively(source);
+    assertThat(target).usingRecursiveComparison().isEqualTo(source);
   }
 }

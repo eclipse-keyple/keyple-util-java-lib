@@ -47,8 +47,25 @@ public final class ByteArrayUtil {
    */
   private static final Pattern HEX_IGNORED_CHARS = Pattern.compile("[ h]");
 
-  private ByteArrayUtil() {
-    throw new IllegalStateException("ByteArray utility class");
+  private ByteArrayUtil() {}
+
+  /**
+   * Checks if the provided string is formed by an even number of hexadecimal digits. <br>
+   *
+   * <ul>
+   *   <li>{@code "1234AB"} will match.
+   *   <li>{@code "1234AB2"}, {@code "12 34AB"} or {@code "x1234AB"} won't match.
+   * </ul>
+   *
+   * @param hexString A string.
+   * @return true if the string matches the expected hexadecimal representation, false otherwise.
+   */
+  public static boolean isValidHexString(String hexString) {
+    if (hexString != null) {
+      return hexString.matches("^([0-9a-fA-F][0-9a-fA-F])+$");
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -78,8 +95,9 @@ public final class ByteArrayUtil {
   /**
    * Represents the byte array in a hexadecimal string.
    *
-   * @param byteArray byte array to represent to hex
-   * @return Hex representation of the byte array
+   * @param byteArray The byte array to represent in hexadecimal.
+   * @return An hexadecimal string representation of byteArray , an empty string of byteArray is
+   *     null.
    * @since 2.0
    */
   public static String toHex(byte[] byteArray) {
@@ -87,8 +105,8 @@ public final class ByteArrayUtil {
       return "";
     }
     StringBuilder hexStringBuilder = new StringBuilder();
-    for (int i = 0; i < byteArray.length; i++) {
-      hexStringBuilder.append(byteToHex[byteArray[i] & 0xFF]);
+    for (byte b : byteArray) {
+      hexStringBuilder.append(byteToHex[b & 0xFF]);
     }
     return hexStringBuilder.toString();
   }

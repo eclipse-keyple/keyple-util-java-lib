@@ -42,6 +42,23 @@ public class ByteArrayUtilTest {
   private static final byte[] BYTEARRAY_LEN_2 = new byte[] {(byte) 0x12, (byte) 0x34};
   private static final byte[] BYTEARRAY_LEN_3 = new byte[] {(byte) 0x12, (byte) 0x34, (byte) 0x56};
 
+  @Test
+  public void isValidHexString_null() {
+    assertThat(ByteArrayUtil.isValidHexString(null)).isFalse();
+  }
+
+  @Test
+  public void isValidHexString_valid() {
+    assertThat(ByteArrayUtil.isValidHexString("0123456789ABCDEF")).isTrue();
+  }
+
+  @Test
+  public void isValidHexString_invalid() {
+    assertThat(ByteArrayUtil.isValidHexString("0123456789ABCDE")).isFalse();
+    assertThat(ByteArrayUtil.isValidHexString("01 23456789ABCDEF")).isFalse();
+    assertThat(ByteArrayUtil.isValidHexString("0123456789ABCDEG")).isFalse();
+  }
+
   @Test(expected = NullPointerException.class)
   public void fromHex_null() {
     byte[] bytes = ByteArrayUtil.fromHex(null);
