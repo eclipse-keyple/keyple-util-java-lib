@@ -97,8 +97,8 @@ public final class ByteArrayUtil {
    * Represents the byte array in a hexadecimal string.
    *
    * @param byteArray The byte array to represent in hexadecimal.
-   * @return An hexadecimal string representation of byteArray, an empty string of byteArray is
-   *     null.
+   * @return An hexadecimal string representation of byteArray, an empty string of if the byte array
+   *     is null.
    * @since 2.0
    */
   public static String toHex(byte[] byteArray) {
@@ -115,9 +115,9 @@ public final class ByteArrayUtil {
   /** (private) */
   private static void checkBytesToIntConversionParams(int size, byte[] bytes, int offset) {
     Assert.getInstance()
-            .notNull(bytes, "bytes")
-            .greaterOrEqual(bytes.length, offset + size, "length")
-            .greaterOrEqual(offset, 0, "offset");
+        .notNull(bytes, "bytes")
+        .greaterOrEqual(bytes.length, offset + size, "length")
+        .greaterOrEqual(offset, 0, "offset");
   }
 
   /**
