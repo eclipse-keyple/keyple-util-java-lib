@@ -11,8 +11,6 @@
  ************************************************************************************** */
 package org.eclipse.keyple.core.util;
 
-import java.util.regex.Pattern;
-
 /**
  * Utils around byte arrays
  *
@@ -42,10 +40,10 @@ public final class ByteArrayUtil {
         "FF"
       };
 
-  /**
-   * Chars we will ignore when loading a sample HEX string. It allows to copy/paste the specs APDU
-   */
-  private static final Pattern HEX_IGNORED_CHARS = Pattern.compile("[ h]");
+  private static final String HEXA_REGEX = "^([0-9a-fA-F][0-9a-fA-F])+$";
+  private static final String BYTES = "bytes";
+  private static final String LENGTH = "length";
+  private static final String OFFSET = "offset";
 
   private ByteArrayUtil() {}
 
@@ -62,25 +60,28 @@ public final class ByteArrayUtil {
    */
   public static boolean isValidHexString(String hexString) {
     if (hexString != null) {
-      return hexString.matches("^([0-9a-fA-F][0-9a-fA-F])+$");
+      return hexString.matches(HEXA_REGEX);
     } else {
       return false;
     }
   }
 
   /**
-   * Create a byte array from an hexa string. This method allows spaces and "h".
+   * Create a byte array from an hexadecimal string made of consecutive even number of digits in the
+   * range {0..9,a..f,A..F}.
    *
-   * @param hex Hexa string
-   * @return byte array
+   * <p>No checks are performed on the input string, except for nullity, zero length and length
+   * parity.
+   *
+   * @param hex An hexadecimal string.
+   * @return A reference of not empty of byte array.
+   * @throws IllegalArgumentException If the provided string is null, empty or made of an odd number
+   *     of characters.
+   * @see #isValidHexString(String)
    * @since 2.0
    */
   public static byte[] fromHex(String hex) {
-    hex = HEX_IGNORED_CHARS.matcher(hex).replaceAll("").toUpperCase();
-
-    if (hex.length() % 2 != 0) {
-      throw new IllegalArgumentException("Odd numbered hex array");
-    }
+    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length() % 2, 0, "parity");
 
     byte[] byteArray = new byte[hex.length() / 2];
     for (int i = 0; i < hex.length(); i += 2) {
@@ -96,7 +97,7 @@ public final class ByteArrayUtil {
    * Represents the byte array in a hexadecimal string.
    *
    * @param byteArray The byte array to represent in hexadecimal.
-   * @return An hexadecimal string representation of byteArray , an empty string of byteArray is
+   * @return An hexadecimal string representation of byteArray, an empty string of byteArray is
    *     null.
    * @since 2.0
    */
@@ -111,46 +112,50 @@ public final class ByteArrayUtil {
     return hexStringBuilder.toString();
   }
 
+  /** (private) */
+  private static void checkBytesToIntConversionParams(int size, byte[] bytes, int offset) {
+    Assert.getInstance()
+            .notNull(bytes, "bytes")
+            .greaterOrEqual(bytes.length, offset + size, "length")
+            .greaterOrEqual(offset, 0, "offset");
+  }
+
   /**
-   * Convert two bytes (unsigned) from a byte array into an integer.
+   * Converts 2 bytes located at the offset provided in the byte array into an <b>unsigned</b>
+   * integer.
    *
-   * <p>The two bytes are expected to be in the MSB first order (aka network order).
+   * <p>The 2 bytes are assumed to be in the of the most significant byte first order (aka 'network
+   * order' or 'big-endian' or 'MSB').
    *
-   * <p>Throw an exception if the buffer is null or not long enough to contain 2 bytes.
-   *
-   * @param bytes byte array
-   * @param offset offset from which the 2 bytes are
-   * @return the resulting int
-   * @throws IllegalArgumentException if the buffer has a bad length
+   * @param bytes A byte array.
+   * @param offset The position of the 2 bytes in the array.
+   * @return A positive int.
+   * @throws IllegalArgumentException If the buffer has a bad length or the offset is negative.
    * @since 2.0
    */
   public static int twoBytesToInt(byte[] bytes, int offset) {
-    if (bytes == null || bytes.length < offset + 2 || offset < 0) {
-      throw new IllegalArgumentException("Bad data for converting 2-byte integers.");
-    }
+    checkBytesToIntConversionParams(2, bytes, offset);
     return (bytes[offset] & 0xFF) << 8 | (bytes[offset + 1] & 0xFF);
   }
 
   /**
-   * Convert two bytes (signed) from a byte array into an integer.
+   * Converts 2 bytes located at the offset provided in the byte array into an <b>signed</b>
+   * integer.
    *
-   * <p>The two bytes are expected to be in the MSB first order (aka network order).
+   * <p>The 2 bytes are assumed to be in the of the most significant byte first order (aka 'network
+   * order' or 'big-endian' or 'MSB').
    *
    * <p>The number is also considered as signed. That is, if the MSB (first left bit) is 1, then the
    * number is negative and the conversion is done accordingly with the usual binary arithmetic.
    *
-   * <p>Throw an exception if the buffer is null or not long enough to contain 2 bytes.
-   *
-   * @param bytes byte array
-   * @param offset offset from which the 2 bytes are
-   * @return the resulting int
-   * @throws IllegalArgumentException if the buffer has a bad length
+   * @param bytes A byte array.
+   * @param offset The position of the 2 bytes in the array.
+   * @return A negative or positive int.
+   * @throws IllegalArgumentException If the buffer has a bad length or the offset is negative.
    * @since 2.0
    */
   public static int twoBytesSignedToInt(byte[] bytes, int offset) {
-    if (bytes == null || bytes.length < offset + 2 || offset < 0) {
-      throw new IllegalArgumentException("Bad data for converting 2-byte integers.");
-    }
+    checkBytesToIntConversionParams(2, bytes, offset);
     if (bytes[offset] >= 0) {
       /* positive number */
       return (bytes[offset] & 0xFF) << 8 | (bytes[offset + 1] & 0xFF);
@@ -161,47 +166,43 @@ public final class ByteArrayUtil {
   }
 
   /**
-   * Convert three bytes (unsigned) from a byte array into an integer.
+   * Converts 3 bytes located at the offset provided in the byte array into an <b>unsigned</b>
+   * integer.
    *
-   * <p>The three bytes are expected to be in the MSB first order (aka network order).
+   * <p>The 3 bytes are assumed to be in the of the most significant byte first order (aka 'network
+   * order' or 'big-endian' or 'MSB').
    *
-   * <p>Throw an exception if the buffer is null or not long enough to contain all 3 bytes.
-   *
-   * @param bytes byte array
-   * @param offset offset from which the 3 bytes are
-   * @return the resulting int
+   * @param bytes A byte array.
+   * @param offset The position of the 3 bytes in the array.
+   * @return A positive int.
    * @throws IllegalArgumentException if the buffer has a bad length
    * @since 2.0
    */
   public static int threeBytesToInt(byte[] bytes, int offset) {
-    if (bytes == null || bytes.length < offset + 3 || offset < 0) {
-      throw new IllegalArgumentException("Bad data for converting 3-byte integers.");
-    }
+    checkBytesToIntConversionParams(3, bytes, offset);
     return (bytes[offset] & 0xFF) << 16
         | (bytes[offset + 1] & 0xFF) << 8
         | (bytes[offset + 2] & 0xFF);
   }
 
   /**
-   * Convert three bytes (signed) from a byte array into an integer.
+   * Converts 3 bytes located at the offset provided in the byte array into an <b>signed</b>
+   * integer.
    *
-   * <p>The three bytes are expected to be in the MSB first order (aka network order).
+   * <p>The 3 bytes are assumed to be in the of the most significant byte first order (aka 'network
+   * order' or 'big-endian' or 'MSB').
    *
    * <p>The number is also considered as signed. That is, if the MSB (first left bit) is 1, then the
    * number is negative and the conversion is done accordingly with the usual binary arithmetic.
    *
-   * <p>Throw an exception if the buffer is null or not long enough to contain all 3 bytes.
-   *
-   * @param bytes byte array containing a 3-byte signed number
-   * @param offset offset from which the 3 bytes are
-   * @return the resulting int
+   * @param bytes A byte array.
+   * @param offset The position of the 3 bytes in the array.
+   * @return A positive int.
    * @throws IllegalArgumentException if the buffer has a bad length
    * @since 2.0
    */
   public static int threeBytesSignedToInt(byte[] bytes, int offset) {
-    if (bytes == null || bytes.length < offset + 3 || offset < 0) {
-      throw new IllegalArgumentException("Bad data for converting 3-byte integers.");
-    }
+    checkBytesToIntConversionParams(3, bytes, offset);
     if (bytes[offset] >= 0) {
       /* positive number */
       return (bytes[offset] & 0xFF) << 16
@@ -217,22 +218,20 @@ public final class ByteArrayUtil {
   }
 
   /**
-   * Convert four bytes from a byte array into an integer.
+   * Converts 4 bytes located at the offset provided in the byte array into an <b>unsigned</b>
+   * integer.
    *
-   * <p>The four bytes are expected to be in the MSB first order (aka network order).
+   * <p>The 4 bytes are assumed to be in the of the most significant byte first order (aka 'network
+   * order' or 'big-endian' or 'MSB').
    *
-   * <p>Throw an exception if the buffer is null or not long enough to contain 4 bytes.
-   *
-   * @param bytes byte array
-   * @param offset offset from which the 4 bytes are
-   * @return the resulting int
+   * @param bytes A byte array.
+   * @param offset The position of the 4 bytes in the array.
+   * @return A positive int.
    * @throws IllegalArgumentException if the buffer has a bad length
    * @since 2.0
    */
   public static int fourBytesToInt(byte[] bytes, int offset) {
-    if (bytes == null || bytes.length < offset + 4 || offset < 0) {
-      throw new IllegalArgumentException("Bad data for converting 4-byte integers.");
-    }
+    checkBytesToIntConversionParams(4, bytes, offset);
     return (bytes[offset] & 0xFF) << 24
         | (bytes[offset + 1] & 0xFF) << 16
         | (bytes[offset + 2] & 0xFF) << 8
