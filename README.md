@@ -4,7 +4,7 @@
 
 The **Keyple Utils** Java library contains various utilities classes.
 
-This library **should not be import explicitly** because it's imported by transitivity by the main libraries.
+This library **should not be imported explicitly** because it's imported by transitivity by the main libraries.
 
 ## User Guide & Download Information
 
