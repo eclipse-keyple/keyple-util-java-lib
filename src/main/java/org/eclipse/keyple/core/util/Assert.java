@@ -11,7 +11,7 @@
  ************************************************************************************** */
 package org.eclipse.keyple.core.util;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Exposes useful methods for testing method call parameters and raising a IllegalArgumentException
@@ -83,7 +83,7 @@ public final class Assert {
   }
 
   /**
-   * Assert that a list of objects is not null and not empty.
+   * Assert that a collection of objects is not null and not empty.
    *
    * @param obj the object to check
    * @param name the object name
@@ -91,7 +91,7 @@ public final class Assert {
    * @throws IllegalArgumentException if object is null or empty
    * @since 2.0
    */
-  public Assert notEmpty(List<? extends Object> obj, String name) {
+  public Assert notEmpty(Collection<? extends Object> obj, String name) {
     if (obj == null) {
       throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
