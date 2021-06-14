@@ -1,1 +1,1 @@
-rootProject.name = "keyple-java-utils"
+rootProject.name = "keyple-util-java-lib"
