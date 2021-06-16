@@ -186,6 +186,6 @@ public class Tag {
         break;
     }
     return String.format(
-        "TAG: size=%d Class=%s, Type=%s, Number=%X", tagSize, tagClassString, tagType, tagNumber);
+        "TAG: size:%d, class:%s, type:%s, number:%X", tagSize, tagClassString, tagType, tagNumber);
   }
 }
