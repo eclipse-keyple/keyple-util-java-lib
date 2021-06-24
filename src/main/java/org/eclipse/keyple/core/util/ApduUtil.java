@@ -12,7 +12,7 @@
 package org.eclipse.keyple.core.util;
 
 /**
- * Utils to build APDUs and check case 4.
+ * Util to build APDUs and check case 4.
  *
  * @since 2.0
  */

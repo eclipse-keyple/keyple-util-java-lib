@@ -1,8 +1,8 @@
-# Keyple Java Utils
+# Keyple Java Util
 
 ## Overview
 
-The **Keyple Utils** Java library contains various utilities classes.
+The **Keyple Util** Java library contains various utilities classes.
 
 This library **should not be imported explicitly** because it's imported by transitivity by the main libraries.
 
