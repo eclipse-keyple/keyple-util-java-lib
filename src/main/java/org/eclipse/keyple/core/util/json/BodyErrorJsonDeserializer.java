@@ -19,7 +19,7 @@ import java.lang.reflect.Type;
  *
  * @since 2.0
  */
-public class BodyErrorJsonSerializer implements JsonDeserializer<BodyError> {
+public class BodyErrorJsonDeserializer implements JsonDeserializer<BodyError> {
 
   /**
    * {@inheritDoc}

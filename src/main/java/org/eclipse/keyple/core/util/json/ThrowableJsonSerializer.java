@@ -36,7 +36,7 @@ public class ThrowableJsonSerializer implements JsonSerializer<Throwable> {
       Throwable exception, Type type, JsonSerializationContext jsonSerializationContext) {
 
     JsonObject json = new JsonObject();
-    json.addProperty("message", exception.getMessage());
+    json.addProperty("detailMessage", exception.getMessage());
     return json;
   }
 }

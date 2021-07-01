@@ -9,11 +9,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package core.util;
+package org.eclipse.keyple.core.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.eclipse.keyple.core.util.ByteArrayUtil;
 import org.junit.Test;
 
 public class ByteArrayUtilTest {

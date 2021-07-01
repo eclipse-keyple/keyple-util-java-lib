@@ -9,10 +9,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package core.util.bertlv;
+package org.eclipse.keyple.core.util.bertlv;
 
 import org.eclipse.keyple.core.util.ByteArrayUtil;
-import org.eclipse.keyple.core.util.bertlv.Tag;
 import org.junit.Assert;
 import org.junit.Test;
 

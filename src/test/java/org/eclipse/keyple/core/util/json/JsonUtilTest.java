@@ -9,7 +9,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package core.util.json;
+package org.eclipse.keyple.core.util.json;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,8 +18,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.keyple.core.util.json.BodyError;
-import org.eclipse.keyple.core.util.json.JsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
