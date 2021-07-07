@@ -35,10 +35,9 @@ public class BodyErrorJsonDeserializer implements JsonDeserializer<BodyError> {
     JsonObject bodyException = jsonElement.getAsJsonObject().get("exception").getAsJsonObject();
 
     try {
-      Class<RuntimeException> exceptionClass =
-          (Class<RuntimeException>) Class.forName(exceptionName);
+      Class<Exception> exceptionClass = (Class<Exception>) Class.forName(exceptionName);
       return new BodyError(
-          (RuntimeException) jsonDeserializationContext.deserialize(bodyException, exceptionClass));
+          (Exception) jsonDeserializationContext.deserialize(bodyException, exceptionClass));
     } catch (Exception e) {
       throw new JsonParseException(e);
     }
