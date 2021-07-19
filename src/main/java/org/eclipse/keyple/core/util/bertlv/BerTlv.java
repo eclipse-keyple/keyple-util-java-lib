@@ -18,11 +18,14 @@ import java.util.Map;
 /**
  * Helper class to decode BER-TLV encoded data.
  *
- * <p>The TLV decoding has the following limitations:
+ * <p>This class offers a tradeoff between complexity and efficiency adapted to the TLV structures
+ * encountered in smart card data, it has the following limitations:
  *
  * <ul>
- *   <li>The size of the tags ID should not be larger than 3.
+ *   <li>The tag ID fields must not exceed 3 bytes.
  *   <li>The length fields must not exceed 3 bytes.
+ *   <li>Tags present several times in the same TLV structure require special attention (see {@link
+ *       #parseSimple(byte[], boolean)}).
  * </ul>
  *
  * @since 2.0
@@ -37,6 +40,12 @@ public class BerTlv {
    * is an integer representing the tag Id (e.g. 0x84 for the DF name tag), the value is the tag
    * value as an array of bytes.
    *
+   * <p><b>Note:</b>This method of extracting tags is deliberately simplified.<br>
+   * If the provided TLV structure contains several identical tags then only one will be reported in
+   * the returned Map.<br>
+   * To overcome this limitation it is recommended to re-parse the constructed tags known to contain
+   * other tags.
+   *
    * @param tlvStructure The input TLV structure.
    * @param primitiveOnly True if only primitives tags are to be placed in the map.
    * @return A not null map.
@@ -49,6 +58,27 @@ public class BerTlv {
     } catch (IndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Invalid TLV structure.");
     }
+  }
+
+  /**
+   * Indicates if the provided tag ID corresponds to a constructed tag.
+   *
+   * @param tagId A positive int less than FFFFFFh.
+   * @return True if the tag is constructed.
+   * @throws IllegalArgumentException If the tag Id is out of range.
+   * @since 2.0
+   */
+  public static boolean isConstructed(int tagId) {
+    if (tagId < 0 || tagId > 0xFFFFFF) {
+      throw new IllegalArgumentException("Tag Id out of range.");
+    }
+    if (tagId <= 0xFF) {
+      return (tagId & 0x20) != 0;
+    }
+    if (tagId <= 0xFFFF) {
+      return (tagId & 0x2000) != 0;
+    }
+    return (tagId & 0x200000) != 0;
   }
 
   /**

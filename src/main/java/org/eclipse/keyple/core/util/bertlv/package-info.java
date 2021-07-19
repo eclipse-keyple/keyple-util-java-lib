@@ -1,5 +1,5 @@
 /**
- * BER-TLV helper classes.
+ * BER-TLV helper class.
  *
  * @since 2.0
  */

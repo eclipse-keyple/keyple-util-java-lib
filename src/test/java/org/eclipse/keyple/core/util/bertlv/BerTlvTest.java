@@ -118,4 +118,44 @@ public class BerTlvTest {
     assertThat(tlvs.get(0x84)).hasSize(260);
     assertThat(tlvs.get(0x84)).containsOnly(0xA5);
   }
+
+  @Test
+  public void isConstructed_when1ByteTagIsConstructed_shouldReturnTrue() {
+    assertThat(BerTlv.isConstructed(0x6F)).isTrue();
+  }
+
+  @Test
+  public void isConstructed_when1ByteTagIsPrimitive_shouldReturnFalse() {
+    assertThat(BerTlv.isConstructed(0x84)).isFalse();
+  }
+
+  @Test
+  public void isConstructed_when2ByteTagIsConstructed_shouldReturnTrue() {
+    assertThat(BerTlv.isConstructed(0xBC0C)).isTrue();
+  }
+
+  @Test
+  public void isConstructed_when2ByteTagIsPrimitive_shouldReturnFalse() {
+    assertThat(BerTlv.isConstructed(0x9F0C)).isFalse();
+  }
+
+  @Test
+  public void isConstructed_when3ByteTagIsConstructed_shouldReturnTrue() {
+    assertThat(BerTlv.isConstructed(0x6FEF2C)).isTrue();
+  }
+
+  @Test
+  public void isConstructed_when3ByteTagIsPrimitive_shouldReturnFalse() {
+    assertThat(BerTlv.isConstructed(0xDFEF2C)).isFalse();
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void isConstructed_whenTagIsNegative_shouldIAE() {
+    BerTlv.isConstructed(-1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void isConstructed_whenTagIsTooLarge_shouldIAE() {
+    BerTlv.isConstructed(0x1000000);
+  }
 }
