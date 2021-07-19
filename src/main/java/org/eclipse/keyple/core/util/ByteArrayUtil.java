@@ -41,9 +41,6 @@ public final class ByteArrayUtil {
       };
 
   private static final String HEXA_REGEX = "^([0-9a-fA-F][0-9a-fA-F])+$";
-  private static final String BYTES = "bytes";
-  private static final String LENGTH = "length";
-  private static final String OFFSET = "offset";
 
   private ByteArrayUtil() {}
 
