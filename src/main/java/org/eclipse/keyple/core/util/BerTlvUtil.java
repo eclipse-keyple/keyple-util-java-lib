@@ -9,7 +9,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package org.eclipse.keyple.core.util.bertlv;
+package org.eclipse.keyple.core.util;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,10 +30,10 @@ import java.util.Map;
  *
  * @since 2.0
  */
-public class BerTlv {
+public class BerTlvUtil {
 
   /** (private) */
-  private BerTlv() {}
+  private BerTlvUtil() {}
 
   /**
    * Parse the provided TLV structure and place all or only primitive tags found in a map. The key

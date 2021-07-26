@@ -9,16 +9,15 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  ************************************************************************************** */
-package org.eclipse.keyple.core.util.bertlv;
+package org.eclipse.keyple.core.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 import java.util.Map;
-import org.eclipse.keyple.core.util.ByteArrayUtil;
 import org.junit.Test;
 
-public class BerTlvTest {
+public class BerTlvUtilTest {
 
   private final String TLV1 =
       "6F238409315449432E49434131A516BF0C13C708000000001122334453070A3C2005141001";
@@ -27,7 +26,7 @@ public class BerTlvTest {
 
   @Test
   public void parse_whenStructureIsValidAndPrimitiveOnlyIsFalse_shouldProvideAllTags() {
-    Map<Integer, byte[]> tlvs = BerTlv.parseSimple(ByteArrayUtil.fromHex(TLV1), false);
+    Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV1), false);
     assertThat(tlvs)
         .containsOnly(
             entry(
@@ -43,7 +42,7 @@ public class BerTlvTest {
 
   @Test
   public void parse_whenStructureIsValidAndPrimitiveOnlyIsTrue_shouldProvideOnlyPrimitiveTags() {
-    Map<Integer, byte[]> tlvs = BerTlv.parseSimple(ByteArrayUtil.fromHex(TLV1), true);
+    Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV1), true);
     assertThat(tlvs)
         .containsOnly(
             entry(0x84, ByteArrayUtil.fromHex("315449432E49434131")),
@@ -53,15 +52,15 @@ public class BerTlvTest {
 
   @Test
   public void parse_whenTagsOrderChange_shouldProvideTheSameTags() {
-    Map<Integer, byte[]> tlvs1 = BerTlv.parseSimple(ByteArrayUtil.fromHex(TLV1), true);
-    Map<Integer, byte[]> tlvs2 = BerTlv.parseSimple(ByteArrayUtil.fromHex(TLV2), true);
+    Map<Integer, byte[]> tlvs1 = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV1), true);
+    Map<Integer, byte[]> tlvs2 = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV2), true);
     assertThat(tlvs1).containsExactlyEntriesOf(tlvs2);
   }
 
   @Test
   public void parse_whenTagsIdIs3Bytes_shouldProvideTheTag() {
     Map<Integer, byte[]> tlvs =
-        BerTlv.parseSimple(
+        BerTlvUtil.parseSimple(
             ByteArrayUtil.fromHex(
                 "6F258409315449432E49434131A518BF0C15DFEF2C08000000001122334453070A3C2005141001"),
             true);
@@ -74,17 +73,17 @@ public class BerTlvTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void parse_whenStructureIsInvalid_shouldIAE() {
-    BerTlv.parseSimple(ByteArrayUtil.fromHex("6F23A5"), true);
+    BerTlvUtil.parseSimple(ByteArrayUtil.fromHex("6F23A5"), true);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void parse_whenLengthFieldIsInvalid_shouldIAE() {
-    BerTlv.parseSimple(ByteArrayUtil.fromHex("6F83A5"), true);
+    BerTlvUtil.parseSimple(ByteArrayUtil.fromHex("6F83A5"), true);
   }
 
   @Test
   public void parse_whenLengthIsZero_shouldReturnEmptyValue() {
-    Map<Integer, byte[]> tlvs = BerTlv.parseSimple(ByteArrayUtil.fromHex("8400"), false);
+    Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex("8400"), false);
     assertThat(tlvs.get(0x84)).isEmpty();
   }
 
@@ -98,7 +97,7 @@ public class BerTlvTest {
     for (int i = 3; i < 253; i++) {
       tlv[i] = (byte) 0xA5;
     }
-    Map<Integer, byte[]> tlvs = BerTlv.parseSimple(tlv, false);
+    Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(tlv, false);
     assertThat(tlvs.get(0x84)).hasSize(250);
     assertThat(tlvs.get(0x84)).containsOnly(0xA5);
   }
@@ -114,48 +113,48 @@ public class BerTlvTest {
     for (int i = 4; i < 264; i++) {
       tlv[i] = (byte) 0xA5;
     }
-    Map<Integer, byte[]> tlvs = BerTlv.parseSimple(tlv, false);
+    Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(tlv, false);
     assertThat(tlvs.get(0x84)).hasSize(260);
     assertThat(tlvs.get(0x84)).containsOnly(0xA5);
   }
 
   @Test
   public void isConstructed_when1ByteTagIsConstructed_shouldReturnTrue() {
-    assertThat(BerTlv.isConstructed(0x6F)).isTrue();
+    assertThat(BerTlvUtil.isConstructed(0x6F)).isTrue();
   }
 
   @Test
   public void isConstructed_when1ByteTagIsPrimitive_shouldReturnFalse() {
-    assertThat(BerTlv.isConstructed(0x84)).isFalse();
+    assertThat(BerTlvUtil.isConstructed(0x84)).isFalse();
   }
 
   @Test
   public void isConstructed_when2ByteTagIsConstructed_shouldReturnTrue() {
-    assertThat(BerTlv.isConstructed(0xBC0C)).isTrue();
+    assertThat(BerTlvUtil.isConstructed(0xBC0C)).isTrue();
   }
 
   @Test
   public void isConstructed_when2ByteTagIsPrimitive_shouldReturnFalse() {
-    assertThat(BerTlv.isConstructed(0x9F0C)).isFalse();
+    assertThat(BerTlvUtil.isConstructed(0x9F0C)).isFalse();
   }
 
   @Test
   public void isConstructed_when3ByteTagIsConstructed_shouldReturnTrue() {
-    assertThat(BerTlv.isConstructed(0x6FEF2C)).isTrue();
+    assertThat(BerTlvUtil.isConstructed(0x6FEF2C)).isTrue();
   }
 
   @Test
   public void isConstructed_when3ByteTagIsPrimitive_shouldReturnFalse() {
-    assertThat(BerTlv.isConstructed(0xDFEF2C)).isFalse();
+    assertThat(BerTlvUtil.isConstructed(0xDFEF2C)).isFalse();
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void isConstructed_whenTagIsNegative_shouldIAE() {
-    BerTlv.isConstructed(-1);
+    BerTlvUtil.isConstructed(-1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void isConstructed_whenTagIsTooLarge_shouldIAE() {
-    BerTlv.isConstructed(0x1000000);
+    BerTlvUtil.isConstructed(0x1000000);
   }
 }
