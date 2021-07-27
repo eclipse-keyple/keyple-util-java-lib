@@ -59,6 +59,8 @@ public final class JsonUtil {
     return new GsonBuilder()
         .registerTypeAdapter(int.class, new IntegerJsonAdapter())
         .registerTypeAdapter(Integer.class, new IntegerJsonAdapter())
+        .registerTypeAdapter(byte.class, new ByteJsonAdapter())
+        .registerTypeAdapter(Byte.class, new ByteJsonAdapter())
         .registerTypeAdapter(byte[].class, new ByteArrayJsonAdapter())
         .registerTypeAdapter(BodyError.class, new BodyErrorJsonDeserializer())
         .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonSerializer());
