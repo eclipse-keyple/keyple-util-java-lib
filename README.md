@@ -1,4 +1,4 @@
-# Keyple Java Util
+# Keyple Util Java Library
 
 ## Overview
 
@@ -9,6 +9,10 @@ This library **should not be imported explicitly** because it's imported by tran
 ## User Guide & Download Information
 
 The full documentation, including download information is available in the **Documentation** section of the official Keyple website [keyple.org](https://keyple.org)
+
+## Javadoc
+
+The javadoc is available online: [eclipse.github.io/keyple-util-java-lib/](https://eclipse.github.io/keyple-util-java-lib/)
 
 ## Build the Code
 
