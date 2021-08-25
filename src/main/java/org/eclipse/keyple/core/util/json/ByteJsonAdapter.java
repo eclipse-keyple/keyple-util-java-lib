@@ -18,14 +18,14 @@ import org.eclipse.keyple.core.util.ByteArrayUtil;
 /**
  * Serializer/Deserializer of a byte to an hex string.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public class ByteJsonAdapter implements JsonSerializer<Byte>, JsonDeserializer<Byte> {
 
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public JsonElement serialize(Byte data, Type typeOfSrc, JsonSerializationContext context) {
@@ -35,7 +35,7 @@ public class ByteJsonAdapter implements JsonSerializer<Byte>, JsonDeserializer<B
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public Byte deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

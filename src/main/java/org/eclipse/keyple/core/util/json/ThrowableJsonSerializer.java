@@ -22,14 +22,14 @@ import java.lang.reflect.Type;
  *
  * <p>Only the field "message" is serialized during the process.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public class ThrowableJsonSerializer implements JsonSerializer<Throwable> {
 
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public JsonElement serialize(

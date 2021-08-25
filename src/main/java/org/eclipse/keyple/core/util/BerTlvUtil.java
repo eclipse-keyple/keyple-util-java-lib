@@ -28,7 +28,7 @@ import java.util.Map;
  *       #parseSimple(byte[], boolean)}).
  * </ul>
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public class BerTlvUtil {
 
@@ -50,7 +50,7 @@ public class BerTlvUtil {
    * @param primitiveOnly True if only primitives tags are to be placed in the map.
    * @return A not null map.
    * @throws IllegalArgumentException If the parsing of the provided structure failed.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static Map<Integer, byte[]> parseSimple(byte[] tlvStructure, boolean primitiveOnly) {
     try {
@@ -66,7 +66,7 @@ public class BerTlvUtil {
    * @param tagId A positive int less than FFFFFFh.
    * @return True if the tag is constructed.
    * @throws IllegalArgumentException If the tag Id is out of range.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static boolean isConstructed(int tagId) {
     if (tagId < 0 || tagId > 0xFFFFFF) {

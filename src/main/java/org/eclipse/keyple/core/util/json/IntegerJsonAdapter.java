@@ -17,14 +17,14 @@ import java.lang.reflect.Type;
 /**
  * Serializer/Deserializer of an integer to an hex string.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public class IntegerJsonAdapter implements JsonSerializer<Integer>, JsonDeserializer<Integer> {
 
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public JsonElement serialize(Integer data, Type typeOfSrc, JsonSerializationContext context) {
@@ -34,7 +34,7 @@ public class IntegerJsonAdapter implements JsonSerializer<Integer>, JsonDeserial
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public Integer deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

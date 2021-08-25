@@ -17,7 +17,7 @@ import com.google.gson.GsonBuilder;
 /**
  * Json utilities based on Gson (com.google.gson).
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public final class JsonUtil {
 
@@ -33,7 +33,7 @@ public final class JsonUtil {
    * Gson library from Google (see the manifest of the NOTICE document for the version to be used).
    *
    * @return a not null instance.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static Gson getParser() {
     if (parser == null) {
@@ -77,7 +77,7 @@ public final class JsonUtil {
    *     com.google.gson.JsonSerializer} and/or {@link com.google.gson.JsonDeserializer}).
    * @param withSubclasses Apply this adapter to subclasses of matchingClass also.
    * @return a not null reference.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static Gson registerTypeAdapter(
       Class<?> matchingClass, Object adapter, boolean withSubclasses) {
@@ -97,7 +97,7 @@ public final class JsonUtil {
    *
    * @param obj The object to format.
    * @return A not empty String.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static String toJson(Object obj) {
     return getParser().toJson(obj);

@@ -14,7 +14,7 @@ package org.eclipse.keyple.core.util.protocol;
 /**
  * This enum contains a non-exhaustive list of contactless smartcard communication protocols.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public enum ContactlessCardCommonProtocol {
 

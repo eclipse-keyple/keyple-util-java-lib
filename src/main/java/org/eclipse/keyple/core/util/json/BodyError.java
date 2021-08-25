@@ -14,7 +14,7 @@ package org.eclipse.keyple.core.util.json;
 /**
  * POJO used to transports the content of an {@link Exception} into a string.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public class BodyError {
 
@@ -25,7 +25,7 @@ public class BodyError {
    * Builds an instance from an exception reference.
    *
    * @param exception The exception.
-   * @since 2.0
+   * @since 2.0.0
    */
   public BodyError(Exception exception) {
     this.exception = exception;
@@ -36,7 +36,7 @@ public class BodyError {
    * Gets the exception class name.
    *
    * @return a not null value.
-   * @since 2.0
+   * @since 2.0.0
    */
   public String getCode() {
     return code;
@@ -46,7 +46,7 @@ public class BodyError {
    * Gets the associated exception.
    *
    * @return a not null reference.
-   * @since 2.0
+   * @since 2.0.0
    */
   public Exception getException() {
     return exception;

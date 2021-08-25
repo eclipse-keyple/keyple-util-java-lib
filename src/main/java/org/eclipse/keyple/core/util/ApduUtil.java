@@ -14,7 +14,7 @@ package org.eclipse.keyple.core.util;
 /**
  * Util to build APDUs and check case 4.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public final class ApduUtil {
 
@@ -35,7 +35,7 @@ public final class ApduUtil {
    * @param le The maximum number of bytes expected in the data field of the response to the command
    *     (optional).
    * @return A byte array containing the resulting apdu command data.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static byte[] build(byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le) {
     byte[] apduCommand;
@@ -118,7 +118,7 @@ public final class ApduUtil {
    *
    * @param apduCommand The apduCommand to check.
    * @return true the APDU command is case 4.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static boolean isCase4(byte[] apduCommand) {
     if (apduCommand != null && apduCommand.length > 4) {

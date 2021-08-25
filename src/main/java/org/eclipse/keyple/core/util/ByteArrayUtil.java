@@ -14,7 +14,7 @@ package org.eclipse.keyple.core.util;
 /**
  * Utils around byte arrays
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public final class ByteArrayUtil {
   /* byte to hex string conversion table */
@@ -75,7 +75,7 @@ public final class ByteArrayUtil {
    * @throws IllegalArgumentException If the provided string is null, empty or made of an odd number
    *     of characters.
    * @see #isValidHexString(String)
-   * @since 2.0
+   * @since 2.0.0
    */
   public static byte[] fromHex(String hex) {
     Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length() % 2, 0, "parity");
@@ -96,7 +96,7 @@ public final class ByteArrayUtil {
    * @param byteArray The byte array to represent in hexadecimal.
    * @return An hexadecimal string representation of byteArray, an empty string of if the byte array
    *     is null.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static String toHex(byte[] byteArray) {
     if (byteArray == null) {
@@ -128,7 +128,7 @@ public final class ByteArrayUtil {
    * @param offset The position of the 2 bytes in the array.
    * @return A positive int.
    * @throws IllegalArgumentException If the buffer has a bad length or the offset is negative.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static int twoBytesToInt(byte[] bytes, int offset) {
     checkBytesToIntConversionParams(2, bytes, offset);
@@ -149,7 +149,7 @@ public final class ByteArrayUtil {
    * @param offset The position of the 2 bytes in the array.
    * @return A negative or positive int.
    * @throws IllegalArgumentException If the buffer has a bad length or the offset is negative.
-   * @since 2.0
+   * @since 2.0.0
    */
   public static int twoBytesSignedToInt(byte[] bytes, int offset) {
     checkBytesToIntConversionParams(2, bytes, offset);
@@ -173,7 +173,7 @@ public final class ByteArrayUtil {
    * @param offset The position of the 3 bytes in the array.
    * @return A positive int.
    * @throws IllegalArgumentException if the buffer has a bad length
-   * @since 2.0
+   * @since 2.0.0
    */
   public static int threeBytesToInt(byte[] bytes, int offset) {
     checkBytesToIntConversionParams(3, bytes, offset);
@@ -196,7 +196,7 @@ public final class ByteArrayUtil {
    * @param offset The position of the 3 bytes in the array.
    * @return A positive int.
    * @throws IllegalArgumentException if the buffer has a bad length
-   * @since 2.0
+   * @since 2.0.0
    */
   public static int threeBytesSignedToInt(byte[] bytes, int offset) {
     checkBytesToIntConversionParams(3, bytes, offset);
@@ -225,7 +225,7 @@ public final class ByteArrayUtil {
    * @param offset The position of the 4 bytes in the array.
    * @return A positive int.
    * @throws IllegalArgumentException if the buffer has a bad length
-   * @since 2.0
+   * @since 2.0.0
    */
   public static int fourBytesToInt(byte[] bytes, int offset) {
     checkBytesToIntConversionParams(4, bytes, offset);

@@ -17,14 +17,14 @@ import java.lang.reflect.Type;
 /**
  * Serializer of a {@link BodyError} that contains a {@link RuntimeException}.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public class BodyErrorJsonDeserializer implements JsonDeserializer<BodyError> {
 
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public BodyError deserialize(

@@ -17,7 +17,7 @@ import java.util.Collection;
  * Exposes useful methods for testing method call parameters and raising a IllegalArgumentException
  * unchecked exception.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public final class Assert {
 
@@ -54,7 +54,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if object is null
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert notNull(Object obj, String name) {
     if (obj == null) {
@@ -70,7 +70,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if object is null or empty
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert notEmpty(String obj, String name) {
     if (obj == null) {
@@ -89,7 +89,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if object is null or empty
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert notEmpty(Collection<? extends Object> obj, String name) {
     if (obj == null) {
@@ -108,7 +108,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if object is null or empty
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert notEmpty(byte[] obj, String name) {
     if (obj == null) {
@@ -127,7 +127,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if condition is null or false
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert isTrue(Boolean condition, String name) {
     if (condition == null) {
@@ -147,7 +147,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if number is null or has a value less than minValue.
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert greaterOrEqual(Integer number, int minValue, String name) {
     if (number == null) {
@@ -168,7 +168,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if number is null or has a value less than minValue.
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert isEqual(Integer number, int value, String name) {
     if (number == null) {
@@ -190,7 +190,7 @@ public final class Assert {
    * @param name the object name
    * @return the current instance
    * @throws IllegalArgumentException if number is null or is out of range.
-   * @since 2.0
+   * @since 2.0.0
    */
   public Assert isInRange(Integer number, int minValue, int maxValue, String name) {
     if (number == null) {
