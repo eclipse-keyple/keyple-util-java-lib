@@ -2,22 +2,16 @@
 
 ## Overview
 
-The **Keyple Util** Java library contains various utilities classes.
+The **Keyple Util Java Library** contains various utility classes used by all Keyple components.
 
-This library **should not be imported explicitly** because it's imported by transitivity by the main libraries.
+## Documentation & Contribution Guide
 
-## User Guide & Download Information
-
-The full documentation, including download information is available in the **Documentation** section of the official Keyple website [keyple.org](https://keyple.org)
+The full documentation, including the **user guide**, **download information** and **contribution guide**, is available on the Keyple website [keyple.org](https://keyple.org).
 
 ## Javadoc
 
 The javadoc is available online: [eclipse.github.io/keyple-util-java-lib/](https://eclipse.github.io/keyple-util-java-lib/)
 
-## Build the Code
+## About the source code
 
-The code is built with **Gradle** and is compliant with **Java 1.6** in order to be able to be used by a very large number of applications.
-
-## Code Contributions
-
-We welcome code contributions through merge requests.
+The code is built with **Gradle** and is compliant with **Java 1.6** in order to address a wide range of applications.
