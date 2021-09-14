@@ -17,11 +17,13 @@ import org.junit.Test;
 
 public class IntegerJsonAdapterTest {
 
-  public static final String JSON_DATA = "{\"primitiveValue\":\"9000\",\"objectValue\":\"9001\"}";
+  public static final String JSON_DATA =
+      "{\"primitiveValue\":\"9000\",\"objectValue\":\"9001\",\"oddDigitNumberValue\":\"02\"}";
 
   static class Data {
     int primitiveValue = 0x9000;
     Integer objectValue = 0x9001;
+    int oddDigitNumberValue = 0x2;
   }
 
   @Test

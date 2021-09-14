@@ -13,15 +13,25 @@ package org.eclipse.keyple.core.util.json;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 
 public class ByteJsonAdapterTest {
 
-  private static final String JSON_DATA = "{\"primitiveValue\":\"F1\",\"objectValue\":\"F2\"}";
+  private static final String JSON_DATA =
+      "{\"primitiveValue\":\"F1\",\"objectValue\":\"F2\",\"oddDigitNumberValue\":\"03\",\"mapValue\":{\"04\":\"test_04\",\"0A\":\"test_0A\"}}";
 
   static class Data {
     byte primitiveValue = (byte) 0xF1;
     Byte objectValue = (byte) 0xF2;
+    byte oddDigitNumberValue = (byte) 0x3;
+    Map<Byte, String> mapValue = new HashMap<Byte, String>();
+
+    {
+      mapValue.put((byte) 4, "test_04");
+      mapValue.put((byte) 10, "test_0A");
+    }
   }
 
   @Test

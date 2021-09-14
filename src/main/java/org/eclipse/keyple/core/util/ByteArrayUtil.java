@@ -64,6 +64,21 @@ public final class ByteArrayUtil {
   }
 
   /**
+   * Normalizes the input hex string by padding on the left by a zero if necessary.
+   *
+   * @param hexString The hex string to normalize.
+   * @return A not null string.
+   * @throws NullPointerException If the input string is null.
+   * @since 2.0.0
+   */
+  public static String normalizeHexString(String hexString) {
+    if (hexString.length() % 2 != 0) {
+      return "0" + hexString;
+    }
+    return hexString;
+  }
+
+  /**
    * Create a byte array from an hexadecimal string made of consecutive even number of digits in the
    * range {0..9,a..f,A..F}.
    *
