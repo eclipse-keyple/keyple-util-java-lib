@@ -1,0 +1,185 @@
+@startuml
+title
+    Keyple 2.0 - keyple-util-java-lib - 2.0.0 (15/09/2021)
+end title
+
+' == THEME ==
+
+'Couleurs issues de : https://htmlcolorcodes.com/fr/tableau-de-couleur/tableau-de-couleur-design-plat/
+!define C_GREY1 F8F9F9
+!define C_GREY2 F2F3F4
+!define C_GREY3 E5E7E9
+!define C_GREY4 D7DBDD
+!define C_GREY5 CACFD2
+!define C_GREY6 BDC3C7
+!define C_LINK 3498DB
+!define C_USE 27AE60
+
+skinparam Shadowing false
+skinparam ClassFontStyle italic
+skinparam ClassBorderColor #D4AC0D
+skinparam stereotypeABorderColor #A9DCDF
+skinparam stereotypeIBorderColor #B4A7E5
+skinparam stereotypeCBorderColor #ADD1B2
+skinparam stereotypeEBorderColor #EB93DF
+' Red
+skinparam ClassBackgroundColor<<red>> #FDEDEC
+skinparam ClassBorderColor<<red>> #E74C3C
+hide <<red>> stereotype
+' Purple
+skinparam ClassBackgroundColor<<purple>> #F4ECF7
+skinparam ClassBorderColor<<purple>> #8E44AD
+hide <<purple>> stereotype
+' blue
+skinparam ClassBackgroundColor<<blue>> #EBF5FB
+skinparam ClassBorderColor<<blue>> #3498DB
+hide <<blue>> stereotype
+' Green
+skinparam ClassBackgroundColor<<green>> #E9F7EF
+skinparam ClassBorderColor<<green>> #27AE60
+hide <<green>> stereotype
+' Grey
+skinparam ClassBackgroundColor<<grey>> #EAECEE
+skinparam ClassBorderColor<<grey>> #2C3E50
+hide <<grey>> stereotype
+
+' == CONTENT ==
+
+legend top
+    __Colors legend__ :
+    * __External API references__ :
+    ** <back:yellow>**com.google.code.gson**</back>
+end legend
+
+package "org.eclipse.keyple.core.util" as util {
+    +class "**final** Assert" as Assert {
+        --
+        +{static} Assert getInstance ()
+        ..
+        +Assert notNull (Object obj, String name)
+        +Assert notEmpty (String obj, String name)
+        +Assert notEmpty (Collection<? extends Object> obj, String name)
+        +Assert notEmpty (byte[] obj, String name)
+        +Assert isTrue (Boolean condition, String name)
+        +Assert greaterOrEqual (Integer number, int minValue, String name)
+        +Assert isEqual (Integer number, int value, String name)
+        +Assert isInRange (Integer number, int minValue, int maxValue, String name)
+    }
+    +class "**final** ByteArrayUtil" as ByteArrayUtil {
+        +{static} boolean isValidHexString (String hexString)
+        +{static} String normalizeHexString (String hexString)
+        +{static} byte[] fromHex (String hex)
+        +{static} String toHex (byte[] byteArray)
+        +{static} int twoBytesToInt (byte[] bytes, int offset)
+        +{static} int twoBytesSignedToInt (byte[] bytes, int offset)
+        +{static} int threeBytesToInt (byte[] bytes, int offset)
+        +{static} int threeBytesSignedToInt (byte[] bytes, int offset)
+        +{static} int fourBytesToInt (byte[] bytes, int offset)
+    }
+    +class "**final** ApduUtil" as ApduUtil {
+        +{static} byte[] build (byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le)
+        +{static} boolean isCase4 (byte[] apduCommand)
+    }
+    +class BerTlvUtil {
+        +{static} Map<Integer, byte[]> parseSimple (byte[] tlvStructure, boolean primitiveOnly)
+        +{static} boolean isConstructed (int tagId)
+    }
+    package json {
+        +class "**final** JsonUtil" as JsonUtil {
+            --
+            +{static} <back:yellow>Gson</back> getParser ()
+            +{static} void registerTypeAdapter (Class<?> matchingClass,
+                \tObject adapter, boolean withSubclasses)
+            ..
+            +{static} String toJson (Object obj)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nIntegerJsonAdapter" as IntegerJsonAdapter {
+            --
+            +IntegerJsonAdapter ()
+            -- **JsonSerializer** --
+            +<back:yellow>JsonElement</back> serialize (Integer data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            -- **JsonDeserializer** --
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteJsonAdapter" as ByteJsonAdapter {
+            --
+            +ByteJsonAdapter ()
+            -- **JsonSerializer** --
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            -- **JsonDeserializer** --
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteArrayJsonAdapter" as ByteArrayJsonAdapter {
+            --
+            +ByteArrayJsonAdapter ()
+            -- **JsonSerializer** --
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            -- **JsonDeserializer** --
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class BodyError {
+            --
+            +BodyError (Exception exception)
+            ..
+            +String getCode ()
+            +Exception getException ()
+        }
+        +class "<<<back:yellow>JsonDeserializer</back>>>\nBodyErrorJsonDeserializer" as BodyErrorJsonDeserializer {
+            --
+            +BodyErrorJsonDeserializer ()
+            -- **JsonDeserializer** --
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
+            --
+            +ThrowableJsonSerializer ()
+            -- **JsonSerializer** --
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+        }
+    }
+    package protocol {
+        +enum ContactCardCommonProtocol {
+            ISO_7816_3
+            ISO_7816_3_TO
+            ISO_7816_3_T1
+            INNOVATRON_HIGH_SPEED_PROTOCOL_SAM
+        }
+        +enum ContactlessCardCommonProtocol {
+            ISO_14443_4
+            NFC_A_ISO_14443_3A
+            NFC_B_ISO_14443_3B
+            NFC_F_JIS_6319_4
+            NFC_V_ISO_15693
+            INNOVATRON_B_PRIME_CARD
+        }
+    }
+}
+
+' Associations
+
+' == LAYOUT ==
+
+JsonUtil -[hidden]- BodyError
+
+BodyError -[hidden]- protocol
+BodyError -[hidden]- Assert
+
+Assert -[hidden]- ByteArrayUtil
+Assert -[hidden]- ApduUtil
+Assert -[hidden]- BerTlvUtil
+
+' == STYLE ==
+
+package util #C_GREY1 {}
+package json #C_GREY2 {}
+package protocol #C_GREY2 {}
+
+@enduml

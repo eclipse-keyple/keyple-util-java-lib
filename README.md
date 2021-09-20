@@ -8,9 +8,9 @@ The **Keyple Util Java Library** contains various utility classes used by all Ke
 
 The full documentation, including the **user guide**, **download information** and **contribution guide**, is available on the Keyple website [keyple.org](https://keyple.org).
 
-## Javadoc
+## API documentation
 
-The javadoc is available online: [eclipse.github.io/keyple-util-java-lib/](https://eclipse.github.io/keyple-util-java-lib/)
+API documentation & class diagram is available online: [eclipse.github.io/keyple-util-java-lib](https://eclipse.github.io/keyple-util-java-lib)
 
 ## About the source code
 
