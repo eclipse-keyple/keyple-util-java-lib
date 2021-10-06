@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple 2.0 - keyple-util-java-lib - 2.0.0 (15/09/2021)
+    Keyple - keyple-util-java-lib - 2.0.+ (15/09/2021)
 end title
 
 ' == THEME ==
