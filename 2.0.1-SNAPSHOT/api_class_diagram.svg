@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="2610px" preserveAspectRatio="none" style="width:3595px;height:2610px;background:#FFFFFF;" version="1.1" viewBox="0 0 3595 2610" width="3595px" zoomAndPan="magnify"><defs><filter height="1" id="bkyhdeydhpax80" width="1" x="0" y="0"><feFlood flood-color="#FFFF00" result="flood"/><feComposite in="SourceGraphic" in2="flood" operator="over"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="45" lengthAdjust="spacing" textLength="947.5" x="1307.5" y="46.7139">Keyple - keyple-util-java-lib - 2.0.+ (15/09/2021)</text><rect fill="#DDDDDD" height="157.0703" rx="12.5" ry="12.5" style="stroke:#000000;stroke-width:2.5;" width="495" x="1532.5" y="76.6016"/><text fill="#000000" font-family="sans-serif" font-size="35" lengthAdjust="spacing" text-decoration="underline" textLength="220" x="1547.5" y="125.4346">Colors legend</text><text fill="#000000" font-family="sans-serif" font-size="35" lengthAdjust="spacing" textLength="10" x="1777.5" y="125.4346">:</text><ellipse cx="1561.25" cy="158.3984" fill="#000000" rx="6.25" ry="6.25" style="stroke:#000000;stroke-width:0.0;"/><text fill="#000000" font-family="sans-serif" font-size="35" lengthAdjust="spacing" text-decoration="underline" textLength="370" x="1580" y="169.458">External API references</text><text fill="#000000" font-family="sans-serif" font-size="35" lengthAdjust="spacing" textLength="10" x="1960" y="169.458">:</text><rect fill="#000000" height="8.75" style="stroke:#000000;stroke-width:0.0;" width="8.75" x="1600" y="201.1719"/><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="35" font-weight="bold" lengthAdjust="spacing" textLength="400" x="1612.5" y="213.4814">com.google.code.gson</text><!--MD5=[3e81cc6ee7da4fa8b6adc12b329096f6]
+cluster util--><polygon fill="#F8F9F9" points="40,271.1719,532.5,271.1719,550,330.1953,3552.5,330.1953,3552.5,2593.6719,40,2593.6719,40,271.1719" style="stroke:#000000;stroke-width:3.75;"/><line style="stroke:#000000;stroke-width:3.75;" x1="40" x2="550" y1="330.1953" y2="330.1953"/><text fill="#000000" font-family="sans-serif" font-size="35" font-weight="bold" lengthAdjust="spacing" textLength="477.5" x="50" y="312.5049">org.eclipse.keyple.core.util</text><!--MD5=[4ac75f36695ece63879c728112de416c]
+cluster json--><polygon fill="#F2F3F4" points="100,381.1719,190,381.1719,207.5,440.1953,3492.5,440.1953,3492.5,1391.1719,100,1391.1719,100,381.1719" style="stroke:#000000;stroke-width:3.75;"/><line style="stroke:#000000;stroke-width:3.75;" x1="100" x2="207.5" y1="440.1953" y2="440.1953"/><text fill="#000000" font-family="sans-serif" font-size="35" font-weight="bold" lengthAdjust="spacing" textLength="75" x="110" y="422.5049">json</text><!--MD5=[59e9faf83e5ffb743ef5750f57e8e967]
+cluster protocol--><polygon fill="#F2F3F4" points="1137.5,1471.1719,1300,1471.1719,1317.5,1530.1953,2570,1530.1953,2570,1968.6719,1137.5,1968.6719,1137.5,1471.1719" style="stroke:#000000;stroke-width:3.75;"/><line style="stroke:#000000;stroke-width:3.75;" x1="1137.5" x2="1317.5" y1="1530.1953" y2="1530.1953"/><text fill="#000000" font-family="sans-serif" font-size="35" font-weight="bold" lengthAdjust="spacing" textLength="147.5" x="1147.5" y="1512.5049">protocol</text><!--MD5=[748d96b9802ee0d94a77604226d4f903]
+class Assert--><rect codeLine="54" fill="#FEFECE" height="451.3086" id="Assert" style="stroke:#D4AC0D;stroke-width:3.75;" width="967.5" x="101.25" y="1518.6719"/><ellipse cx="484.375" cy="1558.6719" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M489.375,1549.9219 Q489.8828,1548.6719 490.4688,1548.0469 Q491.0547,1547.4219 491.7188,1547.4219 Q492.8906,1547.4219 493.6328,1548.125 Q494.375,1548.8281 494.375,1550.4688 L494.375,1554.375 Q494.375,1556.0156 493.6719,1556.7188 Q492.9688,1557.4219 491.875,1557.4219 Q490.8984,1557.4219 490.2734,1556.9922 Q489.6484,1556.5625 489.375,1555.4297 Q489.2578,1554.6484 488.8281,1554.2188 Q488.0469,1553.3984 486.6406,1552.9297 Q485.2344,1552.4219 483.8281,1552.4219 Q482.0703,1552.4219 480.5859,1553.125 Q479.1406,1553.8281 478.0078,1555.3906 Q476.875,1556.9531 476.875,1559.1016 L476.875,1561.4063 Q476.875,1563.9844 478.9844,1565.7031 Q481.0938,1567.4219 484.8438,1567.4219 Q487.0703,1567.4219 488.6328,1566.9141 Q489.5313,1566.6406 490.5469,1565.7422 Q491.2109,1565.2344 491.5625,1565.0781 Q491.9141,1564.9219 492.3438,1564.9219 Q493.1641,1564.9219 493.75,1565.5859 Q494.375,1566.2109 494.375,1567.1094 Q494.375,1567.9688 493.5156,1568.9844 Q492.2656,1570.4688 490.2734,1571.2891 Q487.6563,1572.4219 484.4531,1572.4219 Q480.7031,1572.4219 477.6953,1570.9375 Q475.2734,1569.7656 473.5547,1567.2266 Q471.875,1564.6875 471.875,1561.6797 L471.875,1558.9453 Q471.875,1555.8203 473.3594,1553.0859 Q474.8828,1550.3516 477.5,1548.9063 Q480.1563,1547.4219 483.125,1547.4219 Q484.9219,1547.4219 486.4844,1548.0469 Q488.0469,1548.6719 489.375,1549.9219 Z " fill="#000000"/><ellipse cx="548.125" cy="1557.4219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="60" x="563.125" y="1570.9473">final</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="85" x="630.625" y="1570.9473">Assert</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="103.75" x2="1066.25" y1="1598.6719" y2="1598.6719"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="103.75" x2="1066.25" y1="1618.6719" y2="1618.6719"/><ellipse cx="128.75" cy="1646.1719" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="257.5" x="151.25" y="1657.2192">Assert getInstance ()</text><line style="stroke:#D4AC0D;stroke-width:2.5;stroke-dasharray:1.0,2.0;" x1="103.75" x2="1066.25" y1="1673.2617" y2="1673.2617"/><ellipse cx="128.75" cy="1700.7617" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="475" x="151.25" y="1711.8091">Assert notNull (Object obj, String name)</text><ellipse cx="128.75" cy="1735.3516" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="497.5" x="151.25" y="1746.3989">Assert notEmpty (String obj, String name)</text><ellipse cx="128.75" cy="1769.9414" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="777.5" x="151.25" y="1780.9888">Assert notEmpty (Collection&lt;? extends Object&gt; obj, String name)</text><ellipse cx="128.75" cy="1804.5313" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="495" x="151.25" y="1815.5786">Assert notEmpty (byte[] obj, String name)</text><ellipse cx="128.75" cy="1839.1211" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="562.5" x="151.25" y="1850.1685">Assert isTrue (Boolean condition, String name)</text><ellipse cx="128.75" cy="1873.7109" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="797.5" x="151.25" y="1884.7583">Assert greaterOrEqual (Integer number, int minValue, String name)</text><ellipse cx="128.75" cy="1908.3008" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="655" x="151.25" y="1919.3481">Assert isEqual (Integer number, int value, String name)</text><ellipse cx="128.75" cy="1942.8906" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="902.5" x="151.25" y="1953.938">Assert isInRange (Integer number, int minValue, int maxValue, String name)</text><!--MD5=[27f29ba09c13b8ede23502b37e39f025]
+class ByteArrayUtil--><rect codeLine="67" fill="#FEFECE" height="431.3086" id="ByteArrayUtil" style="stroke:#D4AC0D;stroke-width:3.75;" width="665" x="80" y="2121.1719"/><ellipse cx="265.625" cy="2161.1719" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M270.625,2152.4219 Q271.1328,2151.1719 271.7188,2150.5469 Q272.3047,2149.9219 272.9688,2149.9219 Q274.1406,2149.9219 274.8828,2150.625 Q275.625,2151.3281 275.625,2152.9688 L275.625,2156.875 Q275.625,2158.5156 274.9219,2159.2188 Q274.2188,2159.9219 273.125,2159.9219 Q272.1484,2159.9219 271.5234,2159.4922 Q270.8984,2159.0625 270.625,2157.9297 Q270.5078,2157.1484 270.0781,2156.7188 Q269.2969,2155.8984 267.8906,2155.4297 Q266.4844,2154.9219 265.0781,2154.9219 Q263.3203,2154.9219 261.8359,2155.625 Q260.3906,2156.3281 259.2578,2157.8906 Q258.125,2159.4531 258.125,2161.6016 L258.125,2163.9063 Q258.125,2166.4844 260.2344,2168.2031 Q262.3438,2169.9219 266.0938,2169.9219 Q268.3203,2169.9219 269.8828,2169.4141 Q270.7813,2169.1406 271.7969,2168.2422 Q272.4609,2167.7344 272.8125,2167.5781 Q273.1641,2167.4219 273.5938,2167.4219 Q274.4141,2167.4219 275,2168.0859 Q275.625,2168.7109 275.625,2169.6094 Q275.625,2170.4688 274.7656,2171.4844 Q273.5156,2172.9688 271.5234,2173.7891 Q268.9063,2174.9219 265.7031,2174.9219 Q261.9531,2174.9219 258.9453,2173.4375 Q256.5234,2172.2656 254.8047,2169.7266 Q253.125,2167.1875 253.125,2164.1797 L253.125,2161.4453 Q253.125,2158.3203 254.6094,2155.5859 Q256.1328,2152.8516 258.75,2151.4063 Q261.4063,2149.9219 264.375,2149.9219 Q266.1719,2149.9219 267.7344,2150.5469 Q269.2969,2151.1719 270.625,2152.4219 Z " fill="#000000"/><ellipse cx="329.375" cy="2159.9219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="60" x="344.375" y="2173.4473">final</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="177.5" x="411.875" y="2173.4473">ByteArrayUtil</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="82.5" x2="742.5" y1="2201.1719" y2="2201.1719"/><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="82.5" x2="742.5" y1="2221.1719" y2="2221.1719"/><ellipse cx="107.5" cy="2248.6719" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="520" x="130" y="2259.7192">boolean isValidHexString (String hexString)</text><ellipse cx="107.5" cy="2283.2617" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="530" x="130" y="2294.3091">String normalizeHexString (String hexString)</text><ellipse cx="107.5" cy="2317.8516" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="327.5" x="130" y="2328.8989">byte[] fromHex (String hex)</text><ellipse cx="107.5" cy="2352.4414" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="372.5" x="130" y="2363.4888">String toHex (byte[] byteArray)</text><ellipse cx="107.5" cy="2387.0313" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="502.5" x="130" y="2398.0786">int twoBytesToInt (byte[] bytes, int offset)</text><ellipse cx="107.5" cy="2421.6211" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="585" x="130" y="2432.6685">int twoBytesSignedToInt (byte[] bytes, int offset)</text><ellipse cx="107.5" cy="2456.2109" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="517.5" x="130" y="2467.2583">int threeBytesToInt (byte[] bytes, int offset)</text><ellipse cx="107.5" cy="2490.8008" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="600" x="130" y="2501.8481">int threeBytesSignedToInt (byte[] bytes, int offset)</text><ellipse cx="107.5" cy="2525.3906" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="505" x="130" y="2536.438">int fourBytesToInt (byte[] bytes, int offset)</text><!--MD5=[458b3a9396e0ca5416a37f6d6326ccaf]
+class ApduUtil--><rect codeLine="78" fill="#FEFECE" height="189.1797" id="ApduUtil" style="stroke:#D4AC0D;stroke-width:3.75;" width="897.5" x="833.75" y="2242.4219"/><ellipse cx="1165.625" cy="2282.4219" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M1170.625,2273.6719 Q1171.1328,2272.4219 1171.7188,2271.7969 Q1172.3047,2271.1719 1172.9688,2271.1719 Q1174.1406,2271.1719 1174.8828,2271.875 Q1175.625,2272.5781 1175.625,2274.2188 L1175.625,2278.125 Q1175.625,2279.7656 1174.9219,2280.4688 Q1174.2188,2281.1719 1173.125,2281.1719 Q1172.1484,2281.1719 1171.5234,2280.7422 Q1170.8984,2280.3125 1170.625,2279.1797 Q1170.5078,2278.3984 1170.0781,2277.9688 Q1169.2969,2277.1484 1167.8906,2276.6797 Q1166.4844,2276.1719 1165.0781,2276.1719 Q1163.3203,2276.1719 1161.8359,2276.875 Q1160.3906,2277.5781 1159.2578,2279.1406 Q1158.125,2280.7031 1158.125,2282.8516 L1158.125,2285.1563 Q1158.125,2287.7344 1160.2344,2289.4531 Q1162.3438,2291.1719 1166.0938,2291.1719 Q1168.3203,2291.1719 1169.8828,2290.6641 Q1170.7813,2290.3906 1171.7969,2289.4922 Q1172.4609,2288.9844 1172.8125,2288.8281 Q1173.1641,2288.6719 1173.5938,2288.6719 Q1174.4141,2288.6719 1175,2289.3359 Q1175.625,2289.9609 1175.625,2290.8594 Q1175.625,2291.7188 1174.7656,2292.7344 Q1173.5156,2294.2188 1171.5234,2295.0391 Q1168.9063,2296.1719 1165.7031,2296.1719 Q1161.9531,2296.1719 1158.9453,2294.6875 Q1156.5234,2293.5156 1154.8047,2290.9766 Q1153.125,2288.4375 1153.125,2285.4297 L1153.125,2282.6953 Q1153.125,2279.5703 1154.6094,2276.8359 Q1156.1328,2274.1016 1158.75,2272.6563 Q1161.4063,2271.1719 1164.375,2271.1719 Q1166.1719,2271.1719 1167.7344,2271.7969 Q1169.2969,2272.4219 1170.625,2273.6719 Z " fill="#000000"/><ellipse cx="1229.375" cy="2281.1719" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="60" x="1244.375" y="2294.6973">final</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="117.5" x="1311.875" y="2294.6973">ApduUtil</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="836.25" x2="1728.75" y1="2322.4219" y2="2322.4219"/><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="836.25" x2="1728.75" y1="2342.4219" y2="2342.4219"/><ellipse cx="861.25" cy="2369.9219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="832.5" x="883.75" y="2380.9692">byte[] build (byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le)</text><ellipse cx="861.25" cy="2404.5117" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="480" x="883.75" y="2415.5591">boolean isCase4 (byte[] apduCommand)</text><!--MD5=[967b5bdf980b1f0d408075c95cfc8699]
+class BerTlvUtil--><rect codeLine="82" fill="#FEFECE" height="189.1797" id="BerTlvUtil" style="stroke:#D4AC0D;stroke-width:3.75;" width="977.5" x="1818.75" y="2242.4219"/><ellipse cx="2216.875" cy="2282.4219" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M2221.875,2273.6719 Q2222.3828,2272.4219 2222.9688,2271.7969 Q2223.5547,2271.1719 2224.2188,2271.1719 Q2225.3906,2271.1719 2226.1328,2271.875 Q2226.875,2272.5781 2226.875,2274.2188 L2226.875,2278.125 Q2226.875,2279.7656 2226.1719,2280.4688 Q2225.4688,2281.1719 2224.375,2281.1719 Q2223.3984,2281.1719 2222.7734,2280.7422 Q2222.1484,2280.3125 2221.875,2279.1797 Q2221.7578,2278.3984 2221.3281,2277.9688 Q2220.5469,2277.1484 2219.1406,2276.6797 Q2217.7344,2276.1719 2216.3281,2276.1719 Q2214.5703,2276.1719 2213.0859,2276.875 Q2211.6406,2277.5781 2210.5078,2279.1406 Q2209.375,2280.7031 2209.375,2282.8516 L2209.375,2285.1563 Q2209.375,2287.7344 2211.4844,2289.4531 Q2213.5938,2291.1719 2217.3438,2291.1719 Q2219.5703,2291.1719 2221.1328,2290.6641 Q2222.0313,2290.3906 2223.0469,2289.4922 Q2223.7109,2288.9844 2224.0625,2288.8281 Q2224.4141,2288.6719 2224.8438,2288.6719 Q2225.6641,2288.6719 2226.25,2289.3359 Q2226.875,2289.9609 2226.875,2290.8594 Q2226.875,2291.7188 2226.0156,2292.7344 Q2224.7656,2294.2188 2222.7734,2295.0391 Q2220.1563,2296.1719 2216.9531,2296.1719 Q2213.2031,2296.1719 2210.1953,2294.6875 Q2207.7734,2293.5156 2206.0547,2290.9766 Q2204.375,2288.4375 2204.375,2285.4297 L2204.375,2282.6953 Q2204.375,2279.5703 2205.8594,2276.8359 Q2207.3828,2274.1016 2210,2272.6563 Q2212.6563,2271.1719 2215.625,2271.1719 Q2217.4219,2271.1719 2218.9844,2271.7969 Q2220.5469,2272.4219 2221.875,2273.6719 Z " fill="#000000"/><ellipse cx="2280.625" cy="2281.1719" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="132.5" x="2295.625" y="2294.6973">BerTlvUtil</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1821.25" x2="2793.75" y1="2322.4219" y2="2322.4219"/><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1821.25" x2="2793.75" y1="2342.4219" y2="2342.4219"/><ellipse cx="1846.25" cy="2369.9219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="912.5" x="1868.75" y="2380.9692">Map&lt;Integer, byte[]&gt; parseSimple (byte[] tlvStructure, boolean primitiveOnly)</text><ellipse cx="1846.25" cy="2404.5117" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="390" x="1868.75" y="2415.5591">boolean isConstructed (int tagId)</text><!--MD5=[ff1fef1d5f830c31212d01e346df5a91]
+class JsonUtil--><rect codeLine="87" fill="#FEFECE" height="278.3594" id="JsonUtil" style="stroke:#D4AC0D;stroke-width:3.75;" width="692.5" x="141.25" y="552.4219"/><ellipse cx="374.375" cy="592.4219" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M379.375,583.6719 Q379.8828,582.4219 380.4688,581.7969 Q381.0547,581.1719 381.7188,581.1719 Q382.8906,581.1719 383.6328,581.875 Q384.375,582.5781 384.375,584.2188 L384.375,588.125 Q384.375,589.7656 383.6719,590.4688 Q382.9688,591.1719 381.875,591.1719 Q380.8984,591.1719 380.2734,590.7422 Q379.6484,590.3125 379.375,589.1797 Q379.2578,588.3984 378.8281,587.9688 Q378.0469,587.1484 376.6406,586.6797 Q375.2344,586.1719 373.8281,586.1719 Q372.0703,586.1719 370.5859,586.875 Q369.1406,587.5781 368.0078,589.1406 Q366.875,590.7031 366.875,592.8516 L366.875,595.1563 Q366.875,597.7344 368.9844,599.4531 Q371.0938,601.1719 374.8438,601.1719 Q377.0703,601.1719 378.6328,600.6641 Q379.5313,600.3906 380.5469,599.4922 Q381.2109,598.9844 381.5625,598.8281 Q381.9141,598.6719 382.3438,598.6719 Q383.1641,598.6719 383.75,599.3359 Q384.375,599.9609 384.375,600.8594 Q384.375,601.7188 383.5156,602.7344 Q382.2656,604.2188 380.2734,605.0391 Q377.6563,606.1719 374.4531,606.1719 Q370.7031,606.1719 367.6953,604.6875 Q365.2734,603.5156 363.5547,600.9766 Q361.875,598.4375 361.875,595.4297 L361.875,592.6953 Q361.875,589.5703 363.3594,586.8359 Q364.8828,584.1016 367.5,582.6563 Q370.1563,581.1719 373.125,581.1719 Q374.9219,581.1719 376.4844,581.7969 Q378.0469,582.4219 379.375,583.6719 Z " fill="#000000"/><ellipse cx="438.125" cy="591.1719" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="60" x="453.125" y="604.6973">final</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="110" x="520.625" y="604.6973">JsonUtil</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="143.75" x2="831.25" y1="632.4219" y2="632.4219"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="143.75" x2="831.25" y1="652.4219" y2="652.4219"/><ellipse cx="168.75" cy="679.9219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="65" x="191.25" y="690.9692">Gson</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="145" x="263.75" y="690.9692">getParser ()</text><ellipse cx="168.75" cy="714.5117" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="627.5" x="191.25" y="725.5591">void registerTypeAdapter (Class&lt;?&gt; matchingClass,</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="500" x="251.25" y="760.1489">Object adapter, boolean withSubclasses)</text><line style="stroke:#D4AC0D;stroke-width:2.5;stroke-dasharray:1.0,2.0;" x1="143.75" x2="831.25" y1="776.1914" y2="776.1914"/><ellipse cx="168.75" cy="803.6914" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" text-decoration="underline" textLength="305" x="191.25" y="814.7388">String toJson (Object obj)</text><!--MD5=[f72f8ad6aaf73d77b05e402bfda701b7]
+class IntegerJsonAdapter--><rect codeLine="95" fill="#FEFECE" height="440.332" id="IntegerJsonAdapter" style="stroke:#D4AC0D;stroke-width:3.75;" width="785" x="922.5" y="471.1719"/><ellipse cx="1139.375" cy="540.2734" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M1144.375,531.5234 Q1144.8828,530.2734 1145.4688,529.6484 Q1146.0547,529.0234 1146.7188,529.0234 Q1147.8906,529.0234 1148.6328,529.7266 Q1149.375,530.4297 1149.375,532.0703 L1149.375,535.9766 Q1149.375,537.6172 1148.6719,538.3203 Q1147.9688,539.0234 1146.875,539.0234 Q1145.8984,539.0234 1145.2734,538.5938 Q1144.6484,538.1641 1144.375,537.0313 Q1144.2578,536.25 1143.8281,535.8203 Q1143.0469,535 1141.6406,534.5313 Q1140.2344,534.0234 1138.8281,534.0234 Q1137.0703,534.0234 1135.5859,534.7266 Q1134.1406,535.4297 1133.0078,536.9922 Q1131.875,538.5547 1131.875,540.7031 L1131.875,543.0078 Q1131.875,545.5859 1133.9844,547.3047 Q1136.0938,549.0234 1139.8438,549.0234 Q1142.0703,549.0234 1143.6328,548.5156 Q1144.5313,548.2422 1145.5469,547.3438 Q1146.2109,546.8359 1146.5625,546.6797 Q1146.9141,546.5234 1147.3438,546.5234 Q1148.1641,546.5234 1148.75,547.1875 Q1149.375,547.8125 1149.375,548.7109 Q1149.375,549.5703 1148.5156,550.5859 Q1147.2656,552.0703 1145.2734,552.8906 Q1142.6563,554.0234 1139.4531,554.0234 Q1135.7031,554.0234 1132.6953,552.5391 Q1130.2734,551.3672 1128.5547,548.8281 Q1126.875,546.2891 1126.875,543.2813 L1126.875,540.5469 Q1126.875,537.4219 1128.3594,534.6875 Q1129.8828,531.9531 1132.5,530.5078 Q1135.1563,529.0234 1138.125,529.0234 Q1139.9219,529.0234 1141.4844,529.6484 Q1143.0469,530.2734 1144.375,531.5234 Z " fill="#000000"/><ellipse cx="1203.125" cy="539.0234" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="1235.625" y="514.8145">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="197.5" x="1270.625" y="514.8145">JsonSerializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="1468.125" y="514.8145">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="1218.125" y="552.5488">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="232.5" x="1253.125" y="552.5488">JsonDeserializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="1485.625" y="552.5488">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="270" x="1234.375" y="590.2832">IntegerJsonAdapter</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="925" x2="1705" y1="609.375" y2="609.375"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="925" x2="1705" y1="629.375" y2="629.375"/><ellipse cx="950" cy="656.875" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="265" x="972.5" y="667.9224">IntegerJsonAdapter ()</text><ellipse cx="950" cy="736.0547" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="972.5" y="747.1021">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="267.5" x="1130" y="747.1021">serialize (Integer data,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="1405" y="747.1021">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="132.5" x="1472.5" y="747.1021">typeOfSrc,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="295" x="1032.5" y="781.6919">JsonSerializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="100" x="1335" y="781.6919">context)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="925" x2="1216.25" y1="701.2598" y2="701.2598"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="197.5" x="1216.25" y="711.2622">JsonSerializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1413.75" x2="1705" y1="701.2598" y2="701.2598"/><ellipse cx="950" cy="849.8242" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="170" x="972.5" y="860.8716">T deserialize (</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="1142.5" y="860.8716">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="1300" y="860.8716">jsonElement,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="1457.5" y="860.8716">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="1525" y="860.8716">type,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="325" x="1032.5" y="895.4614">JsonDeserializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="327.5" x="1365" y="895.4614">jsonDeserializationContext)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="925" x2="1198.75" y1="815.0293" y2="815.0293"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="232.5" x="1198.75" y="825.0317">JsonDeserializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1431.25" x2="1705" y1="815.0293" y2="815.0293"/><!--MD5=[52cc22ead8f9cede3c7076eefab9a46c]
+class ByteJsonAdapter--><rect codeLine="105" fill="#FEFECE" height="440.332" id="ByteJsonAdapter" style="stroke:#D4AC0D;stroke-width:3.75;" width="785" x="1795" y="471.1719"/><ellipse cx="2011.875" cy="540.2734" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M2016.875,531.5234 Q2017.3828,530.2734 2017.9688,529.6484 Q2018.5547,529.0234 2019.2188,529.0234 Q2020.3906,529.0234 2021.1328,529.7266 Q2021.875,530.4297 2021.875,532.0703 L2021.875,535.9766 Q2021.875,537.6172 2021.1719,538.3203 Q2020.4688,539.0234 2019.375,539.0234 Q2018.3984,539.0234 2017.7734,538.5938 Q2017.1484,538.1641 2016.875,537.0313 Q2016.7578,536.25 2016.3281,535.8203 Q2015.5469,535 2014.1406,534.5313 Q2012.7344,534.0234 2011.3281,534.0234 Q2009.5703,534.0234 2008.0859,534.7266 Q2006.6406,535.4297 2005.5078,536.9922 Q2004.375,538.5547 2004.375,540.7031 L2004.375,543.0078 Q2004.375,545.5859 2006.4844,547.3047 Q2008.5938,549.0234 2012.3438,549.0234 Q2014.5703,549.0234 2016.1328,548.5156 Q2017.0313,548.2422 2018.0469,547.3438 Q2018.7109,546.8359 2019.0625,546.6797 Q2019.4141,546.5234 2019.8438,546.5234 Q2020.6641,546.5234 2021.25,547.1875 Q2021.875,547.8125 2021.875,548.7109 Q2021.875,549.5703 2021.0156,550.5859 Q2019.7656,552.0703 2017.7734,552.8906 Q2015.1563,554.0234 2011.9531,554.0234 Q2008.2031,554.0234 2005.1953,552.5391 Q2002.7734,551.3672 2001.0547,548.8281 Q1999.375,546.2891 1999.375,543.2813 L1999.375,540.5469 Q1999.375,537.4219 2000.8594,534.6875 Q2002.3828,531.9531 2005,530.5078 Q2007.6563,529.0234 2010.625,529.0234 Q2012.4219,529.0234 2013.9844,529.6484 Q2015.5469,530.2734 2016.875,531.5234 Z " fill="#000000"/><ellipse cx="2075.625" cy="539.0234" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2108.125" y="514.8145">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="197.5" x="2143.125" y="514.8145">JsonSerializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2340.625" y="514.8145">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2090.625" y="552.5488">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="232.5" x="2125.625" y="552.5488">JsonDeserializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2358.125" y="552.5488">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="232.5" x="2125.625" y="590.2832">ByteJsonAdapter</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1797.5" x2="2577.5" y1="609.375" y2="609.375"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1797.5" x2="2577.5" y1="629.375" y2="629.375"/><ellipse cx="1822.5" cy="656.875" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="237.5" x="1845" y="667.9224">ByteJsonAdapter ()</text><ellipse cx="1822.5" cy="736.0547" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="1845" y="747.1021">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="200" x="2002.5" y="747.1021">serialize (T data,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="2210" y="747.1021">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="132.5" x="2277.5" y="747.1021">typeOfSrc,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="295" x="1905" y="781.6919">JsonSerializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="100" x="2207.5" y="781.6919">context)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1797.5" x2="2088.75" y1="701.2598" y2="701.2598"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="197.5" x="2088.75" y="711.2622">JsonSerializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="2286.25" x2="2577.5" y1="701.2598" y2="701.2598"/><ellipse cx="1822.5" cy="849.8242" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="170" x="1845" y="860.8716">T deserialize (</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="2015" y="860.8716">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="2172.5" y="860.8716">jsonElement,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="2330" y="860.8716">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="2397.5" y="860.8716">type,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="325" x="1905" y="895.4614">JsonDeserializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="327.5" x="2237.5" y="895.4614">jsonDeserializationContext)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1797.5" x2="2071.25" y1="815.0293" y2="815.0293"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="232.5" x="2071.25" y="825.0317">JsonDeserializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="2303.75" x2="2577.5" y1="815.0293" y2="815.0293"/><!--MD5=[f0f8c8dfcaa5a8f8c3b99a1fa7726780]
+class ByteArrayJsonAdapter--><rect codeLine="115" fill="#FEFECE" height="440.332" id="ByteArrayJsonAdapter" style="stroke:#D4AC0D;stroke-width:3.75;" width="785" x="2667.5" y="471.1719"/><ellipse cx="2883.125" cy="540.2734" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M2888.125,531.5234 Q2888.6328,530.2734 2889.2188,529.6484 Q2889.8047,529.0234 2890.4688,529.0234 Q2891.6406,529.0234 2892.3828,529.7266 Q2893.125,530.4297 2893.125,532.0703 L2893.125,535.9766 Q2893.125,537.6172 2892.4219,538.3203 Q2891.7188,539.0234 2890.625,539.0234 Q2889.6484,539.0234 2889.0234,538.5938 Q2888.3984,538.1641 2888.125,537.0313 Q2888.0078,536.25 2887.5781,535.8203 Q2886.7969,535 2885.3906,534.5313 Q2883.9844,534.0234 2882.5781,534.0234 Q2880.8203,534.0234 2879.3359,534.7266 Q2877.8906,535.4297 2876.7578,536.9922 Q2875.625,538.5547 2875.625,540.7031 L2875.625,543.0078 Q2875.625,545.5859 2877.7344,547.3047 Q2879.8438,549.0234 2883.5938,549.0234 Q2885.8203,549.0234 2887.3828,548.5156 Q2888.2813,548.2422 2889.2969,547.3438 Q2889.9609,546.8359 2890.3125,546.6797 Q2890.6641,546.5234 2891.0938,546.5234 Q2891.9141,546.5234 2892.5,547.1875 Q2893.125,547.8125 2893.125,548.7109 Q2893.125,549.5703 2892.2656,550.5859 Q2891.0156,552.0703 2889.0234,552.8906 Q2886.4063,554.0234 2883.2031,554.0234 Q2879.4531,554.0234 2876.4453,552.5391 Q2874.0234,551.3672 2872.3047,548.8281 Q2870.625,546.2891 2870.625,543.2813 L2870.625,540.5469 Q2870.625,537.4219 2872.1094,534.6875 Q2873.6328,531.9531 2876.25,530.5078 Q2878.9063,529.0234 2881.875,529.0234 Q2883.6719,529.0234 2885.2344,529.6484 Q2886.7969,530.2734 2888.125,531.5234 Z " fill="#000000"/><ellipse cx="2946.875" cy="539.0234" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2980.625" y="514.8145">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="197.5" x="3015.625" y="514.8145">JsonSerializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="3213.125" y="514.8145">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2963.125" y="552.5488">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="232.5" x="2998.125" y="552.5488">JsonDeserializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="3230.625" y="552.5488">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="305" x="2961.875" y="590.2832">ByteArrayJsonAdapter</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="2670" x2="3450" y1="609.375" y2="609.375"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="2670" x2="3450" y1="629.375" y2="629.375"/><ellipse cx="2695" cy="656.875" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="307.5" x="2717.5" y="667.9224">ByteArrayJsonAdapter ()</text><ellipse cx="2695" cy="736.0547" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="2717.5" y="747.1021">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="200" x="2875" y="747.1021">serialize (T data,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="3082.5" y="747.1021">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="132.5" x="3150" y="747.1021">typeOfSrc,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="295" x="2777.5" y="781.6919">JsonSerializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="100" x="3080" y="781.6919">context)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="2670" x2="2961.25" y1="701.2598" y2="701.2598"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="197.5" x="2961.25" y="711.2622">JsonSerializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="3158.75" x2="3450" y1="701.2598" y2="701.2598"/><ellipse cx="2695" cy="849.8242" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="170" x="2717.5" y="860.8716">T deserialize (</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="2887.5" y="860.8716">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="3045" y="860.8716">jsonElement,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="3202.5" y="860.8716">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="3270" y="860.8716">type,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="325" x="2777.5" y="895.4614">JsonDeserializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="327.5" x="3110" y="895.4614">jsonDeserializationContext)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="2670" x2="2943.75" y1="815.0293" y2="815.0293"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="232.5" x="2943.75" y="825.0317">JsonDeserializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="3176.25" x2="3450" y1="815.0293" y2="815.0293"/><!--MD5=[3d84c5190c7a3821707931f3b8039d88]
+class BodyError--><rect codeLine="125" fill="#FEFECE" height="243.7695" id="BodyError" style="stroke:#D4AC0D;stroke-width:3.75;" width="457.5" x="356.25" y="1083.6719"/><ellipse cx="491.875" cy="1123.6719" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M496.875,1114.9219 Q497.3828,1113.6719 497.9688,1113.0469 Q498.5547,1112.4219 499.2188,1112.4219 Q500.3906,1112.4219 501.1328,1113.125 Q501.875,1113.8281 501.875,1115.4688 L501.875,1119.375 Q501.875,1121.0156 501.1719,1121.7188 Q500.4688,1122.4219 499.375,1122.4219 Q498.3984,1122.4219 497.7734,1121.9922 Q497.1484,1121.5625 496.875,1120.4297 Q496.7578,1119.6484 496.3281,1119.2188 Q495.5469,1118.3984 494.1406,1117.9297 Q492.7344,1117.4219 491.3281,1117.4219 Q489.5703,1117.4219 488.0859,1118.125 Q486.6406,1118.8281 485.5078,1120.3906 Q484.375,1121.9531 484.375,1124.1016 L484.375,1126.4063 Q484.375,1128.9844 486.4844,1130.7031 Q488.5938,1132.4219 492.3438,1132.4219 Q494.5703,1132.4219 496.1328,1131.9141 Q497.0313,1131.6406 498.0469,1130.7422 Q498.7109,1130.2344 499.0625,1130.0781 Q499.4141,1129.9219 499.8438,1129.9219 Q500.6641,1129.9219 501.25,1130.5859 Q501.875,1131.2109 501.875,1132.1094 Q501.875,1132.9688 501.0156,1133.9844 Q499.7656,1135.4688 497.7734,1136.2891 Q495.1563,1137.4219 491.9531,1137.4219 Q488.2031,1137.4219 485.1953,1135.9375 Q482.7734,1134.7656 481.0547,1132.2266 Q479.375,1129.6875 479.375,1126.6797 L479.375,1123.9453 Q479.375,1120.8203 480.8594,1118.0859 Q482.3828,1115.3516 485,1113.9063 Q487.6563,1112.4219 490.625,1112.4219 Q492.4219,1112.4219 493.9844,1113.0469 Q495.5469,1113.6719 496.875,1114.9219 Z " fill="#000000"/><ellipse cx="555.625" cy="1122.4219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="137.5" x="570.625" y="1135.9473">BodyError</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="358.75" x2="811.25" y1="1163.6719" y2="1163.6719"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="358.75" x2="811.25" y1="1183.6719" y2="1183.6719"/><ellipse cx="383.75" cy="1211.1719" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="392.5" x="406.25" y="1222.2192">BodyError (Exception exception)</text><line style="stroke:#D4AC0D;stroke-width:2.5;stroke-dasharray:1.0,2.0;" x1="358.75" x2="811.25" y1="1238.2617" y2="1238.2617"/><ellipse cx="383.75" cy="1265.7617" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="205" x="406.25" y="1276.8091">String getCode ()</text><ellipse cx="383.75" cy="1300.3516" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="307.5" x="406.25" y="1311.3989">Exception getException ()</text><!--MD5=[9a218190a85a7a5cf1f408f9962c53bf]
+class BodyErrorJsonDeserializer--><rect codeLine="132" fill="#FEFECE" height="288.8281" id="BodyErrorJsonDeserializer" style="stroke:#D4AC0D;stroke-width:3.75;" width="785" x="922.5" y="1061.1719"/><ellipse cx="1105.625" cy="1111.4063" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M1110.625,1102.6563 Q1111.1328,1101.4063 1111.7188,1100.7813 Q1112.3047,1100.1563 1112.9688,1100.1563 Q1114.1406,1100.1563 1114.8828,1100.8594 Q1115.625,1101.5625 1115.625,1103.2031 L1115.625,1107.1094 Q1115.625,1108.75 1114.9219,1109.4531 Q1114.2188,1110.1563 1113.125,1110.1563 Q1112.1484,1110.1563 1111.5234,1109.7266 Q1110.8984,1109.2969 1110.625,1108.1641 Q1110.5078,1107.3828 1110.0781,1106.9531 Q1109.2969,1106.1328 1107.8906,1105.6641 Q1106.4844,1105.1563 1105.0781,1105.1563 Q1103.3203,1105.1563 1101.8359,1105.8594 Q1100.3906,1106.5625 1099.2578,1108.125 Q1098.125,1109.6875 1098.125,1111.8359 L1098.125,1114.1406 Q1098.125,1116.7188 1100.2344,1118.4375 Q1102.3438,1120.1563 1106.0938,1120.1563 Q1108.3203,1120.1563 1109.8828,1119.6484 Q1110.7813,1119.375 1111.7969,1118.4766 Q1112.4609,1117.9688 1112.8125,1117.8125 Q1113.1641,1117.6563 1113.5938,1117.6563 Q1114.4141,1117.6563 1115,1118.3203 Q1115.625,1118.9453 1115.625,1119.8438 Q1115.625,1120.7031 1114.7656,1121.7188 Q1113.5156,1123.2031 1111.5234,1124.0234 Q1108.9063,1125.1563 1105.7031,1125.1563 Q1101.9531,1125.1563 1098.9453,1123.6719 Q1096.5234,1122.5 1094.8047,1119.9609 Q1093.125,1117.4219 1093.125,1114.4141 L1093.125,1111.6797 Q1093.125,1108.5547 1094.6094,1105.8203 Q1096.1328,1103.0859 1098.75,1101.6406 Q1101.4063,1100.1563 1104.375,1100.1563 Q1106.1719,1100.1563 1107.7344,1100.7813 Q1109.2969,1101.4063 1110.625,1102.6563 Z " fill="#000000"/><ellipse cx="1169.375" cy="1110.1563" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="1218.125" y="1104.8145">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="232.5" x="1253.125" y="1104.8145">JsonDeserializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="1485.625" y="1104.8145">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="370" x="1184.375" y="1142.5488">BodyErrorJsonDeserializer</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="925" x2="1705" y1="1161.6406" y2="1161.6406"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="925" x2="1705" y1="1181.6406" y2="1181.6406"/><ellipse cx="950" cy="1209.1406" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="350" x="972.5" y="1220.188">BodyErrorJsonDeserializer ()</text><ellipse cx="950" cy="1288.3203" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="170" x="972.5" y="1299.3677">T deserialize (</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="1142.5" y="1299.3677">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="1300" y="1299.3677">jsonElement,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="1457.5" y="1299.3677">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="1525" y="1299.3677">type,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="325" x="1032.5" y="1333.9575">JsonDeserializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="327.5" x="1365" y="1333.9575">jsonDeserializationContext)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="925" x2="1198.75" y1="1253.5254" y2="1253.5254"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="232.5" x="1198.75" y="1263.5278">JsonDeserializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1431.25" x2="1705" y1="1253.5254" y2="1253.5254"/><!--MD5=[fc62ed06551ba356a446c123e88cc84c]
+class ThrowableJsonSerializer--><rect codeLine="139" fill="#FEFECE" height="288.8281" id="ThrowableJsonSerializer" style="stroke:#D4AC0D;stroke-width:3.75;" width="630" x="1795" y="1061.1719"/><ellipse cx="1914.375" cy="1111.4063" fill="#ADD1B2" rx="27.5" ry="27.5" style="stroke:#ADD1B2;stroke-width:2.5;"/><path d="M1919.375,1102.6563 Q1919.8828,1101.4063 1920.4688,1100.7813 Q1921.0547,1100.1563 1921.7188,1100.1563 Q1922.8906,1100.1563 1923.6328,1100.8594 Q1924.375,1101.5625 1924.375,1103.2031 L1924.375,1107.1094 Q1924.375,1108.75 1923.6719,1109.4531 Q1922.9688,1110.1563 1921.875,1110.1563 Q1920.8984,1110.1563 1920.2734,1109.7266 Q1919.6484,1109.2969 1919.375,1108.1641 Q1919.2578,1107.3828 1918.8281,1106.9531 Q1918.0469,1106.1328 1916.6406,1105.6641 Q1915.2344,1105.1563 1913.8281,1105.1563 Q1912.0703,1105.1563 1910.5859,1105.8594 Q1909.1406,1106.5625 1908.0078,1108.125 Q1906.875,1109.6875 1906.875,1111.8359 L1906.875,1114.1406 Q1906.875,1116.7188 1908.9844,1118.4375 Q1911.0938,1120.1563 1914.8438,1120.1563 Q1917.0703,1120.1563 1918.6328,1119.6484 Q1919.5313,1119.375 1920.5469,1118.4766 Q1921.2109,1117.9688 1921.5625,1117.8125 Q1921.9141,1117.6563 1922.3438,1117.6563 Q1923.1641,1117.6563 1923.75,1118.3203 Q1924.375,1118.9453 1924.375,1119.8438 Q1924.375,1120.7031 1923.5156,1121.7188 Q1922.2656,1123.2031 1920.2734,1124.0234 Q1917.6563,1125.1563 1914.4531,1125.1563 Q1910.7031,1125.1563 1907.6953,1123.6719 Q1905.2734,1122.5 1903.5547,1119.9609 Q1901.875,1117.4219 1901.875,1114.4141 L1901.875,1111.6797 Q1901.875,1108.5547 1903.3594,1105.8203 Q1904.8828,1103.0859 1907.5,1101.6406 Q1910.1563,1100.1563 1913.125,1100.1563 Q1914.9219,1100.1563 1916.4844,1100.7813 Q1918.0469,1101.4063 1919.375,1102.6563 Z " fill="#000000"/><ellipse cx="1978.125" cy="1110.1563" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2030.625" y="1104.8145">&lt;&lt;</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="197.5" x="2065.625" y="1104.8145">JsonSerializer</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="35" x="2263.125" y="1104.8145">&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="342.5" x="1993.125" y="1142.5488">ThrowableJsonSerializer</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1797.5" x2="2422.5" y1="1161.6406" y2="1161.6406"/><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1797.5" x2="2422.5" y1="1181.6406" y2="1181.6406"/><ellipse cx="1822.5" cy="1209.1406" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="327.5" x="1845" y="1220.188">ThrowableJsonSerializer ()</text><ellipse cx="1822.5" cy="1288.3203" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="150" x="1845" y="1299.3677">JsonElement</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="200" x="2002.5" y="1299.3677">serialize (T data,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="60" x="2210" y="1299.3677">Type</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="132.5" x="2277.5" y="1299.3677">typeOfSrc,</text><text fill="#000000" filter="url(#bkyhdeydhpax80)" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="295" x="1905" y="1333.9575">JsonSerializationContext</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="100" x="2207.5" y="1333.9575">context)</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="1797.5" x2="2011.25" y1="1253.5254" y2="1253.5254"/><text fill="#000000" font-family="sans-serif" font-size="27.5" font-weight="bold" lengthAdjust="spacing" textLength="197.5" x="2011.25" y="1263.5278">JsonSerializer</text><line style="stroke:#D4AC0D;stroke-width:2.5;" x1="2208.75" x2="2422.5" y1="1253.5254" y2="1253.5254"/><!--MD5=[c34d1faeeea216c406a2d0eb3a604534]
+class ContactCardCommonProtocol--><rect codeLine="148" fill="#FEFECE" height="258.3594" id="ContactCardCommonProtocol" style="stroke:#D4AC0D;stroke-width:3.75;" width="597.5" x="1911.25" y="1616.1719"/><ellipse cx="1982.5" cy="1656.1719" fill="#EB937F" rx="27.5" ry="27.5" style="stroke:#EB93DF;stroke-width:2.5;"/><path d="M1978.75,1658.6719 L1978.75,1663.6719 L1988.75,1663.6719 L1988.75,1661.1719 L1988.75,1659.9609 L1990.3125,1658.6719 L1991.25,1658.6719 L1992.1875,1658.6719 L1993.75,1659.9609 L1993.75,1661.1719 L1993.75,1668.6719 L1973.75,1668.6719 L1972.5391,1668.6719 L1971.25,1667.1094 L1971.25,1666.1719 L1971.25,1665.2344 L1972.5391,1663.6719 L1973.75,1663.6719 L1973.75,1663.6719 L1973.75,1648.6719 L1973.75,1648.6719 L1972.5391,1648.6719 L1971.25,1647.1094 L1971.25,1646.1719 L1971.25,1645.2344 L1972.5391,1643.6719 L1973.75,1643.6719 L1993.75,1643.6719 L1993.75,1651.1719 L1993.75,1652.3828 L1992.1875,1653.6719 L1991.25,1653.6719 L1990.3125,1653.6719 L1988.75,1652.3828 L1988.75,1651.1719 L1988.75,1648.6719 L1978.75,1648.6719 L1978.75,1653.6719 L1981.25,1653.6719 L1981.25,1652.4609 L1981.25,1652.4609 L1982.8125,1651.1719 L1983.75,1651.1719 L1984.6875,1651.1719 L1986.25,1652.4609 L1986.25,1653.6719 L1986.25,1658.6719 L1986.25,1659.8828 L1984.6875,1661.1719 L1984.6875,1661.1719 L1983.75,1661.1719 L1982.8125,1661.1719 L1981.25,1659.8828 L1981.25,1659.8828 L1981.25,1658.6719 L1978.75,1658.6719 Z " fill="#000000"/><ellipse cx="2037.5" cy="1654.9219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="415" x="2052.5" y="1668.4473">ContactCardCommonProtocol</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1913.75" x2="2506.25" y1="1696.1719" y2="1696.1719"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="147.5" x="1926.25" y="1734.7192">ISO_7816_3</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="197.5" x="1926.25" y="1769.3091">ISO_7816_3_TO</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="192.5" x="1926.25" y="1803.8989">ISO_7816_3_T1</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="567.5" x="1926.25" y="1838.4888">INNOVATRON_HIGH_SPEED_PROTOCOL_SAM</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1913.75" x2="2506.25" y1="1854.5313" y2="1854.5313"/><!--MD5=[25bf49c9220c51f3412e028606b93688]
+class ContactlessCardCommonProtocol--><rect codeLine="154" fill="#FEFECE" height="327.5391" id="ContactlessCardCommonProtocol" style="stroke:#D4AC0D;stroke-width:3.75;" width="577.5" x="1246.25" y="1581.1719"/><ellipse cx="1283.75" cy="1621.1719" fill="#EB937F" rx="27.5" ry="27.5" style="stroke:#EB93DF;stroke-width:2.5;"/><path d="M1280,1623.6719 L1280,1628.6719 L1290,1628.6719 L1290,1626.1719 L1290,1624.9609 L1291.5625,1623.6719 L1292.5,1623.6719 L1293.4375,1623.6719 L1295,1624.9609 L1295,1626.1719 L1295,1633.6719 L1275,1633.6719 L1273.7891,1633.6719 L1272.5,1632.1094 L1272.5,1631.1719 L1272.5,1630.2344 L1273.7891,1628.6719 L1275,1628.6719 L1275,1628.6719 L1275,1613.6719 L1275,1613.6719 L1273.7891,1613.6719 L1272.5,1612.1094 L1272.5,1611.1719 L1272.5,1610.2344 L1273.7891,1608.6719 L1275,1608.6719 L1295,1608.6719 L1295,1616.1719 L1295,1617.3828 L1293.4375,1618.6719 L1292.5,1618.6719 L1291.5625,1618.6719 L1290,1617.3828 L1290,1616.1719 L1290,1613.6719 L1280,1613.6719 L1280,1618.6719 L1282.5,1618.6719 L1282.5,1617.4609 L1282.5,1617.4609 L1284.0625,1616.1719 L1285,1616.1719 L1285.9375,1616.1719 L1287.5,1617.4609 L1287.5,1618.6719 L1287.5,1623.6719 L1287.5,1624.8828 L1285.9375,1626.1719 L1285.9375,1626.1719 L1285,1626.1719 L1284.0625,1626.1719 L1282.5,1624.8828 L1282.5,1624.8828 L1282.5,1623.6719 L1280,1623.6719 Z " fill="#000000"/><ellipse cx="1331.25" cy="1619.9219" fill="#84BE84" rx="7.5" ry="7.5" style="stroke:#038048;stroke-width:2.5;"/><text fill="#000000" font-family="sans-serif" font-size="30" font-style="italic" lengthAdjust="spacing" textLength="470" x="1346.25" y="1633.4473">ContactlessCardCommonProtocol</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1248.75" x2="1821.25" y1="1661.1719" y2="1661.1719"/><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="162.5" x="1261.25" y="1699.7192">ISO_14443_4</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="282.5" x="1261.25" y="1734.3091">NFC_A_ISO_14443_3A</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="277.5" x="1261.25" y="1768.8989">NFC_B_ISO_14443_3B</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="235" x="1261.25" y="1803.4888">NFC_F_JIS_6319_4</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="232.5" x="1261.25" y="1838.0786">NFC_V_ISO_15693</text><text fill="#000000" font-family="sans-serif" font-size="27.5" lengthAdjust="spacing" textLength="377.5" x="1261.25" y="1872.6685">INNOVATRON_B_PRIME_CARD</text><line style="stroke:#D4AC0D;stroke-width:3.75;" x1="1248.75" x2="1821.25" y1="1888.7109" y2="1888.7109"/><!--MD5=[8131b4a44a46583043de07eab64a92b3]
+link JsonUtil to BodyError--><!--MD5=[d2ff078f209ffd91996285657b7790b6]
+link BodyError to protocol--><!--MD5=[d4f773b4dc2ac718f7fdcc66720bfc3b]
+link BodyError to Assert--><!--MD5=[6757456dba33f4ac62c37eb7e7994c1a]
+link Assert to ByteArrayUtil--><!--MD5=[6bb83c1742bc0e576ff68716e4c88e08]
+link Assert to ApduUtil--><!--MD5=[51c341f8810c88afd783f70947e1e58c]
+link Assert to BerTlvUtil--><!--MD5=[e6487e908cce997891efbdea5900fa7e]
+link IntegerJsonAdapter to ByteJsonAdapter--><!--MD5=[963bb4cd25e0d3ba00f5dae21e13619a]
+link ByteJsonAdapter to ByteArrayJsonAdapter--><!--MD5=[4b79b04879894f31d1cee3ccb88bd6dd]
+link IntegerJsonAdapter to BodyErrorJsonDeserializer--><!--MD5=[eeae8c364f66fa374381339649087f65]
+link BodyErrorJsonDeserializer to ThrowableJsonSerializer--><!--MD5=[fc33e9fc00cf05fdcf9a0b92dba51297]
+@startuml
+title
+    Keyple - keyple-util-java-lib - 2.0.+ (15/09/2021)
+end title
+
+' == THEME ==
+
+'Couleurs issues de : https://htmlcolorcodes.com/fr/tableau-de-couleur/tableau-de-couleur-design-plat/
+!define C_GREY1 F8F9F9
+!define C_GREY2 F2F3F4
+!define C_GREY3 E5E7E9
+!define C_GREY4 D7DBDD
+!define C_GREY5 CACFD2
+!define C_GREY6 BDC3C7
+!define C_LINK 3498DB
+!define C_USE 27AE60
+
+skinparam Shadowing false
+skinparam ClassFontStyle italic
+skinparam ClassBorderColor #D4AC0D
+skinparam stereotypeABorderColor #A9DCDF
+skinparam stereotypeIBorderColor #B4A7E5
+skinparam stereotypeCBorderColor #ADD1B2
+skinparam stereotypeEBorderColor #EB93DF
+' Red
+skinparam ClassBackgroundColor<<red>> #FDEDEC
+skinparam ClassBorderColor<<red>> #E74C3C
+hide <<red>> stereotype
+' Purple
+skinparam ClassBackgroundColor<<purple>> #F4ECF7
+skinparam ClassBorderColor<<purple>> #8E44AD
+hide <<purple>> stereotype
+' blue
+skinparam ClassBackgroundColor<<blue>> #EBF5FB
+skinparam ClassBorderColor<<blue>> #3498DB
+hide <<blue>> stereotype
+' Green
+skinparam ClassBackgroundColor<<green>> #E9F7EF
+skinparam ClassBorderColor<<green>> #27AE60
+hide <<green>> stereotype
+' Grey
+skinparam ClassBackgroundColor<<grey>> #EAECEE
+skinparam ClassBorderColor<<grey>> #2C3E50
+hide <<grey>> stereotype
+
+' == CONTENT ==
+
+legend top
+    __Colors legend__ :
+    * __External API references__ :
+    ** <back:yellow>**com.google.code.gson**</back>
+end legend
+
+package "org.eclipse.keyple.core.util" as util {
+    +class "**final** Assert" as Assert {
+        - -
+        +{static} Assert getInstance ()
+        ..
+        +Assert notNull (Object obj, String name)
+        +Assert notEmpty (String obj, String name)
+        +Assert notEmpty (Collection<? extends Object> obj, String name)
+        +Assert notEmpty (byte[] obj, String name)
+        +Assert isTrue (Boolean condition, String name)
+        +Assert greaterOrEqual (Integer number, int minValue, String name)
+        +Assert isEqual (Integer number, int value, String name)
+        +Assert isInRange (Integer number, int minValue, int maxValue, String name)
+    }
+    +class "**final** ByteArrayUtil" as ByteArrayUtil {
+        +{static} boolean isValidHexString (String hexString)
+        +{static} String normalizeHexString (String hexString)
+        +{static} byte[] fromHex (String hex)
+        +{static} String toHex (byte[] byteArray)
+        +{static} int twoBytesToInt (byte[] bytes, int offset)
+        +{static} int twoBytesSignedToInt (byte[] bytes, int offset)
+        +{static} int threeBytesToInt (byte[] bytes, int offset)
+        +{static} int threeBytesSignedToInt (byte[] bytes, int offset)
+        +{static} int fourBytesToInt (byte[] bytes, int offset)
+    }
+    +class "**final** ApduUtil" as ApduUtil {
+        +{static} byte[] build (byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le)
+        +{static} boolean isCase4 (byte[] apduCommand)
+    }
+    +class BerTlvUtil {
+        +{static} Map<Integer, byte[]> parseSimple (byte[] tlvStructure, boolean primitiveOnly)
+        +{static} boolean isConstructed (int tagId)
+    }
+    package json {
+        +class "**final** JsonUtil" as JsonUtil {
+            - -
+            +{static} <back:yellow>Gson</back> getParser ()
+            +{static} void registerTypeAdapter (Class<?> matchingClass,
+                \tObject adapter, boolean withSubclasses)
+            ..
+            +{static} String toJson (Object obj)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nIntegerJsonAdapter" as IntegerJsonAdapter {
+            - -
+            +IntegerJsonAdapter ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (Integer data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteJsonAdapter" as ByteJsonAdapter {
+            - -
+            +ByteJsonAdapter ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteArrayJsonAdapter" as ByteArrayJsonAdapter {
+            - -
+            +ByteArrayJsonAdapter ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class BodyError {
+            - -
+            +BodyError (Exception exception)
+            ..
+            +String getCode ()
+            +Exception getException ()
+        }
+        +class "<<<back:yellow>JsonDeserializer</back>>>\nBodyErrorJsonDeserializer" as BodyErrorJsonDeserializer {
+            - -
+            +BodyErrorJsonDeserializer ()
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
+            - -
+            +ThrowableJsonSerializer ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+        }
+    }
+    package protocol {
+        +enum ContactCardCommonProtocol {
+            ISO_7816_3
+            ISO_7816_3_TO
+            ISO_7816_3_T1
+            INNOVATRON_HIGH_SPEED_PROTOCOL_SAM
+        }
+        +enum ContactlessCardCommonProtocol {
+            ISO_14443_4
+            NFC_A_ISO_14443_3A
+            NFC_B_ISO_14443_3B
+            NFC_F_JIS_6319_4
+            NFC_V_ISO_15693
+            INNOVATRON_B_PRIME_CARD
+        }
+    }
+}
+
+' Associations
+
+' == LAYOUT ==
+
+JsonUtil -[hidden]- BodyError
+
+BodyError -[hidden]- protocol
+BodyError -[hidden]- Assert
+
+Assert -[hidden]- ByteArrayUtil
+Assert -[hidden]- ApduUtil
+Assert -[hidden]- BerTlvUtil
+
+' == STYLE ==
+
+package util #C_GREY1 {}
+package json #C_GREY2 {}
+package protocol #C_GREY2 {}
+
+@enduml
+
+@startuml
+title
+    Keyple - keyple-util-java-lib - 2.0.+ (15/09/2021)
+end title
+
+
+
+skinparam Shadowing false
+skinparam ClassFontStyle italic
+skinparam ClassBorderColor #D4AC0D
+skinparam stereotypeABorderColor #A9DCDF
+skinparam stereotypeIBorderColor #B4A7E5
+skinparam stereotypeCBorderColor #ADD1B2
+skinparam stereotypeEBorderColor #EB93DF
+skinparam ClassBackgroundColor<<red>> #FDEDEC
+skinparam ClassBorderColor<<red>> #E74C3C
+hide <<red>> stereotype
+skinparam ClassBackgroundColor<<purple>> #F4ECF7
+skinparam ClassBorderColor<<purple>> #8E44AD
+hide <<purple>> stereotype
+skinparam ClassBackgroundColor<<blue>> #EBF5FB
+skinparam ClassBorderColor<<blue>> #3498DB
+hide <<blue>> stereotype
+skinparam ClassBackgroundColor<<green>> #E9F7EF
+skinparam ClassBorderColor<<green>> #27AE60
+hide <<green>> stereotype
+skinparam ClassBackgroundColor<<grey>> #EAECEE
+skinparam ClassBorderColor<<grey>> #2C3E50
+hide <<grey>> stereotype
+
+
+legend top
+    __Colors legend__ :
+    * __External API references__ :
+    ** <back:yellow>**com.google.code.gson**</back>
+end legend
+
+package "org.eclipse.keyple.core.util" as util {
+    +class "**final** Assert" as Assert {
+        - -
+        +{static} Assert getInstance ()
+        ..
+        +Assert notNull (Object obj, String name)
+        +Assert notEmpty (String obj, String name)
+        +Assert notEmpty (Collection<? extends Object> obj, String name)
+        +Assert notEmpty (byte[] obj, String name)
+        +Assert isTrue (Boolean condition, String name)
+        +Assert greaterOrEqual (Integer number, int minValue, String name)
+        +Assert isEqual (Integer number, int value, String name)
+        +Assert isInRange (Integer number, int minValue, int maxValue, String name)
+    }
+    +class "**final** ByteArrayUtil" as ByteArrayUtil {
+        +{static} boolean isValidHexString (String hexString)
+        +{static} String normalizeHexString (String hexString)
+        +{static} byte[] fromHex (String hex)
+        +{static} String toHex (byte[] byteArray)
+        +{static} int twoBytesToInt (byte[] bytes, int offset)
+        +{static} int twoBytesSignedToInt (byte[] bytes, int offset)
+        +{static} int threeBytesToInt (byte[] bytes, int offset)
+        +{static} int threeBytesSignedToInt (byte[] bytes, int offset)
+        +{static} int fourBytesToInt (byte[] bytes, int offset)
+    }
+    +class "**final** ApduUtil" as ApduUtil {
+        +{static} byte[] build (byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le)
+        +{static} boolean isCase4 (byte[] apduCommand)
+    }
+    +class BerTlvUtil {
+        +{static} Map<Integer, byte[]> parseSimple (byte[] tlvStructure, boolean primitiveOnly)
+        +{static} boolean isConstructed (int tagId)
+    }
+    package json {
+        +class "**final** JsonUtil" as JsonUtil {
+            - -
+            +{static} <back:yellow>Gson</back> getParser ()
+            +{static} void registerTypeAdapter (Class<?> matchingClass,
+                \tObject adapter, boolean withSubclasses)
+            ..
+            +{static} String toJson (Object obj)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nIntegerJsonAdapter" as IntegerJsonAdapter {
+            - -
+            +IntegerJsonAdapter ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (Integer data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteJsonAdapter" as ByteJsonAdapter {
+            - -
+            +ByteJsonAdapter ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteArrayJsonAdapter" as ByteArrayJsonAdapter {
+            - -
+            +ByteArrayJsonAdapter ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class BodyError {
+            - -
+            +BodyError (Exception exception)
+            ..
+            +String getCode ()
+            +Exception getException ()
+        }
+        +class "<<<back:yellow>JsonDeserializer</back>>>\nBodyErrorJsonDeserializer" as BodyErrorJsonDeserializer {
+            - -
+            +BodyErrorJsonDeserializer ()
+            - - **JsonDeserializer** - -
+            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
+                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+        }
+        +class "<<<back:yellow>JsonSerializer</back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
+            - -
+            +ThrowableJsonSerializer ()
+            - - **JsonSerializer** - -
+            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+        }
+    }
+    package protocol {
+        +enum ContactCardCommonProtocol {
+            ISO_7816_3
+            ISO_7816_3_TO
+            ISO_7816_3_T1
+            INNOVATRON_HIGH_SPEED_PROTOCOL_SAM
+        }
+        +enum ContactlessCardCommonProtocol {
+            ISO_14443_4
+            NFC_A_ISO_14443_3A
+            NFC_B_ISO_14443_3B
+            NFC_F_JIS_6319_4
+            NFC_V_ISO_15693
+            INNOVATRON_B_PRIME_CARD
+        }
+    }
+}
+
+
+
+JsonUtil -[hidden]- BodyError
+
+BodyError -[hidden]- protocol
+BodyError -[hidden]- Assert
+
+Assert -[hidden]- ByteArrayUtil
+Assert -[hidden]- ApduUtil
+Assert -[hidden]- BerTlvUtil
+
+
+package util #F8F9F9 {}
+package json #F2F3F4 {}
+package protocol #F2F3F4 {}
+
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 14:40:07 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: fr
+Country: FR
+--></g></svg>
