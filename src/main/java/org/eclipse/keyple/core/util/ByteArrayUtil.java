@@ -11,13 +11,16 @@
  ************************************************************************************** */
 package org.eclipse.keyple.core.util;
 
+import java.util.Arrays;
+
 /**
- * Utils around byte arrays
+ * Utility class around byte arrays
  *
  * @since 2.0.0
  */
 public final class ByteArrayUtil {
-  /* byte to hex string conversion table */
+
+  /** byte to hex string conversion table */
   private static final String[] byteToHex =
       new String[] {
         "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0A", "0B", "0C", "0D", "0E",
@@ -40,7 +43,34 @@ public final class ByteArrayUtil {
         "FF"
       };
 
-  private static final String HEXA_REGEX = "^([0-9a-fA-F][0-9a-fA-F])+$";
+  /** hex digit to nibble conversion */
+  private static final byte[] hexToNibble = new byte[256];
+
+  static {
+    Arrays.fill(hexToNibble, (byte) -1);
+    hexToNibble['0'] = 0x0;
+    hexToNibble['1'] = 0x1;
+    hexToNibble['2'] = 0x2;
+    hexToNibble['3'] = 0x3;
+    hexToNibble['4'] = 0x4;
+    hexToNibble['5'] = 0x5;
+    hexToNibble['6'] = 0x6;
+    hexToNibble['7'] = 0x7;
+    hexToNibble['8'] = 0x8;
+    hexToNibble['9'] = 0x9;
+    hexToNibble['A'] = 0xA;
+    hexToNibble['a'] = 0xA;
+    hexToNibble['B'] = 0xB;
+    hexToNibble['b'] = 0xB;
+    hexToNibble['C'] = 0xC;
+    hexToNibble['c'] = 0xC;
+    hexToNibble['D'] = 0xD;
+    hexToNibble['d'] = 0xD;
+    hexToNibble['E'] = 0xE;
+    hexToNibble['e'] = 0xE;
+    hexToNibble['F'] = 0xF;
+    hexToNibble['f'] = 0xF;
+  }
 
   private ByteArrayUtil() {}
 
@@ -52,76 +82,270 @@ public final class ByteArrayUtil {
    *   <li>{@code "1234AB2"}, {@code "12 34AB"} or {@code "x1234AB"} won't match.
    * </ul>
    *
-   * @param hexString A string.
+   * @param hex A string.
    * @return true if the string matches the expected hexadecimal representation, false otherwise.
    */
-  public static boolean isValidHexString(String hexString) {
-    if (hexString != null) {
-      return hexString.matches(HEXA_REGEX);
-    } else {
+  public static boolean isValidHexString(String hex) {
+    if (hex == null || hex.length() == 0 || hex.length() % 2 != 0) {
       return false;
     }
+    for (int i = 0; i < hex.length(); i++) {
+      if (hexToNibble[hex.charAt(i)] < 0) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
    * Normalizes the input hex string by padding on the left by a zero if necessary.
    *
-   * @param hexString The hex string to normalize.
+   * @param hex The hex string to normalize.
    * @return A not null string.
    * @throws NullPointerException If the input string is null.
    * @since 2.0.0
    */
-  public static String normalizeHexString(String hexString) {
-    if (hexString.length() % 2 != 0) {
-      return "0" + hexString;
+  public static String normalizeHexString(String hex) {
+    if (hex.length() % 2 != 0) {
+      return "0" + hex;
     }
-    return hexString;
+    return hex;
   }
 
   /**
-   * Create a byte array from an hexadecimal string made of consecutive even number of digits in the
-   * range {0..9,a..f,A..F}.
+   * Converts the provided hexadecimal string into a byte array.
    *
    * <p>No checks are performed on the input string, except for nullity, zero length and length
    * parity.
    *
-   * @param hex An hexadecimal string.
-   * @return A reference of not empty of byte array.
+   * @param hex The hexadecimal string to convert.
+   * @return A not empty byte array.
    * @throws IllegalArgumentException If the provided string is null, empty or made of an odd number
    *     of characters.
    * @see #isValidHexString(String)
    * @since 2.0.0
    */
   public static byte[] fromHex(String hex) {
-    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length() % 2, 0, "parity");
-
-    byte[] byteArray = new byte[hex.length() / 2];
+    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length() % 2, 0, "hex");
+    byte[] tab = new byte[hex.length() / 2];
     for (int i = 0; i < hex.length(); i += 2) {
-      byteArray[i / 2] =
-          (byte)
-              ((Character.digit(hex.charAt(i), 16) << 4) + Character.digit(hex.charAt(i + 1), 16));
+      tab[i / 2] =
+          (byte) ((hexToNibble[hex.charAt(i)] << 4) + (hexToNibble[hex.charAt(i + 1)] & 0xFF));
     }
-
-    return byteArray;
+    return tab;
   }
 
   /**
-   * Represents the byte array in a hexadecimal string.
+   * Converts the provided hexadecimal string into a byte.
    *
-   * @param byteArray The byte array to represent in hexadecimal.
-   * @return An hexadecimal string representation of byteArray, an empty string of if the byte array
-   *     is null.
+   * <p>No checks are performed on the input string, except for nullity, zero length and length
+   * parity.
+   *
+   * @param hex The hexadecimal string to convert.
+   * @return The value.
+   * @throws IllegalArgumentException If the provided string is null, empty or made of an odd number
+   *     of characters.
+   * @see #isValidHexString(String)
+   * @since 2.1.0
+   */
+  public static byte hexToByte(String hex) {
+    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length(), 2, "hex");
+    return (byte) ((hexToNibble[hex.charAt(0)] << 4) + (hexToNibble[hex.charAt(1)] & 0xFF));
+  }
+
+  /**
+   * Converts the provided hexadecimal string into a short.
+   *
+   * <p>No checks are performed on the input string, except for nullity, zero length and length
+   * parity.
+   *
+   * @param hex The hexadecimal string to convert.
+   * @return The value.
+   * @throws IllegalArgumentException If the provided string is null, empty or made of an odd number
+   *     of characters.
+   * @see #isValidHexString(String)
+   * @since 2.1.0
+   */
+  public static short hexToShort(String hex) {
+    Assert.getInstance()
+        .notEmpty(hex, "hex")
+        .isEqual(hex.length() % 2, 0, "hex")
+        .isTrue(hex.length() <= 4, "hex");
+    short val = 0;
+    for (int i = 0; i < hex.length(); i++) {
+      val <<= 4;
+      val |= (hexToNibble[hex.charAt(i)] & 0xFF);
+    }
+    return val;
+  }
+
+  /**
+   * Converts the provided hexadecimal string into an integer.
+   *
+   * <p>No checks are performed on the input string, except for nullity, zero length and length
+   * parity.
+   *
+   * @param hex The hexadecimal string to convert.
+   * @return The value.
+   * @throws IllegalArgumentException If the provided string is null, empty or made of an odd number
+   *     of characters.
+   * @see #isValidHexString(String)
+   * @since 2.1.0
+   */
+  public static int hexToInt(String hex) {
+    Assert.getInstance()
+        .notEmpty(hex, "hex")
+        .isEqual(hex.length() % 2, 0, "hex")
+        .isTrue(hex.length() <= 8, "hex");
+    int val = 0;
+    for (int i = 0; i < hex.length(); i++) {
+      val <<= 4;
+      val |= (hexToNibble[hex.charAt(i)] & 0xFF);
+    }
+    return val;
+  }
+
+  /**
+   * Converts the provided hexadecimal string into a long.
+   *
+   * <p>No checks are performed on the input string, except for nullity, zero length and length
+   * parity.
+   *
+   * @param hex The hexadecimal string to convert.
+   * @return The value.
+   * @throws IllegalArgumentException If the provided string is null, empty or made of an odd number
+   *     of characters.
+   * @see #isValidHexString(String)
+   * @since 2.1.0
+   */
+  public static long hexToLong(String hex) {
+    Assert.getInstance()
+        .notEmpty(hex, "hex")
+        .isEqual(hex.length() % 2, 0, "hex")
+        .isTrue(hex.length() <= 16, "hex");
+    long val = 0;
+    for (int i = 0; i < hex.length(); i++) {
+      val <<= 4;
+      val |= (hexToNibble[hex.charAt(i)] & 0xFF);
+    }
+    return val;
+  }
+
+  /**
+   * Converts the provided byte array into a hexadecimal string.
+   *
+   * @param tab The byte array to convert.
+   * @return An empty string if the byte array is null or empty.
    * @since 2.0.0
    */
-  public static String toHex(byte[] byteArray) {
-    if (byteArray == null) {
+  public static String toHex(byte[] tab) {
+    if (tab == null) {
       return "";
     }
-    StringBuilder hexStringBuilder = new StringBuilder();
-    for (byte b : byteArray) {
-      hexStringBuilder.append(byteToHex[b & 0xFF]);
+    StringBuilder sb = new StringBuilder();
+    for (byte b : tab) {
+      sb.append(byteToHex[b & 0xFF]);
     }
-    return hexStringBuilder.toString();
+    return sb.toString();
+  }
+
+  /**
+   * Converts the provided byte into a hexadecimal string.
+   *
+   * @param val The value to convert.
+   * @return A not empty string.
+   * @since 2.1.0
+   */
+  public static String toHex(byte val) {
+    return byteToHex[val & 0xFF];
+  }
+
+  /**
+   * Converts the provided short into a hexadecimal string.
+   *
+   * @param val The value to convert.
+   * @return A not empty string.
+   * @since 2.1.0
+   */
+  public static String toHex(short val) {
+    if ((val & 0xFF00) == 0) {
+      return byteToHex[val & 0xFF];
+    }
+    return byteToHex[val >> 8 & 0xFF] + byteToHex[val & 0xFF];
+  }
+
+  /**
+   * Converts the provided integer into a hexadecimal string.
+   *
+   * @param val The value to convert.
+   * @return A not empty string.
+   * @since 2.1.0
+   */
+  public static String toHex(int val) {
+    if ((val & 0xFFFFFF00) == 0) {
+      return byteToHex[val & 0xFF];
+    } else if ((val & 0xFFFF0000) == 0) {
+      return byteToHex[val >> 8 & 0xFF] + byteToHex[val & 0xFF];
+    } else if ((val & 0xFF000000) == 0) {
+      return byteToHex[val >> 16 & 0xFF] + byteToHex[val >> 8 & 0xFF] + byteToHex[val & 0xFF];
+    }
+    return byteToHex[val >> 24 & 0xFF]
+        + byteToHex[val >> 16 & 0xFF]
+        + byteToHex[val >> 8 & 0xFF]
+        + byteToHex[val & 0xFF];
+  }
+
+  /**
+   * Converts the provided long into a hexadecimal string.
+   *
+   * @param val The value to convert.
+   * @return A not empty string.
+   * @since 2.1.0
+   */
+  public static String toHex(long val) {
+    if ((val & 0xFFFFFFFFFFFFFF00L) == 0) {
+      return byteToHex[(int) (val & 0xFF)];
+    } else if ((val & 0xFFFFFFFFFFFF0000L) == 0) {
+      return byteToHex[(int) (val >> 8 & 0xFF)] + byteToHex[(int) (val & 0xFF)];
+    } else if ((val & 0xFFFFFFFFFF000000L) == 0) {
+      return byteToHex[(int) (val >> 16 & 0xFF)]
+          + byteToHex[(int) (val >> 8 & 0xFF)]
+          + byteToHex[(int) (val & 0xFF)];
+    } else if ((val & 0xFFFFFFFF00000000L) == 0) {
+      return byteToHex[(int) (val >> 24 & 0xFF)]
+          + byteToHex[(int) (val >> 16 & 0xFF)]
+          + byteToHex[(int) (val >> 8 & 0xFF)]
+          + byteToHex[(int) (val & 0xFF)];
+    } else if ((val & 0xFFFFFF0000000000L) == 0) {
+      return byteToHex[(int) (val >> 32 & 0xFF)]
+          + byteToHex[(int) (val >> 24 & 0xFF)]
+          + byteToHex[(int) (val >> 16 & 0xFF)]
+          + byteToHex[(int) (val >> 8 & 0xFF)]
+          + byteToHex[(int) (val & 0xFF)];
+    } else if ((val & 0xFFFF000000000000L) == 0) {
+      return byteToHex[(int) (val >> 40 & 0xFF)]
+          + byteToHex[(int) (val >> 32 & 0xFF)]
+          + byteToHex[(int) (val >> 24 & 0xFF)]
+          + byteToHex[(int) (val >> 16 & 0xFF)]
+          + byteToHex[(int) (val >> 8 & 0xFF)]
+          + byteToHex[(int) (val & 0xFF)];
+    } else if ((val & 0xFF00000000000000L) == 0) {
+      return byteToHex[(int) (val >> 48 & 0xFF)]
+          + byteToHex[(int) (val >> 40 & 0xFF)]
+          + byteToHex[(int) (val >> 32 & 0xFF)]
+          + byteToHex[(int) (val >> 24 & 0xFF)]
+          + byteToHex[(int) (val >> 16 & 0xFF)]
+          + byteToHex[(int) (val >> 8 & 0xFF)]
+          + byteToHex[(int) (val & 0xFF)];
+    }
+    return byteToHex[(int) (val >> 56 & 0xFF)]
+        + byteToHex[(int) (val >> 48 & 0xFF)]
+        + byteToHex[(int) (val >> 40 & 0xFF)]
+        + byteToHex[(int) (val >> 32 & 0xFF)]
+        + byteToHex[(int) (val >> 24 & 0xFF)]
+        + byteToHex[(int) (val >> 16 & 0xFF)]
+        + byteToHex[(int) (val >> 8 & 0xFF)]
+        + byteToHex[(int) (val & 0xFF)];
   }
 
   /** (private) */

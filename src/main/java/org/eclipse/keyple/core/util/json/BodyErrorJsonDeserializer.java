@@ -15,7 +15,11 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 
 /**
- * Serializer of a {@link BodyError} that contains a {@link RuntimeException}.
+ * JSON deserializer of a {@link BodyError}.
+ *
+ * <p>It is not necessary to define a serializer because the type of the associated object
+ * registered is a class and not an interface, and therefore has fields. Gson will then use its
+ * default reflexivity mechanism to serialize the object.
  *
  * @since 2.0.0
  */

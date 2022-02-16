@@ -11,32 +11,41 @@
  ************************************************************************************** */
 package org.eclipse.keyple.core.util.json;
 
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
+import org.eclipse.keyple.core.util.ByteArrayUtil;
 
 /**
- * JSON serializer of a {@link Throwable}.
+ * JSON serializer/deserializer of a long to a hex string.
  *
- * <p>Only the field "message" is serialized during the process.
- *
- * @since 2.0.0
+ * @since 2.1.0
  */
-public class ThrowableJsonSerializer implements JsonSerializer<Throwable> {
+public class LongJsonAdapter implements JsonSerializer<Long>, JsonDeserializer<Long> {
 
   /**
    * {@inheritDoc}
    *
-   * @since 2.0.0
+   * @since 2.1.0
    */
   @Override
-  public JsonElement serialize(
-      Throwable exception, Type type, JsonSerializationContext jsonSerializationContext) {
+  public JsonElement serialize(Long data, Type typeOfSrc, JsonSerializationContext context) {
+    return new JsonPrimitive(ByteArrayUtil.toHex(data));
+  }
 
-    JsonObject json = new JsonObject();
-    json.addProperty("detailMessage", exception.getMessage());
-    return json;
+  /**
+   * {@inheritDoc}
+   *
+   * @since 2.1.0
+   */
+  @Override
+  public Long deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+      throws JsonParseException {
+    return ByteArrayUtil.hexToLong(json.getAsString());
   }
 }

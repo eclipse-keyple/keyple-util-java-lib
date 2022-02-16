@@ -37,12 +37,12 @@ public class BerTlvUtil {
 
   /**
    * Parse the provided TLV structure and place all or only primitive tags found in a map. The key
-   * is an integer representing the tag Id (e.g. 0x84 for the DF name tag), the value is the tag
+   * is an integer representing the tag ID (e.g. 0x84 for the DF name tag), the value is the tag
    * value as an array of bytes.
    *
    * <p><b>Note:</b>This method of extracting tags is deliberately simplified.<br>
    * If the provided TLV structure contains several identical tags then only one will be reported in
-   * the returned Map.<br>
+   * the returned map.<br>
    * To overcome this limitation it is recommended to re-parse the constructed tags known to contain
    * other tags.
    *

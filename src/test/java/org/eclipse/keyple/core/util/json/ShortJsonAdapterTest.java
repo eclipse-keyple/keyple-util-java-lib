@@ -11,22 +11,20 @@
  ************************************************************************************** */
 package org.eclipse.keyple.core.util.json;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-public class IntegerJsonAdapterTest {
+public class ShortJsonAdapterTest {
 
   public static final String JSON_DATA =
-      "{\"f1\":\"FA\",\"f2\":\"FB11\",\"f3\":\"FC1122\",\"f4\":\"FD112233\",\"objectValue\":\"FE\",\"oddDigitNumberValue\":\"0F\"}";;
+      "{\"f1\":\"FA\",\"f2\":\"FB11\",\"objectValue\":\"FC\",\"oddDigitNumberValue\":\"0F\"}";
 
   static class Data {
-    int f1 = 0xFA;
-    int f2 = 0xFB11;
-    int f3 = 0xFC1122;
-    int f4 = 0xFD112233;
-    Integer objectValue = 0xFE;
-    int oddDigitNumberValue = 0xF;
+    short f1 = 0xFA;
+    short f2 = (short) 0xFB11;
+    Short objectValue = 0xFC;
+    short oddDigitNumberValue = 0xF;
   }
 
   @Test

@@ -29,6 +29,7 @@ public final class Assert {
   private static final String IS_NULL = "] is null.";
   private static final String IS_EMPTY = "] is empty.";
   private static final String IS_FALSE = "] is false.";
+  private static final String IS_NOT_HEX = "] is not a hex string.";
   private static final String NOT_EQUAL_TO = "] not equal to [";
   private static final String CLOSING_BRACKET = "].";
 
@@ -203,6 +204,23 @@ public final class Assert {
     if (number > maxValue) {
       throw new IllegalArgumentException(
           ARGUMENT + name + HAS_A_VALUE + number + GREATER_THAN + maxValue + CLOSING_BRACKET);
+    }
+    return INSTANCE;
+  }
+
+  /**
+   * Assert that a string has a valid hexadecimal format.
+   *
+   * @param hex The string to check.
+   * @param name The object name.
+   * @return The current instance.
+   * @throws IllegalArgumentException If the provided string is null, empty or has not a valid
+   *     hexadecimal format.
+   * @since 2.1.0
+   */
+  public Assert isHexString(String hex, String name) {
+    if (!ByteArrayUtil.isValidHexString(hex)) {
+      throw new IllegalArgumentException(ARGUMENT + name + IS_NOT_HEX);
     }
     return INSTANCE;
   }

@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 import org.eclipse.keyple.core.util.ByteArrayUtil;
 
 /**
- * Serializer/Deserializer of an integer to an hex string.
+ * JSON serializer/deserializer of an integer to a hex string.
  *
  * @since 2.0.0
  */
@@ -29,7 +29,7 @@ public class IntegerJsonAdapter implements JsonSerializer<Integer>, JsonDeserial
    */
   @Override
   public JsonElement serialize(Integer data, Type typeOfSrc, JsonSerializationContext context) {
-    return new JsonPrimitive(ByteArrayUtil.normalizeHexString(Integer.toHexString(data)));
+    return new JsonPrimitive(ByteArrayUtil.toHex(data));
   }
 
   /**
@@ -40,6 +40,6 @@ public class IntegerJsonAdapter implements JsonSerializer<Integer>, JsonDeserial
   @Override
   public Integer deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    return Integer.parseInt(json.getAsString(), 16);
+    return ByteArrayUtil.hexToInt(json.getAsString());
   }
 }
