@@ -12,7 +12,7 @@
 package org.eclipse.keyple.core.util.json;
 
 /**
- * POJO used to transports the content of an {@link Exception} into a string.
+ * POJO used to transport the content of an {@link Exception} into a string.
  *
  * @since 2.0.0
  */

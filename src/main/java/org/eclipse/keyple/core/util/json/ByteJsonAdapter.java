@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 import org.eclipse.keyple.core.util.ByteArrayUtil;
 
 /**
- * Serializer/Deserializer of a byte to an hex string.
+ * JSON serializer/deserializer of a byte to a hex string.
  *
  * @since 2.0.0
  */
@@ -29,7 +29,7 @@ public class ByteJsonAdapter implements JsonSerializer<Byte>, JsonDeserializer<B
    */
   @Override
   public JsonElement serialize(Byte data, Type typeOfSrc, JsonSerializationContext context) {
-    return new JsonPrimitive(ByteArrayUtil.toHex(new byte[] {data}));
+    return new JsonPrimitive(ByteArrayUtil.toHex(data));
   }
 
   /**
@@ -40,6 +40,6 @@ public class ByteJsonAdapter implements JsonSerializer<Byte>, JsonDeserializer<B
   @Override
   public Byte deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    return ByteArrayUtil.fromHex(json.getAsString())[0];
+    return ByteArrayUtil.hexToByte(json.getAsString());
   }
 }

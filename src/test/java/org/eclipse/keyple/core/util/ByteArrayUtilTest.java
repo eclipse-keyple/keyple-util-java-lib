@@ -93,6 +93,128 @@ public class ByteArrayUtilTest {
     assertThat(bytes).isEqualTo(BYTEARRAY_LEN_16);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToByte_whenHexIsNull_shouldThrowIAE() {
+    ByteArrayUtil.hexToByte(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToByte_whenHexIsEmpty_shouldThrowIAE() {
+    ByteArrayUtil.hexToByte("");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToByte_whenHexLengthIsOdd_shouldThrowIAE() {
+    ByteArrayUtil.hexToByte("1");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToByte_whenHexLengthIsGreaterThan2_shouldThrowIAE() {
+    ByteArrayUtil.hexToByte("1234");
+  }
+
+  @Test
+  public void hexToByte_whenHexIsValid_shouldBeSuccessful() {
+    assertThat(ByteArrayUtil.hexToByte("AB")).isEqualTo((byte) 0xAB);
+    assertThat(ByteArrayUtil.hexToByte("CD")).isEqualTo((byte) 0xCD);
+    assertThat(ByteArrayUtil.hexToByte("EF")).isEqualTo((byte) 0xEF);
+    assertThat(ByteArrayUtil.hexToByte("ab")).isEqualTo((byte) 0xAB);
+    assertThat(ByteArrayUtil.hexToByte("cd")).isEqualTo((byte) 0xCD);
+    assertThat(ByteArrayUtil.hexToByte("ef")).isEqualTo((byte) 0xEF);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToShort_whenHexIsNull_shouldThrowIAE() {
+    ByteArrayUtil.hexToShort(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToShort_whenHexIsEmpty_shouldThrowIAE() {
+    ByteArrayUtil.hexToShort("");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToShort_whenHexLengthIsOdd_shouldThrowIAE() {
+    ByteArrayUtil.hexToShort("1");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToShort_whenHexLengthIsGreaterThan4_shouldThrowIAE() {
+    ByteArrayUtil.hexToShort("123456");
+  }
+
+  @Test
+  public void hexToShort_whenHexIsValid_shouldBeSuccessful() {
+    assertThat(ByteArrayUtil.hexToShort("ABCD")).isEqualTo((short) 0xABCD);
+    assertThat(ByteArrayUtil.hexToShort("EF")).isEqualTo((short) 0xEF);
+    assertThat(ByteArrayUtil.hexToShort("abcd")).isEqualTo((short) 0xABCD);
+    assertThat(ByteArrayUtil.hexToShort("ef")).isEqualTo((short) 0xEF);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToInt_whenHexIsNull_shouldThrowIAE() {
+    ByteArrayUtil.hexToInt(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToInt_whenHexIsEmpty_shouldThrowIAE() {
+    ByteArrayUtil.hexToInt("");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToInt_whenHexLengthIsOdd_shouldThrowIAE() {
+    ByteArrayUtil.hexToInt("1");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToInt_whenHexLengthIsGreaterThan8_shouldThrowIAE() {
+    ByteArrayUtil.hexToInt("123456789A");
+  }
+
+  @Test
+  public void hexToInt_whenHexIsValid_shouldBeSuccessful() {
+    assertThat(ByteArrayUtil.hexToInt("FE")).isEqualTo(0xFE);
+    assertThat(ByteArrayUtil.hexToInt("FEF7")).isEqualTo(0xFEF7);
+    assertThat(ByteArrayUtil.hexToInt("FEF712")).isEqualTo(0xFEF712);
+    assertThat(ByteArrayUtil.hexToInt("FEF71234")).isEqualTo(0xFEF71234);
+    assertThat(ByteArrayUtil.hexToInt("ABCDEF")).isEqualTo(0xABCDEF);
+    assertThat(ByteArrayUtil.hexToInt("abcdef")).isEqualTo(0xABCDEF);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToLong_whenHexIsNull_shouldThrowIAE() {
+    ByteArrayUtil.hexToLong(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToLong_whenHexIsEmpty_shouldThrowIAE() {
+    ByteArrayUtil.hexToLong("");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToLong_whenHexLengthIsOdd_shouldThrowIAE() {
+    ByteArrayUtil.hexToLong("1");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void hexToLong_whenHexLengthIsGreaterThan16_shouldThrowIAE() {
+    ByteArrayUtil.hexToLong("123456789ABCDEF012");
+  }
+
+  @Test
+  public void hexToLong_whenHexIsValid_shouldBeSuccessful() {
+    assertThat(ByteArrayUtil.hexToLong("FE")).isEqualTo(0xFEL);
+    assertThat(ByteArrayUtil.hexToLong("FEF7")).isEqualTo(0xFEF7L);
+    assertThat(ByteArrayUtil.hexToLong("FEF712")).isEqualTo(0xFEF712L);
+    assertThat(ByteArrayUtil.hexToLong("FEF71234")).isEqualTo(0xFEF71234L);
+    assertThat(ByteArrayUtil.hexToLong("FEF7123456")).isEqualTo(0xFEF7123456L);
+    assertThat(ByteArrayUtil.hexToLong("FEF712345678")).isEqualTo(0xFEF712345678L);
+    assertThat(ByteArrayUtil.hexToLong("FEF7123456789A")).isEqualTo(0xFEF7123456789AL);
+    assertThat(ByteArrayUtil.hexToLong("FEF7123456789ABC")).isEqualTo(0xFEF7123456789ABCL);
+    assertThat(ByteArrayUtil.hexToLong("ABCDEF")).isEqualTo(0xABCDEFL);
+    assertThat(ByteArrayUtil.hexToLong("abcdef")).isEqualTo(0xABCDEFL);
+  }
+
   @Test
   public void toHex_null() {
     String hex = ByteArrayUtil.toHex(null);
@@ -110,6 +232,37 @@ public class ByteArrayUtilTest {
   public void toHex_bytearray_good() {
     String hex = ByteArrayUtil.toHex(BYTEARRAY_LEN_16);
     assertThat(hex).isEqualTo(HEXSTRING_GOOD);
+  }
+
+  @Test
+  public void toHex_byte() {
+    assertThat(ByteArrayUtil.toHex((byte) 0xFE)).isEqualTo("FE");
+  }
+
+  @Test
+  public void toHex_short() {
+    assertThat(ByteArrayUtil.toHex((short) 0xFE)).isEqualTo("FE");
+    assertThat(ByteArrayUtil.toHex((short) 0xFE34)).isEqualTo("FE34");
+  }
+
+  @Test
+  public void toHex_int() {
+    assertThat(ByteArrayUtil.toHex(0xFE)).isEqualTo("FE");
+    assertThat(ByteArrayUtil.toHex(0xFE34)).isEqualTo("FE34");
+    assertThat(ByteArrayUtil.toHex(0xFE3456)).isEqualTo("FE3456");
+    assertThat(ByteArrayUtil.toHex(0xFE345678)).isEqualTo("FE345678");
+  }
+
+  @Test
+  public void toHex_long() {
+    assertThat(ByteArrayUtil.toHex(0xFEL)).isEqualTo("FE");
+    assertThat(ByteArrayUtil.toHex(0xFE34L)).isEqualTo("FE34");
+    assertThat(ByteArrayUtil.toHex(0xFE3456L)).isEqualTo("FE3456");
+    assertThat(ByteArrayUtil.toHex(0xFE345678L)).isEqualTo("FE345678");
+    assertThat(ByteArrayUtil.toHex(0xFE3456789AL)).isEqualTo("FE3456789A");
+    assertThat(ByteArrayUtil.toHex(0xFE3456789ABCL)).isEqualTo("FE3456789ABC");
+    assertThat(ByteArrayUtil.toHex(0xFE3456789ABCDEL)).isEqualTo("FE3456789ABCDE");
+    assertThat(ByteArrayUtil.toHex(0xFE3456789ABCDEF0L)).isEqualTo("FE3456789ABCDEF0");
   }
 
   @Test(expected = IllegalArgumentException.class)

@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.0.+ (15/09/2021)
+    Keyple - keyple-util-java-lib - 2.1.+ (14/02/2022)
 end title
 
 ' == THEME ==
@@ -53,9 +53,8 @@ end legend
 
 package "org.eclipse.keyple.core.util" as util {
     +class "**final** Assert" as Assert {
-        --
         +{static} Assert getInstance ()
-        ..
+
         +Assert notNull (Object obj, String name)
         +Assert notEmpty (String obj, String name)
         +Assert notEmpty (Collection<? extends Object> obj, String name)
@@ -64,12 +63,24 @@ package "org.eclipse.keyple.core.util" as util {
         +Assert greaterOrEqual (Integer number, int minValue, String name)
         +Assert isEqual (Integer number, int value, String name)
         +Assert isInRange (Integer number, int minValue, int maxValue, String name)
+        +Assert isHexString (String hex, String name)
     }
     +class "**final** ByteArrayUtil" as ByteArrayUtil {
-        +{static} boolean isValidHexString (String hexString)
-        +{static} String normalizeHexString (String hexString)
+        +{static} boolean isValidHexString (String hex)
+        +{static} String normalizeHexString (String hex)
+
         +{static} byte[] fromHex (String hex)
-        +{static} String toHex (byte[] byteArray)
+        +{static} byte hexToByte (String hex)
+        +{static} short hexToShort (String hex)
+        +{static} int hexToInt (String hex)
+        +{static} long hexToLong (String hex)
+
+        +{static} String toHex (byte[] data)
+        +{static} String toHex (byte val)
+        +{static} String toHex (short val)
+        +{static} String toHex (int val)
+        +{static} String toHex (long val)
+
         +{static} int twoBytesToInt (byte[] bytes, int offset)
         +{static} int twoBytesSignedToInt (byte[] bytes, int offset)
         +{static} int threeBytesToInt (byte[] bytes, int offset)
@@ -86,62 +97,68 @@ package "org.eclipse.keyple.core.util" as util {
     }
     package json {
         +class "**final** JsonUtil" as JsonUtil {
-            --
             +{static} <back:yellow>Gson</back> getParser ()
             +{static} void registerTypeAdapter (Class<?> matchingClass,
                 \tObject adapter, boolean withSubclasses)
-            ..
+
             +{static} String toJson (Object obj)
         }
-        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nIntegerJsonAdapter" as IntegerJsonAdapter {
-            --
-            +IntegerJsonAdapter ()
-            -- **JsonSerializer** --
-            +<back:yellow>JsonElement</back> serialize (Integer data, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            -- **JsonDeserializer** --
-            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
-                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
-        }
-        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteJsonAdapter" as ByteJsonAdapter {
-            --
-            +ByteJsonAdapter ()
-            -- **JsonSerializer** --
-            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            -- **JsonDeserializer** --
-            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
-                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
-        }
-        +class "<<<back:yellow>JsonSerializer</back>>>\n<<<back:yellow>JsonDeserializer</back>>>\nByteArrayJsonAdapter" as ByteArrayJsonAdapter {
-            --
-            +ByteArrayJsonAdapter ()
-            -- **JsonSerializer** --
-            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            -- **JsonDeserializer** --
-            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
-                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
-        }
         +class BodyError {
-            --
             +BodyError (Exception exception)
-            ..
+
             +String getCode ()
             +Exception getException ()
         }
-        +class "<<<back:yellow>JsonDeserializer</back>>>\nBodyErrorJsonDeserializer" as BodyErrorJsonDeserializer {
-            --
+        +class "<<<back:yellow>JsonDeserializer<BodyError></back>>>\nBodyErrorJsonDeserializer" as BodyErrorJsonDeserializer {
             +BodyErrorJsonDeserializer ()
-            -- **JsonDeserializer** --
-            +T deserialize (<back:yellow>JsonElement</back> jsonElement, <back:yellow>Type</back> type,
-                \t<back:yellow>JsonDeserializationContext</back> jsonDeserializationContext)
+
+            +BodyError deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
+                \t<back:yellow>JsonDeserializationContext</back> context)
         }
-        +class "<<<back:yellow>JsonSerializer</back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
-            --
+        +class "<<<back:yellow>JsonSerializer<byte[]></back>>>\n<<<back:yellow>JsonDeserializer<byte[]></back>>>\nByteArrayJsonAdapter" as ByteArrayJsonAdapter {
+            +ByteArrayJsonAdapter ()
+
+            +<back:yellow>JsonElement</back> serialize (byte[] src, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            +byte[] deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
+                \t<back:yellow>JsonDeserializationContext</back> context)
+        }
+        +class "<<<back:yellow>JsonSerializer<Byte></back>>>\n<<<back:yellow>JsonDeserializer<Byte></back>>>\nByteJsonAdapter" as ByteJsonAdapter {
+            +ByteJsonAdapter ()
+
+            +<back:yellow>JsonElement</back> serialize (Byte src, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            +Byte deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
+                \t<back:yellow>JsonDeserializationContext</back> context)
+        }
+        +class "<<<back:yellow>JsonSerializer<Short></back>>>\n<<<back:yellow>JsonDeserializer<Short></back>>>\nShortJsonAdapter" as ShortJsonAdapter {
+            +ShortJsonAdapter ()
+
+            +<back:yellow>JsonElement</back> serialize (Short src, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            +Short deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
+                \t<back:yellow>JsonDeserializationContext</back> context)
+        }
+        +class "<<<back:yellow>JsonSerializer<Integer></back>>>\n<<<back:yellow>JsonDeserializer<Integer></back>>>\nIntegerJsonAdapter" as IntegerJsonAdapter {
+            +IntegerJsonAdapter ()
+
+            +<back:yellow>JsonElement</back> serialize (Integer src, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            +Integer deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
+                \t<back:yellow>JsonDeserializationContext</back> context)
+        }
+        +class "<<<back:yellow>JsonSerializer<Long></back>>>\n<<<back:yellow>JsonDeserializer<Long></back>>>\nLongJsonAdapter" as LongJsonAdapter {
+            +LongJsonAdapter ()
+
+            +<back:yellow>JsonElement</back> serialize (Long src, <back:yellow>Type</back> typeOfSrc,
+                \t<back:yellow>JsonSerializationContext</back> context)
+            +Long deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
+                \t<back:yellow>JsonDeserializationContext</back> context)
+        }
+        +class "<<<back:yellow>JsonSerializer<Throwable></back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
             +ThrowableJsonSerializer ()
-            -- **JsonSerializer** --
-            +<back:yellow>JsonElement</back> serialize (T data, <back:yellow>Type</back> typeOfSrc,
+
+            +<back:yellow>JsonElement</back> serialize (Throwable src, <back:yellow>Type</back> typeOfSrc,
                 \t<back:yellow>JsonSerializationContext</back> context)
         }
     }
@@ -167,10 +184,7 @@ package "org.eclipse.keyple.core.util" as util {
 
 ' == LAYOUT ==
 
-JsonUtil -[hidden]- BodyError
-
-BodyError -[hidden]- protocol
-BodyError -[hidden]- Assert
+ByteArrayUtil -[hidden]- JsonUtil
 
 Assert -[hidden]- ByteArrayUtil
 Assert -[hidden]- ApduUtil

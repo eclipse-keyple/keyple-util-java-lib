@@ -53,15 +53,19 @@ public final class JsonUtil {
    * (private)<br>
    * Initialize and personalize the gson parser used in Keyple.
    *
-   * @return a not null builder instance.
+   * @return A not null builder instance.
    */
   private static GsonBuilder initGsonBuilder() {
     return new GsonBuilder()
         .enableComplexMapKeySerialization()
-        .registerTypeAdapter(int.class, new IntegerJsonAdapter())
-        .registerTypeAdapter(Integer.class, new IntegerJsonAdapter())
         .registerTypeAdapter(byte.class, new ByteJsonAdapter())
         .registerTypeAdapter(Byte.class, new ByteJsonAdapter())
+        .registerTypeAdapter(short.class, new ShortJsonAdapter())
+        .registerTypeAdapter(Short.class, new ShortJsonAdapter())
+        .registerTypeAdapter(int.class, new IntegerJsonAdapter())
+        .registerTypeAdapter(Integer.class, new IntegerJsonAdapter())
+        .registerTypeAdapter(long.class, new LongJsonAdapter())
+        .registerTypeAdapter(Long.class, new LongJsonAdapter())
         .registerTypeAdapter(byte[].class, new ByteArrayJsonAdapter())
         .registerTypeAdapter(BodyError.class, new BodyErrorJsonDeserializer())
         .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonSerializer());

@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 import org.eclipse.keyple.core.util.ByteArrayUtil;
 
 /**
- * Serializer/Deserializer of a byte array to an hex string.
+ * JSON serializer/deserializer of a byte array to a hex string.
  *
  * @since 2.0.0
  */
