@@ -18,7 +18,7 @@ import org.junit.Test;
 public class IntegerJsonAdapterTest {
 
   public static final String JSON_DATA =
-      "{\"f1\":\"FA\",\"f2\":\"FB11\",\"f3\":\"FC1122\",\"f4\":\"FD112233\",\"objectValue\":\"FE\",\"oddDigitNumberValue\":\"0F\"}";;
+      "{\"f1\":\"FA\",\"f2\":\"FB11\",\"f3\":\"FC1122\",\"f4\":\"FD112233\",\"objectValue\":\"FE\",\"oddDigitNumberValue\":\"0F\"}";
 
   static class Data {
     int f1 = 0xFA;
