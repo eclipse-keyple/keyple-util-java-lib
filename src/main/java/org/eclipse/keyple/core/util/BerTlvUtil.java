@@ -11,8 +11,10 @@
  ************************************************************************************** */
 package org.eclipse.keyple.core.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +56,25 @@ public class BerTlvUtil {
    */
   public static Map<Integer, byte[]> parseSimple(byte[] tlvStructure, boolean primitiveOnly) {
     try {
+      return parseBufferSimple(tlvStructure, primitiveOnly);
+    } catch (IndexOutOfBoundsException e) {
+      throw new IllegalArgumentException("Invalid TLV structure.");
+    }
+  }
+
+  /**
+   * Parse the provided TLV structure and place all or only primitive tags found in a map. The key
+   * is an integer representing the tag ID (e.g. 0x84 for the DF name tag), the value is the list of
+   * tag values as a list of arrays of bytes.
+   *
+   * @param tlvStructure The input TLV structure.
+   * @param primitiveOnly True if only primitives tags are to be placed in the map.
+   * @return A not null map.
+   * @throws IllegalArgumentException If the parsing of the provided structure failed.
+   * @since 2.0.0
+   */
+  public static Map<Integer, List<byte[]>> parse(byte[] tlvStructure, boolean primitiveOnly) {
+    try {
       return parseBuffer(tlvStructure, primitiveOnly);
     } catch (IndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Invalid TLV structure.");
@@ -65,7 +86,7 @@ public class BerTlvUtil {
    *
    * @param tagId A positive int less than FFFFFFh.
    * @return True if the tag is constructed.
-   * @throws IllegalArgumentException If the tag Id is out of range.
+   * @throws IllegalArgumentException If the tag ID is out of range.
    * @since 2.0.0
    */
   public static boolean isConstructed(int tagId) {
@@ -90,9 +111,11 @@ public class BerTlvUtil {
    * @param primitiveOnly True if only primitives tags are to be placed in the map.
    * @return A not null map.
    */
-  private static Map<Integer, byte[]> parseBuffer(byte[] tlvStructure, boolean primitiveOnly) {
-    int offset = 0;
+  private static Map<Integer, byte[]> parseBufferSimple(
+      byte[] tlvStructure, boolean primitiveOnly) {
+
     Map<Integer, byte[]> tlvs = new HashMap<Integer, byte[]>();
+    int offset = 0;
     do {
       int tagSize = getTagSize(tlvStructure, offset);
       byte[] tagBytes = Arrays.copyOfRange(tlvStructure, offset, offset + tagSize);
@@ -117,6 +140,69 @@ public class BerTlvUtil {
       }
     } while (offset < tlvStructure.length);
     return tlvs;
+  }
+
+  /**
+   * (private)<br>
+   * Parse the provided TLV structure from the provided offset and place all or only primitive tags
+   * found in a map.
+   *
+   * @param tlvStructure The input TLV structure.
+   * @param primitiveOnly True if only primitives tags are to be placed in the map.
+   * @return A not null map.
+   */
+  private static Map<Integer, List<byte[]>> parseBuffer(
+      byte[] tlvStructure, boolean primitiveOnly) {
+
+    Map<Integer, List<byte[]>> tlvs = new HashMap<Integer, List<byte[]>>();
+    int offset = 0;
+    do {
+      int tagSize = getTagSize(tlvStructure, offset);
+      byte[] tagBytes = Arrays.copyOfRange(tlvStructure, offset, offset + tagSize);
+      int tag = getTag(tlvStructure, offset, tagSize);
+      int lengthSize = getLengthSize(tlvStructure, offset + tagSize);
+      int valueSize = getLength(tlvStructure, offset + tagSize, lengthSize);
+      byte[] value =
+          Arrays.copyOfRange(
+              tlvStructure,
+              offset + tagSize + lengthSize,
+              offset + tagSize + lengthSize + valueSize);
+      offset += tagSize + lengthSize + valueSize;
+      if ((tagBytes[0] & 0x20) != 0) {
+        // tag is constructed
+        if (!primitiveOnly) {
+          List<byte[]> values = getOrPutTagValues(tlvs, tag);
+          values.add(value);
+        }
+        Map<Integer, List<byte[]>> tlvs2 = parse(value, primitiveOnly);
+        for (Map.Entry<Integer, List<byte[]>> entry : tlvs2.entrySet()) {
+          List<byte[]> values = getOrPutTagValues(tlvs, entry.getKey());
+          values.addAll(entry.getValue());
+        }
+      } else {
+        // tag is primitive
+        List<byte[]> values = getOrPutTagValues(tlvs, tag);
+        values.add(value);
+      }
+    } while (offset < tlvStructure.length);
+    return tlvs;
+  }
+
+  /**
+   * (private)<br>
+   * Gets or creates an entry in the provided map with the provided tag.
+   *
+   * @param tlvs The map.
+   * @param tag The TAG.
+   * @return A not null reference to the associated list of values.
+   */
+  private static List<byte[]> getOrPutTagValues(Map<Integer, List<byte[]>> tlvs, int tag) {
+    List<byte[]> values = tlvs.get(tag);
+    if (values == null) {
+      values = new ArrayList<byte[]>();
+      tlvs.put(tag, values);
+    }
+    return values;
   }
 
   /**

@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.1.+ (14/02/2022)
+    Keyple - keyple-util-java-lib - 2.1.+ (16/02/2022)
 end title
 
 ' == THEME ==
@@ -89,10 +89,13 @@ package "org.eclipse.keyple.core.util" as util {
     }
     +class "**final** ApduUtil" as ApduUtil {
         +{static} byte[] build (byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le)
+
         +{static} boolean isCase4 (byte[] apduCommand)
     }
     +class BerTlvUtil {
         +{static} Map<Integer, byte[]> parseSimple (byte[] tlvStructure, boolean primitiveOnly)
+        +{static} Map<Integer, List<byte[]>> parse (byte[] tlvStructure, boolean primitiveOnly)
+
         +{static} boolean isConstructed (int tagId)
     }
     package json {
