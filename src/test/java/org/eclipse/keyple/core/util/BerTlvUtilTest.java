@@ -14,6 +14,7 @@ package org.eclipse.keyple.core.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
+import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
@@ -26,6 +27,45 @@ public class BerTlvUtilTest {
 
   @Test
   public void parse_whenStructureIsValidAndPrimitiveOnlyIsFalse_shouldProvideAllTags() {
+    Map<Integer, List<byte[]>> tlvs = BerTlvUtil.parse(ByteArrayUtil.fromHex(TLV1), false);
+    assertThat(tlvs).containsOnlyKeys(0x6F, 0x84, 0xA5, 0xBF0C, 0x53, 0xC7);
+    assertThat(tlvs.get(0x6F))
+        .containsExactly(
+            ByteArrayUtil.fromHex(
+                "8409315449432E49434131A516BF0C13C708000000001122334453070A3C2005141001"));
+    assertThat(tlvs.get(0x84)).containsExactly(ByteArrayUtil.fromHex("315449432E49434131"));
+    assertThat(tlvs.get(0xA5))
+        .containsExactly(ByteArrayUtil.fromHex("BF0C13C708000000001122334453070A3C2005141001"));
+    assertThat(tlvs.get(0xBF0C))
+        .containsExactly(ByteArrayUtil.fromHex("C708000000001122334453070A3C2005141001"));
+    assertThat(tlvs.get(0x53)).containsExactly(ByteArrayUtil.fromHex("0A3C2005141001"));
+    assertThat(tlvs.get(0xC7)).containsExactly(ByteArrayUtil.fromHex("0000000011223344"));
+  }
+
+  @Test
+  public void parse_whenStructureIsValidAndPrimitiveOnlyIsFalse_shouldProvideAllTags2() {
+    Map<Integer, List<byte[]>> tlvs =
+        BerTlvUtil.parse(
+            ByteArrayUtil.fromHex(
+                "E030C106200107021D01C106202009021D04C106206919091D01C106201008041D03C10620401D021D01C10620501E021D01"),
+            false);
+    assertThat(tlvs).containsOnlyKeys(0xE0, 0xC1);
+    assertThat(tlvs.get(0xE0))
+        .containsExactly(
+            ByteArrayUtil.fromHex(
+                "C106200107021D01C106202009021D04C106206919091D01C106201008041D03C10620401D021D01C10620501E021D01"));
+    assertThat(tlvs.get(0xC1))
+        .containsExactly(
+            ByteArrayUtil.fromHex("200107021D01"),
+            ByteArrayUtil.fromHex("202009021D04"),
+            ByteArrayUtil.fromHex("206919091D01"),
+            ByteArrayUtil.fromHex("201008041D03"),
+            ByteArrayUtil.fromHex("20401D021D01"),
+            ByteArrayUtil.fromHex("20501E021D01"));
+  }
+
+  @Test
+  public void parseSimple_whenStructureIsValidAndPrimitiveOnlyIsFalse_shouldProvideAllTags() {
     Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV1), false);
     assertThat(tlvs)
         .containsOnly(
@@ -41,7 +81,8 @@ public class BerTlvUtilTest {
   }
 
   @Test
-  public void parse_whenStructureIsValidAndPrimitiveOnlyIsTrue_shouldProvideOnlyPrimitiveTags() {
+  public void
+      parseSimple_whenStructureIsValidAndPrimitiveOnlyIsTrue_shouldProvideOnlyPrimitiveTags() {
     Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV1), true);
     assertThat(tlvs)
         .containsOnly(
@@ -51,14 +92,14 @@ public class BerTlvUtilTest {
   }
 
   @Test
-  public void parse_whenTagsOrderChange_shouldProvideTheSameTags() {
+  public void parseSimple_whenTagsOrderChange_shouldProvideTheSameTags() {
     Map<Integer, byte[]> tlvs1 = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV1), true);
     Map<Integer, byte[]> tlvs2 = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV2), true);
     assertThat(tlvs1).containsExactlyEntriesOf(tlvs2);
   }
 
   @Test
-  public void parse_whenTagsIdIs3Bytes_shouldProvideTheTag() {
+  public void parseSimple_whenTagsIdIs3Bytes_shouldProvideTheTag() {
     Map<Integer, byte[]> tlvs =
         BerTlvUtil.parseSimple(
             ByteArrayUtil.fromHex(
@@ -72,23 +113,23 @@ public class BerTlvUtilTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void parse_whenStructureIsInvalid_shouldIAE() {
+  public void parseSimple_whenStructureIsInvalid_shouldIAE() {
     BerTlvUtil.parseSimple(ByteArrayUtil.fromHex("6F23A5"), true);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void parse_whenLengthFieldIsInvalid_shouldIAE() {
+  public void parseSimple_whenLengthFieldIsInvalid_shouldIAE() {
     BerTlvUtil.parseSimple(ByteArrayUtil.fromHex("6F83A5"), true);
   }
 
   @Test
-  public void parse_whenLengthIsZero_shouldReturnEmptyValue() {
+  public void parseSimple_whenLengthIsZero_shouldReturnEmptyValue() {
     Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex("8400"), false);
     assertThat(tlvs.get(0x84)).isEmpty();
   }
 
   @Test
-  public void parse_whenLengthIsTwoBytes_shouldValue() {
+  public void parseSimple_whenLengthIsTwoBytes_shouldValue() {
     // length 250
     byte[] tlv = new byte[253];
     tlv[0] = (byte) 0x84;
@@ -103,7 +144,7 @@ public class BerTlvUtilTest {
   }
 
   @Test
-  public void parse_whenLengthIsThreeBytes_shouldValue() {
+  public void parseSimple_whenLengthIsThreeBytes_shouldValue() {
     // length 260
     byte[] tlv = new byte[264];
     tlv[0] = (byte) 0x84;

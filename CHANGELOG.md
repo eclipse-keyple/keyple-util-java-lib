@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `hexToInt` method in `ByteArrayUtil` class.
 - `hexToLong` method in `ByteArrayUtil` class.
 - `toHex` methods for `byte`, `short`, `int` and `long` data types in `ByteArrayUtil` class.
+- `parse` method in `BerTlvUtil` class to parse TLV data structure having several identical TAGs (issue [#19]).
 ### Changed
 - Optimizations of hexadecimal data conversions.
 
@@ -26,6 +27,7 @@ It also brings many major API changes.
 [unreleased]: https://github.com/eclipse/keyple-util-java-lib/compare/2.0.0...HEAD
 [2.0.0]: https://github.com/eclipse/keyple-util-java-lib/releases/tag/2.0.0
 
+[#19]: https://github.com/eclipse/keyple-util-java-lib/issues/19
 [#17]: https://github.com/eclipse/keyple-util-java-lib/issues/17
 [#14]: https://github.com/eclipse/keyple-util-java-lib/issues/14
 
