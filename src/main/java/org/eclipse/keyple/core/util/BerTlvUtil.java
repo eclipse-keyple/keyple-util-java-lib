@@ -71,7 +71,7 @@ public class BerTlvUtil {
    * @param primitiveOnly True if only primitives tags are to be placed in the map.
    * @return A not null map.
    * @throws IllegalArgumentException If the parsing of the provided structure failed.
-   * @since 2.0.0
+   * @since 2.1.0
    */
   public static Map<Integer, List<byte[]>> parse(byte[] tlvStructure, boolean primitiveOnly) {
     try {
@@ -171,17 +171,17 @@ public class BerTlvUtil {
       if ((tagBytes[0] & 0x20) != 0) {
         // tag is constructed
         if (!primitiveOnly) {
-          List<byte[]> values = getOrPutTagValues(tlvs, tag);
+          List<byte[]> values = getOrInitTagValues(tlvs, tag);
           values.add(value);
         }
         Map<Integer, List<byte[]>> tlvs2 = parse(value, primitiveOnly);
         for (Map.Entry<Integer, List<byte[]>> entry : tlvs2.entrySet()) {
-          List<byte[]> values = getOrPutTagValues(tlvs, entry.getKey());
+          List<byte[]> values = getOrInitTagValues(tlvs, entry.getKey());
           values.addAll(entry.getValue());
         }
       } else {
         // tag is primitive
-        List<byte[]> values = getOrPutTagValues(tlvs, tag);
+        List<byte[]> values = getOrInitTagValues(tlvs, tag);
         values.add(value);
       }
     } while (offset < tlvStructure.length);
@@ -190,13 +190,14 @@ public class BerTlvUtil {
 
   /**
    * (private)<br>
-   * Gets or creates an entry in the provided map with the provided tag.
+   * Gets a reference to the values of the existing tag in the map, or put the new tag in the map
+   * with an empty list of values.
    *
    * @param tlvs The map.
    * @param tag The TAG.
    * @return A not null reference to the associated list of values.
    */
-  private static List<byte[]> getOrPutTagValues(Map<Integer, List<byte[]>> tlvs, int tag) {
+  private static List<byte[]> getOrInitTagValues(Map<Integer, List<byte[]>> tlvs, int tag) {
     List<byte[]> values = tlvs.get(tag);
     if (values == null) {
       values = new ArrayList<byte[]>();

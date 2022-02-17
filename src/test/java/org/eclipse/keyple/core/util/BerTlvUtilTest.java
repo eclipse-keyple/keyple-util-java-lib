@@ -43,6 +43,28 @@ public class BerTlvUtilTest {
   }
 
   @Test
+  public void parse_whenStructureIsValidAndPrimitiveOnlyIsFalse_shouldProvideAllTags2() {
+    Map<Integer, List<byte[]>> tlvs =
+        BerTlvUtil.parse(
+            ByteArrayUtil.fromHex(
+                "E030C106200107021D01C106202009021D04C106206919091D01C106201008041D03C10620401D021D01C10620501E021D01"),
+            false);
+    assertThat(tlvs).containsOnlyKeys(0xE0, 0xC1);
+    assertThat(tlvs.get(0xE0))
+        .containsExactly(
+            ByteArrayUtil.fromHex(
+                "C106200107021D01C106202009021D04C106206919091D01C106201008041D03C10620401D021D01C10620501E021D01"));
+    assertThat(tlvs.get(0xC1))
+        .containsExactly(
+            ByteArrayUtil.fromHex("200107021D01"),
+            ByteArrayUtil.fromHex("202009021D04"),
+            ByteArrayUtil.fromHex("206919091D01"),
+            ByteArrayUtil.fromHex("201008041D03"),
+            ByteArrayUtil.fromHex("20401D021D01"),
+            ByteArrayUtil.fromHex("20501E021D01"));
+  }
+
+  @Test
   public void parseSimple_whenStructureIsValidAndPrimitiveOnlyIsFalse_shouldProvideAllTags() {
     Map<Integer, byte[]> tlvs = BerTlvUtil.parseSimple(ByteArrayUtil.fromHex(TLV1), false);
     assertThat(tlvs)
