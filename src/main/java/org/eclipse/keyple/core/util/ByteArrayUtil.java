@@ -126,7 +126,7 @@ public final class ByteArrayUtil {
    * @since 2.0.0
    */
   public static byte[] fromHex(String hex) {
-    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length() % 2, 0, "hex");
+    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length() % 2, 0, "hex size");
     byte[] tab = new byte[hex.length() / 2];
     for (int i = 0; i < hex.length(); i += 2) {
       tab[i / 2] =
@@ -149,7 +149,7 @@ public final class ByteArrayUtil {
    * @since 2.1.0
    */
   public static byte hexToByte(String hex) {
-    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length(), 2, "hex");
+    Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length(), 2, "hex size");
     return (byte) ((hexToNibble[hex.charAt(0)] << 4) + (hexToNibble[hex.charAt(1)] & 0xFF));
   }
 
@@ -169,8 +169,8 @@ public final class ByteArrayUtil {
   public static short hexToShort(String hex) {
     Assert.getInstance()
         .notEmpty(hex, "hex")
-        .isEqual(hex.length() % 2, 0, "hex")
-        .isTrue(hex.length() <= 4, "hex");
+        .isEqual(hex.length() % 2, 0, "hex size")
+        .isTrue(hex.length() <= 4, "hex is short");
     short val = 0;
     for (int i = 0; i < hex.length(); i++) {
       val <<= 4;
@@ -195,8 +195,8 @@ public final class ByteArrayUtil {
   public static int hexToInt(String hex) {
     Assert.getInstance()
         .notEmpty(hex, "hex")
-        .isEqual(hex.length() % 2, 0, "hex")
-        .isTrue(hex.length() <= 8, "hex");
+        .isEqual(hex.length() % 2, 0, "hex size")
+        .isTrue(hex.length() <= 8, "hex int");
     int val = 0;
     for (int i = 0; i < hex.length(); i++) {
       val <<= 4;
@@ -221,8 +221,8 @@ public final class ByteArrayUtil {
   public static long hexToLong(String hex) {
     Assert.getInstance()
         .notEmpty(hex, "hex")
-        .isEqual(hex.length() % 2, 0, "hex")
-        .isTrue(hex.length() <= 16, "hex");
+        .isEqual(hex.length() % 2, 0, "hex size")
+        .isTrue(hex.length() <= 16, "hex is long");
     long val = 0;
     for (int i = 0; i < hex.length(); i++) {
       val <<= 4;
@@ -481,6 +481,9 @@ public final class ByteArrayUtil {
    * @param bitOffset The offset (in bits).
    * @param nbBytes The number of bytes to extract.
    * @return A not null byte array.
+   * @throws NullPointerException If "src" is null.
+   * @throws ArrayIndexOutOfBoundsException If "bitOffset" or "nbBytes" is out of range.
+   * @throws NegativeArraySizeException If "nbBytes" is negative.
    * @since 2.1.0
    */
   public static byte[] extract(byte[] src, int bitOffset, int nbBytes) {

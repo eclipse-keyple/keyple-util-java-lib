@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.1.+ (16/02/2022)
+    Keyple - keyple-util-java-lib - 2.1.+ (15/03/2022)
 end title
 
 ' == THEME ==
@@ -86,6 +86,8 @@ package "org.eclipse.keyple.core.util" as util {
         +{static} int threeBytesToInt (byte[] bytes, int offset)
         +{static} int threeBytesSignedToInt (byte[] bytes, int offset)
         +{static} int fourBytesToInt (byte[] bytes, int offset)
+
+        +{static} byte[] extract (byte[] src, int bitOffset, int nbBytes)
     }
     +class "**final** ApduUtil" as ApduUtil {
         +{static} byte[] build (byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le)
