@@ -9,13 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - "CHANGELOG.md" file (issue [eclipse/keyple#6]).
 - CI: Forbid the publication of a version already released (issue [#14]).
 - JSON serializer/deserializer for `short` and `long` data types (issue [#17]).
-- `isHexString` method in `Assert` class.
-- `hexToByte` method in `ByteArrayUtil` class.
-- `hexToShort` method in `ByteArrayUtil` class.
-- `hexToInt` method in `ByteArrayUtil` class.
-- `hexToLong` method in `ByteArrayUtil` class.
-- `toHex` methods for `byte`, `short`, `int` and `long` data types in `ByteArrayUtil` class.
-- `parse` method in `BerTlvUtil` class to parse TLV data structure having several identical TAGs (issue [#19]).
+- `Assert.isHexString` method.
+- `ByteArrayUtil.hexToByte` method.
+- `ByteArrayUtil.hexToShort` method.
+- `ByteArrayUtil.hexToInt` method.
+- `ByteArrayUtil.hexToLong` method.
+- `ByteArrayUtil.toHex` methods for `byte`, `short`, `int` and `long` data types.
+- `ByteArrayUtil.extract` method.
+- `BerTlvUtil.parse` method to parse TLV data structure having several identical TAGs (issue [#19]).
 ### Changed
 - Optimizations of hexadecimal data conversions.
 

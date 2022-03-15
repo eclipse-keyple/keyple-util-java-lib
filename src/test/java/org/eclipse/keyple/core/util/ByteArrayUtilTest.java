@@ -440,4 +440,64 @@ public class ByteArrayUtilTest {
     int value = ByteArrayUtil.fourBytesToInt(BYTEARRAY_LEN_16, 12);
     assertThat(value).isEqualTo(0x87654321);
   }
+
+  @Test(expected = NullPointerException.class)
+  public void extract_whenSrcIsNull_shouldThrowNPE() {
+    ByteArrayUtil.extract(null, 0, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extract_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE() {
+    ByteArrayUtil.extract(new byte[1], 16, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extract_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extract(new byte[1], 9, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extract_whenBitOffsetIsNegative_shouldThrowAIOOBE() {
+    ByteArrayUtil.extract(new byte[1], -8, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extract_whenBitOffsetIsNegative_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extract(new byte[1], -1, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extract_whenNbBytesIsOutOfRange_shouldThrowAIOOBE() {
+    ByteArrayUtil.extract(new byte[1], 0, 2);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extract_whenNbBytesIsOutOfRange_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extract(new byte[1], 1, 2);
+  }
+
+  @Test(expected = NegativeArraySizeException.class)
+  public void extract_whenNbBytesIsNegative_shouldThrowAIOOBE() {
+    ByteArrayUtil.extract(new byte[1], 0, -1);
+  }
+
+  @Test(expected = NegativeArraySizeException.class)
+  public void extract_whenNbBytesIsNegative_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extract(new byte[1], 1, -1);
+  }
+
+  @Test
+  public void extract_whenBitOffsetIsMultipleOf8_shouldBeSuccess() {
+    byte[] src = new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3};
+    assertThat(ByteArrayUtil.extract(src, 8, 1)).containsExactly(0xF2);
+    assertThat(ByteArrayUtil.extract(src, 8, 2)).containsExactly(0xF2, 0xF3);
+  }
+
+  @Test
+  public void extract_whenBitOffsetIsNotMultipleOf8_shouldBeSuccess() {
+    byte[] src = new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3};
+    assertThat(ByteArrayUtil.extract(src, 6, 1)).containsExactly(0x7C);
+    assertThat(ByteArrayUtil.extract(src, 6, 2)).containsExactly(0x7C, 0xBC);
+    assertThat(ByteArrayUtil.extract(src, 3, 1)).containsExactly(0x8F);
+  }
 }

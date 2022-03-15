@@ -473,4 +473,28 @@ public final class ByteArrayUtil {
         | (bytes[offset + 2] & 0xFF) << 8
         | (bytes[offset + 3] & 0xFF);
   }
+
+  /**
+   * Extracts "nbBytes" bytes from the "bitOffset" index in bits of the provided byte array.
+   *
+   * @param src The byte array.
+   * @param bitOffset The offset (in bits).
+   * @param nbBytes The number of bytes to extract.
+   * @return A not null byte array.
+   * @since 2.1.0
+   */
+  public static byte[] extract(byte[] src, int bitOffset, int nbBytes) {
+    final byte[] dest = new byte[nbBytes];
+    final int byteOffset = bitOffset / 8;
+    bitOffset %= 8;
+    if (bitOffset == 0) {
+      System.arraycopy(src, byteOffset, dest, 0, nbBytes);
+    } else {
+      final int rightShift = 8 - bitOffset;
+      for (int i = 0, j = byteOffset; j < byteOffset + nbBytes; i++, j++) {
+        dest[i] = (byte) ((src[j] << bitOffset) | ((src[j + 1] & 0xFF) >> rightShift));
+      }
+    }
+    return dest;
+  }
 }
