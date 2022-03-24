@@ -93,7 +93,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </nav>
 </header>
 <main role="main">
-<div class="contentContainer"><a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:A">
+<div class="contentContainer"><a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:A">
 <!--   -->
 </a>
 <h2 class="title">A</h2>
@@ -143,7 +143,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util"><span class="typeNameLink">ByteArrayUtil</span></a> - Class in <a href="org/eclipse/keyple/core/util/package-summary.html">org.eclipse.keyple.core.util</a></dt>
 <dd>
-<div class="block">Utility class around byte arrays</div>
+<div class="block">Utility class around byte arrays.</div>
 </dd>
 <dt><a href="org/eclipse/keyple/core/util/json/ByteJsonAdapter.html" title="class in org.eclipse.keyple.core.util.json"><span class="typeNameLink">ByteJsonAdapter</span></a> - Class in <a href="org/eclipse/keyple/core/util/json/package-summary.html">org.eclipse.keyple.core.util.json</a></dt>
 <dd>
@@ -178,6 +178,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/json/LongJsonAdapter.html#deserialize(com.google.gson.JsonElement,java.lang.reflect.Type,com.google.gson.JsonDeserializationContext)">deserialize(JsonElement, Type, JsonDeserializationContext)</a></span> - Method in class org.eclipse.keyple.core.util.json.<a href="org/eclipse/keyple/core/util/json/LongJsonAdapter.html" title="class in org.eclipse.keyple.core.util.json">LongJsonAdapter</a></dt>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/json/ShortJsonAdapter.html#deserialize(com.google.gson.JsonElement,java.lang.reflect.Type,com.google.gson.JsonDeserializationContext)">deserialize(JsonElement, Type, JsonDeserializationContext)</a></span> - Method in class org.eclipse.keyple.core.util.json.<a href="org/eclipse/keyple/core/util/json/ShortJsonAdapter.html" title="class in org.eclipse.keyple.core.util.json">ShortJsonAdapter</a></dt>
 </dl>
+<a id="I:E">
+<!--   -->
+</a>
+<h2 class="title">E</h2>
+<dl>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractBytes(byte%5B%5D,int,int)">extractBytes(byte[], int, int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
+<dd>
+<div class="block">Extracts "nbBytes" bytes from the "bitOffset" index (<b>in bits</b>) from a byte array.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)">extractInt(byte[], int, int, boolean)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
+<dd>
+<div class="block">Converts "nbBytes" bytes located at the "offset" provided in a source byte array into an
+ integer.</div>
+</dd>
+</dl>
 <a id="I:F">
 <!--   -->
 </a>
@@ -185,12 +200,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dl>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#fourBytesToInt(byte%5B%5D,int)">fourBytesToInt(byte[], int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Converts 4 bytes located at the offset provided in the byte array into an <b>unsigned</b>
- integer.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true|false".</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#fromHex(java.lang.String)">fromHex(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Converts the provided hexadecimal string into a byte array.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/HexUtil.html#toByteArray(java.lang.String)"><code>HexUtil.toByteArray(String)</code></a> method instead.</div>
+</div>
 </dd>
 </dl>
 <a id="I:G">
@@ -224,21 +243,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">H</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#hexToByte(java.lang.String)">hexToByte(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
+<dt><a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util"><span class="typeNameLink">HexUtil</span></a> - Class in <a href="org/eclipse/keyple/core/util/package-summary.html">org.eclipse.keyple.core.util</a></dt>
 <dd>
-<div class="block">Converts the provided hexadecimal string into a byte.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#hexToInt(java.lang.String)">hexToInt(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
-<dd>
-<div class="block">Converts the provided hexadecimal string into an integer.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#hexToLong(java.lang.String)">hexToLong(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
-<dd>
-<div class="block">Converts the provided hexadecimal string into a long.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#hexToShort(java.lang.String)">hexToShort(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
-<dd>
-<div class="block">Converts the provided hexadecimal string into a short.</div>
+<div class="block">Utility class around hex strings.</div>
 </dd>
 </dl>
 <a id="I:I">
@@ -288,9 +295,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Assert that a condition is true.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#isValid(java.lang.String)">isValid(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
+<dd>
+<div class="block">Checks if a string is formed by an even number of hexadecimal digits.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#isValidHexString(java.lang.String)">isValidHexString(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Checks if the provided string is formed by an even number of hexadecimal digits.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/HexUtil.html#isValid(java.lang.String)"><code>HexUtil.isValid(String)</code></a> method instead.</div>
+</div>
 </dd>
 </dl>
 <a id="I:J">
@@ -330,7 +343,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#normalizeHexString(java.lang.String)">normalizeHexString(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Normalizes the input hex string by padding on the left by a zero if necessary.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">To be removed.</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/Assert.html#notEmpty(byte%5B%5D,java.lang.String)">notEmpty(byte[], String)</a></span> - Method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/Assert.html" title="class in org.eclipse.keyple.core.util">Assert</a></dt>
 <dd>
@@ -340,7 +355,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Assert that the input string is not null and not empty.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/Assert.html#notEmpty(java.util.Collection,java.lang.String)">notEmpty(Collection&lt;? extends Object&gt;, String)</a></span> - Method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/Assert.html" title="class in org.eclipse.keyple.core.util">Assert</a></dt>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/Assert.html#notEmpty(java.util.Collection,java.lang.String)">notEmpty(Collection&lt;?&gt;, String)</a></span> - Method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/Assert.html" title="class in org.eclipse.keyple.core.util">Assert</a></dt>
 <dd>
 <div class="block">Assert that a collection of objects is not null and not empty.</div>
 </dd>
@@ -417,13 +432,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dl>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#threeBytesSignedToInt(byte%5B%5D,int)">threeBytesSignedToInt(byte[], int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Converts 3 bytes located at the offset provided in the byte array into an <b>signed</b>
- integer.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = true".</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#threeBytesToInt(byte%5B%5D,int)">threeBytesToInt(byte[], int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Converts 3 bytes located at the offset provided in the byte array into an <b>unsigned</b>
- integer.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = false".</div>
+</div>
 </dd>
 <dt><a href="org/eclipse/keyple/core/util/json/ThrowableJsonSerializer.html" title="class in org.eclipse.keyple.core.util.json"><span class="typeNameLink">ThrowableJsonSerializer</span></a> - Class in <a href="org/eclipse/keyple/core/util/json/package-summary.html">org.eclipse.keyple.core.util.json</a></dt>
 <dd>
@@ -431,39 +450,69 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/json/ThrowableJsonSerializer.html#%3Cinit%3E()">ThrowableJsonSerializer()</a></span> - Constructor for class org.eclipse.keyple.core.util.json.<a href="org/eclipse/keyple/core/util/json/ThrowableJsonSerializer.html" title="class in org.eclipse.keyple.core.util.json">ThrowableJsonSerializer</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#toHex(byte)">toHex(byte)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toByte(java.lang.String)">toByte(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
 <dd>
-<div class="block">Converts the provided byte into a hexadecimal string.</div>
+<div class="block">Converts a hexadecimal string to a "byte".</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toByteArray(java.lang.String)">toByteArray(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
+<dd>
+<div class="block">Converts a hexadecimal string to a byte array.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toHex(byte)">toHex(byte)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
+<dd>
+<div class="block">Converts a "byte" to a hexadecimal string.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#toHex(byte%5B%5D)">toHex(byte[])</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Converts the provided byte array into a hexadecimal string.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/HexUtil.html#toHex(byte%5B%5D)"><code>HexUtil.toHex(byte[])</code></a> method instead.</div>
+</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#toHex(int)">toHex(int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toHex(byte%5B%5D)">toHex(byte[])</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
 <dd>
-<div class="block">Converts the provided integer into a hexadecimal string.</div>
+<div class="block">Converts a byte array to a hexadecimal string.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#toHex(long)">toHex(long)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toHex(int)">toHex(int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
 <dd>
-<div class="block">Converts the provided long into a hexadecimal string.</div>
+<div class="block">Converts an "integer" to a hexadecimal string.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#toHex(short)">toHex(short)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toHex(long)">toHex(long)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
 <dd>
-<div class="block">Converts the provided short into a hexadecimal string.</div>
+<div class="block">Converts a "long" to a hexadecimal string.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toHex(short)">toHex(short)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
+<dd>
+<div class="block">Converts a "short" to a hexadecimal string.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toInt(java.lang.String)">toInt(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
+<dd>
+<div class="block">Converts a hexadecimal string to an "integer".</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/json/JsonUtil.html#toJson(java.lang.Object)">toJson(Object)</a></span> - Static method in class org.eclipse.keyple.core.util.json.<a href="org/eclipse/keyple/core/util/json/JsonUtil.html" title="class in org.eclipse.keyple.core.util.json">JsonUtil</a></dt>
 <dd>
 <div class="block">Formats the provided object as a json string.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toLong(java.lang.String)">toLong(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
+<dd>
+<div class="block">Converts a hexadecimal string to a "long".</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/HexUtil.html#toShort(java.lang.String)">toShort(String)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/HexUtil.html" title="class in org.eclipse.keyple.core.util">HexUtil</a></dt>
+<dd>
+<div class="block">Converts a hexadecimal string to a "short".</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#twoBytesSignedToInt(byte%5B%5D,int)">twoBytesSignedToInt(byte[], int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Converts 2 bytes located at the offset provided in the byte array into an <b>signed</b>
- integer.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true".</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#twoBytesToInt(byte%5B%5D,int)">twoBytesToInt(byte[], int)</a></span> - Static method in class org.eclipse.keyple.core.util.<a href="org/eclipse/keyple/core/util/ByteArrayUtil.html" title="class in org.eclipse.keyple.core.util">ByteArrayUtil</a></dt>
 <dd>
-<div class="block">Converts 2 bytes located at the offset provided in the byte array into an <b>unsigned</b>
- integer.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = false".</div>
+</div>
 </dd>
 </dl>
 <a id="I:V">
@@ -490,7 +539,7 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
 </main>
 <footer role="contentinfo">
 <nav role="navigation">

@@ -96,6 +96,85 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="header">
 <h1 title="Deprecated API" class="title">Deprecated API</h1>
 <h2 title="Contents">Contents</h2>
+<ul>
+<li><a href="#method">Methods</a></li>
+</ul>
+</div>
+<div class="contentContainer"><a id="method">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<table class="deprecatedSummary">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#fourBytesToInt(byte%5B%5D,int)">org.eclipse.keyple.core.util.ByteArrayUtil.fourBytesToInt&#8203;(byte[], int)</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true|false".</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#fromHex(java.lang.String)">org.eclipse.keyple.core.util.ByteArrayUtil.fromHex&#8203;(String)</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/HexUtil.html#toByteArray(java.lang.String)"><code>HexUtil.toByteArray(String)</code></a> method instead.</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#isValidHexString(java.lang.String)">org.eclipse.keyple.core.util.ByteArrayUtil.isValidHexString&#8203;(String)</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/HexUtil.html#isValid(java.lang.String)"><code>HexUtil.isValid(String)</code></a> method instead.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#normalizeHexString(java.lang.String)">org.eclipse.keyple.core.util.ByteArrayUtil.normalizeHexString&#8203;(String)</a></th>
+<td class="colLast">
+<div class="deprecationComment">To be removed.</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#threeBytesSignedToInt(byte%5B%5D,int)">org.eclipse.keyple.core.util.ByteArrayUtil.threeBytesSignedToInt&#8203;(byte[], int)</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = true".</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#threeBytesToInt(byte%5B%5D,int)">org.eclipse.keyple.core.util.ByteArrayUtil.threeBytesToInt&#8203;(byte[], int)</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = false".</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#toHex(byte%5B%5D)">org.eclipse.keyple.core.util.ByteArrayUtil.toHex&#8203;(byte[])</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/HexUtil.html#toHex(byte%5B%5D)"><code>HexUtil.toHex(byte[])</code></a> method instead.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#twoBytesSignedToInt(byte%5B%5D,int)">org.eclipse.keyple.core.util.ByteArrayUtil.twoBytesSignedToInt&#8203;(byte[], int)</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true".</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colDeprecatedItemName" scope="row"><a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#twoBytesToInt(byte%5B%5D,int)">org.eclipse.keyple.core.util.ByteArrayUtil.twoBytesToInt&#8203;(byte[], int)</a></th>
+<td class="colLast">
+<div class="deprecationComment">Use <a href="org/eclipse/keyple/core/util/ByteArrayUtil.html#extractInt(byte%5B%5D,int,int,boolean)"><code>ByteArrayUtil.extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = false".</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
 </div>
 </main>
 <footer role="contentinfo">

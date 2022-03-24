@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":9,"i15":9,"i16":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":9,"i1":9,"i2":41,"i3":41,"i4":41,"i5":41,"i6":41,"i7":41,"i8":41,"i9":41,"i10":41};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -134,7 +134,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public final class <span class="typeNameLabel">ByteArrayUtil</span>
 extends java.lang.Object</pre>
-<div class="block">Utility class around byte arrays</div>
+<div class="block">Utility class around byte arrays.</div>
 <dl>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2.0.0</dd>
@@ -153,139 +153,121 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static byte[]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#extractBytes(byte%5B%5D,int,int)">extractBytes</a></span>&#8203;(byte[]&nbsp;src,
+            int&nbsp;bitOffset,
+            int&nbsp;nbBytes)</code></th>
+<td class="colLast">
+<div class="block">Extracts "nbBytes" bytes from the "bitOffset" index (<b>in bits</b>) from a byte array.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#extractInt(byte%5B%5D,int,int,boolean)">extractInt</a></span>&#8203;(byte[]&nbsp;src,
+          int&nbsp;offset,
+          int&nbsp;nbBytes,
+          boolean&nbsp;isSigned)</code></th>
+<td class="colLast">
+<div class="block">Converts "nbBytes" bytes located at the "offset" provided in a source byte array into an
+ integer.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fourBytesToInt(byte%5B%5D,int)">fourBytesToInt</a></span>&#8203;(byte[]&nbsp;bytes,
               int&nbsp;offset)</code></th>
 <td class="colLast">
-<div class="block">Converts 4 bytes located at the offset provided in the byte array into an <b>unsigned</b>
- integer.</div>
-</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>static byte[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fromHex(java.lang.String)">fromHex</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided hexadecimal string into a byte array.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>static byte</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hexToByte(java.lang.String)">hexToByte</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided hexadecimal string into a byte.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true|false".</div>
+</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>static int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hexToInt(java.lang.String)">hexToInt</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
+<td class="colFirst"><code>static byte[]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fromHex(java.lang.String)">fromHex</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
 <td class="colLast">
-<div class="block">Converts the provided hexadecimal string into an integer.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="HexUtil.html#toByteArray(java.lang.String)"><code>HexUtil.toByteArray(String)</code></a> method instead.</div>
+</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static long</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hexToLong(java.lang.String)">hexToLong</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided hexadecimal string into a long.</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>static short</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hexToShort(java.lang.String)">hexToShort</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided hexadecimal string into a short.</div>
-</td>
-</tr>
-<tr id="i6" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isValidHexString(java.lang.String)">isValidHexString</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
 <td class="colLast">
-<div class="block">Checks if the provided string is formed by an even number of hexadecimal digits.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="HexUtil.html#isValid(java.lang.String)"><code>HexUtil.isValid(String)</code></a> method instead.</div>
+</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#normalizeHexString(java.lang.String)">normalizeHexString</a></span>&#8203;(java.lang.String&nbsp;hex)</code></th>
 <td class="colLast">
-<div class="block">Normalizes the input hex string by padding on the left by a zero if necessary.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">To be removed.</div>
+</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#threeBytesSignedToInt(byte%5B%5D,int)">threeBytesSignedToInt</a></span>&#8203;(byte[]&nbsp;bytes,
                      int&nbsp;offset)</code></th>
 <td class="colLast">
-<div class="block">Converts 3 bytes located at the offset provided in the byte array into an <b>signed</b>
- integer.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = true".</div>
+</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#threeBytesToInt(byte%5B%5D,int)">threeBytesToInt</a></span>&#8203;(byte[]&nbsp;bytes,
                int&nbsp;offset)</code></th>
 <td class="colLast">
-<div class="block">Converts 3 bytes located at the offset provided in the byte array into an <b>unsigned</b>
- integer.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = false".</div>
+</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toHex(byte)">toHex</a></span>&#8203;(byte&nbsp;val)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toHex(byte%5B%5D)">toHex</a></span>&#8203;(byte[]&nbsp;src)</code></th>
 <td class="colLast">
-<div class="block">Converts the provided byte into a hexadecimal string.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="HexUtil.html#toHex(byte%5B%5D)"><code>HexUtil.toHex(byte[])</code></a> method instead.</div>
+</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toHex(byte%5B%5D)">toHex</a></span>&#8203;(byte[]&nbsp;tab)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided byte array into a hexadecimal string.</div>
-</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toHex(int)">toHex</a></span>&#8203;(int&nbsp;val)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided integer into a hexadecimal string.</div>
-</td>
-</tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toHex(long)">toHex</a></span>&#8203;(long&nbsp;val)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided long into a hexadecimal string.</div>
-</td>
-</tr>
-<tr id="i14" class="altColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toHex(short)">toHex</a></span>&#8203;(short&nbsp;val)</code></th>
-<td class="colLast">
-<div class="block">Converts the provided short into a hexadecimal string.</div>
-</td>
-</tr>
-<tr id="i15" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#twoBytesSignedToInt(byte%5B%5D,int)">twoBytesSignedToInt</a></span>&#8203;(byte[]&nbsp;bytes,
                    int&nbsp;offset)</code></th>
 <td class="colLast">
-<div class="block">Converts 2 bytes located at the offset provided in the byte array into an <b>signed</b>
- integer.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true".</div>
+</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#twoBytesToInt(byte%5B%5D,int)">twoBytesToInt</a></span>&#8203;(byte[]&nbsp;bytes,
              int&nbsp;offset)</code></th>
 <td class="colLast">
-<div class="block">Converts 2 bytes located at the offset provided in the byte array into an <b>unsigned</b>
- integer.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = false".</div>
+</div>
 </td>
 </tr>
 </table>
@@ -312,13 +294,74 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="extractBytes(byte[],int,int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>extractBytes</h4>
+<pre class="methodSignature">public static&nbsp;byte[]&nbsp;extractBytes&#8203;(byte[]&nbsp;src,
+                                  int&nbsp;bitOffset,
+                                  int&nbsp;nbBytes)</pre>
+<div class="block">Extracts "nbBytes" bytes from the "bitOffset" index (<b>in bits</b>) from a byte array.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>src</code> - The source byte array.</dd>
+<dd><code>bitOffset</code> - The offset (<b>in bits</b>).</dd>
+<dd><code>nbBytes</code> - The number of bytes to extract.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A not null byte array.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.NullPointerException</code> - If "src" is null.</dd>
+<dd><code>java.lang.ArrayIndexOutOfBoundsException</code> - If "bitOffset" or "nbBytes" is out of range.</dd>
+<dd><code>java.lang.NegativeArraySizeException</code> - If "nbBytes" is negative.</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>2.1.0</dd>
+</dl>
+</li>
+</ul>
+<a id="extractInt(byte[],int,int,boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>extractInt</h4>
+<pre class="methodSignature">public static&nbsp;int&nbsp;extractInt&#8203;(byte[]&nbsp;src,
+                             int&nbsp;offset,
+                             int&nbsp;nbBytes,
+                             boolean&nbsp;isSigned)</pre>
+<div class="block">Converts "nbBytes" bytes located at the "offset" provided in a source byte array into an
+ integer.
+
+ <p>Caution: the result may be erroneous if "nbBytes" is not in range [1..4].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>src</code> - The source byte array.</dd>
+<dd><code>offset</code> - The offset (in bytes).</dd>
+<dd><code>nbBytes</code> - The number of bytes to extract.</dd>
+<dd><code>isSigned</code> - True if the resulting integer is "signed" (relevant only if "nbBytes" is in
+     range [1..3]).</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>An int.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.NullPointerException</code> - If "src" is null.</dd>
+<dd><code>java.lang.ArrayIndexOutOfBoundsException</code> - If "offset" is not in range [0..(src.length-nbBytes)]</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>2.1.0</dd>
+</dl>
+</li>
+</ul>
 <a id="isValidHexString(java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>isValidHexString</h4>
-<pre class="methodSignature">public static&nbsp;boolean&nbsp;isValidHexString&#8203;(java.lang.String&nbsp;hex)</pre>
+<pre class="methodSignature">@Deprecated
+public static&nbsp;boolean&nbsp;isValidHexString&#8203;(java.lang.String&nbsp;hex)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="HexUtil.html#isValid(java.lang.String)"><code>HexUtil.isValid(String)</code></a> method instead.</div>
+</div>
 <div class="block">Checks if the provided string is formed by an even number of hexadecimal digits. <br>
 
  <ul>
@@ -330,6 +373,8 @@ extends java.lang.Object</pre>
 <dd><code>hex</code> - A string.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if the string matches the expected hexadecimal representation, false otherwise.</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>2.0.0</dd>
 </dl>
 </li>
 </ul>
@@ -339,7 +384,11 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>normalizeHexString</h4>
-<pre class="methodSignature">public static&nbsp;java.lang.String&nbsp;normalizeHexString&#8203;(java.lang.String&nbsp;hex)</pre>
+<pre class="methodSignature">@Deprecated
+public static&nbsp;java.lang.String&nbsp;normalizeHexString&#8203;(java.lang.String&nbsp;hex)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">To be removed.</div>
+</div>
 <div class="block">Normalizes the input hex string by padding on the left by a zero if necessary.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -359,7 +408,11 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>fromHex</h4>
-<pre class="methodSignature">public static&nbsp;byte[]&nbsp;fromHex&#8203;(java.lang.String&nbsp;hex)</pre>
+<pre class="methodSignature">@Deprecated
+public static&nbsp;byte[]&nbsp;fromHex&#8203;(java.lang.String&nbsp;hex)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="HexUtil.html#toByteArray(java.lang.String)"><code>HexUtil.toByteArray(String)</code></a> method instead.</div>
+</div>
 <div class="block">Converts the provided hexadecimal string into a byte array.
 
  <p>No checks are performed on the input string, except for nullity, zero length and length
@@ -379,197 +432,25 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="hexToByte(java.lang.String)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hexToByte</h4>
-<pre class="methodSignature">public static&nbsp;byte&nbsp;hexToByte&#8203;(java.lang.String&nbsp;hex)</pre>
-<div class="block">Converts the provided hexadecimal string into a byte.
-
- <p>No checks are performed on the input string, except for nullity, zero length and length
- parity.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>hex</code> - The hexadecimal string to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>The value.</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - If the provided string is null, empty or made of an odd number
-     of characters.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="#isValidHexString(java.lang.String)"><code>isValidHexString(String)</code></a></dd>
-</dl>
-</li>
-</ul>
-<a id="hexToShort(java.lang.String)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hexToShort</h4>
-<pre class="methodSignature">public static&nbsp;short&nbsp;hexToShort&#8203;(java.lang.String&nbsp;hex)</pre>
-<div class="block">Converts the provided hexadecimal string into a short.
-
- <p>No checks are performed on the input string, except for nullity, zero length and length
- parity.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>hex</code> - The hexadecimal string to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>The value.</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - If the provided string is null, empty or made of an odd number
-     of characters.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="#isValidHexString(java.lang.String)"><code>isValidHexString(String)</code></a></dd>
-</dl>
-</li>
-</ul>
-<a id="hexToInt(java.lang.String)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hexToInt</h4>
-<pre class="methodSignature">public static&nbsp;int&nbsp;hexToInt&#8203;(java.lang.String&nbsp;hex)</pre>
-<div class="block">Converts the provided hexadecimal string into an integer.
-
- <p>No checks are performed on the input string, except for nullity, zero length and length
- parity.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>hex</code> - The hexadecimal string to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>The value.</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - If the provided string is null, empty or made of an odd number
-     of characters.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="#isValidHexString(java.lang.String)"><code>isValidHexString(String)</code></a></dd>
-</dl>
-</li>
-</ul>
-<a id="hexToLong(java.lang.String)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hexToLong</h4>
-<pre class="methodSignature">public static&nbsp;long&nbsp;hexToLong&#8203;(java.lang.String&nbsp;hex)</pre>
-<div class="block">Converts the provided hexadecimal string into a long.
-
- <p>No checks are performed on the input string, except for nullity, zero length and length
- parity.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>hex</code> - The hexadecimal string to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>The value.</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - If the provided string is null, empty or made of an odd number
-     of characters.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="#isValidHexString(java.lang.String)"><code>isValidHexString(String)</code></a></dd>
-</dl>
-</li>
-</ul>
 <a id="toHex(byte[])">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>toHex</h4>
-<pre class="methodSignature">public static&nbsp;java.lang.String&nbsp;toHex&#8203;(byte[]&nbsp;tab)</pre>
+<pre class="methodSignature">@Deprecated
+public static&nbsp;java.lang.String&nbsp;toHex&#8203;(byte[]&nbsp;src)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="HexUtil.html#toHex(byte%5B%5D)"><code>HexUtil.toHex(byte[])</code></a> method instead.</div>
+</div>
 <div class="block">Converts the provided byte array into a hexadecimal string.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>tab</code> - The byte array to convert.</dd>
+<dd><code>src</code> - The byte array to convert.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>An empty string if the byte array is null or empty.</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2.0.0</dd>
-</dl>
-</li>
-</ul>
-<a id="toHex(byte)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toHex</h4>
-<pre class="methodSignature">public static&nbsp;java.lang.String&nbsp;toHex&#8203;(byte&nbsp;val)</pre>
-<div class="block">Converts the provided byte into a hexadecimal string.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>val</code> - The value to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>A not empty string.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
-</dl>
-</li>
-</ul>
-<a id="toHex(short)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toHex</h4>
-<pre class="methodSignature">public static&nbsp;java.lang.String&nbsp;toHex&#8203;(short&nbsp;val)</pre>
-<div class="block">Converts the provided short into a hexadecimal string.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>val</code> - The value to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>A not empty string.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
-</dl>
-</li>
-</ul>
-<a id="toHex(int)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toHex</h4>
-<pre class="methodSignature">public static&nbsp;java.lang.String&nbsp;toHex&#8203;(int&nbsp;val)</pre>
-<div class="block">Converts the provided integer into a hexadecimal string.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>val</code> - The value to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>A not empty string.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
-</dl>
-</li>
-</ul>
-<a id="toHex(long)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toHex</h4>
-<pre class="methodSignature">public static&nbsp;java.lang.String&nbsp;toHex&#8203;(long&nbsp;val)</pre>
-<div class="block">Converts the provided long into a hexadecimal string.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>val</code> - The value to convert.</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>A not empty string.</dd>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>2.1.0</dd>
 </dl>
 </li>
 </ul>
@@ -579,8 +460,13 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>twoBytesToInt</h4>
-<pre class="methodSignature">public static&nbsp;int&nbsp;twoBytesToInt&#8203;(byte[]&nbsp;bytes,
+<pre class="methodSignature">@Deprecated
+public static&nbsp;int&nbsp;twoBytesToInt&#8203;(byte[]&nbsp;bytes,
                                 int&nbsp;offset)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = false".</div>
+</div>
 <div class="block">Converts 2 bytes located at the offset provided in the byte array into an <b>unsigned</b>
  integer.
 
@@ -593,7 +479,8 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A positive int.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - If the buffer has a bad length or the offset is negative.</dd>
+<dd><code>java.lang.NullPointerException</code> - If "bytes" is null.</dd>
+<dd><code>java.lang.ArrayIndexOutOfBoundsException</code> - If "offset" is not in range [0..(bytes.length-2)]</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2.0.0</dd>
 </dl>
@@ -605,10 +492,14 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>twoBytesSignedToInt</h4>
-<pre class="methodSignature">public static&nbsp;int&nbsp;twoBytesSignedToInt&#8203;(byte[]&nbsp;bytes,
+<pre class="methodSignature">@Deprecated
+public static&nbsp;int&nbsp;twoBytesSignedToInt&#8203;(byte[]&nbsp;bytes,
                                       int&nbsp;offset)</pre>
-<div class="block">Converts 2 bytes located at the offset provided in the byte array into an <b>signed</b>
- integer.
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true".</div>
+</div>
+<div class="block">Converts 2 bytes located at the offset provided in the byte array into a <b>signed</b> integer.
 
  <p>The 2 bytes are assumed to be in the of the most significant byte first order (aka 'network
  order' or 'big-endian' or 'MSB').
@@ -622,7 +513,8 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A negative or positive int.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - If the buffer has a bad length or the offset is negative.</dd>
+<dd><code>java.lang.NullPointerException</code> - If "bytes" is null.</dd>
+<dd><code>java.lang.ArrayIndexOutOfBoundsException</code> - If "offset" is not in range [0..(bytes.length-2)]</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2.0.0</dd>
 </dl>
@@ -634,8 +526,13 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>threeBytesToInt</h4>
-<pre class="methodSignature">public static&nbsp;int&nbsp;threeBytesToInt&#8203;(byte[]&nbsp;bytes,
+<pre class="methodSignature">@Deprecated
+public static&nbsp;int&nbsp;threeBytesToInt&#8203;(byte[]&nbsp;bytes,
                                   int&nbsp;offset)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = false".</div>
+</div>
 <div class="block">Converts 3 bytes located at the offset provided in the byte array into an <b>unsigned</b>
  integer.
 
@@ -648,7 +545,8 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A positive int.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the buffer has a bad length</dd>
+<dd><code>java.lang.NullPointerException</code> - If "bytes" is null.</dd>
+<dd><code>java.lang.ArrayIndexOutOfBoundsException</code> - If "offset" is not in range [0..(bytes.length-3)]</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2.0.0</dd>
 </dl>
@@ -660,8 +558,13 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>threeBytesSignedToInt</h4>
-<pre class="methodSignature">public static&nbsp;int&nbsp;threeBytesSignedToInt&#8203;(byte[]&nbsp;bytes,
+<pre class="methodSignature">@Deprecated
+public static&nbsp;int&nbsp;threeBytesSignedToInt&#8203;(byte[]&nbsp;bytes,
                                         int&nbsp;offset)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     3" and "isSigned = true".</div>
+</div>
 <div class="block">Converts 3 bytes located at the offset provided in the byte array into an <b>signed</b>
  integer.
 
@@ -677,7 +580,8 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A positive int.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the buffer has a bad length</dd>
+<dd><code>java.lang.NullPointerException</code> - If "bytes" is null.</dd>
+<dd><code>java.lang.ArrayIndexOutOfBoundsException</code> - If "offset" is not in range [0..(bytes.length-3)]</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2.0.0</dd>
 </dl>
@@ -689,8 +593,13 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>fourBytesToInt</h4>
-<pre class="methodSignature">public static&nbsp;int&nbsp;fourBytesToInt&#8203;(byte[]&nbsp;bytes,
+<pre class="methodSignature">@Deprecated
+public static&nbsp;int&nbsp;fourBytesToInt&#8203;(byte[]&nbsp;bytes,
                                  int&nbsp;offset)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use <a href="#extractInt(byte%5B%5D,int,int,boolean)"><code>extractInt(byte[], int, int, boolean)</code></a> method instead with "nbBytes =
+     2" and "isSigned = true|false".</div>
+</div>
 <div class="block">Converts 4 bytes located at the offset provided in the byte array into an <b>unsigned</b>
  integer.
 
@@ -703,7 +612,8 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A positive int.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.IllegalArgumentException</code> - if the buffer has a bad length</dd>
+<dd><code>java.lang.NullPointerException</code> - If "bytes" is null.</dd>
+<dd><code>java.lang.ArrayIndexOutOfBoundsException</code> - If "offset" is not in range [0..(bytes.length-4)]</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2.0.0</dd>
 </dl>
