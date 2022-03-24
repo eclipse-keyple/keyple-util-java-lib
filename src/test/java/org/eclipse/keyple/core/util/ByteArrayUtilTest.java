@@ -16,9 +16,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 public class ByteArrayUtilTest {
+
   private static final String HEXSTRING_ODD = "0102030";
   private static final String HEXSTRING_BAD = "010203ABGH8+";
   private static final String HEXSTRING_GOOD = "1234567890ABCDEFFEDCBA0987654321";
+  private static final byte[] BYTEARRAY_LEN_1 = new byte[] {(byte) 0x12};
+  private static final byte[] BYTEARRAY_LEN_2 = new byte[] {(byte) 0x12, (byte) 0x34};
+  private static final byte[] BYTEARRAY_LEN_3 = new byte[] {(byte) 0x12, (byte) 0x34, (byte) 0x56};
+  private static final byte[] BYTEARRAY_LEN_4 =
+      new byte[] {(byte) 0x12, (byte) 0x34, (byte) 0x56, (byte) 0x78};
   private static final byte[] BYTEARRAY_LEN_16 =
       new byte[] {
         (byte) 0x12,
@@ -38,11 +44,100 @@ public class ByteArrayUtilTest {
         (byte) 0x43,
         (byte) 0x21
       };
-  private static final byte[] BYTEARRAY_LEN_1 = new byte[] {(byte) 0x12};
-  private static final byte[] BYTEARRAY_LEN_2 = new byte[] {(byte) 0x12, (byte) 0x34};
-  private static final byte[] BYTEARRAY_LEN_3 = new byte[] {(byte) 0x12, (byte) 0x34, (byte) 0x56};
-  private static final byte[] BYTEARRAY_LEN_4 =
-      new byte[] {(byte) 0x12, (byte) 0x34, (byte) 0x56, (byte) 0x78};
+
+  @Test(expected = NullPointerException.class)
+  public void extractBytes_whenSrcIsNull_shouldThrowNPE() {
+    ByteArrayUtil.extractBytes(null, 0, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractBytes_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractBytes(new byte[1], 16, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractBytes_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extractBytes(new byte[1], 9, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractBytes_whenBitOffsetIsNegative_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractBytes(new byte[1], -8, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractBytes_whenBitOffsetIsNegative_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extractBytes(new byte[1], -1, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractBytes_whenNbBytesIsOutOfRange_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractBytes(new byte[1], 0, 2);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractBytes_whenNbBytesIsOutOfRange_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extractBytes(new byte[1], 1, 2);
+  }
+
+  @Test(expected = NegativeArraySizeException.class)
+  public void extractBytes_whenNbBytesIsNegative_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractBytes(new byte[1], 0, -1);
+  }
+
+  @Test(expected = NegativeArraySizeException.class)
+  public void extractBytes_whenNbBytesIsNegative_shouldThrowAIOOBE2() {
+    ByteArrayUtil.extractBytes(new byte[1], 1, -1);
+  }
+
+  @Test
+  public void extractBytes_whenBitOffsetIsMultipleOf8_shouldBeSuccessful() {
+    byte[] src = new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3};
+    assertThat(ByteArrayUtil.extractBytes(src, 8, 1)).containsExactly(0xF2);
+    assertThat(ByteArrayUtil.extractBytes(src, 8, 2)).containsExactly(0xF2, 0xF3);
+  }
+
+  @Test
+  public void extractBytes_whenBitOffsetIsNotMultipleOf8_shouldBeSuccessful() {
+    byte[] src = new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3};
+    assertThat(ByteArrayUtil.extractBytes(src, 6, 1)).containsExactly(0x7C);
+    assertThat(ByteArrayUtil.extractBytes(src, 6, 2)).containsExactly(0x7C, 0xBC);
+    assertThat(ByteArrayUtil.extractBytes(src, 3, 1)).containsExactly(0x8F);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void extractInt_whenSrcIsNull_shouldThrowNPE() {
+    ByteArrayUtil.extractInt(null, 0, 1, true);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractInt_whenOffsetIsNegative_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractInt(new byte[1], -1, 1, true);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractInt_whenOffsetIsGreaterThanSrcLengthMinusNbBytes_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractInt(new byte[1], 1, 1, true);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractInt_whenNbBytesIsTooBig_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractInt(new byte[1], 0, 2, true);
+  }
+
+  @Test
+  public void extractInt_whenInputIsOk_shouldBeSuccessful() {
+    byte[] src =
+        new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6};
+    assertThat(ByteArrayUtil.extractInt(src, 1, 1, true)).isEqualTo(0xFFFFFFF2);
+    assertThat(ByteArrayUtil.extractInt(src, 1, 1, false)).isEqualTo(0xF2);
+    assertThat(ByteArrayUtil.extractInt(src, 1, 2, true)).isEqualTo(0xFFFFF2F3);
+    assertThat(ByteArrayUtil.extractInt(src, 1, 2, false)).isEqualTo(0xF2F3);
+    assertThat(ByteArrayUtil.extractInt(src, 1, 3, true)).isEqualTo(0xFFF2F3F4);
+    assertThat(ByteArrayUtil.extractInt(src, 1, 3, false)).isEqualTo(0xF2F3F4);
+    assertThat(ByteArrayUtil.extractInt(src, 1, 4, true)).isEqualTo(0xF2F3F4F5);
+    assertThat(ByteArrayUtil.extractInt(src, 1, 4, false)).isEqualTo(0xF2F3F4F5);
+  }
 
   @Test
   public void isValidHexString_null() {
@@ -93,128 +188,6 @@ public class ByteArrayUtilTest {
     assertThat(bytes).isEqualTo(BYTEARRAY_LEN_16);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToByte_whenHexIsNull_shouldThrowIAE() {
-    ByteArrayUtil.hexToByte(null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToByte_whenHexIsEmpty_shouldThrowIAE() {
-    ByteArrayUtil.hexToByte("");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToByte_whenHexLengthIsOdd_shouldThrowIAE() {
-    ByteArrayUtil.hexToByte("1");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToByte_whenHexLengthIsGreaterThan2_shouldThrowIAE() {
-    ByteArrayUtil.hexToByte("1234");
-  }
-
-  @Test
-  public void hexToByte_whenHexIsValid_shouldBeSuccessful() {
-    assertThat(ByteArrayUtil.hexToByte("AB")).isEqualTo((byte) 0xAB);
-    assertThat(ByteArrayUtil.hexToByte("CD")).isEqualTo((byte) 0xCD);
-    assertThat(ByteArrayUtil.hexToByte("EF")).isEqualTo((byte) 0xEF);
-    assertThat(ByteArrayUtil.hexToByte("ab")).isEqualTo((byte) 0xAB);
-    assertThat(ByteArrayUtil.hexToByte("cd")).isEqualTo((byte) 0xCD);
-    assertThat(ByteArrayUtil.hexToByte("ef")).isEqualTo((byte) 0xEF);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToShort_whenHexIsNull_shouldThrowIAE() {
-    ByteArrayUtil.hexToShort(null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToShort_whenHexIsEmpty_shouldThrowIAE() {
-    ByteArrayUtil.hexToShort("");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToShort_whenHexLengthIsOdd_shouldThrowIAE() {
-    ByteArrayUtil.hexToShort("1");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToShort_whenHexLengthIsGreaterThan4_shouldThrowIAE() {
-    ByteArrayUtil.hexToShort("123456");
-  }
-
-  @Test
-  public void hexToShort_whenHexIsValid_shouldBeSuccessful() {
-    assertThat(ByteArrayUtil.hexToShort("ABCD")).isEqualTo((short) 0xABCD);
-    assertThat(ByteArrayUtil.hexToShort("EF")).isEqualTo((short) 0xEF);
-    assertThat(ByteArrayUtil.hexToShort("abcd")).isEqualTo((short) 0xABCD);
-    assertThat(ByteArrayUtil.hexToShort("ef")).isEqualTo((short) 0xEF);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToInt_whenHexIsNull_shouldThrowIAE() {
-    ByteArrayUtil.hexToInt(null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToInt_whenHexIsEmpty_shouldThrowIAE() {
-    ByteArrayUtil.hexToInt("");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToInt_whenHexLengthIsOdd_shouldThrowIAE() {
-    ByteArrayUtil.hexToInt("1");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToInt_whenHexLengthIsGreaterThan8_shouldThrowIAE() {
-    ByteArrayUtil.hexToInt("123456789A");
-  }
-
-  @Test
-  public void hexToInt_whenHexIsValid_shouldBeSuccessful() {
-    assertThat(ByteArrayUtil.hexToInt("FE")).isEqualTo(0xFE);
-    assertThat(ByteArrayUtil.hexToInt("FEF7")).isEqualTo(0xFEF7);
-    assertThat(ByteArrayUtil.hexToInt("FEF712")).isEqualTo(0xFEF712);
-    assertThat(ByteArrayUtil.hexToInt("FEF71234")).isEqualTo(0xFEF71234);
-    assertThat(ByteArrayUtil.hexToInt("ABCDEF")).isEqualTo(0xABCDEF);
-    assertThat(ByteArrayUtil.hexToInt("abcdef")).isEqualTo(0xABCDEF);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToLong_whenHexIsNull_shouldThrowIAE() {
-    ByteArrayUtil.hexToLong(null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToLong_whenHexIsEmpty_shouldThrowIAE() {
-    ByteArrayUtil.hexToLong("");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToLong_whenHexLengthIsOdd_shouldThrowIAE() {
-    ByteArrayUtil.hexToLong("1");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void hexToLong_whenHexLengthIsGreaterThan16_shouldThrowIAE() {
-    ByteArrayUtil.hexToLong("123456789ABCDEF012");
-  }
-
-  @Test
-  public void hexToLong_whenHexIsValid_shouldBeSuccessful() {
-    assertThat(ByteArrayUtil.hexToLong("FE")).isEqualTo(0xFEL);
-    assertThat(ByteArrayUtil.hexToLong("FEF7")).isEqualTo(0xFEF7L);
-    assertThat(ByteArrayUtil.hexToLong("FEF712")).isEqualTo(0xFEF712L);
-    assertThat(ByteArrayUtil.hexToLong("FEF71234")).isEqualTo(0xFEF71234L);
-    assertThat(ByteArrayUtil.hexToLong("FEF7123456")).isEqualTo(0xFEF7123456L);
-    assertThat(ByteArrayUtil.hexToLong("FEF712345678")).isEqualTo(0xFEF712345678L);
-    assertThat(ByteArrayUtil.hexToLong("FEF7123456789A")).isEqualTo(0xFEF7123456789AL);
-    assertThat(ByteArrayUtil.hexToLong("FEF7123456789ABC")).isEqualTo(0xFEF7123456789ABCL);
-    assertThat(ByteArrayUtil.hexToLong("ABCDEF")).isEqualTo(0xABCDEFL);
-    assertThat(ByteArrayUtil.hexToLong("abcdef")).isEqualTo(0xABCDEFL);
-  }
-
   @Test
   public void toHex_null() {
     String hex = ByteArrayUtil.toHex(null);
@@ -234,53 +207,22 @@ public class ByteArrayUtilTest {
     assertThat(hex).isEqualTo(HEXSTRING_GOOD);
   }
 
-  @Test
-  public void toHex_byte() {
-    assertThat(ByteArrayUtil.toHex((byte) 0xFE)).isEqualTo("FE");
-  }
-
-  @Test
-  public void toHex_short() {
-    assertThat(ByteArrayUtil.toHex((short) 0xFE)).isEqualTo("FE");
-    assertThat(ByteArrayUtil.toHex((short) 0xFE34)).isEqualTo("FE34");
-  }
-
-  @Test
-  public void toHex_int() {
-    assertThat(ByteArrayUtil.toHex(0xFE)).isEqualTo("FE");
-    assertThat(ByteArrayUtil.toHex(0xFE34)).isEqualTo("FE34");
-    assertThat(ByteArrayUtil.toHex(0xFE3456)).isEqualTo("FE3456");
-    assertThat(ByteArrayUtil.toHex(0xFE345678)).isEqualTo("FE345678");
-  }
-
-  @Test
-  public void toHex_long() {
-    assertThat(ByteArrayUtil.toHex(0xFEL)).isEqualTo("FE");
-    assertThat(ByteArrayUtil.toHex(0xFE34L)).isEqualTo("FE34");
-    assertThat(ByteArrayUtil.toHex(0xFE3456L)).isEqualTo("FE3456");
-    assertThat(ByteArrayUtil.toHex(0xFE345678L)).isEqualTo("FE345678");
-    assertThat(ByteArrayUtil.toHex(0xFE3456789AL)).isEqualTo("FE3456789A");
-    assertThat(ByteArrayUtil.toHex(0xFE3456789ABCL)).isEqualTo("FE3456789ABC");
-    assertThat(ByteArrayUtil.toHex(0xFE3456789ABCDEL)).isEqualTo("FE3456789ABCDE");
-    assertThat(ByteArrayUtil.toHex(0xFE3456789ABCDEF0L)).isEqualTo("FE3456789ABCDEF0");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void twoBytesToInt_null() {
     int value = ByteArrayUtil.twoBytesToInt(null, 0);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void twoBytesToInt_negative_offset() {
     int value = ByteArrayUtil.twoBytesToInt(BYTEARRAY_LEN_16, -1);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void twoBytesToInt_too_short_buffer_1() {
     int value = ByteArrayUtil.twoBytesToInt(BYTEARRAY_LEN_1, 0);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void twoBytesToInt_too_short_buffer_2() {
     int value = ByteArrayUtil.twoBytesToInt(BYTEARRAY_LEN_3, 2);
   }
@@ -328,22 +270,22 @@ public class ByteArrayUtilTest {
     assertThat(value).isEqualTo(-28501);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void threeBytesToInt_null() {
     int value = ByteArrayUtil.threeBytesToInt(null, 0);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void threeBytesToInt_negative_offset() {
     int value = ByteArrayUtil.threeBytesToInt(BYTEARRAY_LEN_16, -1);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void threeBytesToInt_too_short_buffer_1() {
     int value = ByteArrayUtil.threeBytesToInt(BYTEARRAY_LEN_2, 0);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void threeBytesToInt_too_short_buffer_2() {
     int value = ByteArrayUtil.threeBytesToInt(BYTEARRAY_LEN_3, 1);
   }
@@ -391,22 +333,22 @@ public class ByteArrayUtilTest {
     assertThat(value).isEqualTo(-7296051);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void fourBytesToInt_null() {
     int value = ByteArrayUtil.fourBytesToInt(null, 0);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void fourBytesToInt_negative_offset() {
     int value = ByteArrayUtil.fourBytesToInt(BYTEARRAY_LEN_16, -1);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void fourBytesToInt_too_short_buffer_1() {
     int value = ByteArrayUtil.fourBytesToInt(BYTEARRAY_LEN_3, 0);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
   public void fourBytesToInt_too_short_buffer_2() {
     int value = ByteArrayUtil.fourBytesToInt(BYTEARRAY_LEN_4, 1);
   }

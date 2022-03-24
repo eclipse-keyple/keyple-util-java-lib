@@ -24,10 +24,10 @@ public class ApduUtilTest {
       new byte[] {(byte) 0x12, (byte) 0x34, (byte) 0x56, (byte) 0x78};
   private static final Byte LE = 3;
 
-  private static final byte[] CASE1 = ByteArrayUtil.fromHex("1122334400");
-  private static final byte[] CASE2 = ByteArrayUtil.fromHex("1122334403");
-  private static final byte[] CASE3 = ByteArrayUtil.fromHex("112233440412345678");
-  private static final byte[] CASE4 = ByteArrayUtil.fromHex("11223344041234567803");
+  private static final byte[] CASE1 = HexUtil.toByteArray("1122334400");
+  private static final byte[] CASE2 = HexUtil.toByteArray("1122334403");
+  private static final byte[] CASE3 = HexUtil.toByteArray("112233440412345678");
+  private static final byte[] CASE4 = HexUtil.toByteArray("11223344041234567803");
 
   @Test
   public void build_whenDataInAndLeAreNull_shouldReturnCase1() {

@@ -13,7 +13,7 @@ package org.eclipse.keyple.core.util.json;
 
 import com.google.gson.*;
 import java.lang.reflect.Type;
-import org.eclipse.keyple.core.util.ByteArrayUtil;
+import org.eclipse.keyple.core.util.HexUtil;
 
 /**
  * JSON serializer/deserializer of a byte array to a hex string.
@@ -29,7 +29,7 @@ public class ByteArrayJsonAdapter implements JsonSerializer<byte[]>, JsonDeseria
    */
   @Override
   public JsonElement serialize(byte[] data, Type typeOfSrc, JsonSerializationContext context) {
-    return new JsonPrimitive(ByteArrayUtil.toHex(data));
+    return new JsonPrimitive(HexUtil.toHex(data));
   }
 
   /**
@@ -40,6 +40,6 @@ public class ByteArrayJsonAdapter implements JsonSerializer<byte[]>, JsonDeseria
   @Override
   public byte[] deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    return ByteArrayUtil.fromHex(json.getAsString());
+    return HexUtil.toByteArray(json.getAsString());
   }
 }
