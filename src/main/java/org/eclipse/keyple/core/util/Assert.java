@@ -92,7 +92,7 @@ public final class Assert {
    * @throws IllegalArgumentException if object is null or empty
    * @since 2.0.0
    */
-  public Assert notEmpty(Collection<? extends Object> obj, String name) {
+  public Assert notEmpty(Collection<?> obj, String name) {
     if (obj == null) {
       throw new IllegalArgumentException(ARGUMENT + name + IS_NULL);
     }
@@ -219,7 +219,7 @@ public final class Assert {
    * @since 2.1.0
    */
   public Assert isHexString(String hex, String name) {
-    if (!ByteArrayUtil.isValidHexString(hex)) {
+    if (!HexUtil.isValid(hex)) {
       throw new IllegalArgumentException(ARGUMENT + name + IS_NOT_HEX);
     }
     return INSTANCE;

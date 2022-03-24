@@ -19,7 +19,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
-import org.eclipse.keyple.core.util.ByteArrayUtil;
+import org.eclipse.keyple.core.util.HexUtil;
 
 /**
  * JSON serializer/deserializer of a long to a hex string.
@@ -35,7 +35,7 @@ public class LongJsonAdapter implements JsonSerializer<Long>, JsonDeserializer<L
    */
   @Override
   public JsonElement serialize(Long data, Type typeOfSrc, JsonSerializationContext context) {
-    return new JsonPrimitive(ByteArrayUtil.toHex(data));
+    return new JsonPrimitive(HexUtil.toHex(data));
   }
 
   /**
@@ -46,6 +46,6 @@ public class LongJsonAdapter implements JsonSerializer<Long>, JsonDeserializer<L
   @Override
   public Long deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    return ByteArrayUtil.hexToLong(json.getAsString());
+    return HexUtil.toLong(json.getAsString());
   }
 }

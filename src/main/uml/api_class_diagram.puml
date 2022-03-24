@@ -57,7 +57,7 @@ package "org.eclipse.keyple.core.util" as util {
 
         +Assert notNull (Object obj, String name)
         +Assert notEmpty (String obj, String name)
-        +Assert notEmpty (Collection<? extends Object> obj, String name)
+        +Assert notEmpty (Collection<?> obj, String name)
         +Assert notEmpty (byte[] obj, String name)
         +Assert isTrue (Boolean condition, String name)
         +Assert greaterOrEqual (Integer number, int minValue, String name)
@@ -66,28 +66,35 @@ package "org.eclipse.keyple.core.util" as util {
         +Assert isHexString (String hex, String name)
     }
     +class "**final** ByteArrayUtil" as ByteArrayUtil {
-        +{static} boolean isValidHexString (String hex)
-        +{static} String normalizeHexString (String hex)
+        +{static} byte[] extractBytes (byte[] src, int bitOffset, int nbBytes)
+        +{static} int extractInt (byte[] src, int offset, int nbBytes, boolean isSigned)
 
-        +{static} byte[] fromHex (String hex)
-        +{static} byte hexToByte (String hex)
-        +{static} short hexToShort (String hex)
-        +{static} int hexToInt (String hex)
-        +{static} long hexToLong (String hex)
+        +<s>boolean isValidHexString (String hex)
+        +<s>String normalizeHexString (String hex)
 
-        +{static} String toHex (byte[] data)
+        +<s>byte[] fromHex (String hex)
+        +<s>String toHex (byte[] data)
+
+        +<s>int twoBytesToInt (byte[] bytes, int offset)
+        +<s>int twoBytesSignedToInt (byte[] bytes, int offset)
+        +<s>int threeBytesToInt (byte[] bytes, int offset)
+        +<s>int threeBytesSignedToInt (byte[] bytes, int offset)
+        +<s>int fourBytesToInt (byte[] bytes, int offset)
+    }
+    +class "**final** HexUtil" as HexUtil {
+        +{static} boolean isValid (String hex)
+
+        +{static} byte[] toBytes (String hex)
+        +{static} byte toByte (String hex)
+        +{static} short toShort (String hex)
+        +{static} int toInt (String hex)
+        +{static} long toLong (String hex)
+
+        +{static} String toHex (byte[] val)
         +{static} String toHex (byte val)
         +{static} String toHex (short val)
         +{static} String toHex (int val)
         +{static} String toHex (long val)
-
-        +{static} int twoBytesToInt (byte[] bytes, int offset)
-        +{static} int twoBytesSignedToInt (byte[] bytes, int offset)
-        +{static} int threeBytesToInt (byte[] bytes, int offset)
-        +{static} int threeBytesSignedToInt (byte[] bytes, int offset)
-        +{static} int fourBytesToInt (byte[] bytes, int offset)
-
-        +{static} byte[] extract (byte[] src, int bitOffset, int nbBytes)
     }
     +class "**final** ApduUtil" as ApduUtil {
         +{static} byte[] build (byte cla, byte ins, byte p1, byte p2, byte[] dataIn, Byte le)

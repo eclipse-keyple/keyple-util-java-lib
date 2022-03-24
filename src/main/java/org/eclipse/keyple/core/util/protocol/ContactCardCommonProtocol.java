@@ -23,5 +23,5 @@ public enum ContactCardCommonProtocol {
   ISO_7816_3_T1,
 
   // contacts proprietary old Calypso SAM
-  INNOVATRON_HIGH_SPEED_PROTOCOL_SAM;
+  INNOVATRON_HIGH_SPEED_PROTOCOL_SAM
 }
