@@ -43,23 +43,23 @@ public class HexUtilTest {
   }
 
   @Test(expected = NullPointerException.class)
-  public void toBytes_whenHexIsNull_shouldThrowNPE() {
-    HexUtil.toBytes(null);
+  public void toByteArray_whenHexIsNull_shouldThrowNPE() {
+    HexUtil.toByteArray(null);
   }
 
   @Test
-  public void toBytes_whenHexIsEmpty_shouldReturnEmptyArray() {
-    assertThat(HexUtil.toBytes("")).isEmpty();
+  public void toByteArray_whenHexIsEmpty_shouldReturnEmptyArray() {
+    assertThat(HexUtil.toByteArray("")).isEmpty();
   }
 
   @Test(expected = StringIndexOutOfBoundsException.class)
-  public void toBytes_whenHexIsOddLength_shouldThrowSIOOBE() {
-    assertThat(HexUtil.toBytes("1")).containsExactly((byte) 0x1);
+  public void toByteArray_whenHexIsOddLength_shouldThrowSIOOBE() {
+    assertThat(HexUtil.toByteArray("1")).containsExactly((byte) 0x1);
   }
 
   @Test
-  public void toBytes_whenHexIsValid_shouldBeSuccessful() {
-    assertThat(HexUtil.toBytes("ABCDEFabcdef"))
+  public void toByteArray_whenHexIsValid_shouldBeSuccessful() {
+    assertThat(HexUtil.toByteArray("ABCDEFabcdef"))
         .containsExactly(
             (byte) 0xAB, (byte) 0xCD, (byte) 0xEF, (byte) 0xAB, (byte) 0xCD, (byte) 0xEF);
   }

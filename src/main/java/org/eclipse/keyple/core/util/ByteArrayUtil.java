@@ -123,12 +123,12 @@ public final class ByteArrayUtil {
    *     of characters.
    * @see #isValidHexString(String)
    * @since 2.0.0
-   * @deprecated Use {@link HexUtil#toBytes(String)} method instead.
+   * @deprecated Use {@link HexUtil#toByteArray(String)} method instead.
    */
   @Deprecated
   public static byte[] fromHex(String hex) {
     Assert.getInstance().notEmpty(hex, "hex").isEqual(hex.length() % 2, 0, "hex size");
-    return HexUtil.toBytes(hex);
+    return HexUtil.toByteArray(hex);
   }
 
   /**

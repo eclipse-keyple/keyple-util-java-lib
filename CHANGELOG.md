@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JSON serializer/deserializer for `short` and `long` data types (issue [#17]).
 - `Assert.isHexString` method.
 - `HexUtil.isValid` method.
-- `HexUtil.toBytes` method.
+- `HexUtil.toByteArray` method.
 - `HexUtil.toByte` method.
 - `HexUtil.toShort` method.
 - `HexUtil.toInt` method.
@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 - `ByteArrayUtil.isValidHexString` method replaced by `HexUtil.isValid` method.
 - `ByteArrayUtil.normalizeHexString` method.
-- `ByteArrayUtil.fromHex` method replaced by `HexUtil.toBytes` method.
+- `ByteArrayUtil.fromHex` method replaced by `HexUtil.toByteArray` method.
 - `ByteArrayUtil.toHex` method replaced by `HexUtil.toHex` method.
 - `ByteArrayUtil.twoBytesToInt` method replaced by `ByteArrayUtil.extractInt` method.
 - `ByteArrayUtil.twoBytesSignedToInt` method replaced by `ByteArrayUtil.extractInt` method.

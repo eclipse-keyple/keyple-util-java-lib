@@ -40,6 +40,6 @@ public class ByteArrayJsonAdapter implements JsonSerializer<byte[]>, JsonDeseria
   @Override
   public byte[] deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    return HexUtil.toBytes(json.getAsString());
+    return HexUtil.toByteArray(json.getAsString());
   }
 }

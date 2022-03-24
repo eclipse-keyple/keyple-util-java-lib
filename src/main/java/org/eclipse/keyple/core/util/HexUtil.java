@@ -102,7 +102,7 @@ public final class HexUtil {
   }
 
   /**
-   * Converts a hexadecimal string into a byte array.
+   * Converts a hexadecimal string to a byte array.
    *
    * <p>Caution: the result may be erroneous if the string does not contain only hexadecimal
    * characters.
@@ -112,10 +112,9 @@ public final class HexUtil {
    * @throws NullPointerException If the input string is null.
    * @throws StringIndexOutOfBoundsException If the input string is made of an odd number of
    *     characters.
-   * @see #isValid(String)
    * @since 2.1.0
    */
-  public static byte[] toBytes(String hex) {
+  public static byte[] toByteArray(String hex) {
     byte[] tab = new byte[hex.length() / 2];
     for (int i = 0; i < hex.length(); i += 2) {
       tab[i / 2] =
@@ -223,14 +222,14 @@ public final class HexUtil {
   /**
    * Converts a byte array to a hexadecimal string.
    *
-   * @param val The byte array to convert.
+   * @param tab The byte array to convert.
    * @return A string with a size equal to (2 * size of the input array).
    * @throws NullPointerException If the input byte array is null.
    * @since 2.1.0
    */
-  public static String toHex(byte[] val) {
+  public static String toHex(byte[] tab) {
     StringBuilder sb = new StringBuilder();
-    for (byte b : val) {
+    for (byte b : tab) {
       sb.append(byteToHex[b & 0xFF]);
     }
     return sb.toString();

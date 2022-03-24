@@ -84,13 +84,13 @@ package "org.eclipse.keyple.core.util" as util {
     +class "**final** HexUtil" as HexUtil {
         +{static} boolean isValid (String hex)
 
-        +{static} byte[] toBytes (String hex)
+        +{static} byte[] toByteArray (String hex)
         +{static} byte toByte (String hex)
         +{static} short toShort (String hex)
         +{static} int toInt (String hex)
         +{static} long toLong (String hex)
 
-        +{static} String toHex (byte[] val)
+        +{static} String toHex (byte[] tab)
         +{static} String toHex (byte val)
         +{static} String toHex (short val)
         +{static} String toHex (int val)
