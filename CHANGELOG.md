@@ -19,7 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `HexUtil.toHex` methods for `byte[]`, `byte`, `short`, `int` and `long` data types.
 - `ByteArrayUtil.extractBytes` method.
 - `ByteArrayUtil.extractInt` method.
-- `ByteArrayUtil.equals` method.
 - `BerTlvUtil.parse` method to parse TLV data structure having several identical TAGs (issue [#19]).
 ### Changed
 - Optimizations of hexadecimal data conversions.

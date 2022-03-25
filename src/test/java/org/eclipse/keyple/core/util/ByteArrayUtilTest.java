@@ -140,43 +140,6 @@ public class ByteArrayUtilTest {
   }
 
   @Test
-  public void equals_whenArraysAreBothNull_shouldReturnTrue() {
-    assertThat(ByteArrayUtil.equals(null, null)).isTrue();
-  }
-
-  @Test
-  public void equals_whenOnlyOneArrayIsNull_shouldReturnFalse() {
-    assertThat(ByteArrayUtil.equals(new byte[1], null)).isFalse();
-    assertThat(ByteArrayUtil.equals(null, new byte[1])).isFalse();
-  }
-
-  @Test
-  public void equals_whenArraysHaveNotTheSameLength_shouldReturnFalse() {
-    assertThat(ByteArrayUtil.equals(new byte[1], new byte[2])).isFalse();
-  }
-
-  @Test
-  public void equals_whenArraysHaveNotTheSameContent_shouldReturnFalse() {
-    byte[] tab1 = new byte[] {1};
-    byte[] tab2 = new byte[] {2};
-    assertThat(ByteArrayUtil.equals(tab1, tab2)).isFalse();
-  }
-
-  @Test
-  public void equals_whenArraysHaveTheSameContent_shouldReturnTrue() {
-    byte[] tab1 = new byte[] {1};
-    byte[] tab2 = new byte[] {1};
-    assertThat(ByteArrayUtil.equals(tab1, tab2)).isTrue();
-  }
-
-  @Test
-  public void equals_whenArraysHaveSameRef_shouldReturnTrue() {
-    byte[] tab1 = new byte[1];
-    byte[] tab2 = tab1;
-    assertThat(ByteArrayUtil.equals(tab1, tab2)).isTrue();
-  }
-
-  @Test
   public void isValidHexString_null() {
     assertThat(ByteArrayUtil.isValidHexString(null)).isFalse();
   }
