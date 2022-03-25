@@ -77,6 +77,31 @@ public final class ByteArrayUtil {
   }
 
   /**
+   * Compares two byte arrays and return true if they have the same reference or the same content.
+   *
+   * @param tab1 The first byte array.
+   * @param tab2 The second byte array.
+   * @return True if they have the same reference or the same content.
+   */
+  public static boolean equals(byte[] tab1, byte[] tab2) {
+    if (tab1 == tab2) {
+      return true;
+    }
+    if (tab1 == null || tab2 == null) {
+      return false;
+    }
+    if (tab1.length != tab2.length) {
+      return false;
+    }
+    for (int i = 0; i < tab1.length; i++) {
+      if (tab1[i] != tab2[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * Checks if the provided string is formed by an even number of hexadecimal digits. <br>
    *
    * <ul>
