@@ -42,9 +42,9 @@ public class HexUtilTest {
     assertThat(HexUtil.isValid("0123456789ABCDEG")).isFalse();
   }
 
-  @Test(expected = NullPointerException.class)
-  public void toByteArray_whenHexIsNull_shouldThrowNPE() {
-    HexUtil.toByteArray(null);
+  @Test
+  public void toByteArray_whenHexIsNull_shouldReturnEmptyArray() {
+    assertThat(HexUtil.toByteArray(null)).isEmpty();
   }
 
   @Test
@@ -64,9 +64,9 @@ public class HexUtilTest {
             (byte) 0xAB, (byte) 0xCD, (byte) 0xEF, (byte) 0xAB, (byte) 0xCD, (byte) 0xEF);
   }
 
-  @Test(expected = NullPointerException.class)
-  public void toByte_whenHexIsNull_shouldThrowNPE() {
-    HexUtil.toByte(null);
+  @Test
+  public void toByte_whenHexIsNull_shouldReturn0() {
+    assertThat(HexUtil.toByte(null)).isZero();
   }
 
   @Test
@@ -90,9 +90,9 @@ public class HexUtilTest {
     assertThat(HexUtil.toByte("ef")).isEqualTo((byte) 0xEF);
   }
 
-  @Test(expected = NullPointerException.class)
-  public void toShort_whenHexIsNull_shouldThrowNPE() {
-    HexUtil.toShort(null);
+  @Test
+  public void toShort_whenHexIsNull_shouldReturn0() {
+    assertThat(HexUtil.toShort(null)).isZero();
   }
 
   @Test
@@ -114,9 +114,9 @@ public class HexUtilTest {
     assertThat(HexUtil.toShort("ef")).isEqualTo((short) 0xEF);
   }
 
-  @Test(expected = NullPointerException.class)
-  public void toInt_whenHexIsNull_shouldThrowNPE() {
-    HexUtil.toInt(null);
+  @Test
+  public void toInt_whenHexIsNull_shouldReturn0() {
+    assertThat(HexUtil.toInt(null)).isZero();
   }
 
   @Test
@@ -140,9 +140,9 @@ public class HexUtilTest {
     assertThat(HexUtil.toInt("abcdef")).isEqualTo(0xABCDEF);
   }
 
-  @Test(expected = NullPointerException.class)
-  public void toLong_whenHexIsNull_shouldThrowNPE() {
-    HexUtil.toLong(null);
+  @Test
+  public void toLong_whenHexIsNull_shouldReturn0() {
+    assertThat(HexUtil.toLong(null)).isZero();
   }
 
   @Test
@@ -170,9 +170,9 @@ public class HexUtilTest {
     assertThat(HexUtil.toLong("abcdef")).isEqualTo(0xABCDEFL);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test
   public void toHex_null() {
-    HexUtil.toHex(null);
+    assertThat(HexUtil.toHex(null)).isEmpty();
   }
 
   @Test

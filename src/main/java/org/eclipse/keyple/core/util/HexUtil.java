@@ -108,13 +108,15 @@ public final class HexUtil {
    * characters.
    *
    * @param hex The hexadecimal string to convert.
-   * @return An empty byte array if the input string is empty.
-   * @throws NullPointerException If the input string is null.
+   * @return An empty byte array if the input string is null or empty.
    * @throws StringIndexOutOfBoundsException If the input string is made of an odd number of
    *     characters.
    * @since 2.1.0
    */
   public static byte[] toByteArray(String hex) {
+    if (hex == null) {
+      return new byte[0];
+    }
     byte[] tab = new byte[hex.length() / 2];
     for (int i = 0; i < hex.length(); i += 2) {
       tab[i / 2] =
@@ -134,11 +136,13 @@ public final class HexUtil {
    * characters.
    *
    * @param hex The hexadecimal string to convert.
-   * @return 0 if the input string is empty.
-   * @throws NullPointerException If the input string is null.
+   * @return 0 if the input string is null or empty.
    * @since 2.1.0
    */
   public static byte toByte(String hex) {
+    if (hex == null) {
+      return 0;
+    }
     byte val = 0;
     for (int i = 0; i < hex.length(); i++) {
       val <<= 4;
@@ -158,11 +162,13 @@ public final class HexUtil {
    * characters.
    *
    * @param hex The hexadecimal string to convert.
-   * @return 0 if the input string is empty.
-   * @throws NullPointerException If the input string is null.
+   * @return 0 if the input string is null or empty.
    * @since 2.1.0
    */
   public static short toShort(String hex) {
+    if (hex == null) {
+      return 0;
+    }
     short val = 0;
     for (int i = 0; i < hex.length(); i++) {
       val <<= 4;
@@ -182,11 +188,13 @@ public final class HexUtil {
    * characters.
    *
    * @param hex The hexadecimal string to convert.
-   * @return 0 if the input string is empty.
-   * @throws NullPointerException If the input string is null.
+   * @return 0 if the input string is null or empty.
    * @since 2.1.0
    */
   public static int toInt(String hex) {
+    if (hex == null) {
+      return 0;
+    }
     int val = 0;
     for (int i = 0; i < hex.length(); i++) {
       val <<= 4;
@@ -206,11 +214,13 @@ public final class HexUtil {
    * characters.
    *
    * @param hex The hexadecimal string to convert.
-   * @return 0 if the input string is empty.
-   * @throws NullPointerException If the input string is null.
+   * @return 0 if the input string is null or empty.
    * @since 2.1.0
    */
   public static long toLong(String hex) {
+    if (hex == null) {
+      return 0;
+    }
     long val = 0;
     for (int i = 0; i < hex.length(); i++) {
       val <<= 4;
@@ -224,10 +234,12 @@ public final class HexUtil {
    *
    * @param tab The byte array to convert.
    * @return A string with a size equal to (2 * size of the input array).
-   * @throws NullPointerException If the input byte array is null.
    * @since 2.1.0
    */
   public static String toHex(byte[] tab) {
+    if (tab == null) {
+      return "";
+    }
     StringBuilder sb = new StringBuilder();
     for (byte b : tab) {
       sb.append(byteToHex[b & 0xFF]);
