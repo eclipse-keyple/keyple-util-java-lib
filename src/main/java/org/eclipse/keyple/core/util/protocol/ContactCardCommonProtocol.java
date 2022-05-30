@@ -15,7 +15,11 @@ package org.eclipse.keyple.core.util.protocol;
  * This enum contains a non-exhaustive list of contacts smartcard communication protocols.
  *
  * @since 2.0.0
+ * @deprecated This list of protocol names is arbitrary and is not used by Keyple services. The
+ *     protocol identifiers can be freely defined by the business application during polling
+ *     configuration and card selection.
  */
+@Deprecated
 public enum ContactCardCommonProtocol {
   // contacts ISO standard
   ISO_7816_3,

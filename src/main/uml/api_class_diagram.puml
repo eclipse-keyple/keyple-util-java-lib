@@ -15,13 +15,19 @@ end title
 !define C_LINK 3498DB
 !define C_USE 27AE60
 
-skinparam Shadowing false
-skinparam ClassFontStyle italic
-skinparam ClassBorderColor #D4AC0D
+' -- Styles that don't work with new version of plantuml --
 skinparam stereotypeABorderColor #A9DCDF
 skinparam stereotypeIBorderColor #B4A7E5
 skinparam stereotypeCBorderColor #ADD1B2
 skinparam stereotypeEBorderColor #EB93DF
+' -- END --
+
+skinparam ClassBorderThickness 2
+skinparam ArrowThickness 2
+
+' Yellow
+skinparam ClassBackgroundColor #FEFECE
+skinparam ClassBorderColor #D4AC0D
 ' Red
 skinparam ClassBackgroundColor<<red>> #FDEDEC
 skinparam ClassBorderColor<<red>> #E74C3C
@@ -175,19 +181,19 @@ package "org.eclipse.keyple.core.util" as util {
         }
     }
     package protocol {
-        +enum ContactCardCommonProtocol {
-            ISO_7816_3
-            ISO_7816_3_TO
-            ISO_7816_3_T1
-            INNOVATRON_HIGH_SPEED_PROTOCOL_SAM
+        +enum "<s>ContactCardCommonProtocol</s>" as ContactCardCommonProtocol {
+            <s>ISO_7816_3
+            <s>ISO_7816_3_TO
+            <s>ISO_7816_3_T1
+            <s>INNOVATRON_HIGH_SPEED_PROTOCOL_SAM
         }
-        +enum ContactlessCardCommonProtocol {
-            ISO_14443_4
-            NFC_A_ISO_14443_3A
-            NFC_B_ISO_14443_3B
-            NFC_F_JIS_6319_4
-            NFC_V_ISO_15693
-            INNOVATRON_B_PRIME_CARD
+        +enum "<s>ContactlessCardCommonProtocol</s>" as ContactlessCardCommonProtocol {
+            <s>ISO_14443_4
+            <s>NFC_A_ISO_14443_3A
+            <s>NFC_B_ISO_14443_3B
+            <s>NFC_F_JIS_6319_4
+            <s>NFC_V_ISO_15693
+            <s>INNOVATRON_B_PRIME_CARD
         }
     }
 }

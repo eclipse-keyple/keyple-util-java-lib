@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ByteArrayUtil.threeBytesToInt` method replaced by `ByteArrayUtil.extractInt` method.
 - `ByteArrayUtil.threeBytesSignedToInt` method replaced by `ByteArrayUtil.extractInt` method.
 - `ByteArrayUtil.fourBytesToInt` method replaced by `ByteArrayUtil.extractInt` method.
+- `ContactCardCommonProtocol` class.
+- `ContactlessCardCommonProtocol` class.
 
 ## [2.0.0] - 2021-10-06
 This is the initial release.
