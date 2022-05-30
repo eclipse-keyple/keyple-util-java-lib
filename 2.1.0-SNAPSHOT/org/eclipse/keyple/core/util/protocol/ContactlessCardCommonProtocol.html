@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":41,"i1":41};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -141,8 +141,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd><code>java.io.Serializable</code>, <code>java.lang.Comparable&lt;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a>&gt;</code></dd>
 </dl>
 <hr>
-<pre>public enum <span class="typeNameLabel">ContactlessCardCommonProtocol</span>
+<pre>@Deprecated
+public enum <span class="typeNameLabel">ContactlessCardCommonProtocol</span>
 extends java.lang.Enum&lt;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a>&gt;</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This list of protocol names is arbitrary and is not used by Keyple services. The
+     protocol identifiers can be freely defined by the business application during polling
+     configuration and card selection.</div>
+</div>
 <div class="block">This enum contains a non-exhaustive list of contactless smartcard communication protocols.</div>
 <dl>
 <dt><span class="simpleTagLabel">Since:</span></dt>
@@ -169,27 +175,39 @@ extends java.lang.Enum&lt;<a href="ContactlessCardCommonProtocol.html" title="en
 </tr>
 <tr class="altColor">
 <th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#INNOVATRON_B_PRIME_CARD">INNOVATRON_B_PRIME_CARD</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#ISO_14443_4">ISO_14443_4</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</td>
 </tr>
 <tr class="altColor">
 <th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#NFC_A_ISO_14443_3A">NFC_A_ISO_14443_3A</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#NFC_B_ISO_14443_3B">NFC_B_ISO_14443_3B</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</td>
 </tr>
 <tr class="altColor">
 <th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#NFC_F_JIS_6319_4">NFC_F_JIS_6319_4</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <th class="colFirst" scope="row"><code><span class="memberNameLink"><a href="#NFC_V_ISO_15693">NFC_V_ISO_15693</a></span></code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -203,7 +221,7 @@ extends java.lang.Enum&lt;<a href="ContactlessCardCommonProtocol.html" title="en
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -213,6 +231,7 @@ extends java.lang.Enum&lt;<a href="ContactlessCardCommonProtocol.html" title="en
 <td class="colFirst"><code>static <a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
@@ -220,6 +239,7 @@ extends java.lang.Enum&lt;<a href="ContactlessCardCommonProtocol.html" title="en
 <td class="colFirst"><code>static <a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#values()">values</a></span>()</code></th>
 <td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared.</div>
 </td>
@@ -262,6 +282,7 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>ISO_14443_4</h4>
 <pre>public static final&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a> ISO_14443_4</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 <a id="NFC_A_ISO_14443_3A">
@@ -271,6 +292,7 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>NFC_A_ISO_14443_3A</h4>
 <pre>public static final&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a> NFC_A_ISO_14443_3A</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 <a id="NFC_B_ISO_14443_3B">
@@ -280,6 +302,7 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>NFC_B_ISO_14443_3B</h4>
 <pre>public static final&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a> NFC_B_ISO_14443_3B</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 <a id="NFC_F_JIS_6319_4">
@@ -289,6 +312,7 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>NFC_F_JIS_6319_4</h4>
 <pre>public static final&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a> NFC_F_JIS_6319_4</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 <a id="NFC_V_ISO_15693">
@@ -298,6 +322,7 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>NFC_V_ISO_15693</h4>
 <pre>public static final&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a> NFC_V_ISO_15693</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 <a id="INNOVATRON_B_PRIME_CARD">
@@ -307,6 +332,7 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>INNOVATRON_B_PRIME_CARD</h4>
 <pre>public static final&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a> INNOVATRON_B_PRIME_CARD</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 </li>
@@ -326,6 +352,7 @@ the order they are declared.</div>
 <li class="blockList">
 <h4>values</h4>
 <pre class="methodSignature">public static&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a>[]&nbsp;values()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared. This method may be used to iterate
 over the constants as follows:
@@ -346,6 +373,7 @@ for (ContactlessCardCommonProtocol c : ContactlessCardCommonProtocol.values())
 <li class="blockList">
 <h4>valueOf</h4>
 <pre class="methodSignature">public static&nbsp;<a href="ContactlessCardCommonProtocol.html" title="enum in org.eclipse.keyple.core.util.protocol">ContactlessCardCommonProtocol</a>&nbsp;valueOf&#8203;(java.lang.String&nbsp;name)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Returns the enum constant of this type with the specified name.
 The string must match <i>exactly</i> an identifier used to declare an
 enum constant in this type.  (Extraneous whitespace characters are 
