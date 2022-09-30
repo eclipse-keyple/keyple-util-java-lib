@@ -19,7 +19,7 @@ public class ByteArrayJsonAdapterTest {
 
   private static final String JSON_DATA = "{\"primitiveValue\":\"F1F2\"}";
 
-  static class Data {
+  private static class Data {
     byte[] primitiveValue = {(byte) 0xF1, (byte) 0xF2};
   }
 

@@ -13,6 +13,8 @@ package org.eclipse.keyple.core.util.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Json utilities based on Gson (com.google.gson).
@@ -68,6 +70,8 @@ public final class JsonUtil {
         .registerTypeAdapter(Long.class, new LongJsonAdapter())
         .registerTypeAdapter(byte[].class, new ByteArrayJsonAdapter())
         .registerTypeAdapter(BodyError.class, new BodyErrorJsonDeserializer())
+        .registerTypeAdapter(Date.class, new DateJsonSerializer())
+        .registerTypeHierarchyAdapter(Calendar.class, new CalendarJsonAdapter())
         .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonSerializer());
   }
 

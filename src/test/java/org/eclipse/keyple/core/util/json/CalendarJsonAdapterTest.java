@@ -13,24 +13,36 @@ package org.eclipse.keyple.core.util.json;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class LongJsonAdapterTest {
+public class CalendarJsonAdapterTest {
 
-  private static final String JSON_DATA =
-      "{\"f1\":\"FA\",\"f2\":\"FB11\",\"f3\":\"FC1122\",\"f4\":\"FD112233\",\"f5\":\"F511223344\",\"f6\":\"F61122334455\",\"f7\":\"F7112233445566\",\"f8\":\"F811223344556677\",\"objectValue\":\"FE\",\"oddDigitNumberValue\":\"0F\"}";
+  private static String JSON_DATA;
 
   private static class Data {
-    long f1 = 0xFAL;
-    long f2 = 0xFB11L;
-    long f3 = 0xFC1122L;
-    long f4 = 0xFD112233L;
-    long f5 = 0xF511223344L;
-    long f6 = 0xF61122334455L;
-    long f7 = 0xF7112233445566L;
-    long f8 = 0xF811223344556677L;
-    Long objectValue = 0xFEL;
-    long oddDigitNumberValue = 0xF;
+    Calendar c;
+    GregorianCalendar gc;
+
+    private Data() {
+      c = Calendar.getInstance();
+      c.setTime(new Date(0));
+      gc = new GregorianCalendar();
+      gc.setTime(new Date(1));
+    }
+  }
+
+  @BeforeClass
+  public static void beforeClass() {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    sdf.setTimeZone(TimeZone.getTimeZone("CET"));
+    JSON_DATA =
+        "{\"c\":\"" + sdf.format(new Date(0)) + "\",\"gc\":\"" + sdf.format(new Date(1)) + "\"}";
   }
 
   @Test

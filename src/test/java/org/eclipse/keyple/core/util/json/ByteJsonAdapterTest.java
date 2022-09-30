@@ -22,7 +22,7 @@ public class ByteJsonAdapterTest {
   private static final String JSON_DATA =
       "{\"primitiveValue\":\"F1\",\"objectValue\":\"F2\",\"oddDigitNumberValue\":\"03\",\"mapValue\":{\"04\":\"test_04\",\"0A\":\"test_0A\"}}";
 
-  static class Data {
+  private static class Data {
     byte primitiveValue = (byte) 0xF1;
     Byte objectValue = (byte) 0xF2;
     byte oddDigitNumberValue = (byte) 0x3;

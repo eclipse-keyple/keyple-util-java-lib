@@ -17,10 +17,10 @@ import org.junit.Test;
 
 public class ShortJsonAdapterTest {
 
-  public static final String JSON_DATA =
+  private static final String JSON_DATA =
       "{\"f1\":\"FA\",\"f2\":\"FB11\",\"objectValue\":\"FC\",\"oddDigitNumberValue\":\"0F\"}";
 
-  static class Data {
+  private static class Data {
     short f1 = 0xFA;
     short f2 = (short) 0xFB11;
     Short objectValue = 0xFC;

@@ -17,7 +17,7 @@ import org.junit.Test;
 
 public class BodyErrorJsonDeserializerTest {
 
-  public static final String DETAIL_MESSAGE = "DETAIL_MESSAGE";
+  private static final String DETAIL_MESSAGE = "DETAIL_MESSAGE";
 
   @Test
   public void deserialize() {

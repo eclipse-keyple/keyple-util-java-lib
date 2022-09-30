@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.1.+ (15/03/2022)
+    Keyple - keyple-util-java-lib - 2.2.+ (30/09/2022)
 end title
 
 ' == THEME ==
@@ -128,56 +128,40 @@ package "org.eclipse.keyple.core.util" as util {
             +Exception getException ()
         }
         +class "<<<back:yellow>JsonDeserializer<BodyError></back>>>\nBodyErrorJsonDeserializer" as BodyErrorJsonDeserializer {
-            +BodyErrorJsonDeserializer ()
-
-            +BodyError deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
-                \t<back:yellow>JsonDeserializationContext</back> context)
+            __
+            ...
         }
         +class "<<<back:yellow>JsonSerializer<byte[]></back>>>\n<<<back:yellow>JsonDeserializer<byte[]></back>>>\nByteArrayJsonAdapter" as ByteArrayJsonAdapter {
-            +ByteArrayJsonAdapter ()
-
-            +<back:yellow>JsonElement</back> serialize (byte[] src, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            +byte[] deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
-                \t<back:yellow>JsonDeserializationContext</back> context)
+            __
+            ...
         }
         +class "<<<back:yellow>JsonSerializer<Byte></back>>>\n<<<back:yellow>JsonDeserializer<Byte></back>>>\nByteJsonAdapter" as ByteJsonAdapter {
-            +ByteJsonAdapter ()
-
-            +<back:yellow>JsonElement</back> serialize (Byte src, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            +Byte deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
-                \t<back:yellow>JsonDeserializationContext</back> context)
+            __
+            ...
         }
         +class "<<<back:yellow>JsonSerializer<Short></back>>>\n<<<back:yellow>JsonDeserializer<Short></back>>>\nShortJsonAdapter" as ShortJsonAdapter {
-            +ShortJsonAdapter ()
-
-            +<back:yellow>JsonElement</back> serialize (Short src, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            +Short deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
-                \t<back:yellow>JsonDeserializationContext</back> context)
+            __
+            ...
         }
         +class "<<<back:yellow>JsonSerializer<Integer></back>>>\n<<<back:yellow>JsonDeserializer<Integer></back>>>\nIntegerJsonAdapter" as IntegerJsonAdapter {
-            +IntegerJsonAdapter ()
-
-            +<back:yellow>JsonElement</back> serialize (Integer src, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            +Integer deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
-                \t<back:yellow>JsonDeserializationContext</back> context)
+            __
+            ...
         }
         +class "<<<back:yellow>JsonSerializer<Long></back>>>\n<<<back:yellow>JsonDeserializer<Long></back>>>\nLongJsonAdapter" as LongJsonAdapter {
-            +LongJsonAdapter ()
-
-            +<back:yellow>JsonElement</back> serialize (Long src, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
-            +Long deserialize (<back:yellow>JsonElement</back> json, <back:yellow>Type</back> typeOfT,
-                \t<back:yellow>JsonDeserializationContext</back> context)
+            __
+            ...
         }
         +class "<<<back:yellow>JsonSerializer<Throwable></back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
-            +ThrowableJsonSerializer ()
-
-            +<back:yellow>JsonElement</back> serialize (Throwable src, <back:yellow>Type</back> typeOfSrc,
-                \t<back:yellow>JsonSerializationContext</back> context)
+            __
+            ...
+        }
+        +class "<<<back:yellow>JsonSerializer<Date></back>>>\nDateJsonSerializer" as DateJsonSerializer {
+            __
+            ...
+        }
+        +class "<<<back:yellow>JsonSerializer<Calendar></back>>>\n<<<back:yellow>JsonDeserializer<Calendar></back>>>\nCalendarJsonAdapter" as CalendarJsonAdapter {
+            __
+            ...
         }
     }
     package protocol {

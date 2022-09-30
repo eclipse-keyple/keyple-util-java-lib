@@ -5,10 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Class `CalendarJsonAdapter` for serialization of `Calendar` objects in ISO 8601 format.
+- Class `DateJsonSerializer` for serialization of `Date` objects in ISO 8601 format.
 
 ## [2.1.0] - 2022-05-30
 ### Added
-- "CHANGELOG.md" file (issue [eclipse/keyple#6]).
+- `CHANGELOG.md` file (issue [eclipse/keyple#6]).
 - CI: Forbid the publication of a version already released (issue [#14]).
 - JSON serializer/deserializer for `short` and `long` data types (issue [#17]).
 - `Assert.isHexString` method.
