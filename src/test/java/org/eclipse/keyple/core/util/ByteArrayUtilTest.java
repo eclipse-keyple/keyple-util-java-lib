@@ -46,63 +46,124 @@ public class ByteArrayUtilTest {
       };
 
   @Test(expected = NullPointerException.class)
-  public void extractBytes_whenSrcIsNull_shouldThrowNPE() {
+  public void extractBytes_byteArray_whenSrcIsNull_shouldThrowNPE() {
     ByteArrayUtil.extractBytes(null, 0, 1);
   }
 
   @Test(expected = ArrayIndexOutOfBoundsException.class)
-  public void extractBytes_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE() {
+  public void extractBytes_byteArray_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE() {
     ByteArrayUtil.extractBytes(new byte[1], 16, 1);
   }
 
   @Test(expected = ArrayIndexOutOfBoundsException.class)
-  public void extractBytes_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE2() {
+  public void extractBytes_byteArray_whenBitOffsetIsOutOfRange_shouldThrowAIOOBE2() {
     ByteArrayUtil.extractBytes(new byte[1], 9, 1);
   }
 
   @Test(expected = ArrayIndexOutOfBoundsException.class)
-  public void extractBytes_whenBitOffsetIsNegative_shouldThrowAIOOBE() {
+  public void extractBytes_byteArray_whenBitOffsetIsNegative_shouldThrowAIOOBE() {
     ByteArrayUtil.extractBytes(new byte[1], -8, 1);
   }
 
   @Test(expected = ArrayIndexOutOfBoundsException.class)
-  public void extractBytes_whenBitOffsetIsNegative_shouldThrowAIOOBE2() {
+  public void extractBytes_byteArray_whenBitOffsetIsNegative_shouldThrowAIOOBE2() {
     ByteArrayUtil.extractBytes(new byte[1], -1, 1);
   }
 
   @Test(expected = ArrayIndexOutOfBoundsException.class)
-  public void extractBytes_whenNbBytesIsOutOfRange_shouldThrowAIOOBE() {
+  public void extractBytes_byteArray_whenNbBytesIsOutOfRange_shouldThrowAIOOBE() {
     ByteArrayUtil.extractBytes(new byte[1], 0, 2);
   }
 
   @Test(expected = ArrayIndexOutOfBoundsException.class)
-  public void extractBytes_whenNbBytesIsOutOfRange_shouldThrowAIOOBE2() {
+  public void extractBytes_byteArray_whenNbBytesIsOutOfRange_shouldThrowAIOOBE2() {
     ByteArrayUtil.extractBytes(new byte[1], 1, 2);
   }
 
   @Test(expected = NegativeArraySizeException.class)
-  public void extractBytes_whenNbBytesIsNegative_shouldThrowAIOOBE() {
+  public void extractBytes_byteArray_whenNbBytesIsNegative_shouldThrowAIOOBE() {
     ByteArrayUtil.extractBytes(new byte[1], 0, -1);
   }
 
   @Test(expected = NegativeArraySizeException.class)
-  public void extractBytes_whenNbBytesIsNegative_shouldThrowAIOOBE2() {
+  public void extractBytes_byteArray_whenNbBytesIsNegative_shouldThrowAIOOBE2() {
     ByteArrayUtil.extractBytes(new byte[1], 1, -1);
   }
 
   @Test
-  public void extractBytes_whenBitOffsetIsMultipleOf8_shouldBeSuccessful() {
+  public void extractBytes_byteArray_whenBitOffsetIsMultipleOf8_shouldBeSuccessful() {
     byte[] src = new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3};
     assertThat(ByteArrayUtil.extractBytes(src, 8, 1)).containsExactly(0xF2);
     assertThat(ByteArrayUtil.extractBytes(src, 8, 2)).containsExactly(0xF2, 0xF3);
   }
 
   @Test
-  public void extractBytes_whenBitOffsetIsNotMultipleOf8_shouldBeSuccessful() {
+  public void extractBytes_byteArray_whenBitOffsetIsNotMultipleOf8_shouldBeSuccessful() {
     byte[] src = new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3};
     assertThat(ByteArrayUtil.extractBytes(src, 6, 1)).containsExactly(0x7C);
     assertThat(ByteArrayUtil.extractBytes(src, 6, 2)).containsExactly(0x7C, 0xBC);
     assertThat(ByteArrayUtil.extractBytes(src, 3, 1)).containsExactly(0x8F);
+  }
+
+  @Test(expected = NegativeArraySizeException.class)
+  public void extractBytes_number_AndNbBytesIsNegative_shouldThrowNASE() {
+    ByteArrayUtil.extractBytes(0, -1);
+  }
+
+  @Test
+  public void extractBytes_number_AndNbBytesIs0_shouldReturnAnEmptyArray() {
+    assertThat(ByteArrayUtil.extractBytes(0xFF223344, 0)).isEmpty();
+  }
+
+  @Test
+  public void extractBytes_number_AndNbBytesIs1to8_shouldExtractLastBytes() {
+    // short
+    short shortNumber = (short) 0xFF22;
+    assertThat(ByteArrayUtil.extractBytes(shortNumber, 1)).containsExactly(0x22);
+    assertThat(ByteArrayUtil.extractBytes(shortNumber, 2)).containsExactly(0xFF, 0x22);
+    // integer
+    int intNumber = 0xFF223344;
+    assertThat(ByteArrayUtil.extractBytes(intNumber, 1)).containsExactly(0x44);
+    assertThat(ByteArrayUtil.extractBytes(intNumber, 2)).containsExactly(0x33, 0x44);
+    assertThat(ByteArrayUtil.extractBytes(intNumber, 3)).containsExactly(0x22, 0x33, 0x44);
+    assertThat(ByteArrayUtil.extractBytes(intNumber, 4)).containsExactly(0xFF, 0x22, 0x33, 0x44);
+    // long
+    long longNumber = 0xFF22334455667788L;
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 1)).containsExactly(0x88);
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 2)).containsExactly(0x77, 0x88);
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 3)).containsExactly(0x66, 0x77, 0x88);
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 4)).containsExactly(0x55, 0x66, 0x77, 0x88);
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 5))
+        .containsExactly(0x44, 0x55, 0x66, 0x77, 0x88);
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 6))
+        .containsExactly(0x33, 0x44, 0x55, 0x66, 0x77, 0x88);
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 7))
+        .containsExactly(0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88);
+    assertThat(ByteArrayUtil.extractBytes(longNumber, 8))
+        .containsExactly(0xFF, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void extractShort_whenSrcIsNull_shouldThrowNPE() {
+    ByteArrayUtil.extractShort(null, 0);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractShort_whenOffsetIsNegative_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractShort(new byte[2], -1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractShort_whenOffsetIsGreaterThanSrcLengthMinus2_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractShort(new byte[2], 1);
+  }
+
+  @Test
+  public void extractShort_whenInputIsOk_shouldBeSuccessful() {
+    byte[] src =
+        new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6};
+    assertThat(ByteArrayUtil.extractShort(src, 1)).isEqualTo((short) 0xF2F3);
+    assertThat(ByteArrayUtil.extractShort(src, 1)).isEqualTo((short) 0xF2F3);
   }
 
   @Test(expected = NullPointerException.class)
@@ -137,6 +198,255 @@ public class ByteArrayUtilTest {
     assertThat(ByteArrayUtil.extractInt(src, 1, 3, false)).isEqualTo(0xF2F3F4);
     assertThat(ByteArrayUtil.extractInt(src, 1, 4, true)).isEqualTo(0xF2F3F4F5);
     assertThat(ByteArrayUtil.extractInt(src, 1, 4, false)).isEqualTo(0xF2F3F4F5);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void extractLong_whenSrcIsNull_shouldThrowNPE() {
+    ByteArrayUtil.extractLong(null, 0, 1, true);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractLong_whenOffsetIsNegative_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractLong(new byte[1], -1, 1, true);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractLong_whenOffsetIsGreaterThanSrcLengthMinusNbBytes_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractLong(new byte[1], 1, 1, true);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void extractLong_whenNbBytesIsTooBig_shouldThrowAIOOBE() {
+    ByteArrayUtil.extractLong(new byte[1], 0, 2, true);
+  }
+
+  @Test
+  public void extractLong_whenInputIsOk_shouldBeSuccessful() {
+    byte[] src =
+        new byte[] {
+          (byte) 0xF1,
+          (byte) 0xF2,
+          (byte) 0xF3,
+          (byte) 0xF4,
+          (byte) 0xF5,
+          (byte) 0xF6,
+          (byte) 0xF7,
+          (byte) 0xF8,
+          (byte) 0xF9,
+          (byte) 0xFA
+        };
+    assertThat(ByteArrayUtil.extractLong(src, 1, 1, true)).isEqualTo(0xFFFFFFFFFFFFFFF2L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 1, false)).isEqualTo(0xF2L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 2, true)).isEqualTo(0xFFFFFFFFFFFFF2F3L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 2, false)).isEqualTo(0xF2F3L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 3, true)).isEqualTo(0xFFFFFFFFFFF2F3F4L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 3, false)).isEqualTo(0xF2F3F4L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 4, true)).isEqualTo(0xFFFFFFFFF2F3F4F5L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 4, false)).isEqualTo(0xF2F3F4F5L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 5, true)).isEqualTo(0xFFFFFFF2F3F4F5F6L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 5, false)).isEqualTo(0xF2F3F4F5F6L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 6, true)).isEqualTo(0xFFFFF2F3F4F5F6F7L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 6, false)).isEqualTo(0xF2F3F4F5F6F7L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 7, true)).isEqualTo(0xFFF2F3F4F5F6F7F8L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 7, false)).isEqualTo(0xF2F3F4F5F6F7F8L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 8, true)).isEqualTo(0xF2F3F4F5F6F7F8F9L);
+    assertThat(ByteArrayUtil.extractLong(src, 1, 8, false)).isEqualTo(0xF2F3F4F5F6F7F8F9L);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void copyBytes_whenDestIsNull_shouldThrowNPE() {
+    ByteArrayUtil.copyBytes(0, null, 0, 0);
+  }
+
+  @Test
+  public void copyBytes_whenDestIsEmpty_shouldThrow() {
+    ByteArrayUtil.copyBytes(0, new byte[0], 0, 0);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void copyBytes_whenOffsetIsNegative_shouldThrow() {
+    ByteArrayUtil.copyBytes(0, new byte[1], -1, 0);
+  }
+
+  @Test(expected = NegativeArraySizeException.class)
+  public void copyBytes_whenNbBytesIsNegative_shouldThrow() {
+    ByteArrayUtil.copyBytes(0, new byte[1], 0, -1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void copyBytes_whenOffsetIsOutOfRange_shouldThrowAIOOBE() {
+    ByteArrayUtil.copyBytes(0, new byte[1], 1, 1);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void copyBytes_whenNbBytesIsOutOfRange_shouldThrow() {
+    ByteArrayUtil.copyBytes(0, new byte[1], 0, 2);
+  }
+
+  @Test(expected = ArrayIndexOutOfBoundsException.class)
+  public void copyBytes_whenOffsetAndNbBytesIsOutOfRange_shouldThrow() {
+    ByteArrayUtil.copyBytes(0, new byte[2], 1, 2);
+  }
+
+  @Test
+  public void copyBytes_whenNbBytesIs0_shouldDoNothing() {
+    byte[] dest =
+        new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6};
+    ByteArrayUtil.copyBytes(0, dest, 0, 0);
+    assertThat(dest[0]).isEqualTo((byte) 0xF1);
+  }
+
+  @Test
+  public void copyBytes_whenSrcIsByte_shouldBeSuccess() {
+    byte src = 0x11;
+    byte[] dest =
+        new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6};
+    ByteArrayUtil.copyBytes(src, dest, 1, 1);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0xF1, (byte) 0x11, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6);
+  }
+
+  @Test
+  public void copyBytes_whenSrcIsShort_shouldBeSuccess() {
+    short src = 0x1122;
+    byte[] dest =
+        new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6};
+    ByteArrayUtil.copyBytes(src, dest, 1, 1);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0xF1, (byte) 0x22, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6);
+    ByteArrayUtil.copyBytes(src, dest, 3, 2);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0xF1, (byte) 0x22, (byte) 0xF3, (byte) 0x11, (byte) 0x22, (byte) 0xF6);
+  }
+
+  @Test
+  public void copyBytes_whenSrcIsInteger_shouldBeSuccess() {
+    int src = 0x11223344;
+    byte[] dest =
+        new byte[] {(byte) 0xF1, (byte) 0xF2, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6};
+    ByteArrayUtil.copyBytes(src, dest, 1, 1);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0xF1, (byte) 0x44, (byte) 0xF3, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6);
+    ByteArrayUtil.copyBytes(src, dest, 1, 2);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0xF1, (byte) 0x33, (byte) 0x44, (byte) 0xF4, (byte) 0xF5, (byte) 0xF6);
+    ByteArrayUtil.copyBytes(src, dest, 1, 3);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0xF1, (byte) 0x22, (byte) 0x33, (byte) 0x44, (byte) 0xF5, (byte) 0xF6);
+    ByteArrayUtil.copyBytes(src, dest, 1, 4);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0xF1, (byte) 0x11, (byte) 0x22, (byte) 0x33, (byte) 0x44, (byte) 0xF6);
+  }
+
+  @Test
+  public void copyBytes_whenSrcIsLong_shouldBeSuccess() {
+    long src = 0x1122334455667788L;
+    byte[] dest =
+        new byte[] {
+          (byte) 0xF1,
+          (byte) 0xF2,
+          (byte) 0xF3,
+          (byte) 0xF4,
+          (byte) 0xF5,
+          (byte) 0xF6,
+          (byte) 0xF7,
+          (byte) 0xF8
+        };
+    ByteArrayUtil.copyBytes(src, dest, 0, 1);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x88,
+            (byte) 0xF2,
+            (byte) 0xF3,
+            (byte) 0xF4,
+            (byte) 0xF5,
+            (byte) 0xF6,
+            (byte) 0xF7,
+            (byte) 0xF8);
+    ByteArrayUtil.copyBytes(src, dest, 0, 2);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x77,
+            (byte) 0X88,
+            (byte) 0xF3,
+            (byte) 0xF4,
+            (byte) 0xF5,
+            (byte) 0xF6,
+            (byte) 0xF7,
+            (byte) 0xF8);
+    ByteArrayUtil.copyBytes(src, dest, 0, 3);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x66,
+            (byte) 0X77,
+            (byte) 0X88,
+            (byte) 0xF4,
+            (byte) 0xF5,
+            (byte) 0xF6,
+            (byte) 0xF7,
+            (byte) 0xF8);
+    ByteArrayUtil.copyBytes(src, dest, 0, 4);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x55,
+            (byte) 0X66,
+            (byte) 0X77,
+            (byte) 0X88,
+            (byte) 0xF5,
+            (byte) 0xF6,
+            (byte) 0xF7,
+            (byte) 0xF8);
+    ByteArrayUtil.copyBytes(src, dest, 0, 5);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x44,
+            (byte) 0x55,
+            (byte) 0X66,
+            (byte) 0X77,
+            (byte) 0X88,
+            (byte) 0xF6,
+            (byte) 0xF7,
+            (byte) 0xF8);
+    ByteArrayUtil.copyBytes(src, dest, 0, 6);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x33,
+            (byte) 0x44,
+            (byte) 0x55,
+            (byte) 0X66,
+            (byte) 0X77,
+            (byte) 0X88,
+            (byte) 0xF7,
+            (byte) 0xF8);
+    ByteArrayUtil.copyBytes(src, dest, 0, 7);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x22,
+            (byte) 0x33,
+            (byte) 0x44,
+            (byte) 0x55,
+            (byte) 0X66,
+            (byte) 0X77,
+            (byte) 0X88,
+            (byte) 0xF8);
+    ByteArrayUtil.copyBytes(src, dest, 0, 8);
+    assertThat(dest)
+        .containsExactly(
+            (byte) 0x11,
+            (byte) 0x22,
+            (byte) 0x33,
+            (byte) 0x44,
+            (byte) 0x55,
+            (byte) 0X66,
+            (byte) 0X77,
+            (byte) 0x88);
   }
 
   @Test

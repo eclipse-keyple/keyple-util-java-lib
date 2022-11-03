@@ -48,8 +48,47 @@ public final class ByteArrayUtil {
   }
 
   /**
+   * Extracts the least significant bytes (LSB) of a number into a byte array.
+   *
+   * <p>Caution: the result may be erroneous if the number of bytes to extract is greater than the
+   * number of bytes associated to the input number (e.g. 2 bytes max for a "short", 4 bytes max for
+   * an "integer" or 8 bytes max for a "long").
+   *
+   * @param src The source.
+   * @param nbBytes The number of bytes to extract.
+   * @return An empty array if "nbBytes" is equal to 0.
+   * @throws NegativeArraySizeException If "nbBytes" is negative.
+   * @since 2.3.0
+   */
+  public static byte[] extractBytes(long src, int nbBytes) {
+    byte[] data = new byte[nbBytes];
+    int shift = 0;
+    int i = nbBytes - 1;
+    while (i >= 0) {
+      data[i] = (byte) ((src >> shift) & 0xFF);
+      shift += 8;
+      i--;
+    }
+    return data;
+  }
+
+  /**
+   * Extracts a 2-byte "short" located at a specific "offset" in a source byte array.
+   *
+   * @param src The source byte array.
+   * @param offset The offset (in bytes).
+   * @return A short.
+   * @throws NullPointerException If "src" is null.
+   * @throws ArrayIndexOutOfBoundsException If "offset" is not in range [0..(src.length-2)]
+   * @since 2.3.0
+   */
+  public static short extractShort(byte[] src, int offset) {
+    return (short) ((short) ((src[offset] & 0xFF) << 8) | (src[offset + 1] & 0xFF));
+  }
+
+  /**
    * Converts "nbBytes" bytes located at the "offset" provided in a source byte array into an
-   * integer.
+   * "integer".
    *
    * <p>Caution: the result may be erroneous if "nbBytes" is not in range [1..4].
    *
@@ -74,6 +113,51 @@ public final class ByteArrayUtil {
       val |= ((src[offset++] & 0xFF) << (8 * (--nbBytes)));
     }
     return val;
+  }
+
+  /**
+   * Converts "nbBytes" bytes located at the "offset" provided in a source byte array into a "long".
+   *
+   * <p>Caution: the result may be erroneous if "nbBytes" is not in range [1..8].
+   *
+   * @param src The source byte array.
+   * @param offset The offset (in bytes).
+   * @param nbBytes The number of bytes to extract.
+   * @param isSigned True if the resulting integer is "signed" (relevant only if "nbBytes" is in
+   *     range [1..7]).
+   * @return A long.
+   * @throws NullPointerException If "src" is null.
+   * @throws ArrayIndexOutOfBoundsException If "offset" is not in range [0..(src.length-nbBytes)]
+   * @since 2.3.0
+   */
+  public static long extractLong(byte[] src, int offset, int nbBytes, boolean isSigned) {
+    long val = 0L;
+    if (isSigned) {
+      val |= ((long) src[offset++] << (8 * (--nbBytes)));
+    } else {
+      val |= ((long) (src[offset++] & 0xFF) << (8 * (--nbBytes)));
+    }
+    while (nbBytes > 0) {
+      val |= ((long) (src[offset++] & 0xFF) << (8 * (--nbBytes)));
+    }
+    return val;
+  }
+
+  /**
+   * Copy the least significant bytes (LSB) of a number (byte, short, integer or long) into a byte
+   * array at a specific offset.
+   *
+   * @param src The number.
+   * @param dest The target byte array.
+   * @param offset The offset (in bytes).
+   * @param nbBytes The number of bytes to copy.
+   * @throws NullPointerException If "dest" is null.
+   * @throws NegativeArraySizeException If "nbBytes" is negative.
+   * @throws ArrayIndexOutOfBoundsException If "offset" is not in range [0..(dest.length-nbBytes)]
+   * @since 2.3.0
+   */
+  public static void copyBytes(long src, byte[] dest, int offset, int nbBytes) {
+    System.arraycopy(extractBytes(src, nbBytes), 0, dest, offset, nbBytes);
   }
 
   /**

@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.2.+ (30/09/2022)
+    Keyple - keyple-util-java-lib - 2.3.+ (2022-11-03)
 end title
 
 ' == THEME ==
@@ -73,7 +73,13 @@ package "org.eclipse.keyple.core.util" as util {
     }
     +class "**final** ByteArrayUtil" as ByteArrayUtil {
         +{static} byte[] extractBytes (byte[] src, int bitOffset, int nbBytes)
+        +{static} byte[] extractBytes (long src, int nbBytes)
+
+        +{static} short extractShort (byte[] src, int offset)
         +{static} int extractInt (byte[] src, int offset, int nbBytes, boolean isSigned)
+        +{static} long extractLong (byte[] src, int offset, int nbBytes, boolean isSigned)
+
+        +{static} void copyBytes (long src, byte[] dest, int offset, int nbBytes)
 
         +<s>boolean isValidHexString (String hex)
         +<s>String normalizeHexString (String hex)
