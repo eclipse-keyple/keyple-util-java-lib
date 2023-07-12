@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added project status badges on `README.md` file.
 ### Fixed
-- Fixes compatibility issue with date formatting across Java versions in `DateJsonSerializer` class.
+- Fixes compatibility issue with date formatting across Java versions in `DateJsonSerializer` and `CalendarJsonAdapter`
+  classes (issue [#25]).
 - CI: code coverage report when releasing.
 
 ## [2.3.0] - 2022-11-17
