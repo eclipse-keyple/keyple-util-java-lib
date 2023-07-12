@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added project status badges on `README.md` file.
 ### Fixed
+- Fixes compatibility issue with date formatting across Java versions in `DateJsonSerializer` class.
 - CI: code coverage report when releasing.
 
 ## [2.3.0] - 2022-11-17
@@ -64,6 +65,7 @@ It also brings many major API changes.
 [2.1.0]: https://github.com/eclipse/keyple-util-java-lib/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/eclipse/keyple-util-java-lib/releases/tag/2.0.0
 
+[#25]: https://github.com/eclipse/keyple-util-java-lib/issues/25
 [#19]: https://github.com/eclipse/keyple-util-java-lib/issues/19
 [#17]: https://github.com/eclipse/keyple-util-java-lib/issues/17
 [#14]: https://github.com/eclipse/keyple-util-java-lib/issues/14
