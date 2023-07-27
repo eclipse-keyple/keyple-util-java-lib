@@ -35,7 +35,7 @@ public class DateJsonSerializer implements JsonSerializer<Date> {
    * @since 2.2.0
    */
   public DateJsonSerializer() {
-    // We're using "Z" instead of "XXX" due to compatibility issues.
+    // We're using "Z" instead of "XXX" to be compliant with JRE 1.6
     sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     sdf.setTimeZone(TimeZone.getTimeZone("CET"));
   }
@@ -47,14 +47,6 @@ public class DateJsonSerializer implements JsonSerializer<Date> {
    */
   @Override
   public JsonElement serialize(Date data, Type typeOfSrc, JsonSerializationContext context) {
-    String formatted = sdf.format(data);
-
-    // We are manually inserting a colon in the timezone offset to have a ISO 8601 format and
-    // maintain compatibility with older versions of Java and Android that do not support the "XXX"
-    // timezone marker.
-    StringBuilder sb = new StringBuilder(formatted);
-    sb.insert(formatted.length() - 2, ':');
-    formatted = sb.toString();
-    return new JsonPrimitive(formatted);
+    return new JsonPrimitive(sdf.format(data));
   }
 }

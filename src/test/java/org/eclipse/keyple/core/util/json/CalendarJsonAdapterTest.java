@@ -39,7 +39,7 @@ public class CalendarJsonAdapterTest {
 
   @BeforeClass
   public static void beforeClass() {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     sdf.setTimeZone(TimeZone.getTimeZone("CET"));
     JSON_DATA =
         "{\"c\":\"" + sdf.format(new Date(0)) + "\",\"gc\":\"" + sdf.format(new Date(1)) + "\"}";

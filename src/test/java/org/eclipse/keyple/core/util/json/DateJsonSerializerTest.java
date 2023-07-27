@@ -29,7 +29,7 @@ public class DateJsonSerializerTest {
 
   @BeforeClass
   public static void beforeClass() {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     sdf.setTimeZone(TimeZone.getTimeZone("CET"));
     JSON_DATA = "{\"d\":\"" + sdf.format(new Date(0)) + "\"}";
   }
