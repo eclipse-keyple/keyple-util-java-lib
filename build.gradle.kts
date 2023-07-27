@@ -30,7 +30,7 @@ repositories {
 }
 dependencies {
     implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("com.google.code.gson:gson:2.8.8")
+    implementation("com.google.code.gson:gson:2.10.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.assertj:assertj-core:3.15.0")
     testImplementation("org.mockito:mockito-core:2.28.2")

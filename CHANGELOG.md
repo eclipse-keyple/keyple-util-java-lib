@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed compatibility issue with date formatting across Java versions in `DateJsonSerializer` and `CalendarJsonAdapter`
   classes (issue [#25]).
 - CI: code coverage report when releasing.
+### Upgraded
+- "Google Gson Library" (com.google.code.gson) `2.8.8` -> `2.10.1` (source code not impacted)
 
 ## [2.3.0] - 2022-11-17
 ### Added
