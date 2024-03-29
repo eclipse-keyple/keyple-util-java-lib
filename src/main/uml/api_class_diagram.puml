@@ -169,6 +169,10 @@ package "org.eclipse.keyple.core.util" as util {
             __
             ...
         }
+        +class "<<<back:yellow>JsonSerializer<ByteBuffer></back>>>\n<<<back:yellow>JsonDeserializer<ByteBuffer></back>>>\n<color:blue>ByteBufferJsonAdapter" as ByteBufferJsonAdapter {
+            __
+            ...
+        }
     }
     package protocol {
         +enum "<s>ContactCardCommonProtocol</s>" as ContactCardCommonProtocol {
@@ -201,7 +205,7 @@ Assert -[hidden]- BerTlvUtil
 ' == STYLE ==
 
 package util #C_GREY1 {}
-package json #C_GREY2 {}
-package protocol #C_GREY2 {}
+package util.json #C_GREY2 {}
+package util.protocol #C_GREY2 {}
 
 @enduml
