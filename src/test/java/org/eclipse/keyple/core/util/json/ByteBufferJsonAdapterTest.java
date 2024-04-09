@@ -11,18 +11,17 @@
  ************************************************************************************** */
 package org.eclipse.keyple.core.util.json;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.ByteBuffer;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 public class ByteBufferJsonAdapterTest {
 
   private static final String JSON_DATA = "{\"buffer\":\"F1F2\"}";
 
   private static class Data {
-    ByteBuffer buffer = ByteBuffer.wrap(new byte[]{(byte) 0xF1, (byte) 0xF2});
+    ByteBuffer buffer = ByteBuffer.wrap(new byte[] {(byte) 0xF1, (byte) 0xF2});
   }
 
   @Test

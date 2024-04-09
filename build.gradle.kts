@@ -31,9 +31,12 @@ repositories {
 dependencies {
     implementation("org.slf4j:slf4j-api:1.7.32")
     implementation("com.google.code.gson:gson:2.10.1")
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.assertj:assertj-core:3.15.0")
-    testImplementation("org.mockito:mockito-core:2.28.2")
+    implementation("org.eclipse.keyple:keyple-service-java-lib:3.2.1-SNAPSHOT") {isChanging=true}
+    testImplementation(platform("org.junit:junit-bom:5.10.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.vintage:junit-vintage-engine")
+    testImplementation("org.assertj:assertj-core:3.25.3")
+    testImplementation("org.mockito:mockito-core:5.11.0")
 }
 
 val javaSourceLevel: String by project
