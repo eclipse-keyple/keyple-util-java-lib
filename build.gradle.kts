@@ -10,7 +10,6 @@ plugins {
 buildscript {
     repositories {
         mavenLocal()
-        maven(url = "https://repo.eclipse.org/service/local/repositories/maven_central/content")
         mavenCentral()
     }
     dependencies {
@@ -24,9 +23,7 @@ apply(plugin = "org.eclipse.keyple")
 ///////////////////////////////////////////////////////////////////////////////
 repositories {
     mavenLocal()
-    maven(url = "https://repo.eclipse.org/service/local/repositories/maven_central/content")
     mavenCentral()
-    maven(url = "https://oss.sonatype.org/content/repositories/snapshots")
 }
 dependencies {
     implementation("org.slf4j:slf4j-api:1.7.32")
