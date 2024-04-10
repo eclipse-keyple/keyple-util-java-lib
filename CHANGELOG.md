@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Class `ByteBufferJsonAdapter` for serialization of `ByteBuffer` objects.
 ### Changed
 - Java source and target levels `1.6` -> `1.8`
+- Renaming of `ThrowableJsonSerializer` -> `ThrowableJsonAdapter`
 ### Upgraded
 - Gradle `6.8.3` -> `7.6.4`
 

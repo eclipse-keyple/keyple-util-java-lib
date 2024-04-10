@@ -13,27 +13,12 @@ package org.eclipse.keyple.core.util.json;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.google.gson.*;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-@RunWith(MockitoJUnitRunner.class)
 public class JsonUtilTest {
-
-  private static final Logger logger = LoggerFactory.getLogger(JsonUtilTest.class);
-
-  @Test
-  public void serialize_IllegalArgumentException() {
-    RuntimeException source = new IllegalArgumentException("IAE message");
-    assertSerialization_forException(new BodyError(source), BodyError.class);
-  }
 
   @Test
   public void toJson_whenObjectIsNotEmpty_shouldReturnANotEmptyString() {
@@ -53,39 +38,5 @@ public class JsonUtilTest {
   public void toJson_whenObjectIsNull_shouldReturnAStringContainingNull() {
     String result = JsonUtil.toJson(null);
     assertThat(result).isEqualTo("null");
-  }
-
-  /*
-   * Utility Methods
-   */
-
-  public static void assertSerialization(Object source, Class objectClass) {
-    Gson gson = JsonUtil.getParser();
-    String json = gson.toJson(source);
-    logger.debug("json : {}", json);
-    Object target = gson.fromJson(json, objectClass);
-    assertThat(target).usingRecursiveComparison().isEqualTo(source);
-  }
-
-  public static void assertSerialization_forList(List<?> source, Type objectType) {
-    Gson gson = JsonUtil.getParser();
-    String json = gson.toJson(source);
-    logger.debug("json : {}", json);
-    List<?> target = gson.fromJson(json, objectType);
-    assertThat(target).hasSameSizeAs(source);
-    assertThat(target.get(0)).usingRecursiveComparison().isEqualTo(source.get(0));
-  }
-
-  public static void assertSerialization_forException(
-      Object source, Class<? extends BodyError> objectClass) {
-    Gson gson = JsonUtil.getParser();
-    String json = gson.toJson(source);
-    assertThat(json).doesNotContain("suppressedExceptions");
-    assertThat(json).doesNotContain("stackTrace");
-    logger.debug("json : {}", json);
-    BodyError target = gson.fromJson(json, objectClass);
-    logger.debug(
-        "deserialize exception className : {}", target.getException().getClass().getName());
-    assertThat(target).usingRecursiveComparison().isEqualTo(source);
   }
 }

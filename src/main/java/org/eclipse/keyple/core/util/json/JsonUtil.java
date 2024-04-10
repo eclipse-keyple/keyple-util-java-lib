@@ -74,7 +74,7 @@ public final class JsonUtil {
         .registerTypeAdapter(Date.class, new DateJsonSerializer())
         .registerTypeHierarchyAdapter(ByteBuffer.class, new ByteBufferJsonAdapter())
         .registerTypeHierarchyAdapter(Calendar.class, new CalendarJsonAdapter())
-        .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonSerializer());
+        .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonAdapter());
   }
 
   /**

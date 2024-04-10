@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.3.+ (2022-11-03)
+    Keyple - keyple-util-java-lib - 2.3.+ (2024-04-10)
 end title
 
 ' == THEME ==
@@ -157,7 +157,7 @@ package "org.eclipse.keyple.core.util" as util {
             __
             ...
         }
-        +class "<<<back:yellow>JsonSerializer<Throwable></back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
+        +class "<<<back:yellow>JsonSerializer<Throwable></back>>>\nThrowableJsonAdapter" as ThrowableJsonAdapter {
             __
             ...
         }
