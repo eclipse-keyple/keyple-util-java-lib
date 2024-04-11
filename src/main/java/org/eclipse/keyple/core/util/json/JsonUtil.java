@@ -13,6 +13,7 @@ package org.eclipse.keyple.core.util.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.nio.ByteBuffer;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,8 +72,9 @@ public final class JsonUtil {
         .registerTypeAdapter(byte[].class, new ByteArrayJsonAdapter())
         .registerTypeAdapter(BodyError.class, new BodyErrorJsonDeserializer())
         .registerTypeAdapter(Date.class, new DateJsonSerializer())
+        .registerTypeHierarchyAdapter(ByteBuffer.class, new ByteBufferJsonAdapter())
         .registerTypeHierarchyAdapter(Calendar.class, new CalendarJsonAdapter())
-        .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonSerializer());
+        .registerTypeHierarchyAdapter(Throwable.class, new ThrowableJsonAdapter());
   }
 
   /**

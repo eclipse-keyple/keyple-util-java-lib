@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.3.+ (2022-11-03)
+    Keyple - keyple-util-java-lib - 2.3.+ (2024-04-10)
 end title
 
 ' == THEME ==
@@ -157,7 +157,7 @@ package "org.eclipse.keyple.core.util" as util {
             __
             ...
         }
-        +class "<<<back:yellow>JsonSerializer<Throwable></back>>>\nThrowableJsonSerializer" as ThrowableJsonSerializer {
+        +class "<<<back:yellow>JsonSerializer<Throwable></back>>>\nThrowableJsonAdapter" as ThrowableJsonAdapter {
             __
             ...
         }
@@ -166,6 +166,10 @@ package "org.eclipse.keyple.core.util" as util {
             ...
         }
         +class "<<<back:yellow>JsonSerializer<Calendar></back>>>\n<<<back:yellow>JsonDeserializer<Calendar></back>>>\nCalendarJsonAdapter" as CalendarJsonAdapter {
+            __
+            ...
+        }
+        +class "<<<back:yellow>JsonSerializer<ByteBuffer></back>>>\n<<<back:yellow>JsonDeserializer<ByteBuffer></back>>>\n<color:blue>ByteBufferJsonAdapter" as ByteBufferJsonAdapter {
             __
             ...
         }
@@ -201,7 +205,7 @@ Assert -[hidden]- BerTlvUtil
 ' == STYLE ==
 
 package util #C_GREY1 {}
-package json #C_GREY2 {}
-package protocol #C_GREY2 {}
+package util.json #C_GREY2 {}
+package util.protocol #C_GREY2 {}
 
 @enduml
