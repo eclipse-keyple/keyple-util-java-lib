@@ -21,13 +21,8 @@ cd $repository_name
 echo "Checkout gh-pages branch..."
 git checkout -f gh-pages
 
-echo "Delete existing SNAPSHOT directories except the current one..."
-for snapshot in *-SNAPSHOT/; do
-    if [ "$snapshot" != "$version/" ]; then
-        echo "Removing old SNAPSHOT: $snapshot"
-        rm -rf "$snapshot"
-    fi
-done
+echo "Delete existing SNAPSHOT directory..."
+rm -rf *-SNAPSHOT
 
 echo "Create target directory $version..."
 mkdir $version
