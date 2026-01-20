@@ -1,6 +1,6 @@
 @startuml
 title
-    Keyple - keyple-util-java-lib - 2.3.+ (2024-04-10)
+    Keyple - keyple-util-java-lib - 2.5.+ (2026-01-20)
 end title
 
 ' == THEME ==
@@ -174,6 +174,33 @@ package "org.eclipse.keyple.core.util" as util {
             ...
         }
     }
+    package logging {
+        +class "<color:blue>**final** LoggerFactory" as LoggerFactory {
+            +<color:blue>{static} void setProvider (LoggerProvider provider)
+            +<color:blue>{static} Logger getLogger(Class<?> clazz)
+        }
+        +interface "<color:blue>Logger" as Logger {
+            +<color:blue>boolean isTraceEnabled ()
+            +<color:blue>boolean isDebugEnabled ()
+            +<color:blue>boolean isInfoEnabled ()
+            +<color:blue>boolean isWarnEnabled ()
+            +<color:blue>boolean isErrorEnabled ()
+
+            +<color:blue>void trace (String message, Object... args)
+            +<color:blue>void debug (String message, Object... args)
+            +<color:blue>void info (String message, Object... args)
+            +<color:blue>void warn (String message, Object... args)
+            +<color:blue>void error (String message, Object... args)
+
+            +<color:blue>void warn (String message, Throwable throwable, Object... args)
+            +<color:blue>void error (String message, Throwable throwable, Object... args)
+        }
+        package spi {
+            +interface "<color:blue>LoggerProvider" as LoggerProvider {
+                +<color:blue>Logger getLogger (String className)
+            }
+        }
+    }
     package protocol {
         +enum "<s>ContactCardCommonProtocol</s>" as ContactCardCommonProtocol {
             <s>ISO_7816_3
@@ -194,6 +221,11 @@ package "org.eclipse.keyple.core.util" as util {
 
 ' Associations
 
+LoggerFactory .right.> LoggerProvider #C_USE : use >
+LoggerFactory ..> Logger #C_LINK : provide >
+
+LoggerProvider ..> Logger #C_LINK : provide >
+
 ' == LAYOUT ==
 
 ByteArrayUtil -[hidden]- JsonUtil
@@ -207,5 +239,7 @@ Assert -[hidden]- BerTlvUtil
 package util #C_GREY1 {}
 package util.json #C_GREY2 {}
 package util.protocol #C_GREY2 {}
+package util.logging #C_GREY2 {}
+package util.logging.spi #C_GREY3 {}
 
 @enduml
