@@ -83,8 +83,8 @@ It follows the extraction of Keyple 1.0 components contained in the `eclipse-key
 repositories.
 It also brings many major API changes.
 
-[unreleased]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.2...HEAD
-[2.3.2]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.1...2.3.2
+[unreleased]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.4.0...HEAD
+[2.4.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.1...2.4.0
 [2.3.1]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.0...2.3.1
 [2.3.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.1.0...2.2.0
