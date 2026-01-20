@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Logger` interface providing methods for trace, debug, info, warn, and error levels.
 - `LoggerFactory` for centralized management of loggers and dynamic configuration of providers.
 - `LoggerProvider` Service Provider Interface (SPI) to allow integration of various logging frameworks.
-- Default temporary `Slf4jLogger` and `Slf4jLoggerProvider` for SLF4J framework integration.
-  This will be replaced by `NoOpLogger` and `NoOpLoggerProvider` on next major release.
+- Default temporary `Slf4jLogger` and `Slf4jLoggerProvider` for SLF4J v1.7.32 framework integration.
+  This logger will be replaced by `NoOpLogger` and `NoOpLoggerProvider` on next major release.
 ### Changed
 - Migrated the CI pipeline from Jenkins to GitHub Actions.
 

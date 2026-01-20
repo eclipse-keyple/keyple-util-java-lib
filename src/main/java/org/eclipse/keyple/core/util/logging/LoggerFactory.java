@@ -26,7 +26,7 @@ import org.eclipse.keyple.core.util.logging.spi.LoggerProvider;
  * it initializes a {@link LoggerProvider} using the {@link ServiceLoader} mechanism, but it also
  * provides a method to programmatically set a custom provider.
  *
- * <p>The default implementation uses a {@link NoOpLoggerProvider} if no suitable {@link
+ * <p>The default implementation uses temporary a {@link Slf4jLoggerProvider} if no suitable {@link
  * LoggerProvider} is found, ensuring that logging operations perform no actions.
  *
  * <p>This class is thread-safe and ensures only one {@link LoggerProvider} is active at any given
@@ -103,8 +103,8 @@ public final class LoggerFactory {
           "[Keyple][WARN] No LoggerProvider found on classpath. "
               // + "Logging is disabled (NoOpLogger in use). " FIXME uncomment when major version is
               // bumped
-              + "Logging is set to Slf4j (Slf4jLogger in use). " // FIXME remove when major version
-              // is bumped
+              + "Logging is set to Slf4j version 1.7.32 (Slf4jLogger in use). " // FIXME remove when
+              // major version is bumped
               + "Add one of the keyple-logging-xxx-jvm-lib dependencies to enable logging, "
               + "or provide a custom implementation using LoggerFactory.setProvider().");
     }
