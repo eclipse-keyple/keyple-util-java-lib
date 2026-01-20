@@ -53,7 +53,8 @@ public final class LoggerFactory {
     loader.forEach(providers::add);
 
     if (providers.isEmpty()) {
-      return new NoOpLoggerProvider();
+      // return new NoOpLoggerProvider(); FIXME uncomment when major version is bumped
+      return new Slf4jLoggerProvider(); // FIXME remove when major version is bumped
     }
 
     if (providers.size() > 1) {
@@ -90,16 +91,20 @@ public final class LoggerFactory {
    * @since 2.5.0
    */
   public static Logger getLogger(Class<?> clazz) {
-    emitNoOpWarningIfNeeded();
+    emitNoLoggerWarningIfNeeded();
     return provider.getLogger(clazz.getName());
   }
 
-  private static void emitNoOpWarningIfNeeded() {
-    if (provider instanceof NoOpLoggerProvider && warningEmitted.compareAndSet(false, true)) {
+  private static void emitNoLoggerWarningIfNeeded() {
+    if ((provider instanceof Slf4jLoggerProvider || provider instanceof NoOpLoggerProvider)
+        && warningEmitted.compareAndSet(false, true)) {
       // Direct use of System.err ONLY for this warning because no logging system is available.
       System.err.println(
           "[Keyple][WARN] No LoggerProvider found on classpath. "
-              + "Logging is disabled (NoOpLogger in use). "
+              // + "Logging is disabled (NoOpLogger in use). " FIXME uncomment when major version is
+              // bumped
+              + "Logging is set to Slf4j (Slf4jLogger in use). " // FIXME remove when major version
+              // is bumped
               + "Add one of the keyple-logging-xxx-jvm-lib dependencies to enable logging, "
               + "or provide a custom implementation using LoggerFactory.setProvider().");
     }

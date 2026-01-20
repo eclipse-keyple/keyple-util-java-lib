@@ -14,18 +14,21 @@ package org.eclipse.keyple.core.util.logging;
 import org.eclipse.keyple.core.util.logging.spi.LoggerProvider;
 
 /**
- * A no-operation implementation of the {@link LoggerProvider} interface.
+ * Provides a temporary defaul implementation of the {@link LoggerProvider} interface that creates
+ * loggers leveraging the SLF4J logging framework. Specifically, this class wraps SLF4J's {@link
+ * org.slf4j.Logger}, returning instances of {@link Slf4jLogger}, which act as adapters between the
+ * {@link LoggerProvider} interface and SLF4J.
  *
- * <p>This implementation returns a {@link NoOpLogger} instance for any logger name. The {@link
- * NoOpLogger} provides a logger that performs no actions for all logging methods, ensuring minimal
- * overhead when logging is not required.
+ * <p>This implementation is intended to standardize the creation of logger instances while
+ * utilizing SLF4J for actual logging operations, ensuring compatibility with SLF4J-based logging
+ * systems.
  *
- * <p>This class is typically used as a default or placeholder implementation of {@link
- * LoggerProvider} where explicit logging is not needed.
+ * <p>Thread-safe and suitable for use in multi-threaded applications, this class guarantees
+ * consistent logger instances for a given class name.
  *
  * @since 2.5.0
  */
-final class NoOpLoggerProvider implements LoggerProvider {
+class Slf4jLoggerProvider implements LoggerProvider {
 
   /**
    * {@inheritDoc}
@@ -34,6 +37,6 @@ final class NoOpLoggerProvider implements LoggerProvider {
    */
   @Override
   public Logger getLogger(String className) {
-    return new NoOpLogger();
+    return new Slf4jLogger(org.slf4j.LoggerFactory.getLogger(className));
   }
 }
