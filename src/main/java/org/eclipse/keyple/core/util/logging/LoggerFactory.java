@@ -14,12 +14,30 @@ package org.eclipse.keyple.core.util.logging;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import org.eclipse.keyple.core.util.logging.spi.LoggerProvider;
 
+/**
+ * A factory class for creating and managing {@link Logger} instances.
+ *
+ * <p>This class provides a centralized mechanism to retrieve loggers for specific classes and
+ * allows dynamic configuration of the underlying {@link LoggerProvider} implementation. By default,
+ * it initializes a {@link LoggerProvider} using the {@link ServiceLoader} mechanism, but it also
+ * provides a method to programmatically set a custom provider.
+ *
+ * <p>The default implementation uses a {@link NoOpLoggerProvider} if no suitable {@link
+ * LoggerProvider} is found, ensuring that logging operations perform no actions.
+ *
+ * <p>This class is thread-safe and ensures only one {@link LoggerProvider} is active at any given
+ * time.
+ *
+ * @since 2.5.0
+ */
 public final class LoggerFactory {
 
   private static volatile LoggerProvider provider;
+  private static final AtomicBoolean warningEmitted = new AtomicBoolean(false);
 
   private LoggerFactory() {}
 
@@ -50,11 +68,40 @@ public final class LoggerFactory {
     return providers.get(0);
   }
 
+  /**
+   * Sets the {@link LoggerProvider} to be used by the {@link LoggerFactory}.
+   *
+   * <p>This method allows overriding the default logger provider with a custom implementation. It
+   * is typically used to integrate a specific logging framework or behavior.
+   *
+   * @param provider the {@link LoggerProvider} instance to set; must not be null
+   * @since 2.5.0
+   */
   public static void setProvider(LoggerProvider provider) {
     LoggerFactory.provider = provider;
   }
 
+  /**
+   * Retrieves a {@link Logger} instance associated with the specified class. The logger can be used
+   * for logging messages at various levels, enabling class-specific logging behavior.
+   *
+   * @param clazz the class for which the logger is to be retrieved; must not be null
+   * @return the {@link Logger} instance associated with the specified class
+   * @since 2.5.0
+   */
   public static Logger getLogger(Class<?> clazz) {
+    emitNoOpWarningIfNeeded();
     return provider.getLogger(clazz.getName());
+  }
+
+  private static void emitNoOpWarningIfNeeded() {
+    if (provider instanceof NoOpLoggerProvider && warningEmitted.compareAndSet(false, true)) {
+      // Direct use of System.err ONLY for this warning because no logging system is available.
+      System.err.println(
+          "[Keyple][WARN] No LoggerProvider found on classpath. "
+              + "Logging is disabled (NoOpLogger in use). "
+              + "Add one of the keyple-logging-xxx-jvm-lib dependencies to enable logging, "
+              + "or provide a custom implementation using LoggerFactory.setProvider().");
+    }
   }
 }

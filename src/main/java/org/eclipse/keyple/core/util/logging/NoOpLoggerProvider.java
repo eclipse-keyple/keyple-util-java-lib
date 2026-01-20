@@ -13,7 +13,25 @@ package org.eclipse.keyple.core.util.logging;
 
 import org.eclipse.keyple.core.util.logging.spi.LoggerProvider;
 
+/**
+ * A no-operation implementation of the {@link LoggerProvider} interface.
+ *
+ * <p>This implementation returns a {@link NoOpLogger} instance for any logger name. The {@link
+ * NoOpLogger} provides a logger that performs no actions for all logging methods, ensuring minimal
+ * overhead when logging is not required.
+ *
+ * <p>This class is typically used as a default or placeholder implementation of {@link
+ * LoggerProvider} where explicit logging is not needed.
+ *
+ * @since 2.5.0
+ */
 final class NoOpLoggerProvider implements LoggerProvider {
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 2.5.0
+   */
   @Override
   public Logger getLogger(String name) {
     return new NoOpLogger();
