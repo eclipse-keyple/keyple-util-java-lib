@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Logging abstraction layer in the `org.eclipse.keyple.core.util.logging` package.
+- `Logger` interface providing methods for trace, debug, info, warn, and error levels.
+- `LoggerFactory` for centralized management of loggers and dynamic configuration of providers.
+- `LoggerProvider` Service Provider Interface (SPI) to allow integration of various logging frameworks.
+- Default temporary `Slf4jLogger` and `Slf4jLoggerProvider` for SLF4J v1.7.32 framework integration.
+  This logger will be replaced by `NoOpLogger` and `NoOpLoggerProvider` on next major release.
 ### Changed
 - Migrated the CI pipeline from Jenkins to GitHub Actions.
 
@@ -76,8 +83,8 @@ It follows the extraction of Keyple 1.0 components contained in the `eclipse-key
 repositories.
 It also brings many major API changes.
 
-[unreleased]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.2...HEAD
-[2.3.2]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.1...2.3.2
+[unreleased]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.4.0...HEAD
+[2.4.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.1...2.4.0
 [2.3.1]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.0...2.3.1
 [2.3.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.1.0...2.2.0
