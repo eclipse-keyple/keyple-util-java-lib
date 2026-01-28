@@ -75,6 +75,9 @@ public final class LoggerFactory {
    * <p>This method allows overriding the default logger provider with a custom implementation. It
    * is typically used to integrate a specific logging framework or behavior.
    *
+   * <p><b>Android / ProGuard troubleshooting:</b> on Android, if code shrinking removes the
+   * provider implementation, the provider must be set explicitly.
+   *
    * @param provider the {@link LoggerProvider} instance to set; must not be null
    * @since 2.5.0
    */
@@ -106,7 +109,10 @@ public final class LoggerFactory {
               + "Logging is set to Slf4j version 1.7.32 (Slf4jLogger in use). " // FIXME remove when
               // major version is bumped
               + "Add one of the keyple-logging-xxx-jvm-lib dependencies to enable logging, "
-              + "or provide a custom implementation using LoggerFactory.setProvider().");
+              + "or provide a custom implementation using LoggerFactory.setProvider()."
+              + "Android / ProGuard troubleshooting: On Android, make sure the provider "
+              + "implementation is not removed by code shrinking, or set it "
+              + "explicitly using LoggerFactory.setProvider().");
     }
   }
 }
