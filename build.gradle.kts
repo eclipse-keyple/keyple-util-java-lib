@@ -14,8 +14,10 @@ plugins {
 ///////////////////////////////////////////////////////////////////////////////
 
 dependencies {
-  implementation("org.slf4j:slf4j-api:1.7.32")
   implementation("com.google.code.gson:gson:2.10.1")
+  implementation("org.slf4j:slf4j-api:1.7.32")
+
+  testImplementation("org.slf4j:slf4j-simple:1.7.32")
   testImplementation(platform("org.junit:junit-bom:5.10.2"))
   testImplementation("org.junit.jupiter:junit-jupiter")
   testImplementation("org.junit.vintage:junit-vintage-engine")
