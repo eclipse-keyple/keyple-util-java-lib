@@ -5,15 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Added
-- Logging abstraction layer in the `org.eclipse.keyple.core.util.logging` package.
-- `Logger` interface providing methods for trace, debug, info, warn, and error levels.
-- `LoggerFactory` for centralized management of loggers and dynamic configuration of providers.
-- `LoggerProvider` Service Provider Interface (SPI) to allow integration of various logging frameworks.
-- Default temporary `Slf4jLogger` and `Slf4jLoggerProvider` for SLF4J v1.7.32 framework integration.
-  This logger will be replaced by `NoOpLogger` and `NoOpLoggerProvider` on next major release.
 ### Changed
 - Migrated the CI pipeline from Jenkins to GitHub Actions.
+### Removed
+- Removed useless SLF4J API dependency
 
 ## [2.4.0] - 2024-04-12
 ### Added

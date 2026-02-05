@@ -35,8 +35,3 @@ GSON
 
 * License: [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)
 * Project: https://github.com/google/gson/gson
-
-SLF4J API
-
-* License: [MIT](https://spdx.org/licenses/MIT.html)
-* Project: http://www.slf4j.org
