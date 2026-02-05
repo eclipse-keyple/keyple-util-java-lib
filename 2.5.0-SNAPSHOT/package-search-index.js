@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.eclipse.keyple.core.util"},{"l":"org.eclipse.keyple.core.util.json"},{"l":"org.eclipse.keyple.core.util.logging"},{"l":"org.eclipse.keyple.core.util.logging.spi"},{"l":"org.eclipse.keyple.core.util.protocol"}];updateSearchResults();
