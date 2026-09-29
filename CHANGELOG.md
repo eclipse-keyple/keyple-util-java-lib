@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-09-29
+### Changed
+- `BodyErrorJsonDeserializer` now rebuilds the original exception only for the exceptions of the `java`,
+  `org.eclipse.keyple` and `org.eclipse.keypop` packages (and their sub-packages). The other exceptions, as well as the
+  exceptions that cannot be rebuilt, are now provided as a `RuntimeException` whose message contains the original
+  class name and message (`Remote exception [<class name>]: <message>`), instead of a `JsonParseException`.
+
 ## [2.4.1] - 2026-02-05
 ### Changed
 - Migrated the CI pipeline from Jenkins to GitHub Actions.
@@ -80,7 +87,8 @@ It follows the extraction of Keyple 1.0 components contained in the `eclipse-key
 repositories.
 It also brings many major API changes.
 
-[unreleased]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.4.1...HEAD
+[unreleased]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.5.0...HEAD
+[2.5.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.4.1...2.5.0
 [2.4.1]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.4.0...2.4.1
 [2.4.0]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.1...2.4.0
 [2.3.1]: https://github.com/eclipse-keyple/keyple-util-java-lib/compare/2.3.0...2.3.1
